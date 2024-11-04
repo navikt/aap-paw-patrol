@@ -454,6 +454,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/eslint-config-aap@npm:^2.0.7":
+  version: 2.0.7
+  resolution: "@navikt/eslint-config-aap@npm:2.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Feslint-config-aap%2F2.0.7%2F144b8884ed3806a0fba1e4b54eaa1303c15d1cf0"
+  peerDependencies:
+    "@typescript-eslint/eslint-plugin": ^7.7.0
+    "@typescript-eslint/parser": ^7.7.0
+    eslint: ^8.56.0
+    eslint-config-standard: ^17.0.0
+    eslint-plugin-jest: ^28.2.0
+    eslint-plugin-jsx-a11y: ^6.7.1
+    eslint-plugin-react: ^7.34.1
+    eslint-plugin-react-hooks: ^4.6.0
+  checksum: 10c0/3c8d8a5fbcdd934a8beb6a0b134c2cf569ee3fdccb561c0a6b45151274ab99c16b439fffe20c4f4457059c8019894fc6c18d472377b03c4029b8e926908b9628
+  languageName: node
+  linkType: hard
+
 "@next/env@npm:15.0.2":
   version: 15.0.2
   resolution: "@next/env@npm:15.0.2"
@@ -780,6 +796,7 @@ __metadata:
   resolution: "aap-paw-patrol@workspace:."
   dependencies:
     "@navikt/aap-felles-prettier": "npm:^2.0.7"
+    "@navikt/eslint-config-aap": "npm:^2.0.7"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
