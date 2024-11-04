@@ -17,7 +17,7 @@ export const Jobboversikt = ({ appNavn, planlagteJobber, feilendeJobber, sisteKj
     <div className={'flex-column'}>
       <PlanlagteJobber planlagteJobber={planlagteJobber} />
       <FeilendeJobber appNavn={appNavn} jobber={feilendeJobber} />
-      <RekjørFeiledeJobber />
+      <RekjørFeiledeJobber appNavn={appNavn} />
       <SisteKjørteJobber sisteKjørteJobber={sisteKjørteJobber} />
     </div>
   );
