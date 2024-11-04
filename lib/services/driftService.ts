@@ -30,8 +30,8 @@ export interface JobbInfo {
   type: string;
 }
 
-const getBaseUrlAndScopeForApp = (appNavn: AppNavn): BaseUrlAndScope => {
-  if (true) {
+const getBaseUrlAndScopeForApp = async (appNavn: AppNavn): Promise<BaseUrlAndScope> => {
+  if (await isLocal()) {
     return {
       baseUrl: 'http://localhost:8080',
       scope: 'local',
@@ -52,31 +52,37 @@ const getBaseUrlAndScopeForApp = (appNavn: AppNavn): BaseUrlAndScope => {
 };
 
 export const hentFeilendeJobber = async (appNavn: AppNavn) => {
-  const url = `${getBaseUrlAndScopeForApp(appNavn).baseUrl}/drift/api/jobb/feilende`;
-  return await fetchProxy<JobbInfo[]>(url, getBaseUrlAndScopeForApp(appNavn).scope, 'GET');
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp(appNavn);
+  const url = `${baseUrl}/drift/api/jobb/feilende`;
+  return await fetchProxy<JobbInfo[]>(url, scope, 'GET');
 };
 
 export const hentPlanlagteJobber = async (appNavn: AppNavn) => {
-  const url = `${getBaseUrlAndScopeForApp(appNavn).baseUrl}/drift/api/jobb/planlagte-jobber`;
-  return await fetchProxy<JobbInfo[]>(url, getBaseUrlAndScopeForApp(appNavn).scope, 'GET');
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp(appNavn);
+  const url = `${baseUrl}/drift/api/jobb/planlagte-jobber`;
+  return await fetchProxy<JobbInfo[]>(url, scope, 'GET');
 };
 
 export const rekjørJobb = async (appNavn: AppNavn, jobbId: string) => {
-  const url = `${getBaseUrlAndScopeForApp(appNavn).baseUrl}/drift/api/jobb/rekjor/${jobbId}`;
-  return await fetchProxy<string>(url, getBaseUrlAndScopeForApp(appNavn).scope, 'GET');
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp(appNavn);
+  const url = `${baseUrl}/drift/api/jobb/rekjor/${jobbId}`;
+  return await fetchProxy<string>(url, scope, 'GET');
 };
 
 export const avbrytJobb = async (appNavn: AppNavn, jobbId: string) => {
-  const url = `${getBaseUrlAndScopeForApp(appNavn).baseUrl}/drift/api/jobb/avbryt/${jobbId}`;
-  return await fetchProxy<string>(url, getBaseUrlAndScopeForApp(appNavn).scope, 'GET');
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp(appNavn);
+  const url = `${baseUrl}/drift/api/jobb/avbryt/${jobbId}`;
+  return await fetchProxy<string>(url, scope, 'GET');
 };
 
 export const rekjørFeiledeJobber = async (appNavn: AppNavn) => {
-  const url = `${getBaseUrlAndScopeForApp(appNavn).baseUrl}/drift/api/jobb/rekjorAlleFeilede`;
-  return await fetchProxy<string>(url, getBaseUrlAndScopeForApp(appNavn).scope, 'GET');
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp(appNavn);
+  const url = `${baseUrl}/drift/api/jobb/rekjorAlleFeilede`;
+  return await fetchProxy<string>(url, scope, 'GET');
 };
 
 export const hentSisteKjørteJobber = async (appNavn: AppNavn) => {
-  const url = `${getBaseUrlAndScopeForApp(appNavn).baseUrl}/drift/api/jobb/sisteKjørte`;
-  return await fetchProxy<JobbInfo[]>(url, getBaseUrlAndScopeForApp(appNavn).scope, 'GET');
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp(appNavn);
+  const url = `${baseUrl}/drift/api/jobb/sisteKjørte`;
+  return await fetchProxy<JobbInfo[]>(url, scope, 'GET');
 };

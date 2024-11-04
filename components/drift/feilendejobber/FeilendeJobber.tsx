@@ -31,6 +31,7 @@ export const FeilendeJobber = ({ jobber, appNavn }: Props) => {
         setMessage(message);
       }
     } catch (err) {
+      console.log('err', err);
       setMessage('Noe gikk galt');
       setIsLoadingRekjørJobb(false);
     }
@@ -49,6 +50,7 @@ export const FeilendeJobber = ({ jobber, appNavn }: Props) => {
         setMessage(message);
       }
     } catch (err) {
+      console.log('err', err);
       setMessage('Noe gikk galt');
       setIsLoadingAvbrytJobb(false);
     }

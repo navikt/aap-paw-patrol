@@ -24,6 +24,7 @@ export const RekjørFeiledeJobber = ({ appNavn }: Props) => {
         setMessage(message);
       }
     } catch (err) {
+      console.log(err);
       setMessage('Noe gikk galt');
       setIsLoading(false);
     }
