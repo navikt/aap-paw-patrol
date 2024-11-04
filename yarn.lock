@@ -444,13 +444,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aap-felles-prettier@npm:^2.0.7":
-  version: 2.0.7
-  resolution: "@navikt/aap-felles-prettier@npm:2.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faap-felles-prettier%2F2.0.7%2F5b3b580bdde525342cc1dc45b7f21fb86ffd6c21"
+"@navikt/aap-felles-prettier@npm:^2.0.8":
+  version: 2.0.8
+  resolution: "@navikt/aap-felles-prettier@npm:2.0.8::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faap-felles-prettier%2F2.0.8%2F320588589c4f1bd7dbbf9c3927298b436b09a01f"
   dependencies:
     "@trivago/prettier-plugin-sort-imports": "npm:^4.3.0"
     prettier: "npm:^3.3.3"
-  checksum: 10c0/356522b37f36b47159ba997de39bceec3756d8a66441b91b8513a2e601d073b2bfb980a23f2d14b6bca4d0671916fdb143e10bde1ed65257c381b08ee9a8dc41
+  checksum: 10c0/f5c68da137e07964d8805af2ddc89fc9ebcab2144cef25b0b1a8b9003580e3f1cca002c335b790bf1c8708d0c90783eef58814d67bd85ac99441e583a845eedb
   languageName: node
   linkType: hard
 
@@ -795,7 +795,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aap-paw-patrol@workspace:."
   dependencies:
-    "@navikt/aap-felles-prettier": "npm:^2.0.7"
+    "@navikt/aap-felles-prettier": "npm:^2.0.8"
     "@navikt/eslint-config-aap": "npm:^2.0.7"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"

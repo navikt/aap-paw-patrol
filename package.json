@@ -16,7 +16,7 @@
     "react-dom": "19.0.0-rc-02c0e824-20241028"
   },
   "devDependencies": {
-    "@navikt/aap-felles-prettier": "^2.0.7",
+    "@navikt/aap-felles-prettier": "^2.0.8",
     "@navikt/eslint-config-aap": "^2.0.7",
     "@types/node": "^20",
     "@types/react": "^18",
