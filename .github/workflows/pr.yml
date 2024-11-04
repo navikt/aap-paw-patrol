@@ -1,0 +1,35 @@
+name: Pull request med automerge
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  buildDev:
+    uses: navikt/aap-workflows/.github/workflows/frontend-next-only-build.yml@main
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
+    secrets: inherit
+    with:
+      cluster: dev-gcp
+  autoMerge:
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    needs: buildDev
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: gh pr merge --auto --rebase "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: gh workflow run deploy-dev.yaml --ref main
+        env:
+          GH_TOKEN: ${{ secrets.GH_WF_TOKEN }}
