@@ -3,7 +3,7 @@ import '@navikt/aap-felles-css';
 import 'styles/globals.css';
 
 import { hentBrukerInformasjon, verifyUserLoggedIn } from '@navikt/aap-felles-utils';
-//import { KelvinAppHeader } from '@navikt/aap-felles-react';
+import { KelvinAppHeader } from '@navikt/aap-felles-react/cjs/KelvinAppHeader/KelvinAppHeader';
 
 export const metadata = {
   title: 'Kelvin - Paw Patrol',
@@ -17,7 +17,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="nb">
       <body>
-        {/*<KelvinAppHeader brukerInformasjon={brukerInformasjon} />*/}
+        <KelvinAppHeader brukerInformasjon={brukerInformasjon} />
         {children}
       </body>
     </html>

@@ -57,3 +57,4 @@ spec:
     outbound:
       rules:
         - application: "behandlingsflyt"
+        - application: "brev"
