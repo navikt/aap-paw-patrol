@@ -37,18 +37,19 @@ const getBaseUrlAndScopeForApp = async (appNavn: AppNavn): Promise<BaseUrlAndSco
       scope: 'local',
     };
   }
-  switch (appNavn) {
-    case 'behandlingsflyt':
-      return {
-        baseUrl: process.env.BEHANDLING_API_BASE_URL ?? '',
-        scope: process.env.BEHANDLING_API_SCOPE ?? '',
-      };
-    case 'brev':
-      return {
-        baseUrl: process.env.BREV_API_BASE_URL ?? '',
-        scope: process.env.BREV_API_SCOPE ?? '',
-      };
+  if (appNavn === 'behandlingsflyt') {
+    return {
+      baseUrl: process.env.BEHANDLING_API_BASE_URL ?? '',
+      scope: process.env.BEHANDLING_API_SCOPE ?? '',
+    };
   }
+  if (appNavn === 'brev') {
+    return {
+      baseUrl: process.env.BREV_API_BASE_URL ?? '',
+      scope: process.env.BREV_API_SCOPE ?? '',
+    };
+  }
+  throw new Error(`Ukjent app: ${appNavn}`);
 };
 
 export const hentFeilendeJobber = async (appNavn: AppNavn) => {
