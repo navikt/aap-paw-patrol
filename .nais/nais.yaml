@@ -60,3 +60,4 @@ spec:
         - application: "brev"
         - application: "postmottak-backend"
         - application: "dokumentinnhenting"
+        - application: statistikk
