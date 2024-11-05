@@ -58,3 +58,4 @@ spec:
       rules:
         - application: "behandlingsflyt"
         - application: "brev"
+        - application: "postmottak-backend"

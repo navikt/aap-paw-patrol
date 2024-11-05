@@ -1,6 +1,13 @@
 import { Heading } from '@navikt/ds-react';
 import { Jobboversikt } from 'components/drift/jobboversikt/Jobboversikt';
-import { AppNavn, hentFeilendeJobber, hentPlanlagteJobber, hentSisteKjørteJobber } from 'lib/services/driftService';
+import {
+  appInfo,
+  AppNavn,
+  hentFeilendeJobber,
+  hentPlanlagteJobber,
+  hentSisteKjørteJobber,
+} from 'lib/services/driftService';
+import { notFound } from 'next/navigation';
 
 interface Params {
   app: AppNavn;
@@ -8,6 +15,10 @@ interface Params {
 
 const DriftPage = async ({ params }: { params: Promise<Params> }) => {
   const { app } = await params;
+
+  if (appInfo.find((appInfo) => appInfo.name === app) === undefined) {
+    return notFound();
+  }
   const feilendeJobber = await hentFeilendeJobber(app);
   const planlagteJobber = await hentPlanlagteJobber(app);
   const sisteKjørteJobber = await hentSisteKjørteJobber(app);
