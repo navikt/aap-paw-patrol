@@ -59,3 +59,4 @@ spec:
         - application: "behandlingsflyt"
         - application: "brev"
         - application: "postmottak-backend"
+        - application: "dokumentinnhenting"

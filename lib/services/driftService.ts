@@ -1,6 +1,6 @@
 import { fetchProxy, isLocal } from 'lib/services/fetchProxy';
 
-export type AppNavn = 'behandlingsflyt' | 'brev' | 'postmottak';
+export type AppNavn = 'behandlingsflyt' | 'brev' | 'postmottak' | 'dokumentinnhenting';
 
 export interface AppInfo {
   name: AppNavn;
@@ -19,6 +19,10 @@ export const appInfo: AppInfo[] = [
   {
     name: 'postmottak',
     displayName: 'Postmottak',
+  },
+  {
+    name: 'dokumentinnhenting',
+    displayName: 'Dokumentinnhenting',
   },
 ];
 
@@ -73,6 +77,12 @@ const getBaseUrlAndScopeForApp = async (appNavn: AppNavn): Promise<BaseUrlAndSco
     return {
       baseUrl: process.env.POSTMOTTAK_API_BASE_URL ?? '',
       scope: process.env.POSTMOTTAK_API_SCOPE ?? '',
+    };
+  }
+  if (appNavn === 'dokumentinnhenting') {
+    return {
+      baseUrl: process.env.DOKUMENTINNHENTING_API_BASE_URL ?? '',
+      scope: process.env.DOKUMENTINNHENTING_API_SCOPE ?? '',
     };
   }
   throw new Error(`Ukjent app: ${appNavn}`);
