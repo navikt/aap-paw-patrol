@@ -44,24 +44,6 @@ export const fetchProxy = async <ResponseBody>(
   return await fetchWithRetry<ResponseBody>(url, method, oboToken, NUMBER_OF_RETRIES, requestBody, tags);
 };
 
-export const fetchPdf = async (url: string, scope: string): Promise<Blob | undefined> => {
-  const oboToken = (await isLocal()) ? await hentLocalToken() : await getOnBefalfOfToken(scope, url);
-  const response = await fetch(url, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${oboToken}`,
-      Accept: 'application/pdf',
-    },
-    next: { revalidate: 0 },
-  });
-
-  if (response.ok) {
-    return response.blob();
-  } else {
-    logError(`kunne ikke lese pdf på url ${url}.`);
-  }
-};
-
 export const fetchWithRetry = async <ResponseBody>(
   url: string,
   method: string,
@@ -97,9 +79,14 @@ export const fetchWithRetry = async <ResponseBody>(
 
   if (!response.ok) {
     if (response.status === 500) {
-      const responseJson = await response.json();
-      logError(`klarte ikke å hente ${url}: ${responseJson.message}`);
-      throw new Error(`Unable to fetch ${url}: ${responseJson.message}`);
+      try {
+        const responseJson = await response.json();
+        logError(`klarte ikke å hente ${url}: ${responseJson.message}`);
+        throw new Error(`Unable to fetch ${url}: ${responseJson.message}`);
+      } catch (error) {
+        logError('Klarte ikke parse JSON fra response', error);
+        throw new Error(`Unable to fetch ${url}`);
+      }
     }
     if (response.status === 404) {
       throw new Error(`Ikke funnet: ${url}`);
