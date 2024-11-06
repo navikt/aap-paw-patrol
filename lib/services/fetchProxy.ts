@@ -79,14 +79,15 @@ export const fetchWithRetry = async <ResponseBody>(
 
   if (!response.ok) {
     if (response.status === 500) {
+      let responseJson;
       try {
-        const responseJson = await response.json();
-        logError(`klarte ikke å hente ${url}: ${responseJson.message}`);
-        throw new Error(`Unable to fetch ${url}: ${responseJson.message}`);
+        responseJson = await response.json();
       } catch (error) {
         logError('Klarte ikke parse JSON fra response', error);
-        throw new Error(`Unable to fetch ${url}`);
+        throw new Error('Klarte ikke parse JSON fra response');
       }
+      logError(`klarte ikke å hente ${url}: ${responseJson.message}`);
+      throw new Error(`Unable to fetch ${url}: ${responseJson.message}`);
     }
     if (response.status === 404) {
       throw new Error(`Ikke funnet: ${url}`);
