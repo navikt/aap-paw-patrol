@@ -24,7 +24,7 @@
   "devDependencies": {
     "@navikt/aap-felles-prettier": "^2.0.20",
     "@navikt/eslint-config-aap": "^2.0.8",
-    "@types/eslint-plugin-jsx-a11y": "^6.9.0",
+    "@types/eslint-plugin-jsx-a11y": "^6.10.0",
     "@types/node": "^20.17.6",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
