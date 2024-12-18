@@ -61,3 +61,4 @@ spec:
         - application: "postmottak-backend"
         - application: "dokumentinnhenting"
         - application: "statistikk"
+        - application: "oppgave"
