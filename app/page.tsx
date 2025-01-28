@@ -9,7 +9,7 @@ export default function Home() {
         Paw Patrol <span aria-hidden>🐾</span>
       </Heading>
       <BodyShort spacing>
-        Driftconsole for AAP apper med oversikt over jobber som kjører, har feilet og mulighet for å kjøre jobber på
+        Driftconsole for AAP-apper med oversikt over jobber som kjører, har feilet og mulighet for å kjøre jobber på
         nytt.
       </BodyShort>
       {appInfo.length > 0 && (

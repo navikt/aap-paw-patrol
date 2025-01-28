@@ -7,7 +7,7 @@ import { KelvinAppHeader } from '@navikt/aap-felles-react/cjs/KelvinAppHeader/Ke
 
 export const metadata = {
   title: 'Kelvin - Paw Patrol',
-  description: 'Drift dashboard for status og kjøring av jobber i Kelvin appene',
+  description: 'Drift-dashboard for status og kjøring av jobber i Kelvin-appene.',
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
