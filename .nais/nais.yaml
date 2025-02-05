@@ -62,3 +62,4 @@ spec:
         - application: "dokumentinnhenting"
         - application: "statistikk"
         - application: "oppgave"
+        - application: meldekort-backend
