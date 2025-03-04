@@ -1,6 +1,6 @@
 # AAP Paw Patrol
 
-Frontendapplikasjon for intern drift av saksbehandlingsapper i AAP
+Frontendapplikasjon for intern drift av saksbehandlingsapper i AAP.
 
 ## Bygge og kjøre app lokalt
 
