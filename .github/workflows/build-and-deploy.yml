@@ -34,3 +34,16 @@ jobs:
       manifest: .nais/nais.yaml
       imageSuffix: -dev-gcp
       vars: .nais/dev.yaml
+
+  deployProd:
+    needs: deployDev
+    uses: navikt/aap-workflows/.github/workflows/deploy.yml@main
+    permissions:
+      contents: read
+      id-token: write
+    secrets: inherit
+    with:
+      cluster: prod-gcp
+      manifest: .nais/nais.yaml
+      imageSuffix: -prod-gcp
+      vars: .nais/prod.yaml
