@@ -6,6 +6,7 @@ export type AppNavn =
   | 'postmottak'
   | 'dokumentinnhenting'
   | 'statistikk'
+  | 'utbetal'
   | 'oppgave'
   | 'meldekort';
 
@@ -40,6 +41,7 @@ export const appInfo: AppInfo[] = [
     displayName: 'Oppgave',
   },
   { name: 'meldekort', displayName: 'Meldekort' },
+  { name: 'utbetal', displayName: 'Utbetal' },
 ];
 
 interface BaseUrlAndScope {
@@ -115,6 +117,9 @@ const getBaseUrlAndScopeForApp = async (appNavn: AppNavn): Promise<BaseUrlAndSco
   }
   if (appNavn === 'meldekort') {
     return { baseUrl: process.env.MELDEKORT_API_BASEU_URL ?? '', scope: process.env.MELDEKORT_API_SCOPE ?? '' };
+  }
+  if (appNavn === 'utbetal') {
+    return { baseUrl: process.env.UTBETAL_API_BASEU_URL ?? '', scope: process.env.UTBETAL_API_SCOPE ?? '' };
   }
   assertUnreachable(appNavn);
   throw new Error(`Ukjent app: ${appNavn}`);
