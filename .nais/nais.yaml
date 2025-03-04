@@ -34,7 +34,7 @@ spec:
       allowAllUsers: false
       claims:
         groups:
-          - id: "bc89623f-4624-4978-ac54-acd048c0f2a5"
+          - id: {{driftrolle}}
     sidecar:
       enabled: true
       autoLogin: true
