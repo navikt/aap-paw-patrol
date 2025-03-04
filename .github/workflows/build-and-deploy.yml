@@ -22,6 +22,19 @@ jobs:
       playwright: false
       cdn: true
 
+  buildProd:
+    uses: navikt/aap-workflows/.github/workflows/frontend-next-build.yml@main
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
+    secrets: inherit
+    with:
+      cluster: prod-gcp
+      appname: 'aap-paw-patrol'
+      playwright: false
+      cdn: true
+
   deployDev:
     needs: buildDev
     uses: navikt/aap-workflows/.github/workflows/deploy.yml@main
