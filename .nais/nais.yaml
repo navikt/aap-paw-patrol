@@ -20,8 +20,8 @@ spec:
     initialDelay: 20
     timeout: 60
   replicas:
-    min: 2
-    max: 4
+    min: 1
+    max: 2
   resources:
     requests:
       cpu: 200m
@@ -31,7 +31,10 @@ spec:
   azure:
     application:
       enabled: true
-      allowAllUsers: true
+      allowAllUsers: false
+      claims:
+        groups:
+          - id: "bc89623f-4624-4978-ac54-acd048c0f2a5"
     sidecar:
       enabled: true
       autoLogin: true
