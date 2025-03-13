@@ -14,9 +14,9 @@
     "@navikt/aap-felles-css": "^4.3.4",
     "@navikt/aap-felles-react": "^4.3.4",
     "@navikt/aap-felles-utils": "^4.3.4",
-    "@navikt/aksel-icons": "^7.17.2",
-    "@navikt/ds-css": "^7.17.2",
-    "@navikt/ds-react": "^7.17.2",
+    "@navikt/aksel-icons": "^7.17.3",
+    "@navikt/ds-css": "^7.17.3",
+    "@navikt/ds-react": "^7.17.3",
     "next": "15.2.1",
     "react": "19.0.0",
     "react-dom": "19.0.0"
