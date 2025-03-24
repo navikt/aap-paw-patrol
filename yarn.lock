@@ -1720,6 +1720,7 @@ __metadata:
     "@types/react-dom": "npm:^18.3.1"
     "@typescript-eslint/eslint-plugin": "npm:^8.12.2"
     "@typescript-eslint/parser": "npm:^8.12.2"
+    date-fns: "npm:^4.1.0"
     eslint: "npm:^8.57.1"
     eslint-config-next: "npm:15.0.2"
     eslint-config-standard: "npm:^17.1.0"

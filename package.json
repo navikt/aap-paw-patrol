@@ -17,6 +17,7 @@
     "@navikt/aksel-icons": "^7.17.4",
     "@navikt/ds-css": "^7.17.4",
     "@navikt/ds-react": "^7.17.4",
+    "date-fns": "^4.1.0",
     "next": "15.2.3",
     "react": "19.0.0",
     "react-dom": "19.0.0"

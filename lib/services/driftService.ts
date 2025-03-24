@@ -147,6 +147,12 @@ export const rekjørJobb = async (appNavn: AppNavn, jobbId: string) => {
   return await fetchProxy<string>(url, scope, 'GET');
 };
 
+export const kjørJobb = async (appNavn: AppNavn, jobbId: string) => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp(appNavn);
+  const url = `${baseUrl}/drift/api/jobb/${jobbId}/kjor`;
+  return await fetchProxy<string>(url, scope, 'POST');
+};
+
 export const avbrytJobb = async (appNavn: AppNavn, jobbId: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp(appNavn);
   const url = `${baseUrl}/drift/api/jobb/avbryt/${jobbId}`;

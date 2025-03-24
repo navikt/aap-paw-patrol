@@ -1,5 +1,9 @@
 import { AppNavn } from 'lib/services/driftService';
 
+export function kjørJobb(appNavn: AppNavn, jobbId: number) {
+  return fetch(`/api/drift/${appNavn}/jobb/${jobbId}/kjor`, { method: 'POST' });
+}
+
 export function rekjørJobb(appNavn: AppNavn, jobbId: number) {
   return fetch(`/api/drift/${appNavn}/jobb/rekjor/${jobbId}`, { method: 'GET' });
 }
