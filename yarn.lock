@@ -1748,7 +1748,7 @@ __metadata:
     react-dom: "npm:19.1.0"
     typescript: "npm:^5.8.3"
     vitest: "npm:^2.1.9"
-    vitest-fetch-mock: "npm:^0.4.1"
+    vitest-fetch-mock: "npm:^0.4.5"
   languageName: unknown
   linkType: soft
 
@@ -6038,12 +6038,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest-fetch-mock@npm:^0.4.1":
-  version: 0.4.1
-  resolution: "vitest-fetch-mock@npm:0.4.1"
+"vitest-fetch-mock@npm:^0.4.5":
+  version: 0.4.5
+  resolution: "vitest-fetch-mock@npm:0.4.5"
   peerDependencies:
     vitest: ">=2.0.0"
-  checksum: 10c0/41f338c3eeb35baca2e88f7277b705497a890247af8ebfe2d77cc8790190a76ee6cf5dfbb85437b9f7dc68fd136778410312479d863a9e147c64e92606ab9918
+  checksum: 10c0/c877ae9e1769481dd0c955ce311651030b6eee0bb1d8f9c9388f33a0d8f7f2b6e451268e0ed171d5a26b4390dd887656caa366d2152b1d552bc09b27c2dd8792
   languageName: node
   linkType: hard
 
