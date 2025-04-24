@@ -1,5 +1,5 @@
 import { BodyShort, Button, TextField } from '@navikt/ds-react';
-import { rekjørJobb } from 'lib/clientApi';
+import { kjørJobb } from 'lib/clientApi';
 import { AppNavn } from 'lib/services/driftService';
 import { useState } from 'react';
 
@@ -25,7 +25,7 @@ export const RekjørSpesifikkJobb = ({ appNavn }: { appNavn: AppNavn }) => {
     }
 
     try {
-      const rekjørRes = await rekjørJobb(appNavn, parseInt(jobbId));
+      const rekjørRes = await kjørJobb(appNavn, parseInt(jobbId));
       if (rekjørRes.ok) {
         const message = await rekjørRes.text();
         setMessage(message);
