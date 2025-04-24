@@ -5,6 +5,7 @@ import { FeilendeJobber } from 'components/drift/feilendejobber/FeilendeJobber';
 import { RekjørFeiledeJobber } from 'components/drift/rekjørfeiledejobber/RekjørFeiledeJobber';
 import { SisteKjørteJobber } from 'components/drift/sistekjørtejobber/SisteKjørteJobber';
 import { AppNavn, JobbInfo } from 'lib/services/driftService';
+import { RekjørSpesifikkJobb } from 'components/drift/rekjørspesifikkjobb/RekjørSpesifikkJobb';
 
 interface Props {
   appNavn: AppNavn;
@@ -16,6 +17,7 @@ export const Jobboversikt = ({ appNavn, planlagteJobber, feilendeJobber, sisteKj
   return (
     <div className={'flex-column'}>
       <RekjørFeiledeJobber appNavn={appNavn} />
+      <RekjørSpesifikkJobb appNavn={appNavn} />
       <PlanlagteJobber planlagteJobber={planlagteJobber} appNavn={appNavn} />
       <FeilendeJobber appNavn={appNavn} jobber={feilendeJobber} />
       <SisteKjørteJobber sisteKjørteJobber={sisteKjørteJobber} />
