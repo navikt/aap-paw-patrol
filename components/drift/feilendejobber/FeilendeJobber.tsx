@@ -83,6 +83,13 @@ export const FeilendeJobber = ({ jobber, appNavn }: Props) => {
                     <BodyShort>{jobb.status}</BodyShort>
                   </div>
 
+                  {jobb.opprettetTidspunkt && (
+                    <div>
+                      <Label>Opprettet tidspunkt</Label>
+                      <BodyShort>{jobb.opprettetTidspunkt}</BodyShort>
+                    </div>
+                  )}
+
                   <div>
                     <Label>Antall feilende forsøk</Label>
                     <BodyShort>{jobb.antallFeilendeForsøk}</BodyShort>

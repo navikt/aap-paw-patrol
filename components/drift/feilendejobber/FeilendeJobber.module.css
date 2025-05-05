@@ -5,7 +5,7 @@
 }
 .metaData {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: var(--a-spacing-4);
 }
 .topWrapper {

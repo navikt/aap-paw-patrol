@@ -70,6 +70,7 @@ export interface JobbInfo {
   /** @enum {string} */
   status: 'KLAR' | 'PLUKKET' | 'FERDIG' | 'FEILET' | 'AVBRUTT';
   type: string;
+  opprettetTidspunkt?: string | null;
 }
 
 const getBaseUrlAndScopeForApp = async (appNavn: AppNavn): Promise<BaseUrlAndScope> => {
