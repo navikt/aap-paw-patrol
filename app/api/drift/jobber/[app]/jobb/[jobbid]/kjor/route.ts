@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { AppNavn, kjørJobb } from '../../../../../../../lib/services/driftService';
+import { AppNavn, kjørJobb } from '../../../../../../../../lib/services/driftService';
 
 interface Params {
   app: string;
