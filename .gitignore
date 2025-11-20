@@ -39,3 +39,7 @@
 
 # Yarn
 .yarn/install-state.gz
+
+# Idea
+.*.iml
+.idea/
