@@ -1,17 +1,21 @@
 import { AppNavn } from 'lib/services/driftService';
 
 export function kjørJobb(appNavn: AppNavn, jobbId: number) {
-  return fetch(`/api/drift/${appNavn}/jobb/${jobbId}/kjor`, { method: 'POST' });
+  return fetch(`/api/drift/jobber/${appNavn}/jobb/${jobbId}/kjor`, { method: 'POST' });
 }
 
 export function rekjørJobb(appNavn: AppNavn, jobbId: number) {
-  return fetch(`/api/drift/${appNavn}/jobb/rekjor/${jobbId}`, { method: 'GET' });
+  return fetch(`/api/drift/jobber/${appNavn}/jobb/rekjor/${jobbId}`, { method: 'GET' });
 }
 
 export function rekjørFeiledeJobber(appNavn: AppNavn) {
-  return fetch(`/api/drift/${appNavn}/jobb/rekjorfeilede`, { method: 'GET' });
+  return fetch(`/api/drift/jobber/${appNavn}/jobb/rekjorfeilede`, { method: 'GET' });
 }
 
 export function avbrytKjørendeJobb(appNavn: AppNavn, jobbId: number) {
-  return fetch(`/api/drift/${appNavn}/jobb/avbryt/${jobbId}`, { method: 'GET' });
+  return fetch(`/api/drift/jobber/${appNavn}/jobb/avbryt/${jobbId}`, { method: 'GET' });
+}
+
+export function kjørFraSteg(behandlingsreferanse: string, steg: string) {
+  return fetch(`/api/drift/behandling/${behandlingsreferanse}/kjorfrasteg/`, {method: 'POST', body: JSON.stringify({steg})})
 }

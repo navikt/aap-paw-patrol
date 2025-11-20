@@ -16,11 +16,13 @@ export default function Home() {
         <ul>
           {appInfo.map((app) => (
             <li key={app.name}>
-              <Link href={`/drift/${app.name}`}>{app.displayName}</Link>
+              <Link href={`/drift/jobber/${app.name}`}>{app.displayName}</Link>
             </li>
           ))}
         </ul>
       )}
+
+      <Link href={`/drift/behandlingsflyt`}>Operasjoner for behandlingsflyt</Link>
     </main>
   );
 }
