@@ -39,3 +39,6 @@
 
 # Yarn
 .yarn/install-state.gz
+
+# IntelliJ
+.idea/
