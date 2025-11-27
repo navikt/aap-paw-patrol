@@ -1,49 +1,58 @@
-"use client";
+'use client';
 import { useState } from 'react';
-import { BodyShort, Button, Heading, Select, TextField, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, HStack, Select, TextField, VStack } from '@navikt/ds-react';
 import { kjørFraSteg } from '../../../lib/clientApi';
 
 export const KjørFraSteg = () => {
   const [behandlingsreferanse, setBehandlingsreferanse] = useState('');
-  const [steg, setSteg] = useState("")
+  const [steg, setSteg] = useState('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
 
   const onClick = async () => {
     setIsLoading(true);
-    setMessage("");
+    setMessage('');
 
-    console.log("kjør-fra-steg", {behandlingsreferanse, steg})
+    console.log('kjør-fra-steg', { behandlingsreferanse, steg });
 
     try {
-      const settAktivtStegResponse = await kjørFraSteg(behandlingsreferanse, steg)
+      const settAktivtStegResponse = await kjørFraSteg(behandlingsreferanse, steg);
       if (settAktivtStegResponse.ok) {
-        setMessage("ok 👍");
+        setMessage('ok 👍');
       } else {
-        setMessage(await settAktivtStegResponse.text())
+        setMessage(await settAktivtStegResponse.text());
       }
     } catch (err) {
       console.log(err);
       setMessage('Noe gikk galt');
     }
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   return (
-    <div>
-      <VStack gap='space-32'>
-        <Heading size="medium">Sett aktivt steg for behandling</Heading>
-        <TextField label="Behandlingsreferanse (UUID)" value={behandlingsreferanse} onChange={e => setBehandlingsreferanse(e.target.value)}/>
-        <Select label="Steg" onChange={e => setSteg(e.target.value)}>
-          {muligeSteg.map(s => <option value={s} key={s}>{s}</option> )}
+    <VStack gap="4" marginBlock="8">
+      <Heading size="medium">Sett aktivt steg for behandling</Heading>
+      <HStack gap="2" align="end">
+        <TextField
+          label="Behandlingsreferanse (UUID)"
+          value={behandlingsreferanse}
+          onChange={(e) => setBehandlingsreferanse(e.target.value)}
+        />
+        <Select label="Steg" onChange={(e) => setSteg(e.target.value)}>
+          {muligeSteg.map((s) => (
+            <option value={s} key={s}>
+              {s}
+            </option>
+          ))}
         </Select>
-        <Button onClick={onClick } loading={isLoading}>Sett aktivt steg</Button>
-        {message && <BodyShort>{message}</BodyShort>}
-      </VStack>
-    </div>
+        <Button onClick={onClick} loading={isLoading}>
+          Sett aktivt steg
+        </Button>
+      </HStack>
+      {message && <BodyShort>{message}</BodyShort>}
+    </VStack>
   );
 };
-
 
 const muligeSteg = [
   'VURDER_RETTIGHETSPERIODE',
@@ -86,4 +95,4 @@ const muligeSteg = [
   'SIMULERING',
   'FORESLÅ_VEDTAK',
   'FATTE_VEDTAK',
-]
+];

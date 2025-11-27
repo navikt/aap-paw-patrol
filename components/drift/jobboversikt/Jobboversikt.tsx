@@ -6,6 +6,7 @@ import { RekjørFeiledeJobber } from 'components/drift/rekjørfeiledejobber/Rekj
 import { SisteKjørteJobber } from 'components/drift/sistekjørtejobber/SisteKjørteJobber';
 import { AppNavn, JobbInfo } from 'lib/services/driftService';
 import { RekjørSpesifikkJobb } from 'components/drift/rekjørspesifikkjobb/RekjørSpesifikkJobb';
+import { VStack } from '@navikt/ds-react';
 
 interface Props {
   appNavn: AppNavn;
@@ -15,12 +16,12 @@ interface Props {
 }
 export const Jobboversikt = ({ appNavn, planlagteJobber, feilendeJobber, sisteKjørteJobber }: Props) => {
   return (
-    <div className={'flex-column'}>
+    <VStack gap="8">
       <RekjørFeiledeJobber appNavn={appNavn} />
       <RekjørSpesifikkJobb appNavn={appNavn} />
       <PlanlagteJobber planlagteJobber={planlagteJobber} appNavn={appNavn} />
       <FeilendeJobber appNavn={appNavn} jobber={feilendeJobber} />
       <SisteKjørteJobber sisteKjørteJobber={sisteKjørteJobber} />
-    </div>
+    </VStack>
   );
 };

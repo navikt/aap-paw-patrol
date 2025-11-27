@@ -1,9 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Alert, BodyShort, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-
-import styles from 'components/drift/feilendejobber/FeilendeJobber.module.css';
+import { Alert, BodyShort, Box, Button, CopyButton, Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { avbrytKjørendeJobb, rekjørJobb } from 'lib/clientApi';
 import { objectToMap } from 'components/drift/jobbtabell/JobbTabell';
 import { AppNavn, JobbInfo } from 'lib/services/driftService';
@@ -58,75 +56,100 @@ export const FeilendeJobber = ({ jobber, appNavn }: Props) => {
   }
 
   return (
-    <VStack>
-      <Heading size={'small'} level={'3'} spacing>
+    <VStack gap="4" marginBlock="8">
+      <Heading size={'small'} level={'3'}>
         Feilende jobber
       </Heading>
+
       {harFeilendeJobber ? (
         <Alert variant={'error'}>Det finnes {jobber.length} feilede jobb(er)</Alert>
       ) : (
         <Alert variant={'success'}>Det finnes ingen feilende jobber</Alert>
       )}
+
       {harFeilendeJobber && (
-        <VStack>
+        <VStack gap="4">
           {jobber.map((jobb, index) => (
-            <div key={index} className={`${styles.feilendeJobb} flex-column`}>
-              <div className={styles.topWrapper}>
-                <div className={styles.metaData}>
-                  <div>
-                    <Label>Type</Label>
-                    <BodyShort>{jobb.type}</BodyShort>
-                  </div>
+            <Box key={index} borderWidth="1" borderColor="border-divider" borderRadius="large" padding="4">
+              <VStack gap="4">
+                <HStack gap="4" justify="space-between">
+                  <HStack gap="8">
+                    <VStack gap="4">
+                      <div>
+                        <Label>Type</Label>
+                        <BodyShort>{jobb.type}</BodyShort>
+                      </div>
+                      <div>
+                        <Label>Antall feilende forsøk</Label>
+                        <BodyShort>{jobb.antallFeilendeForsøk}</BodyShort>
+                      </div>
+                    </VStack>
 
-                  <div>
-                    <Label>Status</Label>
-                    <BodyShort>{jobb.status}</BodyShort>
-                  </div>
+                    <VStack gap="4">
+                      <div>
+                        <Label>Status</Label>
+                        <BodyShort>{jobb.status}</BodyShort>
+                      </div>
 
-                  {jobb.opprettetTidspunkt && (
-                    <div>
-                      <Label>Opprettet tidspunkt</Label>
-                      <BodyShort>{jobb.opprettetTidspunkt}</BodyShort>
-                    </div>
-                  )}
+                      <div>
+                        <Label>ID</Label>
+                        <BodyShort>{jobb.id}</BodyShort>
+                      </div>
+                    </VStack>
 
-                  <div>
-                    <Label>Antall feilende forsøk</Label>
-                    <BodyShort>{jobb.antallFeilendeForsøk}</BodyShort>
-                  </div>
-
-                  <div>
-                    <Label>ID</Label>
-                    <BodyShort>{jobb.id}</BodyShort>
-                  </div>
-                </div>
-                <div>
-                  <HStack justify={'end'} gap={'4'}>
-                    <Button loading={isLoadingRekjørJobb} onClick={() => onRekjørJobbClick(jobb.id)}>
-                      Rekjør
-                    </Button>
-                    <Button loading={isLoadingAvbrytJobb} onClick={() => onAvbrytJobbClick(jobb.id)}>
-                      Avbryt
-                    </Button>
+                    {jobb.opprettetTidspunkt && (
+                      <div>
+                        <Label>Opprettet tidspunkt</Label>
+                        <BodyShort>{jobb.opprettetTidspunkt}</BodyShort>
+                      </div>
+                    )}
                   </HStack>
-                  {message && <BodyShort>{message}</BodyShort>}
-                </div>
-              </div>
 
-              <div>
-                <Label>Feilmelding</Label>
-                <BodyShort size={'small'}>{jobb.feilmelding}</BodyShort>
-              </div>
-
-              {[...objectToMap(jobb.metadata)].map(([key, value]) => {
-                return (
-                  <div key={key}>
-                    <Label>{key}</Label>
-                    <BodyShort>{value}</BodyShort>
+                  <div>
+                    <HStack justify={'end'} gap={'4'}>
+                      <Button loading={isLoadingRekjørJobb} onClick={() => onRekjørJobbClick(jobb.id)}>
+                        Rekjør
+                      </Button>
+                      <Button loading={isLoadingAvbrytJobb} onClick={() => onAvbrytJobbClick(jobb.id)}>
+                        Avbryt
+                      </Button>
+                    </HStack>
+                    {message && <BodyShort>{message}</BodyShort>}
                   </div>
-                );
-              })}
-            </div>
+                </HStack>
+
+                <div>
+
+                  <Box
+                    background="surface-warning-subtle"
+                    borderColor="border-warning"
+                    borderRadius="large"
+                    borderWidth="1"
+                    padding="4"
+                  >
+                    <HStack gap="4">
+                      <Label>Feilmelding</Label>
+                      {jobb.feilmelding && (
+                        <CopyButton copyText={jobb.feilmelding} text="Kopier feilmelding" size="xsmall" />
+                      )}
+                    </HStack>
+
+                    <pre style={{ fontSize: 'small', whiteSpace: 'pre-wrap', maxHeight: '20rem', overflow: 'scroll' }}>
+                      {jobb.feilmelding}
+                    </pre>
+                  </Box>
+                </div>
+
+                {[...objectToMap(jobb.metadata)].map(([key, value]) => {
+                  return (
+                    <div key={key}>
+                      <Label>{key}</Label>
+                      <BodyShort>{value}</BodyShort>
+                    </div>
+                  );
+                })}
+              </VStack>
+            </Box>
           ))}
         </VStack>
       )}

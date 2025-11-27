@@ -2,7 +2,7 @@
 
 import { Heading } from '@navikt/ds-react';
 import { JobbTabell } from 'components/drift/jobbtabell/JobbTabell';
-import {AppNavn, JobbInfo} from 'lib/services/driftService';
+import { AppNavn, JobbInfo } from 'lib/services/driftService';
 
 interface Props {
   appNavn: AppNavn;
