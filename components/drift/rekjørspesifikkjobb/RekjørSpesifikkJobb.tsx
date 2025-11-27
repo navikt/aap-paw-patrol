@@ -1,4 +1,4 @@
-import { BodyShort, Button, TextField } from '@navikt/ds-react';
+import { BodyShort, Box, Button, HStack, TextField } from '@navikt/ds-react';
 import { kjørJobb } from 'lib/clientApi';
 import { AppNavn } from 'lib/services/driftService';
 import { useState } from 'react';
@@ -42,17 +42,19 @@ export const RekjørSpesifikkJobb = ({ appNavn }: { appNavn: AppNavn }) => {
   };
   // kjørJobb
   return (
-    <div>
-      <TextField
-        label="JobbId"
-        description="Må være et heltall"
-        value={jobbId}
-        onChange={(e) => setJobbId(e.target.value)}
-      />
-      <Button variant="primary" onClick={() => onClick(jobbId, appNavn)} loading={isLoading}>
-        Rekjør spesifikk jobb
-      </Button>
+    <Box background="bg-subtle" padding="4" borderRadius="large" borderWidth="1" borderColor="border-divider">
+      <HStack gap="4" align="end">
+        <TextField
+          label="JobbId"
+          description="Må være et heltall"
+          value={jobbId}
+          onChange={(e) => setJobbId(e.target.value)}
+        />
+        <Button variant="primary" onClick={() => onClick(jobbId, appNavn)} loading={isLoading}>
+          Rekjør spesifikk jobb
+        </Button>
+      </HStack>
       {message && <BodyShort>{message}</BodyShort>}
-    </div>
+    </Box>
   );
 };

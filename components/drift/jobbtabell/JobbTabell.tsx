@@ -35,7 +35,7 @@ export const JobbTabell = ({ jobber, appNavn }: Props) => {
   }
 
   return (
-    <VStack>
+    <VStack gap="4">
       <Table zebraStripes>
         <Table.Header>
           <Table.Row>
