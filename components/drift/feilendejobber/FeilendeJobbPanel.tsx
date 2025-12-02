@@ -1,30 +1,36 @@
 'use client';
 
-import { BodyShort, Box, Button, CopyButton, HStack, Label, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Box, Button, CopyButton, HStack, Label, Modal, Tag, VStack } from '@navikt/ds-react';
 import { objectToMap } from 'components/drift/jobbtabell/JobbTabell';
 import React, { useState } from 'react';
 import { AppNavn, JobbInfo } from 'lib/services/driftService';
 import { avbrytKjørendeJobb, rekjørJobb } from 'lib/clientApi';
+import { format } from 'date-fns';
+import { ExclamationmarkTriangleIcon } from '@navikt/aksel-icons';
 
 export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: AppNavn }) => {
+  const [visAvbrytModal, setVisAvbrytModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>('');
+  const [message, setMessage] = useState<string>();
+  const [error, setError] = useState<string>();
 
   async function onRekjørJobbClick(id: number) {
+    setError(undefined);
     setIsLoading(true);
     await rekjørJobb(appNavn, id)
       .then((res) => res.text())
       .then((msg) => setMessage(msg))
-      .catch((err) => setMessage(err.message || 'Noe gikk galt'))
+      .catch((err) => setError(err.message || 'Noe gikk galt'))
       .finally(() => setIsLoading(false));
   }
 
   async function onAvbrytJobbClick(id: number) {
+    setError(undefined);
     setIsLoading(true);
     await avbrytKjørendeJobb(appNavn, id)
       .then((res) => res.text())
       .then((msg) => setMessage(msg))
-      .catch((err) => setMessage(err.message || 'Noe gikk galt'))
+      .catch((err) => setError(err.message || 'Noe gikk galt'))
       .finally(() => setIsLoading(false));
   }
 
@@ -32,50 +38,61 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
     <Box borderWidth="1" borderColor="border-divider" borderRadius="large" padding="4">
       <VStack gap="4">
         <HStack gap="4" justify="space-between">
-          <HStack gap="8">
-            <VStack gap="4">
+          <VStack gap="4">
+            <HStack gap="8">
               <div>
-                <Label>Type</Label>
-                <BodyShort>{jobb.type}</BodyShort>
+                <Label size="small">ID</Label>
+                <BodyShort size="small">{jobb.id}</BodyShort>
               </div>
               <div>
-                <Label>Antall feilende forsøk</Label>
-                <BodyShort>{jobb.antallFeilendeForsøk}</BodyShort>
+                <Label size="small">Type</Label>
+                <BodyShort size="small">{jobb.type}</BodyShort>
               </div>
-            </VStack>
+              <div>
+                <Label size="small">Forsøk</Label>
+                <BodyShort size="small">{jobb.antallFeilendeForsøk}</BodyShort>
+              </div>
+              <div>
+                <Label size="small">Opprettet tidspunkt</Label>
+                <BodyShort size="small">
+                  {jobb.opprettetTidspunkt ? format(jobb.opprettetTidspunkt, 'dd.MM.yyyy HH:mm:ss') : '-'}
+                </BodyShort>
+              </div>
+            </HStack>
 
-            <VStack gap="4">
-              <div>
-                <Label>Status</Label>
-                <BodyShort>{jobb.status}</BodyShort>
-              </div>
+            <HStack gap="4">
+              {[...objectToMap(jobb.metadata)].map(([key, value]) => {
+                return (
+                  <div key={key}>
+                    <Label size="small">{key}</Label>
+                    <CopyButton size="small" copyText={value} text={value} activeText={`Kopierte ${key}`} />
+                  </div>
+                );
+              })}
+            </HStack>
+          </VStack>
 
-              <div>
-                <Label>ID</Label>
-                <BodyShort>{jobb.id}</BodyShort>
-              </div>
-            </VStack>
-
-            {jobb.opprettetTidspunkt && (
-              <div>
-                <Label>Opprettet tidspunkt</Label>
-                <BodyShort>{jobb.opprettetTidspunkt}</BodyShort>
-              </div>
-            )}
-          </HStack>
-
-          <div>
+          <VStack gap="4">
             <HStack justify={'end'} gap={'4'}>
               <Button loading={isLoading} onClick={() => onRekjørJobbClick(jobb.id)}>
                 Rekjør
               </Button>
-              <Button loading={isLoading} onClick={() => onAvbrytJobbClick(jobb.id)}>
+              <Button loading={isLoading} onClick={() => setVisAvbrytModal(true)} variant="danger">
                 Avbryt
               </Button>
             </HStack>
 
-            {message && <BodyShort>{message}</BodyShort>}
-          </div>
+            {error && (
+              <Alert variant="error" size="small">
+                {error}
+              </Alert>
+            )}
+            {message && (
+              <Alert variant="info" size="small">
+                {message}
+              </Alert>
+            )}
+          </VStack>
         </HStack>
 
         <div>
@@ -96,16 +113,42 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
             </pre>
           </Box>
         </div>
-
-        {[...objectToMap(jobb.metadata)].map(([key, value]) => {
-          return (
-            <div key={key}>
-              <Label>{key}</Label>
-              <BodyShort>{value}</BodyShort>
-            </div>
-          );
-        })}
       </VStack>
+
+      <Modal
+        open={visAvbrytModal}
+        header={{
+          heading: `Avbryt jobb (ID: ${jobb.id})`,
+          icon: <ExclamationmarkTriangleIcon fontSize={'inherit'} />,
+        }}
+        onClose={() => {
+          setVisAvbrytModal(false);
+        }}
+        onBeforeClose={() => {
+          setVisAvbrytModal(false);
+          return true;
+        }}
+      >
+        <Modal.Body>
+          <BodyShort spacing>Er du sikker på at du vil avbryte denne jobben?</BodyShort>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button type="button" variant="secondary" onClick={() => setVisAvbrytModal(false)}>
+            Nei, gå tilbake
+          </Button>
+          <Button
+            type="button"
+            variant="danger"
+            onClick={async () => {
+              await onAvbrytJobbClick(jobb.id);
+
+              setVisAvbrytModal(false);
+            }}
+          >
+            Ja, avbryt jobb
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Box>
   );
 };
