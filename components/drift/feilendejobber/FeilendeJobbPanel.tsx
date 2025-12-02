@@ -1,6 +1,6 @@
 'use client';
 
-import { Alert, BodyShort, Box, Button, CopyButton, HStack, Label, Modal, Tag, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Box, Button, CopyButton, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 import { objectToMap } from 'components/drift/jobbtabell/JobbTabell';
 import React, { useState } from 'react';
 import { AppNavn, JobbInfo } from 'lib/services/driftService';
