@@ -175,5 +175,11 @@ export const hentSisteKjørteJobber = async (appNavn: AppNavn) => {
 export const kjørFraSteg = async (behandlingsreferanse: string, steg: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
   const url = `${baseUrl}/api/drift/behandling/${behandlingsreferanse}/kjor-fra-steg`;
-  return await fetchProxy<undefined>(url,  scope, 'POST', {steg});
+  return await fetchProxy<undefined>(url, scope, 'POST', { steg });
+};
+
+export const triggProsesserBehandlingIPostmottak = async (referanse: string) => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('postmottak');
+  const url = `${baseUrl}/api/drift/behandling/${referanse}/prosesser`;
+  return await fetchProxy<undefined>(url, scope, 'POST', {});
 };

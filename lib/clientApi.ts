@@ -17,5 +17,12 @@ export function avbrytKjørendeJobb(appNavn: AppNavn, jobbId: number) {
 }
 
 export function kjørFraSteg(behandlingsreferanse: string, steg: string) {
-  return fetch(`/api/drift/behandling/${behandlingsreferanse}/kjorfrasteg/`, {method: 'POST', body: JSON.stringify({steg})})
+  return fetch(`/api/drift/behandling/${behandlingsreferanse}/kjorfrasteg/`, {
+    method: 'POST',
+    body: JSON.stringify({ steg }),
+  });
+}
+
+export function triggProsesserbehandlingIPostmottak(referanse: string) {
+  return fetch(`/api/drift/postmottak/${referanse}/prosesser`, { method: 'POST', body: JSON.stringify({}) });
 }
