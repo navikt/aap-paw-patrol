@@ -1,5 +1,4 @@
 import '@navikt/ds-css';
-import '@navikt/aap-felles-css';
 import 'styles/globals.css';
 
 import { verifyUserLoggedIn } from '@navikt/aap-felles-utils';
