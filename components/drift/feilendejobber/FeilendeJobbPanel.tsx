@@ -1,12 +1,13 @@
 'use client';
 
-import { Alert, BodyShort, Box, Button, CopyButton, HStack, Label, Modal, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Box, Button, CopyButton, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 import { objectToMap } from 'components/drift/jobbtabell/JobbTabell';
 import React, { useState } from 'react';
 import { AppNavn, JobbInfo } from 'lib/services/driftService';
 import { avbrytKjørendeJobb, rekjørJobb } from 'lib/clientApi';
 import { format } from 'date-fns';
-import { ExclamationmarkTriangleIcon } from '@navikt/aksel-icons';
+import { ExclamationmarkTriangleIcon, LinkIcon } from '@navikt/aksel-icons';
+import Link from 'next/link';
 
 export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: AppNavn }) => {
   const [visAvbrytModal, setVisAvbrytModal] = useState<boolean>(false);
@@ -35,49 +36,28 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
   }
 
   return (
-    <Box borderWidth="1" borderColor="border-divider" borderRadius="large" padding="4">
+    <Box borderWidth="1" borderColor="border-divider" borderRadius="large" padding="4" id={jobb.id.toString()}>
       <VStack gap="4">
         <HStack gap="4" justify="space-between">
-          <VStack gap="4">
-            <HStack gap="8">
-              <div>
-                <Label size="small">ID</Label>
-                <BodyShort size="small">{jobb.id}</BodyShort>
-              </div>
-              <div>
-                <Label size="small">Type</Label>
-                <BodyShort size="small">{jobb.type}</BodyShort>
-              </div>
-              <div>
-                <Label size="small">Forsøk</Label>
-                <BodyShort size="small">{jobb.antallFeilendeForsøk}</BodyShort>
-              </div>
-              <div>
-                <Label size="small">Opprettet tidspunkt</Label>
-                <BodyShort size="small">
-                  {jobb.opprettetTidspunkt ? format(jobb.opprettetTidspunkt, 'dd.MM.yyyy HH:mm:ss') : '-'}
-                </BodyShort>
-              </div>
+          <Heading size="medium">
+            <HStack gap="2" align="center">
+              <Link href={`#${jobb.id}`}>Jobb {jobb.id}</Link>
+              <CopyButton
+                icon={<LinkIcon aria-hidden />}
+                size="small"
+                text="Kopier lenke til jobb"
+                activeText="Lenken er kopiert"
+                copyText={`${window.location.origin}${window.location.pathname}#${jobb.id}`}
+              />
             </HStack>
-
-            <HStack gap="4">
-              {[...objectToMap(jobb.metadata)].map(([key, value]) => {
-                return (
-                  <div key={key}>
-                    <Label size="small">{key}</Label>
-                    <CopyButton size="small" copyText={value} text={value} activeText={`Kopierte ${key}`} />
-                  </div>
-                );
-              })}
-            </HStack>
-          </VStack>
+          </Heading>
 
           <VStack gap="4">
             <HStack justify={'end'} gap={'4'}>
-              <Button loading={isLoading} onClick={() => onRekjørJobbClick(jobb.id)}>
+              <Button size="small" loading={isLoading} onClick={() => onRekjørJobbClick(jobb.id)}>
                 Rekjør
               </Button>
-              <Button loading={isLoading} onClick={() => setVisAvbrytModal(true)} variant="danger">
+              <Button size="small" loading={isLoading} onClick={() => setVisAvbrytModal(true)} variant="danger">
                 Avbryt
               </Button>
             </HStack>
@@ -92,6 +72,38 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
                 {message}
               </Alert>
             )}
+          </VStack>
+        </HStack>
+
+        <HStack gap="4" justify="space-between">
+          <VStack gap="4">
+            <HStack gap="8">
+              <div>
+                <Label size="small">Type</Label>
+                <BodyShort size="small">{jobb.type}</BodyShort>
+              </div>
+
+              <div>
+                <Label size="small">Forsøk</Label>
+                <BodyShort size="small">{jobb.antallFeilendeForsøk}</BodyShort>
+              </div>
+
+              <div>
+                <Label size="small">Opprettet tidspunkt</Label>
+                <BodyShort size="small">
+                  {jobb.opprettetTidspunkt ? format(jobb.opprettetTidspunkt, 'dd.MM.yyyy HH:mm:ss') : '-'}
+                </BodyShort>
+              </div>
+
+              {[...objectToMap(jobb.metadata)].map(([key, value]) => {
+                return (
+                  <div key={key}>
+                    <Label size="small">{key}</Label>
+                    <CopyButton size="xsmall" copyText={value} text={value} activeText={`Kopierte ${key}`} />
+                  </div>
+                );
+              })}
+            </HStack>
           </VStack>
         </HStack>
 
