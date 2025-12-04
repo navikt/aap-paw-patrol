@@ -2,7 +2,7 @@
 
 import { Alert, BodyShort, Box, Button, CopyButton, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 import { objectToMap } from 'components/drift/jobbtabell/JobbTabell';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppNavn, JobbInfo } from 'lib/services/driftService';
 import { avbrytKjørendeJobb, rekjørJobb } from 'lib/clientApi';
 import { format } from 'date-fns';
@@ -35,6 +35,15 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
       .finally(() => setIsLoading(false));
   }
 
+  useEffect(() => {
+    if (window.location.hash === `#${jobb.id}`) {
+      const el = document.getElementById(jobb.id.toString());
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [jobb.id]);
+
   return (
     <Box borderWidth="1" borderColor="border-divider" borderRadius="large" padding="4" id={jobb.id.toString()}>
       <VStack gap="4">
@@ -42,13 +51,15 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
           <Heading size="medium">
             <HStack gap="2" align="center">
               <Link href={`#${jobb.id}`}>Jobb {jobb.id}</Link>
-              <CopyButton
-                icon={<LinkIcon aria-hidden />}
-                size="small"
-                text="Kopier lenke til jobb"
-                activeText="Lenken er kopiert"
-                copyText={`${window.location.origin}${window.location.pathname}#${jobb.id}`}
-              />
+              {typeof window !== 'undefined' && (
+                <CopyButton
+                  icon={<LinkIcon aria-hidden />}
+                  size="small"
+                  text="Kopier lenke til jobb"
+                  activeText="Lenken er kopiert"
+                  copyText={`${window.location.origin}${window.location.pathname}#${jobb.id}`}
+                />
+              )}
             </HStack>
           </Heading>
 
