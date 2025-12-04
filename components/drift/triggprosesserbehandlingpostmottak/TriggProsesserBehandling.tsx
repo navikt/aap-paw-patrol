@@ -12,7 +12,7 @@ export const TriggProsesserBehandling = () => {
     setIsLoading(true);
     setMessage('');
 
-    console.log('kjør-fra-steg', { behandlingsreferanse });
+    console.log('trigg-behandling:', { behandlingsreferanse });
 
     try {
       const response = await triggProsesserbehandlingIPostmottak(behandlingsreferanse);
@@ -38,7 +38,7 @@ export const TriggProsesserBehandling = () => {
           onChange={(e) => setBehandlingsreferanse(e.target.value)}
         />
         <Button onClick={onClick} loading={isLoading}>
-          Sett aktivt steg
+          Trigg
         </Button>
       </HStack>
       {message && <BodyShort>{message}</BodyShort>}
