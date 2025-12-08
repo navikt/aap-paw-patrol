@@ -10,6 +10,7 @@ import { ExclamationmarkTriangleIcon, LinkIcon } from '@navikt/aksel-icons';
 import Link from 'next/link';
 
 export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: AppNavn }) => {
+  const [mounted, setMounted] = useState(false);
   const [visAvbrytModal, setVisAvbrytModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>();
@@ -36,13 +37,17 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
   }
 
   useEffect(() => {
-    if (window.location.hash === `#${jobb.id}`) {
+    setMounted(true);
+  }, [])
+
+  useEffect(() => {
+    if (mounted && window.location.hash === `#${jobb.id}`) {
       const el = document.getElementById(jobb.id.toString());
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
-  }, [jobb.id]);
+  }, [mounted, jobb.id]);
 
   return (
     <Box borderWidth="1" borderColor="border-divider" borderRadius="large" padding="4" id={jobb.id.toString()}>
@@ -51,7 +56,7 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
           <Heading size="medium">
             <HStack gap="2" align="center">
               <Link href={`#${jobb.id}`}>Jobb {jobb.id}</Link>
-              {typeof window !== 'undefined' && (
+              {mounted && (
                 <CopyButton
                   icon={<LinkIcon aria-hidden />}
                   size="small"
