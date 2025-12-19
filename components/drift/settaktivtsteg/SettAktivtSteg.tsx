@@ -1,30 +1,41 @@
 'use client';
-import { useState } from 'react';
-import { BodyShort, Button, Heading, HStack, Select, TextField, VStack } from '@navikt/ds-react';
+import { useEffect, useState } from 'react';
+import { Alert, Button, Heading, HStack, TextField, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
 import { kjørFraSteg } from '../../../lib/clientApi';
 
 export const KjørFraSteg = () => {
-  const [behandlingsreferanse, setBehandlingsreferanse] = useState('');
-  const [steg, setSteg] = useState('');
+  const [behandlingsreferanse, setBehandlingsreferanse] = useState<string>();
+  const [steg, setSteg] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>('');
+  const [error, setError] = useState<string>();
+  const [message, setMessage] = useState<string>();
+
+  useEffect(() => {
+    if (behandlingsreferanse && steg) {
+      setError(undefined);
+    }
+  }, [behandlingsreferanse, steg]);
 
   const onClick = async () => {
-    setIsLoading(true);
-    setMessage('');
+    setMessage(undefined);
+    setError(undefined);
 
+    if (!behandlingsreferanse || !steg) {
+      setError('Behandlingsreferanse og steg må fylles ut');
+      return;
+    }
+
+    setIsLoading(true);
     console.log('kjør-fra-steg', { behandlingsreferanse, steg });
 
     try {
-      const settAktivtStegResponse = await kjørFraSteg(behandlingsreferanse, steg);
-      if (settAktivtStegResponse.ok) {
-        setMessage('ok 👍');
-      } else {
-        setMessage(await settAktivtStegResponse.text());
-      }
+      await kjørFraSteg(behandlingsreferanse, steg).then(async (res) => {
+        if (res.ok) setMessage('ok 👍');
+        else setError(await res.text());
+      });
     } catch (err) {
       console.log(err);
-      setMessage('Noe gikk galt');
+      setError(`Noe gikk galt: ${err}`);
     }
     setIsLoading(false);
   };
@@ -32,67 +43,71 @@ export const KjørFraSteg = () => {
   return (
     <VStack gap="4" marginBlock="8">
       <Heading size="medium">Sett aktivt steg for behandling</Heading>
-      <HStack gap="2" align="end">
-        <TextField
-          label="Behandlingsreferanse (UUID)"
-          value={behandlingsreferanse}
-          onChange={(e) => setBehandlingsreferanse(e.target.value)}
-        />
-        <Select label="Steg" onChange={(e) => setSteg(e.target.value)}>
-          {muligeSteg.map((s) => (
-            <option value={s} key={s}>
-              {s}
-            </option>
-          ))}
-        </Select>
+      <TextField
+        label="Behandlingsreferanse (UUID)"
+        value={behandlingsreferanse}
+        onChange={(e) => setBehandlingsreferanse(e.target.value)}
+      />
+
+      <UNSAFE_Combobox
+        label="Steg"
+        options={Object.entries(muligeSteg).map(([key, value]) => ({ label: value, value: key }))}
+        multiple={false}
+        onToggleSelected={(value) => setSteg(value)}
+        shouldAutocomplete={false}
+      />
+
+      <div>
         <Button onClick={onClick} loading={isLoading}>
           Sett aktivt steg
         </Button>
-      </HStack>
-      {message && <BodyShort>{message}</BodyShort>}
+      </div>
+
+      {message && <Alert variant="info">{message}</Alert>}
+      {error && <Alert variant="error">{error}</Alert>}
     </VStack>
   );
 };
 
-const muligeSteg = [
-  'VURDER_RETTIGHETSPERIODE',
-  'SØKNAD',
-  'VURDER_ALDER',
-  'VURDER_LOVVALG',
-  'VURDER_MEDLEMSKAP',
-  'VURDER_OPPHOLDSKRAV',
-  'FASTSETT_MELDEPERIODER',
-  'AVKLAR_STUDENT',
-  'VURDER_BISTANDSBEHOV',
-  'OVERGANG_UFORE',
-  'OVERGANG_ARBEID',
-  'VURDER_SYKEPENGEERSTATNING',
-  'FASTSETT_SYKDOMSVILKÅRET',
-  'VURDER_YRKESSKADE',
-  'FRITAK_MELDEPLIKT',
-  'SYKDOMSVURDERING_BREV',
-  'KVALITETSSIKRING',
-  'BARNETILLEGG',
-  'AVKLAR_SYKDOM',
-  'ARBEIDSOPPTRAPPING',
-  'REFUSJON_KRAV',
-  'FASTSETT_ARBEIDSEVNE',
-  'FASTSETT_BEREGNINGSTIDSPUNKT',
-  'FASTSETT_GRUNNLAG',
-  'VIS_GRUNNLAG',
-  'MANGLENDE_LIGNING',
-  'SAMORDNING_UFØRE',
-  'SAMORDNING_GRADERING',
-  'SAMORDNING_AVSLAG',
-  'SAMORDNING_ANDRE_STATLIGE_YTELSER',
-  'SAMORDNING_ARBEIDSGIVER',
-  'SAMORDNING_TJENESTEPENSJON_REFUSJONSKRAV',
-  'IKKE_OPPFYLT_MELDEPLIKT',
-  'FASTSETT_UTTAK',
-  'EFFEKTUER_11_7',
-  'DU_ER_ET_ANNET_STED',
-  'BEREGN_TILKJENT_YTELSE',
-  'SIMULERING',
-  'FORESLÅ_VEDTAK',
-  'FATTE_VEDTAK',
-];
+const muligeSteg: Record<string, string> = {
+  SØKNAD: 'Søknad',
+  VURDER_RETTIGHETSPERIODE: 'Vurder rettighetsperiode',
+  VURDER_ALDER: 'Vurder alder',
+  VURDER_LOVVALG: 'Vurder lovvalg',
+  VURDER_MEDLEMSKAP: 'Vurder medlemskap',
+  VURDER_OPPHOLDSKRAV: 'Vurder oppholdskrav',
+  FASTSETT_MELDEPERIODER: 'Fastsett meldeperioder',
+  AVKLAR_STUDENT: 'Avklar student',
+  VURDER_BISTANDSBEHOV: 'Vurder bistandsbehov',
+  OVERGANG_UFORE: 'Overgang ufore',
+  OVERGANG_ARBEID: 'Overgang arbeid',
+  VURDER_SYKEPENGEERSTATNING: 'Vurder sykepengeerstatning',
+  FASTSETT_SYKDOMSVILKÅRET: 'Fastsett sykdomsvilkåret',
+  VURDER_YRKESSKADE: 'Vurder yrkesskade',
+  FRITAK_MELDEPLIKT: 'Fritak meldeplikt',
+  SYKDOMSVURDERING_BREV: 'Sykdomsvurdering brev',
+  KVALITETSSIKRING: 'Kvalitetssikring',
+  BARNETILLEGG: 'Barnetillegg',
+  AVKLAR_SYKDOM: 'Avklar sykdom',
+  ARBEIDSOPPTRAPPING: 'Arbeidsopptrapping',
+  REFUSJON_KRAV: 'Refusjon krav',
+  FASTSETT_ARBEIDSEVNE: 'Fastsett arbeidsevne',
+  FASTSETT_BEREGNINGSTIDSPUNKT: 'Fastsett beregningstidspunkt',
+  FASTSETT_GRUNNLAG: 'Fastsett grunnlag',
+  VIS_GRUNNLAG: 'Vis grunnlag',
+  MANGLENDE_LIGNING: 'Manglende ligning',
+  SAMORDNING_UFØRE: 'Samordning uføre',
+  SAMORDNING_GRADERING: 'Samordning gradering',
+  SAMORDNING_AVSLAG: 'Samordning avslag',
+  SAMORDNING_ANDRE_STATLIGE_YTELSER: 'Samordning andre statlige ytelser',
+  SAMORDNING_ARBEIDSGIVER: 'Samordning arbeidsgiver',
+  SAMORDNING_TJENESTEPENSJON_REFUSJONSKRAV: 'Samordning tjenestepensjon refusjonskrav',
+  IKKE_OPPFYLT_MELDEPLIKT: 'Ikke oppfylt meldeplikt',
+  FASTSETT_UTTAK: 'Fastsett uttak',
+  EFFEKTUER_11_7: 'Effektuer 11 7',
+  DU_ER_ET_ANNET_STED: 'Du er et annet sted',
+  BEREGN_TILKJENT_YTELSE: 'Beregn tilkjent ytelse',
+  SIMULERING: 'Simulering',
+  FORESLÅ_VEDTAK: 'Foreslå vedtak',
+  FATTE_VEDTAK: 'Fatte vedtak',
+};
