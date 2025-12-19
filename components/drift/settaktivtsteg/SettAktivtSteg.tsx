@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Alert, Button, Heading, HStack, TextField, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
+import { Alert, Button, Heading, TextField, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
 import { kjørFraSteg } from '../../../lib/clientApi';
 
 export const KjørFraSteg = () => {
