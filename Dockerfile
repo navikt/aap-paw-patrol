@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/nodejs20-debian12@sha256:3db2ff68a5e0a09955ee9199d6de23a11e65e7a032d75a2f29ca44b36cb46ea8
+FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/node:25-slim
 
 
 WORKDIR /app
