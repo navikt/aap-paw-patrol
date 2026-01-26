@@ -50,11 +50,11 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
   }, [mounted, jobb.id]);
 
   return (
-    <Box borderWidth="1" borderColor="border-divider" borderRadius="large" padding="4" id={jobb.id.toString()}>
-      <VStack gap="4">
-        <HStack gap="4" justify="space-between">
+    <Box borderWidth="1" borderColor="neutral-subtle" borderRadius="12" padding="space-16" id={jobb.id.toString()}>
+      <VStack gap="space-16">
+        <HStack gap="space-16" justify="space-between">
           <Heading size="medium">
-            <HStack gap="2" align="center">
+            <HStack gap="space-8" align="center">
               <Link href={`#${jobb.id}`}>Jobb {jobb.id}</Link>
               {mounted && (
                 <CopyButton
@@ -68,8 +68,8 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
             </HStack>
           </Heading>
 
-          <VStack gap="4">
-            <HStack justify={'end'} gap={'4'}>
+          <VStack gap="space-16">
+            <HStack justify={'end'} gap="space-16">
               <Button size="small" loading={isLoading} onClick={() => onRekjørJobbClick(jobb.id)}>
                 Rekjør
               </Button>
@@ -91,9 +91,9 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
           </VStack>
         </HStack>
 
-        <HStack gap="4" justify="space-between">
-          <VStack gap="4">
-            <HStack gap="8">
+        <HStack gap="space-16" justify="space-between">
+          <VStack gap="space-16">
+            <HStack gap="space-32">
               <div>
                 <Label size="small">Type</Label>
                 <BodyShort size="small">{jobb.type}</BodyShort>
@@ -125,13 +125,13 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
 
         <div>
           <Box
-            background="surface-warning-subtle"
-            borderColor="border-warning"
-            borderRadius="large"
+            background="warning-soft"
+            borderColor="warning-subtle"
+            borderRadius="12"
             borderWidth="1"
-            padding="4"
+            padding="space-16"
           >
-            <HStack gap="4">
+            <HStack gap="space-16">
               <Label>Feilmelding</Label>
               {jobb.feilmelding && <CopyButton copyText={jobb.feilmelding} text="Kopier feilmelding" size="xsmall" />}
             </HStack>

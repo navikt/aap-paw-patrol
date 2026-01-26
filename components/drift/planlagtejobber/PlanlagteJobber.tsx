@@ -12,7 +12,7 @@ interface Props {
 export const PlanlagteJobber = ({ planlagteJobber, appNavn }: Props) => {
   return (
     <div>
-      <Heading size={'small'} level={'2'}>
+      <Heading size={'small'} level="2">
         Planlagte jobber
       </Heading>
       <JobbTabell jobber={planlagteJobber} appNavn={appNavn} />

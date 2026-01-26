@@ -35,7 +35,7 @@ export const JobbTabell = ({ jobber, appNavn }: Props) => {
   }
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Table zebraStripes>
         <Table.Header>
           <Table.Row>
@@ -55,7 +55,7 @@ export const JobbTabell = ({ jobber, appNavn }: Props) => {
                 key={jobb.id}
                 content={
                   <HStack>
-                    <VStack gap={'4'}>
+                    <VStack gap="space-16">
                       <div>
                         <Label>Beskrivelse</Label>
                         <BodyShort>{jobb.beskrivelse}</BodyShort>
@@ -67,7 +67,7 @@ export const JobbTabell = ({ jobber, appNavn }: Props) => {
                         </div>
                       )}
                     </VStack>
-                    <VStack gap={'4'}>
+                    <VStack gap="space-16">
                       {[...objectToMap(jobb.metadata)].map(([key, value]) => {
                         return (
                           <div key={key}>

@@ -42,8 +42,8 @@ export const RekjørSpesifikkJobb = ({ appNavn }: { appNavn: AppNavn }) => {
   };
   // kjørJobb
   return (
-    <Box background="bg-subtle" padding="4" borderRadius="large" borderWidth="1" borderColor="border-divider">
-      <HStack gap="4" align="end">
+    <Box background="neutral-soft" padding="space-16" borderRadius="12" borderWidth="1" borderColor="neutral">
+      <HStack gap="space-16" align="end">
         <TextField
           label="JobbId"
           description="Må være et heltall"

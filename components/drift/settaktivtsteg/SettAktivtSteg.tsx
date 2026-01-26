@@ -41,7 +41,7 @@ export const KjørFraSteg = () => {
   };
 
   return (
-    <VStack gap="4" marginBlock="8">
+    <VStack gap="space-16" marginBlock="space-32">
       <Heading size="medium">Sett aktivt steg for behandling</Heading>
       <TextField
         label="Behandlingsreferanse (UUID)"

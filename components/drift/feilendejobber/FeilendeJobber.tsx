@@ -9,7 +9,7 @@ interface Props {
 
 export const FeilendeJobber = ({ jobber, appNavn }: Props) => {
   return (
-    <VStack gap="4" marginBlock="8">
+    <VStack gap="space-16" marginBlock="space-32">
       <Heading size={'small'} level={'3'}>
         Feilende jobber
       </Heading>
@@ -18,7 +18,7 @@ export const FeilendeJobber = ({ jobber, appNavn }: Props) => {
         <>
           <Alert variant={'error'}>Det finnes {jobber.length} feilede jobb(er)</Alert>
 
-          <VStack gap="4">
+          <VStack gap="space-16">
             {jobber.map((jobb, index) => (
               <FeilendeJobbPanel jobb={jobb} appNavn={appNavn} key={index} />
             ))}

@@ -8,12 +8,12 @@ export default function Home() {
   return (
     <Page>
       <PageBlock width="md">
-        <VStack gap="4" marginBlock="8">
+        <VStack gap="space-16" marginBlock="space-32">
           <Heading size={'large'} spacing>
             Jobber
           </Heading>
           {appInfo.length > 0 && (
-            <HGrid columns="3" gap="4">
+            <HGrid columns="3" gap="space-16">
               {appInfo.map((app) => (
                 <LinkCard key={app.name} size="small">
                   <LinkCardIcon>

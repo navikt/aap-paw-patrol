@@ -29,9 +29,9 @@ export const TriggProsesserBehandling = () => {
   };
 
   return (
-    <VStack gap="4" marginBlock="8">
+    <VStack gap="space-16" marginBlock="space-32">
       <Heading size="medium">Trigg prosesser behandling</Heading>
-      <HStack gap="2" align="end">
+      <HStack gap="space-8" align="end">
         <TextField
           label="Behandlingsreferanse (UUID)"
           value={behandlingsreferanse}

@@ -16,7 +16,7 @@ interface Props {
 }
 export const Jobboversikt = ({ appNavn, planlagteJobber, feilendeJobber, sisteKjørteJobber }: Props) => {
   return (
-    <VStack gap="8">
+    <VStack gap="space-32">
       <RekjørFeiledeJobber appNavn={appNavn} />
       <RekjørSpesifikkJobb appNavn={appNavn} />
       <PlanlagteJobber planlagteJobber={planlagteJobber} appNavn={appNavn} />

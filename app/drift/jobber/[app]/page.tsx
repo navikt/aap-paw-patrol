@@ -27,7 +27,7 @@ const DriftPage = async ({ params }: { params: Promise<Params> }) => {
   return (
     <Page>
       <PageBlock width="2xl">
-        <Box marginBlock="8">
+        <Box marginBlock="space-32">
           <Heading size={'large'} spacing>
             Drift console
           </Heading>

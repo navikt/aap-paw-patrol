@@ -37,7 +37,7 @@ export const Behandleroppslag = () => {
 
   return (
     <>
-      <VStack gap="2" marginBlock="8">
+      <VStack gap="space-8" marginBlock="space-32">
         <Heading size={'large'}>Behandleroppslag</Heading>
 
         <BodyShort>
@@ -50,7 +50,7 @@ export const Behandleroppslag = () => {
             søkEtterBehandler();
           }}
         >
-          <HStack gap="2" align="end">
+          <HStack gap="space-8" align="end">
             <TextField
               label="Saksnummer"
               value={request.saksnummer}
