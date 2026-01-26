@@ -23,6 +23,12 @@ export function kjørFraSteg(behandlingsreferanse: string, steg: string) {
   });
 }
 
+export function hentBehandlingDriftsinfo(behandlingsreferanse: string) {
+  return fetch(`/api/drift/behandling/${behandlingsreferanse}/info`, {
+    method: 'POST',
+  });
+}
+
 export function triggProsesserbehandlingIPostmottak(referanse: string) {
   return fetch(`/api/drift/postmottak/${referanse}/prosesser`, { method: 'POST', body: JSON.stringify({}) });
 }

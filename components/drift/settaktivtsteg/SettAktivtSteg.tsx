@@ -69,7 +69,7 @@ export const KjørFraSteg = () => {
   );
 };
 
-const muligeSteg: Record<string, string> = {
+export const muligeSteg: Record<string, string> = {
   SØKNAD: 'Søknad',
   VURDER_RETTIGHETSPERIODE: 'Vurder rettighetsperiode',
   VURDER_ALDER: 'Vurder alder',
