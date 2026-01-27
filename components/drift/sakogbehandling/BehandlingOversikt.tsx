@@ -14,7 +14,7 @@ import {
   TextField,
   VStack,
 } from '@navikt/ds-react';
-import { BehandlingInfo } from 'components/drift/settaktivtsteg/BehandlingInfo';
+import { AvklaringsbehovInfo } from 'components/drift/settaktivtsteg/AvklaringsbehovInfo';
 import * as uuid from 'uuid';
 import { SettAktivtStegV2 } from 'components/drift/sakogbehandling/SettAktivtStegV2';
 import { hentBehandlingDriftsinfo } from 'lib/clientApi';
@@ -127,7 +127,7 @@ export const BehandlingOversikt = () => {
       {!isLoading && !!behandling && (
         <HGrid columns="4fr 2fr" gap="space-16" maxWidth={'1680px'} marginInline={'auto'} marginBlock="space-0">
           <Box padding="space-16" borderRadius="16">
-            {!!behandlingsreferanse && <BehandlingInfo behandling={behandling} />}
+            <AvklaringsbehovInfo avklaringsbehov={behandling.avklaringsbehov} />
           </Box>
 
           <Box

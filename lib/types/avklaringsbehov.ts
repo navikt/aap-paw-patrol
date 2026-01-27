@@ -1,6 +1,6 @@
 export interface BehandlingDriftsinfoDTO {
   behandling: BehandlinginfoDTO;
-  avklaringsbehov: AvklaringsbehovDTO[];
+  avklaringsbehov: ForenkletAvklaringsbehov[];
 }
 
 export interface BehandlinginfoDTO {
@@ -12,13 +12,14 @@ export interface BehandlinginfoDTO {
   opprettet: string;
 }
 
-export interface AvklaringsbehovDTO {
-  definisjon: DefinisjonDTO;
-  status: string;
-  endringer: EndringDTO[];
+export interface ForenkletAvklaringsbehov {
+  definisjon: Definisjon;
+  status: AvklaringsbehovStatus;
+  tidsstempel: string;
+  endretAv: string;
 }
 
-export interface DefinisjonDTO {
+export interface Definisjon {
   kode: string;
   type: string;
   løsesISteg: string;
@@ -27,10 +28,12 @@ export interface DefinisjonDTO {
   løsesAv: string[];
 }
 
-export interface EndringDTO {
-  status: string;
-  tidsstempel: string;
-  begrunnelse: string;
-  endretAv: string;
+export enum AvklaringsbehovStatus {
+  OPPRETTET = 'OPPRETTET',
+  AVSLUTTET = 'AVSLUTTET',
+  TOTRINNS_VURDERT = 'TOTRINNS_VURDERT',
+  SENDT_TILBAKE_FRA_BESLUTTER = 'SENDT_TILBAKE_FRA_BESLUTTER',
+  KVALITETSSIKRET = 'KVALITETSSIKRET',
+  SENDT_TILBAKE_FRA_KVALITETSSIKRER = 'SENDT_TILBAKE_FRA_KVALITETSSIKRER',
+  AVBRUTT = 'AVBRUTT',
 }
-
