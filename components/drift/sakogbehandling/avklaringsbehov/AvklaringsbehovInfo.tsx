@@ -1,8 +1,7 @@
 import { AvklaringsbehovStatus, ForenkletAvklaringsbehov } from 'lib/types/avklaringsbehov';
 import { Process, Tag } from '@navikt/ds-react';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
-
-const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase().replace(/_/g, ' ');
+import { capitalize } from 'lib/utils/formatting';
 
 const tagStatusColor = (status: AvklaringsbehovStatus) => {
   switch (status) {

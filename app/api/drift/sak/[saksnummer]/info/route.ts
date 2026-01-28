@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { hentBehandlingDriftsinfo } from 'lib/services/driftService';
+import { hentSakDriftsinfo } from 'lib/services/driftService';
 
 interface Params {
-  behandlingsreferanse: string;
+  saksnummer: string;
 }
 
 export async function POST(_: NextRequest, { params }: { params: Promise<Params> }) {
-  const { behandlingsreferanse } = await params;
+  const { saksnummer } = await params;
   try {
-    return NextResponse.json(await hentBehandlingDriftsinfo(behandlingsreferanse));
+    return NextResponse.json(await hentSakDriftsinfo(saksnummer));
   } catch (err: any) {
     return new Response(err?.message, { status: 500 });
   }

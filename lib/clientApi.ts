@@ -23,8 +23,8 @@ export function kjørFraSteg(behandlingsreferanse: string, steg: string) {
   });
 }
 
-export function hentBehandlingDriftsinfo(behandlingsreferanse: string) {
-  return fetch(`/api/drift/behandling/${behandlingsreferanse}/info`, {
+export function hentSakDriftsinfo(saksnummer: string) {
+  return fetch(`/api/drift/sak/${saksnummer}/info`, {
     method: 'POST',
   });
 }

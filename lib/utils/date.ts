@@ -11,3 +11,7 @@ export const DATO_FORMATER = {
 export function formaterDatoMedTidspunktSekunderForFrontend(dato: Date | string): string {
   return format(dato, DATO_FORMATER.ddMMyyyy_HHmmss, { locale: nb });
 }
+
+export function formaterDatoForFrontend(dato: Date | string): string {
+  return format(dato, DATO_FORMATER.ddMMyyyy, { locale: nb });
+}

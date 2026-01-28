@@ -178,9 +178,9 @@ export const kjørFraSteg = async (behandlingsreferanse: string, steg: string) =
   return await fetchProxy<undefined>(url, scope, 'POST', { steg });
 };
 
-export const hentBehandlingDriftsinfo = async (behandlingsreferanse: string) => {
+export const hentSakDriftsinfo = async (saksnummer: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
-  const url = `${baseUrl}/api/drift/behandling/${behandlingsreferanse}/info`;
+  const url = `${baseUrl}/api/drift/sak/${saksnummer}/info`;
   return await fetchProxy<any>(url, scope, 'POST');
 };
 

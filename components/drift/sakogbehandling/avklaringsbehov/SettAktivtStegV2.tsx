@@ -1,16 +1,13 @@
-import { Alert, Button, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
+import { Alert, Button, Heading, InlineMessage, Tag, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
 import { muligeSteg } from 'components/drift/settaktivtsteg/SettAktivtSteg';
 import { useState } from 'react';
 import { kjørFraSteg } from 'lib/clientApi';
-import { ArrowCirclepathIcon } from '@navikt/aksel-icons';
+import { BehandlingDriftsinfo, BehandlingStatus } from 'lib/types/avklaringsbehov';
+import { formaterBehandlingType } from 'lib/utils/formatting';
 
-export const SettAktivtStegV2 = ({
-  behandlingsreferanse,
-  refresh,
-}: {
-  behandlingsreferanse: string;
-  refresh: () => void;
-}) => {
+export const SettAktivtStegV2 = ({ behandling }: { behandling: BehandlingDriftsinfo }) => {
+  const behandlingsreferanse = behandling.referanse;
+
   const [steg, setSteg] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>();
@@ -18,7 +15,6 @@ export const SettAktivtStegV2 = ({
 
   const onClick = async () => {
     setMessage(undefined);
-
     setError(undefined);
 
     if (!behandlingsreferanse || !steg) {
@@ -41,8 +37,14 @@ export const SettAktivtStegV2 = ({
     setIsLoading(false);
   };
 
+  if ([BehandlingStatus.IVERKSETTES, BehandlingStatus.AVSLUTTET].includes(behandling.status)) {
+    return null;
+  }
+
   return (
     <VStack gap="space-16" marginBlock="space-32">
+      <Heading size="medium">Sett aktivt steg for behandling</Heading>
+
       <UNSAFE_Combobox
         label="Steg"
         options={Object.entries(muligeSteg).map(([key, value]) => ({ label: value, value: key }))}
@@ -51,21 +53,33 @@ export const SettAktivtStegV2 = ({
         shouldAutocomplete={false}
       />
 
-      <div>
-        <Button onClick={onClick} loading={isLoading}>
-          Sett aktivt steg
-        </Button>
-      </div>
+      {steg && (
+        <InlineMessage status="info">
+          Du setter nå aktivt steg til{' '}
+          <Tag size="small" variant="warning">
+            {steg}
+          </Tag>{' '}
+          for <strong>{formaterBehandlingType(behandling.type)}</strong> med referanse:
+          <br />
+          <strong>{behandlingsreferanse}</strong>
+        </InlineMessage>
+      )}
+
+      <Button onClick={onClick} loading={isLoading} disabled={!steg}>
+        Sett aktivt steg
+      </Button>
 
       {message && (
         <VStack gap="space-8">
-          <Alert variant="info">{message}</Alert>
-          <Button variant="secondary" size="small" onClick={refresh} icon={<ArrowCirclepathIcon />}>
-            Last behandling på nytt
-          </Button>
+          <Alert variant="info">{message} - Last siden på nytt for å se endringen</Alert>
         </VStack>
       )}
       {error && <Alert variant="error">{error}</Alert>}
+      {steg === 'SØKNAD' && (
+        <Alert size="small" variant="warning">
+          Burde kun brukes hvis søknad er trukket!
+        </Alert>
+      )}
     </VStack>
   );
 };

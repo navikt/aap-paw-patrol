@@ -37,3 +37,42 @@ export enum AvklaringsbehovStatus {
   SENDT_TILBAKE_FRA_KVALITETSSIKRER = 'SENDT_TILBAKE_FRA_KVALITETSSIKRER',
   AVBRUTT = 'AVBRUTT',
 }
+
+// ------
+
+export interface SakDriftsinfoDTO {
+  saksnummer: string;
+  status: SakStatus;
+  rettighetsperiode: Periode;
+  opprettetTidspunkt: string;
+  behandlinger: BehandlingDriftsinfo[];
+}
+
+export enum SakStatus {
+  OPPRETTET = 'OPPRETTET',
+  UTREDES = 'UTREDES',
+  LØPENDE = 'LØPENDE',
+  AVSLUTTET = 'AVSLUTTET',
+}
+
+export interface BehandlingDriftsinfo {
+  referanse: string;
+  type: string;
+  status: BehandlingStatus;
+  vurderingsbehov: string[];
+  årsakTilOpprettelse?: string;
+  opprettet: string;
+  avklaringsbehov: ForenkletAvklaringsbehov[];
+}
+
+export enum BehandlingStatus {
+  OPPRETTET = 'OPPRETTET',
+  UTREDES = 'UTREDES',
+  IVERKSETTES = 'IVERKSETTES',
+  AVSLUTTET = 'AVSLUTTET',
+}
+
+export interface Periode {
+  fom: string;
+  tom: string;
+}
