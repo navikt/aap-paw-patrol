@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { BodyShort, Button, Heading, HStack, TextField, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, HStack, InfoCard, TextField, VStack } from '@navikt/ds-react';
 import { avbrytBrev } from '../../../lib/clientApi';
 
 export const AvbrytBrev = () => {
@@ -38,6 +38,14 @@ export const AvbrytBrev = () => {
     <VStack gap="space-16" marginBlock="space-32">
       <Heading size="medium">Avbryt bestilt brev i behandlingsflyt</Heading>
       <HStack gap="space-8" align="end">
+        <InfoCard data-color="info">
+          <InfoCard.Header>
+            <InfoCard.Title>Åpne avklarinsgbehov vil bli avbrutt</InfoCard.Title>
+          </InfoCard.Header>
+          <InfoCard.Content>
+            Denne skal brukes for vedtaksbrev i behandlingsflyt. Åpne avklaringsbehov for <code>SKRIV_VEDTAKSBREV</code> blir avbrutt, og behandlingen fullføres.
+          </InfoCard.Content>
+        </InfoCard>
         <TextField
           label="Brevets bestillingsreferanse (UUID)"
           value={bestillingsreferanse}
