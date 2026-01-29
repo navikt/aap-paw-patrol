@@ -23,6 +23,12 @@ export function kjørFraSteg(behandlingsreferanse: string, steg: string) {
   });
 }
 
+export function avbrytBrev(bestillingsreferanse: string) {
+  return fetch(`/api/drift/brev/${bestillingsreferanse}/avbryt/`, {
+    method: 'POST',
+  });
+}
+
 export function hentSakDriftsinfo(saksnummer: string) {
   return fetch(`/api/drift/sak/${saksnummer}/info`, {
     method: 'POST',

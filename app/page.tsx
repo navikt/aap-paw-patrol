@@ -75,6 +75,15 @@ export default function Home() {
               <LinkCardAnchor href={`/drift/postmottak`}>Trigg prosesser behandling i postmottak</LinkCardAnchor>
             </LinkCardTitle>
           </LinkCard>
+
+          <LinkCard size="small">
+            <LinkCardIcon>
+              <EnvelopeClosedIcon fontSize="2rem" />
+            </LinkCardIcon>
+            <LinkCardTitle>
+              <LinkCardAnchor href={`/drift/brev/avbryt`}>Avbryt brev i behandlingsflyt</LinkCardAnchor>
+            </LinkCardTitle>
+          </LinkCard>
         </VStack>
       </PageBlock>
     </Page>
