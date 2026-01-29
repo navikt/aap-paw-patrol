@@ -181,7 +181,7 @@ export const kjørFraSteg = async (behandlingsreferanse: string, steg: string) =
 export const avbrytBrev = async (bestillingsreferanse: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
 
-  const url = `${baseUrl}/api/drift/brev/${bestillingsreferanse}/avbryt/`;
+  const url = `${baseUrl}/api/drift/brev/${bestillingsreferanse}/avbryt`;
   return await fetchProxy<string>(url, scope, 'POST');
 };
 
