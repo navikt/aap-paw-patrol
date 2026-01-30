@@ -23,9 +23,10 @@ export function kjørFraSteg(behandlingsreferanse: string, steg: string) {
   });
 }
 
-export function avbrytBrev(bestillingsreferanse: string) {
+export function avbrytBrev(bestillingsreferanse: string, begrunnelse: string) {
   return fetch(`/api/drift/brev/${bestillingsreferanse}/avbryt/`, {
     method: 'POST',
+    body: JSON.stringify({ begrunnelse }),
   });
 }
 

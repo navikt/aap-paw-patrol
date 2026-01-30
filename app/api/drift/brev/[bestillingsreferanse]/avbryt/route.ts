@@ -7,8 +7,10 @@ interface Params {
 
 export async function POST(req: NextRequest, { params }: { params: Promise<Params> }) {
   const { bestillingsreferanse } = await params;
+  const { begrunnelse } = (await req.json()) as { begrunnelse: string };
+
   try {
-    return new Response(await avbrytBrev(bestillingsreferanse), { status: 200 });
+    return new Response(await avbrytBrev(bestillingsreferanse, begrunnelse), { status: 200 });
   } catch (err: any) {
     return new Response(err?.message, { status: 500 });
   }

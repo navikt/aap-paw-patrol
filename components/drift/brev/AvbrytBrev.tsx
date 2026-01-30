@@ -1,10 +1,11 @@
 'use client';
 import { useState } from 'react';
-import { BodyShort, Button, Heading, HStack, InfoCard, TextField, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, HStack, InfoCard, Textarea, TextField, VStack } from '@navikt/ds-react';
 import { avbrytBrev } from '../../../lib/clientApi';
 
 export const AvbrytBrev = () => {
   const [bestillingsreferanse, setbestillingsreferanse] = useState('');
+  const [begrunnelse, setBegrunnelse] = useState('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
 
@@ -17,11 +18,16 @@ export const AvbrytBrev = () => {
       setIsLoading(false);
       return;
     }
-    
+    if (!begrunnelse || begrunnelse.trim() === '') {
+      setMessage('Begrunnelse må fylles ut');
+      setIsLoading(false);
+      return;
+    }
+
     console.log('avbryt-brev', { bestillingsreferanse });
 
     try {
-      const response = await avbrytBrev(bestillingsreferanse);
+      const response = await avbrytBrev(bestillingsreferanse, begrunnelse);
       if (response.ok) {
         setMessage('ok 👍');
       } else {
@@ -37,13 +43,13 @@ export const AvbrytBrev = () => {
   return (
     <VStack gap="space-16" marginBlock="space-32">
       <Heading size="medium">Avbryt bestilt brev i behandlingsflyt</Heading>
-      <HStack gap="space-8" align="end">
         <InfoCard data-color="info">
           <InfoCard.Header>
-            <InfoCard.Title>Åpne avklarinsgbehov vil bli avbrutt</InfoCard.Title>
+            <InfoCard.Title>Avklaringsbehovet blir løst</InfoCard.Title>
           </InfoCard.Header>
           <InfoCard.Content>
-            Denne skal brukes for vedtaksbrev i behandlingsflyt. Åpne avklaringsbehov for <code>SKRIV_VEDTAKSBREV</code> blir avbrutt, og behandlingen fullføres.
+            Denne skal brukes for vedtaksbrev i behandlingsflyt. Åpne avklaringsbehov for <code>SKRIV_VEDTAKSBREV</code>{' '}
+            blir løst, og du vil stå som løser.
           </InfoCard.Content>
         </InfoCard>
         <TextField
@@ -51,10 +57,14 @@ export const AvbrytBrev = () => {
           value={bestillingsreferanse}
           onChange={(e) => setbestillingsreferanse(e.target.value)}
         />
+        <Textarea
+          label="Begrunnelse for avbrytelse"
+          value={begrunnelse}
+          onChange={(e) => setBegrunnelse(e.target.value)}
+        />
         <Button onClick={onClick} loading={isLoading}>
-          Trigg
+          Avbryt brev og fortsett prosessering
         </Button>
-      </HStack>
       {message && <BodyShort>{message}</BodyShort>}
     </VStack>
   );
