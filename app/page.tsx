@@ -39,16 +39,7 @@ export default function Home() {
               <LinkCardAnchor href={`/drift/sak`}>Hent sak</LinkCardAnchor>
             </LinkCardTitle>
           </LinkCard>
-
-          <LinkCard size="small">
-            <LinkCardIcon>
-              <MagnifyingGlassIcon fontSize="2rem" />
-            </LinkCardIcon>
-            <LinkCardTitle>
-              <LinkCardAnchor href={`/drift/behandling`}>Hent behandling</LinkCardAnchor>
-            </LinkCardTitle>
-          </LinkCard>
-
+          
           <LinkCard size="small">
             <LinkCardIcon>
               <BackwardIcon fontSize="2rem" />
