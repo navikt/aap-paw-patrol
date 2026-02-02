@@ -42,6 +42,7 @@ export const SakOversikt = () => {
 
   const hentSak = async () => {
     setSak(undefined);
+    setValgtBehandling(undefined)
     setError(undefined);
     setIsLoading(true);
 
