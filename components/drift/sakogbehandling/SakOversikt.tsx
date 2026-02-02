@@ -42,7 +42,7 @@ export const SakOversikt = () => {
 
   const hentSak = async () => {
     setSak(undefined);
-    setValgtBehandling(undefined)
+    setValgtBehandling(undefined);
     setError(undefined);
     setIsLoading(true);
 
@@ -54,7 +54,13 @@ export const SakOversikt = () => {
           if (res.ok) return await res.json();
           else throw Error(await res.text());
         })
-        .then((sak: SakDriftsinfoDTO) => setSak(sak));
+        .then((sak: SakDriftsinfoDTO) => {
+          setSak(sak);
+
+          if (sak.behandlinger.length === 1) {
+            setValgtBehandling(sak.behandlinger[0]);
+          }
+        });
     } catch (err) {
       console.log(err);
       setError(`Noe gikk galt: ${err}`);
