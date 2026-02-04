@@ -105,6 +105,7 @@ export const SakOversikt = () => {
                       <Table.HeaderCell>Type</Table.HeaderCell>
                       <Table.HeaderCell>Referanse</Table.HeaderCell>
                       <Table.HeaderCell>Status</Table.HeaderCell>
+                      <Table.HeaderCell>Vurderingsbehov</Table.HeaderCell>
                       <Table.HeaderCell>Årsak til opprettelse</Table.HeaderCell>
                       <Table.HeaderCell>Opprettet</Table.HeaderCell>
                       <Table.HeaderCell style={{ width: '2rem' }} />
@@ -130,6 +131,9 @@ export const SakOversikt = () => {
                             <Tag variant="info" size="small">
                               {capitalize(behandling.status)}
                             </Tag>
+                          </Table.DataCell>
+                          <Table.DataCell>
+                            {behandling.vurderingsbehov.map((v) => capitalize(v)).join(', ')}
                           </Table.DataCell>
                           <Table.DataCell>
                             {behandling.årsakTilOpprettelse ? capitalize(behandling.årsakTilOpprettelse) : '-'}
