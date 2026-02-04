@@ -42,6 +42,12 @@ export function hentVilkår(behandlingsreferanse: string) {
   });
 }
 
+export function hentOppgaver(behandlingsreferanse: string) {
+  return fetch(`/api/drift/oppgave/behandling/${behandlingsreferanse}`, {
+    method: 'POST',
+  });
+}
+
 export function triggProsesserbehandlingIPostmottak(referanse: string) {
   return fetch(`/api/drift/postmottak/${referanse}/prosesser`, { method: 'POST', body: JSON.stringify({}) });
 }

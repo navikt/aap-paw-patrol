@@ -1,7 +1,20 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Alert, BodyShort, Box, Heading, HGrid, Loader, Table, Tabs, Tag, TextField, VStack } from '@navikt/ds-react';
+import {
+  Alert,
+  BodyShort,
+  Box,
+  CopyButton,
+  Heading,
+  HGrid,
+  Loader,
+  Table,
+  Tabs,
+  Tag,
+  TextField,
+  VStack,
+} from '@navikt/ds-react';
 import { hentSakDriftsinfo } from 'lib/clientApi';
 import { BehandlingDriftsinfo, SakDriftsinfoDTO } from 'lib/types/avklaringsbehov';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
@@ -12,10 +25,12 @@ import { capitalize, formaterBehandlingType } from 'lib/utils/formatting';
 import { AvklaringsbehovInfo } from 'components/drift/sakogbehandling/avklaringsbehov/AvklaringsbehovInfo';
 import { SettAktivtStegV2 } from 'components/drift/sakogbehandling/avklaringsbehov/SettAktivtStegV2';
 import { Vilkårsresultat } from 'components/drift/sakogbehandling/vilkårsresultat/Vilkårsresultat';
+import { Oppgaver } from 'components/drift/sakogbehandling/oppgave/Oppgaver';
 
 enum Tab {
   AVKLARINGSBEHOV = 'AVKLARINGSBEHOV',
   VILKÅRSRESULTAT = 'VILKÅRSRESULTAT',
+  OPPGAVER = 'OPPGAVER',
 }
 
 export const SakOversikt = () => {
@@ -128,7 +143,14 @@ export const SakOversikt = () => {
                           }}
                         >
                           <Table.DataCell>{formaterBehandlingType(behandling.type)}</Table.DataCell>
-                          <Table.DataCell>{behandling.referanse}</Table.DataCell>
+                          <Table.DataCell>
+                            <CopyButton
+                              size="xsmall"
+                              iconPosition="right"
+                              copyText={behandling.referanse}
+                              text={behandling.referanse}
+                            />
+                          </Table.DataCell>
                           <Table.DataCell>
                             <Tag variant="info" size="small">
                               {capitalize(behandling.status)}
@@ -172,6 +194,7 @@ export const SakOversikt = () => {
             <Tabs.List>
               <Tabs.Tab value={Tab.AVKLARINGSBEHOV} label="Avklaringsbehov" />
               <Tabs.Tab value={Tab.VILKÅRSRESULTAT} label="Vilkårsresultat" />
+              <Tabs.Tab value={Tab.OPPGAVER} label="Oppgaver" />
             </Tabs.List>
 
             <Tabs.Panel value={Tab.AVKLARINGSBEHOV}>
@@ -188,6 +211,9 @@ export const SakOversikt = () => {
             </Tabs.Panel>
             <Tabs.Panel value={Tab.VILKÅRSRESULTAT}>
               <Vilkårsresultat behandlingsreferanse={valgtBehandling.referanse} />
+            </Tabs.Panel>
+            <Tabs.Panel value={Tab.OPPGAVER}>
+              <Oppgaver behandlingsreferanse={valgtBehandling.referanse} />
             </Tabs.Panel>
           </Tabs>
         </Box>

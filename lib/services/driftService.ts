@@ -74,12 +74,6 @@ export interface JobbInfo {
 }
 
 export const getBaseUrlAndScopeForApp = async (appNavn: AppNavn): Promise<BaseUrlAndScope> => {
-  if (await isLocal()) {
-    return {
-      baseUrl: 'http://localhost:8080',
-      scope: 'local',
-    };
-  }
   if (appNavn === 'behandlingsflyt') {
     return {
       baseUrl: process.env.BEHANDLING_API_BASE_URL ?? '',
