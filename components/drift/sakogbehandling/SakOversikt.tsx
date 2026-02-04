@@ -11,9 +11,11 @@ import { SakInfoPanel } from 'components/drift/sakogbehandling/SakInfoPanel';
 import { capitalize, formaterBehandlingType } from 'lib/utils/formatting';
 import { AvklaringsbehovInfo } from 'components/drift/sakogbehandling/avklaringsbehov/AvklaringsbehovInfo';
 import { SettAktivtStegV2 } from 'components/drift/sakogbehandling/avklaringsbehov/SettAktivtStegV2';
+import { Vilkårsresultat } from 'components/drift/sakogbehandling/vilkårsresultat/Vilkårsresultat';
 
 enum Tab {
   AVKLARINGSBEHOV = 'AVKLARINGSBEHOV',
+  VILKÅRSRESULTAT = 'VILKÅRSRESULTAT',
 }
 
 export const SakOversikt = () => {
@@ -169,6 +171,7 @@ export const SakOversikt = () => {
           <Tabs defaultValue={Tab.AVKLARINGSBEHOV} onChange={(value) => setTab(value as Tab)} value={tab}>
             <Tabs.List>
               <Tabs.Tab value={Tab.AVKLARINGSBEHOV} label="Avklaringsbehov" />
+              <Tabs.Tab value={Tab.VILKÅRSRESULTAT} label="Vilkårsresultat" />
             </Tabs.List>
 
             <Tabs.Panel value={Tab.AVKLARINGSBEHOV}>
@@ -182,6 +185,9 @@ export const SakOversikt = () => {
                   </Box>
                 </Box>
               </HGrid>
+            </Tabs.Panel>
+            <Tabs.Panel value={Tab.VILKÅRSRESULTAT}>
+              <Vilkårsresultat behandlingsreferanse={valgtBehandling.referanse} />
             </Tabs.Panel>
           </Tabs>
         </Box>

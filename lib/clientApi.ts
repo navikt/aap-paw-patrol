@@ -36,6 +36,12 @@ export function hentSakDriftsinfo(saksnummer: string) {
   });
 }
 
+export function hentVilkår(behandlingsreferanse: string) {
+  return fetch(`/api/drift/behandling/${behandlingsreferanse}/vilkar`, {
+    method: 'POST',
+  });
+}
+
 export function triggProsesserbehandlingIPostmottak(referanse: string) {
   return fetch(`/api/drift/postmottak/${referanse}/prosesser`, { method: 'POST', body: JSON.stringify({}) });
 }

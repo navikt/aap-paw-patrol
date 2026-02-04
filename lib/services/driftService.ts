@@ -73,7 +73,7 @@ export interface JobbInfo {
   opprettetTidspunkt?: string | null;
 }
 
-const getBaseUrlAndScopeForApp = async (appNavn: AppNavn): Promise<BaseUrlAndScope> => {
+export const getBaseUrlAndScopeForApp = async (appNavn: AppNavn): Promise<BaseUrlAndScope> => {
   if (await isLocal()) {
     return {
       baseUrl: 'http://localhost:8080',

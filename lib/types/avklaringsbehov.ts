@@ -1,16 +1,4 @@
-export interface BehandlingDriftsinfoDTO {
-  behandling: BehandlinginfoDTO;
-  avklaringsbehov: ForenkletAvklaringsbehov[];
-}
-
-export interface BehandlinginfoDTO {
-  referanse: string;
-  type: string;
-  status: string;
-  vurderingsbehov: string[];
-  årsakTilOpprettelse: string;
-  opprettet: string;
-}
+import { Periode } from 'lib/types/felles';
 
 export interface ForenkletAvklaringsbehov {
   definisjon: Definisjon;
@@ -70,9 +58,4 @@ export enum BehandlingStatus {
   UTREDES = 'UTREDES',
   IVERKSETTES = 'IVERKSETTES',
   AVSLUTTET = 'AVSLUTTET',
-}
-
-export interface Periode {
-  fom: string;
-  tom: string;
 }
