@@ -9,6 +9,7 @@ export interface OppgaveDriftsinfoDTO {
   veilederSykdom?: string;
   opprettetTidspunkt: string;
   endretTidspunkt?: string;
+  avklaringsbehovKode: string;
 }
 
 export enum OppgaveStatus {
