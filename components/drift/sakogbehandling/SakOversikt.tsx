@@ -66,7 +66,7 @@ export const SakOversikt = () => {
     try {
       router.replace(`?saksnummer=${saksnummer}`);
 
-      await hentSakDriftsinfo(saksnummer)
+      await hentSakDriftsinfo(saksnummer.trim())
         .then(async (res) => {
           if (res.ok) return await res.json();
           else throw Error(await res.text());
