@@ -3,6 +3,10 @@ import 'styles/globals.css';
 
 import { verifyUserLoggedIn } from '@navikt/aap-felles-utils';
 import { InternalHeader, InternalHeaderTitle } from '@navikt/ds-react/InternalHeader';
+import { SakSøkefelt } from 'components/drift/sakogbehandling/SakSøkefelt';
+import { hentBrukerInformasjon, hentRollerForBruker, Roller } from 'lib/azure/azureUserService';
+import { InnloggetBrukerDropdown } from 'components/drift/navbar/InnloggetBrukerDropdown';
+import { Spacer } from '@navikt/ds-react';
 
 export const metadata = {
   title: 'Kelvin - Paw Patrol',
@@ -11,6 +15,9 @@ export const metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   await verifyUserLoggedIn();
+
+  const roller = await hentRollerForBruker();
+  const brukerInformasjon = await hentBrukerInformasjon();
 
   return (
     <html lang="nb">
@@ -21,6 +28,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         <InternalHeader>
           <InternalHeaderTitle href="/">Paw Patrol 🐶</InternalHeaderTitle>
+
+          {roller.includes(Roller.DRIFT) && <SakSøkefelt />}
+
+          <Spacer />
+
+          <InnloggetBrukerDropdown brukerInformasjon={brukerInformasjon} roller={roller} />
         </InternalHeader>
 
         {children}

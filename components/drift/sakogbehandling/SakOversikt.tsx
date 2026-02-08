@@ -1,20 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import {
-  Alert,
-  BodyShort,
-  Box,
-  CopyButton,
-  Heading,
-  HGrid,
-  Loader,
-  Table,
-  Tabs,
-  Tag,
-  TextField,
-  VStack,
-} from '@navikt/ds-react';
+import { Alert, BodyShort, Box, CopyButton, Heading, HGrid, Loader, Table, Tabs, Tag, VStack } from '@navikt/ds-react';
 import { hentSakDriftsinfo } from 'lib/clientApi';
 import { BehandlingDriftsinfo, SakDriftsinfoDTO } from 'lib/types/avklaringsbehov';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
@@ -33,11 +20,10 @@ enum Tab {
   OPPGAVER = 'OPPGAVER',
 }
 
-export const SakOversikt = () => {
+export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [saksnummer, setSaksnummer] = useState<string>(searchParams.get('saksnummer') || '');
   const [error, setError] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [sak, setSak] = useState<SakDriftsinfoDTO>();
@@ -59,13 +45,11 @@ export const SakOversikt = () => {
 
   const hentSak = async () => {
     setSak(undefined);
-    setValgtBehandling(undefined);
+    oppdaterValgtBehandling(undefined);
     setError(undefined);
     setIsLoading(true);
 
     try {
-      router.replace(`?saksnummer=${saksnummer}`);
-
       await hentSakDriftsinfo(saksnummer.trim())
         .then(async (res) => {
           if (res.ok) return await res.json();
@@ -75,7 +59,10 @@ export const SakOversikt = () => {
           setSak(sak);
 
           if (sak.behandlinger.length === 1) {
-            setValgtBehandling(sak.behandlinger[0]);
+            oppdaterValgtBehandling(sak.behandlinger[0]);
+          } else if (searchParams.get('behandlingref')) {
+            const behandling = sak.behandlinger.find((b) => b.referanse === searchParams.get('behandlingref'));
+            oppdaterValgtBehandling(behandling);
           }
         });
     } catch (err) {
@@ -83,6 +70,15 @@ export const SakOversikt = () => {
       setError(`Noe gikk galt: ${err}`);
     }
     setIsLoading(false);
+  };
+
+  const oppdaterValgtBehandling = (behandling?: BehandlingDriftsinfo) => {
+    if (behandling) {
+      router.replace(`?behandlingref=${behandling.referanse}`);
+    } else {
+      router.replace('');
+    }
+    setValgtBehandling(behandling);
   };
 
   return (
@@ -96,16 +92,9 @@ export const SakOversikt = () => {
         borderWidth="1"
       >
         <VStack gap="space-16">
-          <Heading size="medium">Hent sak</Heading>
-          <TextField
-            label="Saksnummer"
-            value={saksnummer}
-            onChange={(e) => setSaksnummer(e.target.value)}
-            htmlSize={40}
-            error={!saksnummer ? 'Saksnummer må fylles ut' : undefined}
-          />
+          <Heading size="medium">Sak {saksnummer}</Heading>
           {error && (
-            <Alert variant="warning" size="small">
+            <Alert variant="error" size="small">
               {error}
             </Alert>
           )}
@@ -136,7 +125,7 @@ export const SakOversikt = () => {
                       return (
                         <Table.Row
                           key={behandling.referanse}
-                          onClick={() => setValgtBehandling(behandling)}
+                          onClick={() => oppdaterValgtBehandling(behandling)}
                           style={{
                             background: erValgtBehandling ? 'var(--ax-bg-success-softA)' : 'inherit',
                             cursor: 'pointer',

@@ -1,12 +1,12 @@
 import { Box, Heading } from '@navikt/ds-react';
-import { Jobboversikt } from '../../../../components/drift/jobboversikt/Jobboversikt';
+import { Jobboversikt } from 'components/drift/jobboversikt/Jobboversikt';
 import {
   appInfo,
   AppNavn,
   hentFeilendeJobber,
   hentPlanlagteJobber,
   hentSisteKjørteJobber,
-} from '../../../../lib/services/driftService';
+} from 'lib/services/driftService';
 import { notFound } from 'next/navigation';
 import { Page, PageBlock } from '@navikt/ds-react/Page';
 

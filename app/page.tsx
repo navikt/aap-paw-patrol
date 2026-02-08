@@ -2,7 +2,13 @@ import { Heading, HGrid, VStack } from '@navikt/ds-react';
 import { Page, PageBlock } from '@navikt/ds-react/Page';
 import { appInfo } from 'lib/services/driftService';
 import { LinkCard, LinkCardAnchor, LinkCardIcon, LinkCardTitle } from '@navikt/ds-react/LinkCard';
-import { BackwardIcon, CogRotationIcon, MagnifyingGlassIcon, EnvelopeClosedIcon } from '@navikt/aksel-icons';
+import {
+  BackwardIcon,
+  CogRotationIcon,
+  EnvelopeClosedIcon,
+  MagnifyingGlassIcon,
+  StethoscopeIcon,
+} from '@navikt/aksel-icons';
 
 export default function Home() {
   return (
@@ -39,7 +45,7 @@ export default function Home() {
               <LinkCardAnchor href={`/drift/sak`}>Hent sak</LinkCardAnchor>
             </LinkCardTitle>
           </LinkCard>
-          
+
           <LinkCard size="small">
             <LinkCardIcon>
               <BackwardIcon fontSize="2rem" />
@@ -51,7 +57,7 @@ export default function Home() {
 
           <LinkCard size="small">
             <LinkCardIcon>
-              <MagnifyingGlassIcon fontSize="2rem" />
+              <StethoscopeIcon fontSize="2rem" />
             </LinkCardIcon>
             <LinkCardTitle>
               <LinkCardAnchor href={`/drift/behandleroppslag`}>Behandleroppslag</LinkCardAnchor>
