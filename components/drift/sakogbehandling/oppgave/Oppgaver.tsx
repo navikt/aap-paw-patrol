@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { hentOppgaver } from 'lib/clientApi';
-import { BodyShort, Box, HStack, Label, Loader, Table, Tag, VStack } from '@navikt/ds-react';
+import { BodyShort, Box, HStack, Label, Loader, Table, Tag } from '@navikt/ds-react';
 import { OppgaveDriftsinfoDTO, OppgaveStatus } from 'lib/types/oppgave';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
@@ -62,22 +62,22 @@ export const Oppgaver = ({ behandlingsreferanse }: { behandlingsreferanse: strin
             <Table.ExpandableRow
               key={oppg.oppgaveId}
               content={
-                <div>
-                  <VStack gap="space-16">
-                    <HStack gap="space-16">
+                <Box background="default" padding="space-16">
+                  <HStack gap="space-16">
+                    <div>
                       <Label>Veileder arbeid</Label>
                       <BodyShort>{oppg.veilederArbeid}</BodyShort>
-                    </HStack>
-                    <HStack gap="space-16">
+                    </div>
+                    <div>
                       <Label>Veileder sykdom</Label>
                       <BodyShort>{oppg.veilederSykdom}</BodyShort>
-                    </HStack>
-                    <HStack gap="space-16">
+                    </div>
+                    <div>
                       <Label>Oppfølgingsenhet</Label>
                       <BodyShort>{oppg.oppfølgingsenhet}</BodyShort>
-                    </HStack>
-                  </VStack>
-                </div>
+                    </div>
+                  </HStack>
+                </Box>
               }
             >
               <Table.DataCell>{oppg.oppgaveId}</Table.DataCell>
