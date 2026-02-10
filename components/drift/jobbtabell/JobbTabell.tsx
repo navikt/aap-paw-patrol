@@ -36,10 +36,10 @@ export const JobbTabell = ({ jobber, appNavn }: Props) => {
 
   return (
     <VStack gap="space-16">
-      <Table zebraStripes>
+      <Table size="small" zebraStripes>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell scope="col"></Table.HeaderCell>
+            <Table.HeaderCell scope="col" />
             <Table.HeaderCell scope="col">Id</Table.HeaderCell>
             <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
             <Table.HeaderCell scope="col">Status</Table.HeaderCell>
@@ -89,7 +89,7 @@ export const JobbTabell = ({ jobber, appNavn }: Props) => {
                 <Table.DataCell>{jobb.antallFeilendeForsøk}</Table.DataCell>
                 {appNavn && (
                   <Table.DataCell>
-                    <Button loading={isLoadingKjørJobb} onClick={() => onKjørJobbClick(jobb.id)}>
+                    <Button size="small" loading={isLoadingKjørJobb} onClick={() => onKjørJobbClick(jobb.id)}>
                       Kjør nå
                     </Button>
                   </Table.DataCell>

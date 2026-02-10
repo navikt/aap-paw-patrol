@@ -52,6 +52,7 @@ export const Oppgaver = ({ behandlingsreferanse }: { behandlingsreferanse: strin
             <Table.HeaderCell>Status</Table.HeaderCell>
             <Table.HeaderCell>Avklaringsbehov</Table.HeaderCell>
             <Table.HeaderCell>Enhet</Table.HeaderCell>
+            <Table.HeaderCell title="Oppfølgingsenhet">Oppf.enhet</Table.HeaderCell>
             <Table.HeaderCell>Reservert av</Table.HeaderCell>
             <Table.HeaderCell>Opprettet</Table.HeaderCell>
             <Table.HeaderCell>Endret</Table.HeaderCell>
@@ -72,10 +73,6 @@ export const Oppgaver = ({ behandlingsreferanse }: { behandlingsreferanse: strin
                       <Label>Veileder sykdom</Label>
                       <BodyShort>{oppg.veilederSykdom}</BodyShort>
                     </div>
-                    <div>
-                      <Label>Oppfølgingsenhet</Label>
-                      <BodyShort>{oppg.oppfølgingsenhet}</BodyShort>
-                    </div>
                   </HStack>
                 </Box>
               }
@@ -83,6 +80,7 @@ export const Oppgaver = ({ behandlingsreferanse }: { behandlingsreferanse: strin
               <Table.DataCell>{oppg.oppgaveId}</Table.DataCell>
               <Table.DataCell>{tag(oppg.status)}</Table.DataCell>
               <Table.DataCell>{mapBehovskodeTilBehovstype(oppg.avklaringsbehovKode)}</Table.DataCell>
+              <Table.DataCell>{oppg.oppfølgingsenhet}</Table.DataCell>
               <Table.DataCell>{oppg.enhet}</Table.DataCell>
               <Table.DataCell>{oppg.reservertAv ?? '-'}</Table.DataCell>
               <Table.DataCell style={{ whiteSpace: 'nowrap' }}>
