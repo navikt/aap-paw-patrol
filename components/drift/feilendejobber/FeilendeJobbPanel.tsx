@@ -38,7 +38,7 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
 
   useEffect(() => {
     setMounted(true);
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (mounted && window.location.hash === `#${jobb.id}`) {
@@ -115,7 +115,9 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
                 return (
                   <div key={key}>
                     <Label size="small">{key}</Label>
-                    <CopyButton size="xsmall" copyText={value} text={value} activeText={`Kopierte ${key}`} />
+                    <div>
+                      <CopyButton size="xsmall" copyText={value} text={value} activeText={`Kopierte ${key}`} />
+                    </div>
                   </div>
                 );
               })}
