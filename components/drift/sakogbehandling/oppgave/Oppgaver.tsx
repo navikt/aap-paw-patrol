@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { hentOppgaver } from 'lib/clientApi';
-import { BodyShort, Box, HStack, Loader, Table, Tag } from '@navikt/ds-react';
+import { BodyShort, Box, HStack, Label, Loader, Table, Tag, VStack } from '@navikt/ds-react';
 import { OppgaveDriftsinfoDTO, OppgaveStatus } from 'lib/types/oppgave';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
+import { mapBehovskodeTilBehovstype } from 'lib/utils/oversettelser';
 
 export const Oppgaver = ({ behandlingsreferanse }: { behandlingsreferanse: string }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -50,30 +51,46 @@ export const Oppgaver = ({ behandlingsreferanse }: { behandlingsreferanse: strin
             <Table.HeaderCell>Status</Table.HeaderCell>
             <Table.HeaderCell>Avklaringsbehov</Table.HeaderCell>
             <Table.HeaderCell>Enhet</Table.HeaderCell>
-            <Table.HeaderCell>Oppfølgingsenhet</Table.HeaderCell>
             <Table.HeaderCell>Reservert av</Table.HeaderCell>
-            <Table.HeaderCell>Veileder arbeid</Table.HeaderCell>
-            <Table.HeaderCell>Veileder sykdom</Table.HeaderCell>
             <Table.HeaderCell>Opprettet</Table.HeaderCell>
             <Table.HeaderCell>Endret</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {oppgaver?.map((oppg) => (
-            <Table.Row key={oppg.oppgaveId}>
+            <Table.ExpandableRow
+              key={oppg.oppgaveId}
+              content={
+                <div>
+                  <VStack gap="space-16">
+                    <HStack gap="space-16">
+                      <Label>Veileder arbeid</Label>
+                      <BodyShort>{oppg.veilederArbeid}</BodyShort>
+                    </HStack>
+                    <HStack gap="space-16">
+                      <Label>Veileder sykdom</Label>
+                      <BodyShort>{oppg.veilederSykdom}</BodyShort>
+                    </HStack>
+                    <HStack gap="space-16">
+                      <Label>Oppfølgingsenhet</Label>
+                      <BodyShort>{oppg.oppfølgingsenhet}</BodyShort>
+                    </HStack>
+                  </VStack>
+                </div>
+              }
+            >
               <Table.DataCell>{oppg.oppgaveId}</Table.DataCell>
               <Table.DataCell>{tag(oppg.status)}</Table.DataCell>
-              <Table.DataCell>{oppg.avklaringsbehovKode}</Table.DataCell>
+              <Table.DataCell>{mapBehovskodeTilBehovstype(oppg.avklaringsbehovKode)}</Table.DataCell>
               <Table.DataCell>{oppg.enhet}</Table.DataCell>
-              <Table.DataCell>{oppg.oppfølgingsenhet}</Table.DataCell>
-              <Table.DataCell>{oppg.reservertAv}</Table.DataCell>
-              <Table.DataCell>{oppg.veilederArbeid}</Table.DataCell>
-              <Table.DataCell>{oppg.veilederSykdom}</Table.DataCell>
-              <Table.DataCell>{formaterDatoMedTidspunktSekunderForFrontend(oppg.opprettetTidspunkt)}</Table.DataCell>
+              <Table.DataCell>{oppg.reservertAv ?? '-'}</Table.DataCell>
+              <Table.DataCell style={{ whiteSpace: 'nowrap' }}>
+                {formaterDatoMedTidspunktSekunderForFrontend(oppg.opprettetTidspunkt)}
+              </Table.DataCell>
               <Table.DataCell>
                 {oppg.endretTidspunkt ? formaterDatoMedTidspunktSekunderForFrontend(oppg.endretTidspunkt) : '-'}
               </Table.DataCell>
-            </Table.Row>
+            </Table.ExpandableRow>
           ))}
         </Table.Body>
       </Table>
