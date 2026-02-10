@@ -4,6 +4,16 @@ Frontendapplikasjon for intern drift av saksbehandlingsapper i AAP
 
 ## Bygge og kjøre app lokalt
 
+### Prettier og linting
+
+Prosjektet bruker prettier og eslint. Skru gjerne på "Automatic configuration" for disse i din IDE.
+
+For at pre-commit hooks for linting og formatering skal kunne kjøre, må du sette opp Husky med følgende kommando (trengs bare én gang):
+
+```bash
+  yarn husky
+```
+
 ### Github package registry
 
 Vi bruker Github sitt package registry for npm pakker, siden flere av Nav sine pakker kun blir publisert her.

@@ -6,8 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "test": "vitest --run"
+    "lint": "eslint app components context hooks lib",
+    "test": "vitest --run",
+    "run-prettier": "prettier --write ."
   },
   "prettier": "@navikt/aap-felles-prettier",
   "dependencies": {
@@ -38,10 +39,16 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.3.3",
     "typescript": "^5.9.3",
     "vitest": "^2.1.9",
     "vitest-fetch-mock": "^0.4.5"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": "eslint --cache --fix",
+    "*.{js,ts,tsx,css,md}": "prettier --write"
   },
   "packageManager": "yarn@4.10.2"
 }
