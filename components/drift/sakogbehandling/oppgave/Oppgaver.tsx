@@ -47,6 +47,7 @@ export const Oppgaver = ({ behandlingsreferanse }: { behandlingsreferanse: strin
       <Table size="small">
         <Table.Header>
           <Table.Row>
+            <Table.HeaderCell />
             <Table.HeaderCell>OppgaveID</Table.HeaderCell>
             <Table.HeaderCell>Status</Table.HeaderCell>
             <Table.HeaderCell>Avklaringsbehov</Table.HeaderCell>
