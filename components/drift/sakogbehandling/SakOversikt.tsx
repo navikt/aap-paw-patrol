@@ -138,6 +138,7 @@ export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
                               iconPosition="right"
                               copyText={behandling.referanse}
                               text={behandling.referanse}
+                              style={{ whiteSpace: 'nowrap' }}
                             />
                           </Table.DataCell>
                           <Table.DataCell>
@@ -152,7 +153,9 @@ export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
                             {behandling.årsakTilOpprettelse ? capitalize(behandling.årsakTilOpprettelse) : '-'}
                           </Table.DataCell>
                           <Table.DataCell>
-                            {formaterDatoMedTidspunktSekunderForFrontend(behandling.opprettet)}
+                            <BodyShort style={{ whiteSpace: 'nowrap' }}>
+                              {formaterDatoMedTidspunktSekunderForFrontend(behandling.opprettet)}
+                            </BodyShort>
                           </Table.DataCell>
                           <Table.DataCell>
                             {erValgtBehandling && <CheckmarkCircleFillIcon style={{ color: 'green' }} />}
