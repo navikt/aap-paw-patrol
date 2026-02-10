@@ -9,6 +9,7 @@ import {
 } from 'lib/services/driftService';
 import { notFound } from 'next/navigation';
 import { Page, PageBlock } from '@navikt/ds-react/Page';
+import { JobberNavbar } from 'components/drift/navbar/JobberNavbar';
 
 interface Params {
   app: AppNavn;
@@ -25,22 +26,26 @@ const DriftPage = async ({ params }: { params: Promise<Params> }) => {
   const sisteKjørteJobber = await hentSisteKjørteJobber(app);
 
   return (
-    <Page>
-      <PageBlock width="2xl">
-        <Box marginBlock="space-32">
-          <Heading size={'large'} spacing>
-            Drift console
-          </Heading>
+    <>
+      <JobberNavbar currentApp={app} />
 
-          <Jobboversikt
-            appNavn={app}
-            feilendeJobber={feilendeJobber}
-            planlagteJobber={planlagteJobber}
-            sisteKjørteJobber={sisteKjørteJobber}
-          />
-        </Box>
-      </PageBlock>
-    </Page>
+      <Page>
+        <PageBlock width="2xl">
+          <Box marginBlock="space-32">
+            <Heading size={'large'} spacing>
+              Drift console
+            </Heading>
+
+            <Jobboversikt
+              appNavn={app}
+              feilendeJobber={feilendeJobber}
+              planlagteJobber={planlagteJobber}
+              sisteKjørteJobber={sisteKjørteJobber}
+            />
+          </Box>
+        </PageBlock>
+      </Page>
+    </>
   );
 };
 
