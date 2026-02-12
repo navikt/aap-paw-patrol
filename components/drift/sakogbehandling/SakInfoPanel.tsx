@@ -4,7 +4,7 @@ import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } 
 import { capitalize } from 'lib/utils/formatting';
 
 export const SakInfoPanel = ({ sak }: { sak: SakDriftsinfoDTO }) => (
-  <Box background="default" padding="space-16" marginBlock="space-32" borderRadius="16">
+  <Box background="default" padding="space-16" borderRadius="16">
     <HStack gap="space-32" marginBlock="space-0 space-32">
       <div>
         <Label>Saksnummer</Label>

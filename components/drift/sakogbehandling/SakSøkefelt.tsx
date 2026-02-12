@@ -2,12 +2,25 @@
 
 import { HStack, Search } from '@navikt/ds-react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const SakSøkefelt = () => {
   const router = useRouter();
+  const searchRef = useRef<HTMLInputElement>(null);
 
   const [searchValue, setSearchValue] = useState('');
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.metaKey && e.key === 'k') {
+        e.preventDefault();
+        searchRef.current?.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
     <HStack
@@ -20,6 +33,7 @@ export const SakSøkefelt = () => {
       }}
     >
       <Search
+        ref={searchRef}
         label="Finn sak"
         size="small"
         variant="simple"

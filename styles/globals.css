@@ -1,0 +1,4 @@
+.copybutton {
+  padding-left: var(--ax-space-16);
+  color: var(--ax-text-subtle);
+}

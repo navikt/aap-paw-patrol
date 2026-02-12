@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Alert, BodyShort, Box, CopyButton, Heading, HGrid, Loader, Table, Tabs, Tag, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Box, CopyButton, HGrid, Loader, Table, Tabs, Tag, VStack } from '@navikt/ds-react';
 import { hentSakDriftsinfo } from 'lib/clientApi';
 import { BehandlingDriftsinfo, SakDriftsinfoDTO } from 'lib/types/avklaringsbehov';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
@@ -32,14 +32,12 @@ export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
   const [valgtBehandling, setValgtBehandling] = useState<BehandlingDriftsinfo>();
 
   useEffect(() => {
-    const timeout = setTimeout(async () => {
-      if (saksnummer) {
-        setError(undefined);
-        await hentSak();
-      }
-    }, 1000);
-
-    return () => clearTimeout(timeout);
+    if (saksnummer && /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d]{7}$/.test(saksnummer)) {
+      setError(undefined);
+      hentSak();
+    } else if (saksnummer) {
+      setError('Saksnummer skal bestå av 7 tegn og inneholde både bokstaver og tall.');
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [saksnummer]);
 
@@ -92,7 +90,6 @@ export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
         borderWidth="1"
       >
         <VStack gap="space-16">
-          <Heading size="medium">Sak {saksnummer}</Heading>
           {error && (
             <Alert variant="error" size="small">
               {error}
