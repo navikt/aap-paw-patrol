@@ -71,6 +71,7 @@ export const KjørFraSteg = () => {
 
 export const muligeSteg: Record<string, string> = {
   SØKNAD: 'Søknad',
+  AVBRYT_REVURDERING: 'Avbryt revurdering',
   VURDER_RETTIGHETSPERIODE: 'Vurder rettighetsperiode',
   VURDER_ALDER: 'Vurder alder',
   VURDER_LOVVALG: 'Vurder lovvalg',
