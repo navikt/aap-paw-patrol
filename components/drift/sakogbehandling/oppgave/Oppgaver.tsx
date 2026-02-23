@@ -80,8 +80,8 @@ export const Oppgaver = ({ behandlingsreferanse }: { behandlingsreferanse: strin
               <Table.DataCell>{oppg.oppgaveId}</Table.DataCell>
               <Table.DataCell>{tag(oppg.status)}</Table.DataCell>
               <Table.DataCell>{mapBehovskodeTilBehovstype(oppg.avklaringsbehovKode)}</Table.DataCell>
-              <Table.DataCell>{oppg.oppfølgingsenhet}</Table.DataCell>
               <Table.DataCell>{oppg.enhet}</Table.DataCell>
+              <Table.DataCell>{oppg.oppfølgingsenhet}</Table.DataCell>
               <Table.DataCell>{oppg.reservertAv ?? '-'}</Table.DataCell>
               <Table.DataCell style={{ whiteSpace: 'nowrap' }}>
                 {formaterDatoMedTidspunktSekunderForFrontend(oppg.opprettetTidspunkt)}
