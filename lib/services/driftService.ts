@@ -1,4 +1,4 @@
-import { fetchProxy, isLocal } from 'lib/services/fetchProxy';
+import { fetchProxy } from 'lib/services/fetchProxy';
 
 export type AppNavn =
   | 'behandlingsflyt'
@@ -177,12 +177,6 @@ export const avbrytBrev = async (bestillingsreferanse: string, begrunnelse: stri
 
   const url = `${baseUrl}/api/drift/brev/${bestillingsreferanse}/avbryt`;
   return await fetchProxy<string>(url, scope, 'POST', { begrunnelse });
-};
-
-export const hentSakDriftsinfo = async (saksnummer: string) => {
-  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
-  const url = `${baseUrl}/api/drift/sak/${saksnummer}/info`;
-  return await fetchProxy<any>(url, scope, 'POST');
 };
 
 export const triggProsesserBehandlingIPostmottak = async (referanse: string) => {
