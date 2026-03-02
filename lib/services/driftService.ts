@@ -130,6 +130,16 @@ export const hentFeilendeJobber = async (appNavn: AppNavn) => {
   return await fetchProxy<JobbInfo[]>(url, scope, 'GET');
 };
 
+export const hentAntallFeilendeJobber = async (appNavn: AppNavn) => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp(appNavn);
+  const url = `${baseUrl}/drift/api/jobb/feilende/antall`;
+  try {
+    return await fetchProxy<number>(url, scope, 'GET');
+  } catch {
+    return -1;
+  }
+};
+
 export const hentPlanlagteJobber = async (appNavn: AppNavn) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp(appNavn);
   const url = `${baseUrl}/drift/api/jobb/planlagte-jobber`;

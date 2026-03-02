@@ -2,13 +2,8 @@ import { Heading, HGrid, VStack } from '@navikt/ds-react';
 import { Page, PageBlock } from '@navikt/ds-react/Page';
 import { appInfo } from 'lib/services/driftService';
 import { LinkCard, LinkCardAnchor, LinkCardIcon, LinkCardTitle } from '@navikt/ds-react/LinkCard';
-import {
-  BackwardIcon,
-  CogRotationIcon,
-  EnvelopeClosedIcon,
-  MagnifyingGlassIcon,
-  StethoscopeIcon,
-} from '@navikt/aksel-icons';
+import { BackwardIcon, EnvelopeClosedIcon, MagnifyingGlassIcon, StethoscopeIcon } from '@navikt/aksel-icons';
+import { FeilendeJobberLinkCard } from 'components/drift/feilendejobber/FeilendeJobberLinkCard';
 
 export default function Home() {
   return (
@@ -18,20 +13,12 @@ export default function Home() {
           <Heading size={'large'} spacing>
             Jobber
           </Heading>
-          {appInfo.length > 0 && (
-            <HGrid columns="3" gap="space-16">
-              {appInfo.map((app) => (
-                <LinkCard key={app.name} size="small">
-                  <LinkCardIcon>
-                    <CogRotationIcon fontSize="2rem" />
-                  </LinkCardIcon>
-                  <LinkCardTitle>
-                    <LinkCardAnchor href={`/drift/jobber/${app.name}`}>{app.displayName}</LinkCardAnchor>
-                  </LinkCardTitle>
-                </LinkCard>
-              ))}
-            </HGrid>
-          )}
+
+          <HGrid columns="3" gap="space-16">
+            {appInfo.map((app) => (
+              <FeilendeJobberLinkCard key={app.name} app={app} />
+            ))}
+          </HGrid>
 
           <Heading size={'large'} spacing>
             Annet
