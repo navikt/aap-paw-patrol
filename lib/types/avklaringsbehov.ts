@@ -3,6 +3,9 @@ import { Periode } from 'lib/types/felles';
 export interface ForenkletAvklaringsbehov {
   definisjon: Definisjon;
   status: AvklaringsbehovStatus;
+  årsakTilSettPåVent?: string;
+  perioderUgyldigVurdering?: Periode[];
+  perioderKreverVurdering?: Periode[];
   tidsstempel: string;
   endretAv: string;
 }
