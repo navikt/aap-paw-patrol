@@ -1116,42 +1116,42 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^8.6.0":
-  version: 8.6.0
-  resolution: "@navikt/aksel-icons@npm:8.6.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F8.6.0%2Fff360cbe68f878b6e8deb59c19a23aa30eacab9e"
-  checksum: 10c0/fb6b54edb594f440db8d3ba93822f31e7c589ca1c2a8ccb49b5ff2f699a52faa77e692a981e0f5a98b339df7a8e130654517ff00e278c98953570a36ca3c2089
+"@navikt/aksel-icons@npm:^8.7.0":
+  version: 8.7.0
+  resolution: "@navikt/aksel-icons@npm:8.7.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F8.7.0%2F71371b0ac52d8760340b655f20580faeb47a2fb5"
+  checksum: 10c0/81d2c3dedae73aed7e071f571855bb4c9bdf50f4b596a2c9ca0f2dcdff5043556d2cb8c359480a5d5e0ebf3b105a981e8a633a46439ec68eac3fa02824a02080
   languageName: node
   linkType: hard
 
-"@navikt/ds-css@npm:^8.6.0":
-  version: 8.6.0
-  resolution: "@navikt/ds-css@npm:8.6.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F8.6.0%2F4c763d8f5f64587336bba5cba74b8a16ab379619"
-  checksum: 10c0/4aa64f47b5ec34af4efe5ffdfc5fa5e0552e43d43b14ce384d3ce450ea8492c10209263a228875e0b260da6e81e7df7ae3f01c89036d9f00d5b065eb9b729a91
+"@navikt/ds-css@npm:^8.7.0":
+  version: 8.7.0
+  resolution: "@navikt/ds-css@npm:8.7.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F8.7.0%2F353215289ac1a756ed37dc54379b7a501fc84a28"
+  checksum: 10c0/4baac3f3e88ea34a06d3b853522398c1383f66410c3c526cf42d8d4482cbc1c860284b1d72e5b94a3b16cd6997b827852f8d5c607a3a28012d4f1f89824b1903
   languageName: node
   linkType: hard
 
-"@navikt/ds-react@npm:^8.6.0":
-  version: 8.6.0
-  resolution: "@navikt/ds-react@npm:8.6.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F8.6.0%2F484ac00ed4dbee8147f6a6cde76720bd7874b93b"
+"@navikt/ds-react@npm:^8.7.0":
+  version: 8.7.0
+  resolution: "@navikt/ds-react@npm:8.7.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F8.7.0%2F6961196212e6e8eca21fba86926327a5ad8ab074"
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
     "@floating-ui/react-dom": "npm:^2.1.6"
-    "@navikt/aksel-icons": "npm:^8.6.0"
-    "@navikt/ds-tokens": "npm:^8.6.0"
+    "@navikt/aksel-icons": "npm:^8.7.0"
+    "@navikt/ds-tokens": "npm:^8.7.0"
     date-fns: "npm:^4.0.0"
     react-day-picker: "npm:9.7.0"
   peerDependencies:
     "@types/react": ^17.0.30 || ^18 || ^19
     react: ^17 || ^18 || ^19
     react-dom: ^17 || ^18 || ^19
-  checksum: 10c0/1ae8535586715820a5d66871a6d2255a23da13caa2fc75383d900a58dd6c8bd473ce9d12cf94af89ef063452dc3a9d08c2542507fad4c6a42d5288e135ebebab
+  checksum: 10c0/e668662941a548116ad67d99057c25a359e50845c193c4c8beb6bc634d5f821b196b9f35d25c741c58962bed4292bb77ed41a09a5ecb02059236f5b414362bbe
   languageName: node
   linkType: hard
 
-"@navikt/ds-tokens@npm:^8.6.0":
-  version: 8.6.0
-  resolution: "@navikt/ds-tokens@npm:8.6.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F8.6.0%2Facac1517c2bc4c4eda259f1bc591db24656f102f"
-  checksum: 10c0/44f7182e4e7e347bd61582b5773c88089968b9568dd0209076191a8e6caca6c85b0026ca614aba520592941a482a88c246203346b1e612cdf9d411fe5afe0272
+"@navikt/ds-tokens@npm:^8.7.0":
+  version: 8.7.0
+  resolution: "@navikt/ds-tokens@npm:8.7.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F8.7.0%2F17a22dcaa2107ac81431db172701e0debe4e3fe3"
+  checksum: 10c0/3c59b632d62754f91b03608480e94eed81f02e8149f69414fb96902b8f7b6d0aaa6a3bc0286e55d5b2d06ce100e4afaf98e74377e8fc1a3220fc5e4d7e2823f7
   languageName: node
   linkType: hard
 
@@ -1887,9 +1887,9 @@ __metadata:
   dependencies:
     "@navikt/aap-felles-prettier": "npm:^5.6.0"
     "@navikt/aap-felles-utils": "npm:5.6.0"
-    "@navikt/aksel-icons": "npm:^8.6.0"
-    "@navikt/ds-css": "npm:^8.6.0"
-    "@navikt/ds-react": "npm:^8.6.0"
+    "@navikt/aksel-icons": "npm:^8.7.0"
+    "@navikt/ds-css": "npm:^8.7.0"
+    "@navikt/ds-react": "npm:^8.7.0"
     "@navikt/eslint-config-aap": "npm:^5.1.3"
     "@types/eslint-plugin-jsx-a11y": "npm:^6.10.1"
     "@types/node": "npm:^20.17.6"
