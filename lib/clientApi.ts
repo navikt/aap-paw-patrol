@@ -23,6 +23,12 @@ export function kjørFraSteg(behandlingsreferanse: string, steg: string) {
   });
 }
 
+export function utvidRettighetsperiodeOgKjørFraStart(behandlingsreferanse: string) {
+  return fetch(`/api/drift/behandling/${behandlingsreferanse}/utvidrettighetsperiode-og-kjorfrastart/`, {
+    method: 'POST',
+  });
+}
+
 export function avbrytBrev(bestillingsreferanse: string, begrunnelse: string) {
   return fetch(`/api/drift/brev/${bestillingsreferanse}/avbryt/`, {
     method: 'POST',

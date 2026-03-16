@@ -182,6 +182,12 @@ export const kjørFraSteg = async (behandlingsreferanse: string, steg: string) =
   return await fetchProxy<undefined>(url, scope, 'POST', { steg });
 };
 
+export const utvidRettighetsperiodeOgKjørFraStart = async (behandlingsreferanse: string) => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
+  const url = `${baseUrl}/api/drift/behandling/${behandlingsreferanse}/utvid-rettighetsperiode-og-kjor-fra-start`;
+  return await fetchProxy<undefined>(url, scope, 'POST', {});
+};
+
 export const avbrytBrev = async (bestillingsreferanse: string, begrunnelse: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
 
