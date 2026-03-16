@@ -2,7 +2,7 @@ import { Heading, HGrid, VStack } from '@navikt/ds-react';
 import { Page, PageBlock } from '@navikt/ds-react/Page';
 import { appInfo } from 'lib/services/driftService';
 import { LinkCard, LinkCardAnchor, LinkCardIcon, LinkCardTitle } from '@navikt/ds-react/LinkCard';
-import { BackwardIcon, EnvelopeClosedIcon, MagnifyingGlassIcon, StethoscopeIcon } from '@navikt/aksel-icons';
+import { BackwardIcon, ClockIcon, EnvelopeClosedIcon, MagnifyingGlassIcon, StethoscopeIcon } from '@navikt/aksel-icons';
 import { FeilendeJobberLinkCard } from 'components/drift/feilendejobber/FeilendeJobberLinkCard';
 
 export default function Home() {
@@ -66,6 +66,14 @@ export default function Home() {
             </LinkCardIcon>
             <LinkCardTitle>
               <LinkCardAnchor href={`/drift/brev/avbryt`}>Avbryt brev i behandlingsflyt</LinkCardAnchor>
+            </LinkCardTitle>
+          </LinkCard>
+          <LinkCard size="small">
+            <LinkCardIcon>
+              <ClockIcon fontSize="2rem" />
+            </LinkCardIcon>
+            <LinkCardTitle>
+              <LinkCardAnchor href={`/drift/rettighetsperiode`}>Utvid rettighetsperiode til Tid.Maks</LinkCardAnchor>
             </LinkCardTitle>
           </LinkCard>
         </VStack>
