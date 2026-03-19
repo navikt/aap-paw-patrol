@@ -36,6 +36,12 @@ export function avbrytBrev(bestillingsreferanse: string, begrunnelse: string) {
   });
 }
 
+export function oppdaterPersonIdenter(saksnummer: string) {
+  return fetch(`/api/drift/sak/${saksnummer}/oppdater-person-identer`, {
+    method: 'POST',
+  });
+}
+
 export function hentSakDriftsinfo(saksnummer: string) {
   return fetch(`/api/drift/sak/${saksnummer}/info`, {
     method: 'POST',
