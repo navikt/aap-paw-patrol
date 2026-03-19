@@ -15,3 +15,13 @@ export function formaterDatoMedTidspunktSekunderForFrontend(dato: Date | string)
 export function formaterDatoForFrontend(dato: Date | string): string {
   return format(dato, DATO_FORMATER.ddMMyyyy, { locale: nb });
 }
+
+export function formaterPeriode(dato1?: string | null, dato2?: string | null): string {
+  if (dato1 && !dato2) {
+    return `${formaterDatoForFrontend(dato1)} - `;
+  } else if (dato1 && dato2) {
+    return `${formaterDatoForFrontend(dato1)} - ${formaterDatoForFrontend(dato2)}`;
+  } else {
+    return '';
+  }
+}

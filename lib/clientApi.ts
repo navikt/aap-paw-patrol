@@ -54,6 +54,12 @@ export function hentVilkår(behandlingsreferanse: string) {
   });
 }
 
+export function hentTilkjentYtelse(behandlingsreferanse: string) {
+  return fetch(`/api/drift/behandling/${behandlingsreferanse}/tilkjent-ytelse`, {
+    method: 'POST',
+  });
+}
+
 export function hentOppgaver(behandlingsreferanse: string) {
   return fetch(`/api/drift/oppgave/behandling/${behandlingsreferanse}`, {
     method: 'POST',

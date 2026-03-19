@@ -33,7 +33,6 @@ export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
   const hentSak = async () => {
     setSak(undefined);
     setError(undefined);
-    setIsLoading(true);
 
     try {
       await hentSakDriftsinfo(saksnummer.trim())

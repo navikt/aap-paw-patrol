@@ -14,3 +14,17 @@ export function formaterBehandlingType(type: string) {
       return type;
   }
 }
+
+export function formaterTilNok(sum?: number | null): string {
+  if (sum === null || sum === undefined) {
+    return '';
+  }
+  return `${sum.toLocaleString(`nb-NO`, { style: 'currency', currency: 'NOK', trailingZeroDisplay: 'stripIfInteger' })}`;
+}
+
+export function formaterTilProsent(sum?: number | null): string {
+  if (sum === null || sum === undefined) {
+    return '';
+  }
+  return `${sum} %`;
+}

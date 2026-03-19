@@ -9,11 +9,13 @@ import { Oppgaver } from 'components/drift/sakogbehandling/oppgave/Oppgaver';
 import { useEffect, useState } from 'react';
 import { BehandlingDriftsinfo } from 'lib/types/avklaringsbehov';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { TilkjentYtelse } from 'components/drift/sakogbehandling/tilkjentytelse/TilkjentYtelse';
 
 enum Tab {
   AVKLARINGSBEHOV = 'AVKLARINGSBEHOV',
   VILKÅRSRESULTAT = 'VILKÅRSRESULTAT',
   OPPGAVER = 'OPPGAVER',
+  TILKJENT_YTELSE = 'TILKJENT_YTELSE',
 }
 
 export const BehandlingOversikt = ({
@@ -149,6 +151,7 @@ export const BehandlingOversikt = ({
               <Tabs.Tab value={Tab.AVKLARINGSBEHOV} label="Avklaringsbehov" />
               <Tabs.Tab value={Tab.VILKÅRSRESULTAT} label="Vilkårsresultat" />
               <Tabs.Tab value={Tab.OPPGAVER} label="Oppgaver" />
+              <Tabs.Tab value={Tab.TILKJENT_YTELSE} label="Tilkjent ytelse" />
             </Tabs.List>
 
             <Tabs.Panel value={Tab.AVKLARINGSBEHOV}>
@@ -168,6 +171,9 @@ export const BehandlingOversikt = ({
             </Tabs.Panel>
             <Tabs.Panel value={Tab.OPPGAVER}>
               <Oppgaver behandlingsreferanse={valgtBehandling.referanse} />
+            </Tabs.Panel>
+            <Tabs.Panel value={Tab.TILKJENT_YTELSE}>
+              <TilkjentYtelse behandlingsreferanse={valgtBehandling.referanse} />
             </Tabs.Panel>
           </Tabs>
         </Box>
