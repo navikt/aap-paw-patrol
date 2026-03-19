@@ -37,7 +37,7 @@ export const OppdaterPersonIdenter = () => {
   return (
     <VStack gap="space-16" marginBlock="space-32">
       <Heading size="medium">
-        Tving behandlingsflyt til å hente nye personidenter fra PDL for person tilkyttet oppgitt saksnummer
+        Tving behandlingsflyt til å hente nye personidenter fra PDL for person tilknyttet oppgitt saksnummer
       </Heading>
       <InfoCard data-color="info">
         <InfoCard.Header>
