@@ -3,6 +3,15 @@ import { hentRollerForBruker, Roller } from 'lib/azure/azureUserService';
 import { Alert } from '@navikt/ds-react';
 import { SakOversikt } from 'components/drift/sakogbehandling/SakOversikt';
 import { SakNavbar } from 'components/drift/navbar/SakNavbar';
+import { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ saksnummer: string }> }): Promise<Metadata> {
+  const { saksnummer } = await params;
+  return {
+    title: `Paw Patrol - Sak ${saksnummer}`,
+    description: `Viser saksdetaljer for ${saksnummer}`,
+  };
+}
 
 const SakPage = async ({ params }: { params: Promise<{ saksnummer: string }> }) => {
   const { saksnummer } = await params;

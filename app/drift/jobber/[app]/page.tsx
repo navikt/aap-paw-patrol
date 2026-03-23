@@ -10,9 +10,18 @@ import {
 import { notFound } from 'next/navigation';
 import { Page, PageBlock } from '@navikt/ds-react/Page';
 import { JobberNavbar } from 'components/drift/navbar/JobberNavbar';
+import { Metadata } from 'next';
 
 interface Params {
   app: AppNavn;
+}
+
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { app } = await params;
+  return {
+    title: `Paw Patrol - Jobber (${app})`,
+    description: `Viser jobber for ${app}`,
+  };
 }
 
 const DriftPage = async ({ params }: { params: Promise<Params> }) => {

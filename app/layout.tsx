@@ -9,7 +9,7 @@ import { InnloggetBrukerDropdown } from 'components/drift/navbar/InnloggetBruker
 import { Spacer } from '@navikt/ds-react';
 
 export const metadata = {
-  title: 'Kelvin - Paw Patrol',
+  title: 'Paw Patrol',
   description: 'Drift-dashboard for status og kjøring av jobber i Kelvin-appene.',
 };
 
