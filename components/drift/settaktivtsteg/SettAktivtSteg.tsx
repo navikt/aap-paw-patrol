@@ -92,6 +92,7 @@ export const muligeSteg: Record<string, string> = {
   AVKLAR_SYKDOM: 'Avklar sykdom',
   ARBEIDSOPPTRAPPING: 'Arbeidsopptrapping',
   REFUSJON_KRAV: 'Refusjon krav',
+  BEKREFT_VURDERINGER_OPPFØLGING: 'Bekreft vurderinger oppfølging',
   FASTSETT_ARBEIDSEVNE: 'Fastsett arbeidsevne',
   FASTSETT_BEREGNINGSTIDSPUNKT: 'Fastsett beregningstidspunkt',
   FASTSETT_GRUNNLAG: 'Fastsett grunnlag',
