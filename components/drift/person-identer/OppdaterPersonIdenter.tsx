@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { BodyShort, Button, Heading, HStack, InfoCard, Textarea, TextField, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, InfoCard, List, TextField, VStack } from '@navikt/ds-react';
 import { oppdaterPersonIdenter } from '../../../lib/clientApi';
 
 export const OppdaterPersonIdenter = () => {
@@ -36,25 +36,26 @@ export const OppdaterPersonIdenter = () => {
 
   return (
     <VStack gap="space-16" marginBlock="space-32">
-      <Heading size="medium">
-        Tving behandlingsflyt til å hente nye personidenter fra PDL for person tilknyttet oppgitt saksnummer
-      </Heading>
+      <Heading size="medium">Oppdater identer for sak</Heading>
       <InfoCard data-color="info">
         <InfoCard.Header>
           <InfoCard.Title>Person tilknyttet sak får tilført identer fra PDL</InfoCard.Title>
         </InfoCard.Header>
         <InfoCard.Content>
-          <p>
-          Denne skal brukes for saker i behandlingsflyt og meldekort hvor bruker har fått ny ident. Eksempel bruker har
-          gått fra d-nummer til f-nummer i folkeregisteret.
-          </p><p>
-          Behandlingsflyt oppdaterer sin database person med nye identer fra PDL og sender denne informasjonen
-          umiddelbart videre til meldekort-backend som også oppdaterer person i egen database tilknyttet sakens
-          meldekortdata.
-          </p><p>
-          Dette er f.eks. nyttig ved feilsituasjoner hvor bruker ikke får tilgang til meldekortene sine
-          da disse er koblet til kun gammel bruker-ident i behandlingsflyt.
-          </p>
+          <BodyShort spacing>
+            Denne funksjonaliteten kan benyttes i saker hvor bruker har fått ny ident og eksterne systemer ikke har
+            blitt oppdatert. Eksempelvis bruker har gått fra d-nummer til f-nummer i folkeregisteret.
+          </BodyShort>
+          <BodyShort spacing>
+            Behandlingsflyt oppdaterer sin database person med nye identer fra PDL og sender denne informasjonen
+            umiddelbart videre til aktuelle apper som også oppdaterer person i egen database tilknyttet sakens
+            meldekortdata.
+          </BodyShort>
+          <strong>Apper som oppdateres:</strong>
+          <List>
+            <List.Item>api-intern</List.Item>
+            <List.Item>meldekort-backend</List.Item>
+          </List>
         </InfoCard.Content>
       </InfoCard>
       <TextField
