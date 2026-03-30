@@ -36,7 +36,7 @@ export const AvbrytFeiledeJobber = ({ appNavn }: Props) => {
 
   return (
     <div>
-      <Button onClick={() => setVisAvbrytModal(true)} loading={isLoading}>
+      <Button variant="danger" onClick={() => setVisAvbrytModal(true)} loading={isLoading}>
         Avbryt alle feilede jobber
       </Button>
       {message && <BodyShort>{message}</BodyShort>}
