@@ -1,4 +1,5 @@
 import { fetchProxy } from 'lib/services/fetchProxy';
+import { isDev, isLocal } from '@navikt/aap-felles-utils';
 
 export type AppNavn =
   | 'behandlingsflyt'
@@ -168,6 +169,19 @@ export const rekjørFeiledeJobber = async (appNavn: AppNavn) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp(appNavn);
   const url = `${baseUrl}/drift/api/jobb/rekjorAlleFeilede`;
   return await fetchProxy<string>(url, scope, 'GET');
+};
+
+/*
+ * Kun ment for bruk i dev
+ */
+export const avbrytFeiledeJobber = async (appNavn: AppNavn) => {
+  if (isDev() || isLocal()) {
+    const { baseUrl, scope } = await getBaseUrlAndScopeForApp(appNavn);
+    const url = `${baseUrl}/drift/api/jobb/avbrytAlleFeilede`;
+    return await fetchProxy<string>(url, scope, 'GET');
+  } else {
+    throw new Error('Kan ikke avbryte feilede jobber i prod');
+  }
 };
 
 export const hentSisteKjørteJobber = async (appNavn: AppNavn) => {

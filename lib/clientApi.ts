@@ -12,6 +12,10 @@ export function rekjørFeiledeJobber(appNavn: AppNavn) {
   return fetch(`/api/drift/jobber/${appNavn}/jobb/rekjorfeilede`, { method: 'GET' });
 }
 
+export function avbrytAlleFeiledeJobber(appNavn: AppNavn) {
+  return fetch(`/api/drift/jobber/${appNavn}/jobb/avbrytfeilede`, { method: 'GET' });
+}
+
 export function avbrytKjørendeJobb(appNavn: AppNavn, jobbId: number) {
   return fetch(`/api/drift/jobber/${appNavn}/jobb/avbryt/${jobbId}`, { method: 'GET' });
 }

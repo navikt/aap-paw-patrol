@@ -7,6 +7,8 @@ import { SisteKjørteJobber } from 'components/drift/sistekjørtejobber/SisteKj�
 import { AppNavn, JobbInfo } from 'lib/services/driftService';
 import { RekjørSpesifikkJobb } from 'components/drift/rekjørspesifikkjobb/RekjørSpesifikkJobb';
 import { VStack } from '@navikt/ds-react';
+import { isDev, isLocal } from '@navikt/aap-felles-utils';
+import { AvbrytFeiledeJobber } from 'components/drift/avbrytfeiledejobber/AvbrytFeiledeJobber';
 
 interface Props {
   appNavn: AppNavn;
@@ -14,10 +16,12 @@ interface Props {
   feilendeJobber: JobbInfo[];
   sisteKjørteJobber: JobbInfo[];
 }
+
 export const Jobboversikt = ({ appNavn, planlagteJobber, feilendeJobber, sisteKjørteJobber }: Props) => {
   return (
     <VStack gap="space-32">
       <RekjørFeiledeJobber appNavn={appNavn} />
+      {(isLocal() || isDev()) && <AvbrytFeiledeJobber appNavn={appNavn} />}
       <RekjørSpesifikkJobb appNavn={appNavn} />
       <PlanlagteJobber planlagteJobber={planlagteJobber} appNavn={appNavn} />
       <FeilendeJobber appNavn={appNavn} jobber={feilendeJobber} />
