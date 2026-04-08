@@ -49,7 +49,7 @@ export const OppdaterPersonIdenter = () => {
           </BodyShort>
           <BodyShort spacing>
             Behandlingsflyt oppdaterer sin database person med nye identer fra PDL og sender denne informasjonen
-            umiddelbart videre til aktuelle apper som også oppdaterer person i egen database tilknyttet sakens
+            umiddelbart videre til aktuelle apper som også oppdaterer person tilknyttet sak i egen database.
             meldekortdata.
           </BodyShort>
           <strong>Apper som oppdateres:</strong>
