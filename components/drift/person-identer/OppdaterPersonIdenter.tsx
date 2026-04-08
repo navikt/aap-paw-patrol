@@ -43,18 +43,18 @@ export const OppdaterPersonIdenter = () => {
         </InfoCard.Header>
         <InfoCard.Content>
           <BodyShort spacing>
-            Denne funksjonaliteten kan benyttes for å oppdatere identer på bruker tilknyttet sak.
-            Eksempelvis bruker har gått fra d-nummer til f-nummer i folkeregisteret. Identoppdatering
-            må gjøres manuelt for hver sak på en person, da meldekort har separate person-identer per sak.
+            Denne funksjonaliteten kan benyttes for å oppdatere identer på bruker tilknyttet sak. Eksempelvis bruker har
+            gått fra d-nummer til f-nummer i folkeregisteret. Identoppdatering må gjøres manuelt for hver sak på en
+            person, da meldekort har separate person-identer per sak.
           </BodyShort>
           <BodyShort spacing>
             Behandlingsflyt oppdaterer sin database person med nye identer fra PDL og sender denne informasjonen
             umiddelbart videre til aktuelle apper som også oppdaterer person tilknyttet sak i egen database.
-            meldekortdata.
           </BodyShort>
           <strong>Apper som oppdateres:</strong>
           <List>
             <List.Item>api-intern</List.Item>
+            <List.Item>behandlingsflyt</List.Item>
             <List.Item>meldekort-backend</List.Item>
           </List>
         </InfoCard.Content>
