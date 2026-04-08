@@ -44,7 +44,7 @@ export const OppdaterPersonIdenter = () => {
         <InfoCard.Content>
           <BodyShort spacing>
             Denne funksjonaliteten kan benyttes for å oppdatere identer på bruker tilknyttet sak.
-            gammel ident. Eksempelvis bruker har gått fra d-nummer til f-nummer i folkeregisteret. Identoppdatering
+            Eksempelvis bruker har gått fra d-nummer til f-nummer i folkeregisteret. Identoppdatering
             må gjøres manuelt for hver sak på en person, da meldekort har separate person-identer per sak.
           </BodyShort>
           <BodyShort spacing>
