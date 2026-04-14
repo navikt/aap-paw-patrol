@@ -47,6 +47,7 @@ const behovskodeMap: Record<string, string> = {
   '5051': 'Skriv vedtaksbrev',
   '5052': 'Skriv forhåndsvarsel brudd aktivitetsplikt',
   '5053': 'Skriv sykdomsvurdering brev',
+  '5054': 'Bekreft sykdomsvurderinger',
   '5056': 'Samordning refusjonskrav',
   '5057': 'Arbeidsopptrapping',
   '5096': 'Forslå uttak',
