@@ -1,5 +1,5 @@
 export function mapBehovskodeTilBehovstype(kode: string): string {
-  return behovskodeMap[kode] ?? 'Ukjent behovstype';
+  return behovskodeMap[kode] ?? `Ukjent behovstype (${kode})`;
 }
 
 const behovskodeMap: Record<string, string> = {
