@@ -79,3 +79,8 @@ export function hentOppgaver(behandlingsreferanse: string) {
 export function triggProsesserbehandlingIPostmottak(referanse: string) {
   return fetch(`/api/drift/postmottak/${referanse}/prosesser`, { method: 'POST', body: JSON.stringify({}) });
 }
+
+export function hentJournalpostInfo(journalpostId: string) {
+  return fetch(`/api/drift/postmottak/${journalpostId}/info`, { method: 'GET' });
+}
+

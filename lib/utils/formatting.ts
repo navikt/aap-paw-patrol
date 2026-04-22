@@ -10,6 +10,10 @@ export function formaterBehandlingType(type: string) {
       return 'Tilbakekreving';
     case 'ae0058':
       return 'Klage';
+    case 'ae2000':
+      return 'Journalføring';
+    case 'ae1999':
+      return 'Dokumenthåndtering'
     default:
       return type;
   }

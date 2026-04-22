@@ -40,7 +40,7 @@ export const fetchProxy = async <ResponseBody>(
   requestBody?: object,
   tags?: string[]
 ): Promise<ResponseBody> => {
-  const oboToken = (await isLocal()) ? await hentLocalToken() : await getOnBefalfOfToken(scope, url);
+  const oboToken = (await isLocal()) ? await hentLocalToken(scope) : await getOnBefalfOfToken(scope, url);
   return await fetchWithRetry<ResponseBody>(url, method, oboToken, NUMBER_OF_RETRIES, requestBody, tags);
 };
 
