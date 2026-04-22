@@ -1,8 +1,8 @@
 export interface JournalpostInfoDTO {
-  innkommendeStatus: string;
-  brevkode: string;
+  innkommendeStatus: string | null;
+  brevkode: string | null;
   tema: string;
-  fordelingsresultat: Fordelingsresultat;
+  fordelingsresultat: Fordelingsresultat | null;
   journalstatus: string;
   mottattDato: string;
   kanal: Kanal;
@@ -79,7 +79,10 @@ export const kanalInfo: Record<Kanal, KanalDetaljer> = {
   SENTRAL_UTSKRIFT: { beskrivelse: 'Overført til sentral distribusjon og sendt i posten', erDigital: false },
   SDP: { beskrivelse: 'Sendt via digital post til innbyggere', erDigital: false },
   SKAN_NETS: { beskrivelse: 'Sendt inn på papir og skannet hos NETS', erDigital: false },
-  SKAN_PEN: { beskrivelse: 'Sendt inn på papir og skannet på NAVs skanningsenter for pensjon og bidrag', erDigital: false },
+  SKAN_PEN: {
+    beskrivelse: 'Sendt inn på papir og skannet på NAVs skanningsenter for pensjon og bidrag',
+    erDigital: false,
+  },
   SKAN_IM: { beskrivelse: 'Sendt inn på papir og skannet hos Iron Mountain', erDigital: false },
   TRYGDERETTEN: { beskrivelse: 'Distribuert via eFormidling til Trygderetten', erDigital: false },
   HELSENETTET: { beskrivelse: 'Mottatt eller distribuert via Norsk Helsenett', erDigital: false },
@@ -92,4 +95,3 @@ export const kanalInfo: Record<Kanal, KanalDetaljer> = {
   ALTINN_INNBOKS: { beskrivelse: 'Mottatt i en av NAVs meldingsbokser i Altinn', erDigital: false },
   UKJENT: { beskrivelse: 'Ingen kjent kanal', erDigital: false },
 };
-

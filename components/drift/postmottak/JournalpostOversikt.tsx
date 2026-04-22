@@ -17,9 +17,15 @@ import {
   VStack,
 } from '@navikt/ds-react';
 import { hentJournalpostInfo } from 'lib/clientApi';
-import { JournalpostInfoDTO, kanalInfo, PostmottakAvklaringsbehov, PostmottakBehandling } from 'lib/types/postmottak';
+import {
+  Fordelingsresultat,
+  JournalpostInfoDTO,
+  kanalInfo,
+  PostmottakAvklaringsbehov,
+  PostmottakBehandling,
+} from 'lib/types/postmottak';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
-import { capitalize, formaterBehandlingType } from 'lib/utils/formatting';
+import { formaterBehandlingType } from 'lib/utils/formatting';
 import { AvklaringsbehovInfo } from 'components/drift/sakogbehandling/avklaringsbehov/AvklaringsbehovInfo';
 import { ForenkletAvklaringsbehov } from 'lib/types/avklaringsbehov';
 import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
@@ -51,18 +57,14 @@ const KanalTag = ({ kanal }: { kanal: string }) => {
   return (
     <HStack gap="space-4" align="center">
       <Tag variant={info.erDigital ? 'success' : 'neutral'} size="small">
-        {capitalize(kanal)} {info.erDigital ? '(digital)' : ''}
+        {kanal} {info.erDigital ? '(digital)' : ''}
       </Tag>
       <HelpText title="Om kanal">{info.beskrivelse}</HelpText>
     </HStack>
   );
 };
 
-const FordelingsresultatPanel = ({
-  fordelingsresultat,
-}: {
-  fordelingsresultat: JournalpostInfoDTO['fordelingsresultat'];
-}) => (
+const FordelingsresultatPanel = ({ fordelingsresultat }: { fordelingsresultat: Fordelingsresultat }) => (
   <Box background="neutral-soft" padding="space-16" borderRadius="16" borderColor="neutral-subtle" borderWidth="1">
     <VStack gap="space-16">
       <Heading size="small" textColor="subtle">
@@ -74,9 +76,6 @@ const FordelingsresultatPanel = ({
         <Tag variant="info" size="medium">
           {fordelingsresultat.systemNavn}
         </Tag>
-        <BodyShort size="small" textColor="subtle">
-          (journalpost {fordelingsresultat.forJournalpost})
-        </BodyShort>
       </HStack>
 
       <Table size="small">
@@ -150,10 +149,10 @@ const BehandlingerPanel = ({ behandlinger }: { behandlinger: PostmottakBehandlin
                 </Table.DataCell>
                 <Table.DataCell>
                   <Tag variant="info" size="small">
-                    {capitalize(behandling.status)}
+                    {behandling.status}
                   </Tag>
                 </Table.DataCell>
-                <Table.DataCell>{capitalize(behandling.aktivtSteg)}</Table.DataCell>
+                <Table.DataCell>{behandling.aktivtSteg}</Table.DataCell>
                 <Table.DataCell>
                   <BodyShort style={{ whiteSpace: 'nowrap' }}>
                     {formaterDatoMedTidspunktSekunderForFrontend(behandling.opprettet)}
@@ -196,16 +195,15 @@ export const JournalpostOversikt = ({ journalpostId }: { journalpostId: string }
       await hentJournalpostInfo(journalpostId.trim())
         .then(async (res) => {
           if (res.ok) {
-            const json = await res.json()
-            console.log(json)
-            return json
-              }
-          else {
+            const json = await res.json();
+            console.log(json);
+            return json;
+          } else {
             throw Error(await res.text());
           }
         })
         .then((data: JournalpostInfoDTO) => {
-          console.log(data)
+          console.log(data);
           setJournalpost(data);
         })
         .catch((err) => {
@@ -226,9 +224,11 @@ export const JournalpostOversikt = ({ journalpostId }: { journalpostId: string }
     <Box borderColor="neutral-subtle" borderWidth="1 0 1 0" background="default">
       <HStack gap="space-16" align="center" margin="space-16">
         <Heading size="large">Journalpost {journalpostId}</Heading>
-        <Tag variant="info" size="medium">
-          {capitalize(journalpost.innkommendeStatus)}
-        </Tag>
+        {journalpost.innkommendeStatus && (
+          <Tag variant="info" size="medium">
+            {journalpost.innkommendeStatus}
+          </Tag>
+        )}
       </HStack>
 
       <Box borderColor="neutral-subtle" borderWidth="1 0 0 0" background="default">
@@ -251,7 +251,7 @@ export const JournalpostOversikt = ({ journalpostId }: { journalpostId: string }
               </div>
               <div>
                 <Label size="small">Journalstatus</Label>
-                <BodyShort>{capitalize(journalpost.journalstatus)}</BodyShort>
+                <BodyShort>{journalpost.journalstatus}</BodyShort>
               </div>
               <div>
                 <Label size="small">Mottatt dato</Label>
@@ -274,7 +274,11 @@ export const JournalpostOversikt = ({ journalpostId }: { journalpostId: string }
 
           {/* Høyre: fordelingsresultat + behandlinger */}
           <VStack gap="space-16" padding="space-16">
-            <FordelingsresultatPanel fordelingsresultat={journalpost.fordelingsresultat} />
+            {journalpost.fordelingsresultat ? (
+              <FordelingsresultatPanel fordelingsresultat={journalpost.fordelingsresultat} />
+            ) : (
+              <BodyShort textColor="subtle">Ingen fordelingsresultat tilgjengelig</BodyShort>
+            )}
             {journalpost.behandlinger.length > 0 && <BehandlingerPanel behandlinger={journalpost.behandlinger} />}
           </VStack>
         </HGrid>
