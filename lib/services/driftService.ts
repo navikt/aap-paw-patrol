@@ -214,3 +214,10 @@ export const triggProsesserBehandlingIPostmottak = async (referanse: string) => 
   const url = `${baseUrl}/api/drift/behandling/${referanse}/prosesser`;
   return await fetchProxy<undefined>(url, scope, 'POST', {});
 };
+
+export const hentJournalpostInfo = async (journalpostId: string) => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('postmottak');
+  const url = `${baseUrl}/api/drift/journalpost/${journalpostId}/info`;
+  return await fetchProxy<unknown>(url, scope, 'GET');
+};
+
