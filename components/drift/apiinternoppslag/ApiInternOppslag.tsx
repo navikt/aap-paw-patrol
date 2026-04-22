@@ -122,7 +122,7 @@ export const ApiInternOppslag = () => {
           )}
 
           {dsopVedtak != null ? (
-            dsopVedtak.length === 0 ? (
+            dsopVedtak.vedtak.length === 0 ? (
               <InlineMessage status="info">Ingen vedtak</InlineMessage>
             ) : (
               <Table>
