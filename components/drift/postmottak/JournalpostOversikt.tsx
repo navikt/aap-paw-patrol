@@ -195,15 +195,12 @@ export const JournalpostOversikt = ({ journalpostId }: { journalpostId: string }
       await hentJournalpostInfo(journalpostId.trim())
         .then(async (res) => {
           if (res.ok) {
-            const json = await res.json();
-            console.log(json);
-            return json;
+            return await res.json();
           } else {
             throw Error(await res.text());
           }
         })
         .then((data: JournalpostInfoDTO) => {
-          console.log(data);
           setJournalpost(data);
         })
         .catch((err) => {
