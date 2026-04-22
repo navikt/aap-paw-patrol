@@ -46,6 +46,13 @@ export function oppdaterPersonIdenter(saksnummer: string) {
   });
 }
 
+export function hentDsopVedtak(personIdent: string, fomDato: string, tomDato: string) {
+  return fetch(`/api/drift/api-intern/dsop-vedtak`, {
+    method: 'POST',
+    body: JSON.stringify({ personIdent, fomDato, tomDato, }),
+  });
+}
+
 export function hentSakDriftsinfo(saksnummer: string) {
   return fetch(`/api/drift/sak/${saksnummer}/info`, {
     method: 'POST',

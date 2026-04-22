@@ -60,11 +60,12 @@ spec:
   accessPolicy:
     outbound:
       rules:
-        - application: "behandlingsflyt"
-        - application: "brev"
-        - application: "postmottak-backend"
-        - application: "dokumentinnhenting"
-        - application: "statistikk"
-        - application: "oppgave"
-        - application: "utbetal"
+        - application: behandlingsflyt
+        - application: brev
+        - application: postmottak-backend
+        - application: dokumentinnhenting
+        - application: statistikk
+        - application: oppgave
+        - application: utbetal
         - application: meldekort-backend
+        - application: api-intern

@@ -6,11 +6,13 @@ import {
   BackwardIcon,
   ClockIcon,
   EnvelopeClosedIcon,
+  FileJsonIcon,
   MagnifyingGlassIcon,
   StethoscopeIcon,
   PersonIcon,
 } from '@navikt/aksel-icons';
 import { FeilendeJobberLinkCard } from 'components/drift/feilendejobber/FeilendeJobberLinkCard';
+import { isDev, isLocal } from '@navikt/aap-felles-utils';
 
 export default function Home() {
   return (
@@ -93,6 +95,17 @@ export default function Home() {
               <LinkCardAnchor href={`/drift/person-identer/oppdater`}>Oppdater identer for sak</LinkCardAnchor>
             </LinkCardTitle>
           </LinkCard>
+
+          {(isDev() || isLocal()) ? (
+            <LinkCard size="small">
+              <LinkCardIcon>
+                <FileJsonIcon fontSize="2rem" />
+              </LinkCardIcon>
+              <LinkCardTitle>
+                <LinkCardAnchor href={`/drift/api-intern`}>Oppslag mot API-intern</LinkCardAnchor>
+              </LinkCardTitle>
+            </LinkCard>
+          ) : null}
         </VStack>
       </PageBlock>
     </Page>

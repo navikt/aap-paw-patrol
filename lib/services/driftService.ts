@@ -9,7 +9,8 @@ export type AppNavn =
   | 'statistikk'
   | 'utbetal'
   | 'oppgave'
-  | 'meldekort';
+  | 'meldekort'
+  | 'api-intern';
 
 export interface AppInfo {
   name: AppNavn;
@@ -116,6 +117,9 @@ export const getBaseUrlAndScopeForApp = async (appNavn: AppNavn): Promise<BaseUr
   }
   if (appNavn === 'utbetal') {
     return { baseUrl: process.env.UTBETAL_API_BASE_URL ?? '', scope: process.env.UTBETAL_API_SCOPE ?? '' };
+  }
+  if (appNavn === 'api-intern') {
+    return { baseUrl: process.env.API_INTERN_BASE_URL ?? '', scope: process.env.API_INTERN_SCOPE ?? ''};
   }
   assertUnreachable(appNavn);
   throw new Error(`Ukjent app: ${appNavn}`);
