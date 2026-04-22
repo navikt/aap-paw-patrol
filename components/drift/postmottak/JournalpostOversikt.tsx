@@ -13,6 +13,7 @@ import {
   Label,
   Loader,
   Table,
+  Tabs,
   Tag,
   VStack,
 } from '@navikt/ds-react';
@@ -30,6 +31,7 @@ import { AvklaringsbehovInfo } from 'components/drift/sakogbehandling/avklarings
 import { ForenkletAvklaringsbehov } from 'lib/types/avklaringsbehov';
 import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import Link from 'next/link';
+import { Oppgaver } from 'components/drift/sakogbehandling/oppgave/Oppgaver';
 
 function mapTilForenkletAvklaringsbehov(behov: PostmottakAvklaringsbehov): ForenkletAvklaringsbehov {
   return {
@@ -104,10 +106,16 @@ const FordelingsresultatPanel = ({ fordelingsresultat }: { fordelingsresultat: F
   </Box>
 );
 
+enum BehandlingTab {
+  AVKLARINGSBEHOV = 'AVKLARINGSBEHOV',
+  OPPGAVER = 'OPPGAVER',
+}
+
 const BehandlingerPanel = ({ behandlinger }: { behandlinger: PostmottakBehandling[] }) => {
   const [valgtBehandling, setValgtBehandling] = useState<PostmottakBehandling | undefined>(
     behandlinger.length === 1 ? behandlinger[0] : undefined
   );
+  const [tab, setTab] = useState<BehandlingTab>(BehandlingTab.AVKLARINGSBEHOV);
 
   return (
     <Box background="neutral-soft" padding="space-16" borderRadius="16" borderColor="neutral-subtle" borderWidth="1">
@@ -165,11 +173,21 @@ const BehandlingerPanel = ({ behandlinger }: { behandlinger: PostmottakBehandlin
       </Table>
 
       {valgtBehandling && (
-        <Box marginBlock="space-16" padding="space-16" borderWidth="1 0 0 0" borderColor="neutral-subtle">
-          <Heading size="xsmall" spacing>
-            Avklaringsbehovhistorikk – {formaterBehandlingType(valgtBehandling.type)}
-          </Heading>
-          <AvklaringsbehovInfo avklaringsbehov={valgtBehandling.avklaringsbehov.map(mapTilForenkletAvklaringsbehov)} />
+        <Box marginBlock="space-16" borderWidth="1 0 0 0" borderColor="neutral-subtle">
+          <Tabs defaultValue={BehandlingTab.AVKLARINGSBEHOV} onChange={(value) => setTab(value as BehandlingTab)} value={tab}>
+            <Tabs.List>
+              <Tabs.Tab value={BehandlingTab.AVKLARINGSBEHOV} label="Avklaringsbehov" />
+              <Tabs.Tab value={BehandlingTab.OPPGAVER} label="Oppgaver" />
+            </Tabs.List>
+            <Tabs.Panel value={BehandlingTab.AVKLARINGSBEHOV}>
+              <Box padding="space-16">
+                <AvklaringsbehovInfo avklaringsbehov={valgtBehandling.avklaringsbehov.map(mapTilForenkletAvklaringsbehov)} />
+              </Box>
+            </Tabs.Panel>
+            <Tabs.Panel value={BehandlingTab.OPPGAVER}>
+              <Oppgaver behandlingsreferanse={valgtBehandling.referanse} />
+            </Tabs.Panel>
+          </Tabs>
         </Box>
       )}
     </Box>
