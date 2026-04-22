@@ -151,10 +151,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@date-fns/tz@npm:1.2.0":
-  version: 1.2.0
-  resolution: "@date-fns/tz@npm:1.2.0"
-  checksum: 10c0/411e9d4303b10951f6fd0189d18fb845f0d934a575df2176bc10daf664282c765fb6b057a977e446bbb1229151d89e7788978600a019f1fc24b5c75276d496bd
+"@date-fns/tz@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "@date-fns/tz@npm:1.4.1"
+  checksum: 10c0/9033fdc4682fe3d4d147625ce04fa88a8792653594e2de8d5a438c8f3bfc0990ee28fe773f91cac6810b06d818b5b281ae0608752ba8337257d0279ded3f019a
   languageName: node
   linkType: hard
 
@@ -1116,42 +1116,42 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^8.9.1":
-  version: 8.9.1
-  resolution: "@navikt/aksel-icons@npm:8.9.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F8.9.1%2Fff1f10cabbda2ee7f6baa457cadcabb13adc64cc"
-  checksum: 10c0/f752acf96d395f6d570ed18ad0fd794121d87345800ac354f90e35a6ec48f7c717e8cb22e7e192058455ce3e96dda19fdf5bdc3ed87db4fee594f90a45f54991
+"@navikt/aksel-icons@npm:^8.10.1":
+  version: 8.10.1
+  resolution: "@navikt/aksel-icons@npm:8.10.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F8.10.1%2F6adb563ecbb10ca249f14b966e2bf3920082e776"
+  checksum: 10c0/667f494e811c18df83d7044c76e5125eaa48a3ed1458b20c624ad8b4e9c42537b878f099abe49fc50a187bb9bb2d4de4413cf09aadcb3824aab66bd455310664
   languageName: node
   linkType: hard
 
-"@navikt/ds-css@npm:^8.9.1":
-  version: 8.9.1
-  resolution: "@navikt/ds-css@npm:8.9.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F8.9.1%2Ff827d1a6ff83ec30606991f5208ea37eb68f2362"
-  checksum: 10c0/ae5ba288bfaa6fdd05d7cfbda49ce8abf85735319d6501b4b75ba9fe8d60a742aa041149deb6d8567d3c0801aa63489ffd8378a37412781f14ad172e5b45de0d
+"@navikt/ds-css@npm:^8.10.1":
+  version: 8.10.1
+  resolution: "@navikt/ds-css@npm:8.10.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F8.10.1%2F5c92ad909382e34e1dc68c307e93fe36440afe90"
+  checksum: 10c0/254cdcf6493b2820fa5473c1c34ec28e91d3f0c03c8e87100909bde282db14e8f92288ae49b2bbc90e24a6a1dc394964d77af278b78fd2d63cc330ad5d6b4772
   languageName: node
   linkType: hard
 
-"@navikt/ds-react@npm:^8.9.1":
-  version: 8.9.1
-  resolution: "@navikt/ds-react@npm:8.9.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F8.9.1%2Fa9dfd4b309cee1dc078b6d43b5ec791d238e16fe"
+"@navikt/ds-react@npm:^8.10.1":
+  version: 8.10.1
+  resolution: "@navikt/ds-react@npm:8.10.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F8.10.1%2Fd948b1c7a3593452a2fb1262c011a028f076115f"
   dependencies:
     "@floating-ui/react": "npm:0.27.8"
     "@floating-ui/react-dom": "npm:^2.1.8"
-    "@navikt/aksel-icons": "npm:^8.9.1"
-    "@navikt/ds-tokens": "npm:^8.9.1"
+    "@navikt/aksel-icons": "npm:^8.10.1"
+    "@navikt/ds-tokens": "npm:^8.10.1"
     date-fns: "npm:^4.0.0"
-    react-day-picker: "npm:9.7.0"
+    react-day-picker: "npm:9.14.0"
   peerDependencies:
     "@types/react": ^17.0.30 || ^18 || ^19
     react: ^17 || ^18 || ^19
     react-dom: ^17 || ^18 || ^19
-  checksum: 10c0/609a8f5d2332dd09d6af5a4a228869e2854d4b0fed392f90e5198ca7660dcdcc0a45432fe512dc702a0fb7075b7df5be7f26728f94501dbb9648d4ba6a4f5eee
+  checksum: 10c0/20dfe823aff41c18af9dac718d0444230c6534db13d8ecd9b146e0b0b7d0f54acbada5cf42afed6ec6a8127d804d0a7a8d80d51693b4bf00bf4c91cb202e7ccb
   languageName: node
   linkType: hard
 
-"@navikt/ds-tokens@npm:^8.9.1":
-  version: 8.9.1
-  resolution: "@navikt/ds-tokens@npm:8.9.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F8.9.1%2F961db4bb606a0858e6cd01292adff493f474b5da"
-  checksum: 10c0/5bd74b80ccc79be2a399a1aeba6b211fe0d017694a3a717531b521b020aa914458af6d91c3e1dddfa9b1100be14fe122110cd68f3f89ff4abe4057bf8fd67c16
+"@navikt/ds-tokens@npm:^8.10.1":
+  version: 8.10.1
+  resolution: "@navikt/ds-tokens@npm:8.10.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F8.10.1%2Fe0e93219aede2463946851b272b809f17b813fa9"
+  checksum: 10c0/2922e9b0b3c3cb2212ca0178eadacf1435180029a916dc50ebd3910b10d1071db6a6ed96c6c76975841e090c59518c4a8ee61a6191be57a70c17d19e5d0dd6bb
   languageName: node
   linkType: hard
 
@@ -1585,6 +1585,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tabby_ai/hijri-converter@npm:1.0.5":
+  version: 1.0.5
+  resolution: "@tabby_ai/hijri-converter@npm:1.0.5"
+  checksum: 10c0/40044f463ff57855315c8925461942311460bb64e16706480dde98142f40bcd8e9925bb6fee401fd209397b5bb25368d1529c85b1e6c7e6216ea2085f6aaf61e
+  languageName: node
+  linkType: hard
+
 "@trivago/prettier-plugin-sort-imports@npm:^4.3.0":
   version: 4.3.0
   resolution: "@trivago/prettier-plugin-sort-imports@npm:4.3.0"
@@ -1887,9 +1894,9 @@ __metadata:
   dependencies:
     "@navikt/aap-felles-prettier": "npm:^5.6.3"
     "@navikt/aap-felles-utils": "npm:5.6.3"
-    "@navikt/aksel-icons": "npm:^8.9.1"
-    "@navikt/ds-css": "npm:^8.9.1"
-    "@navikt/ds-react": "npm:^8.9.1"
+    "@navikt/aksel-icons": "npm:^8.10.1"
+    "@navikt/ds-css": "npm:^8.10.1"
+    "@navikt/ds-react": "npm:^8.10.1"
     "@navikt/eslint-config-aap": "npm:^5.1.3"
     "@types/eslint-plugin-jsx-a11y": "npm:^6.10.1"
     "@types/node": "npm:^20.17.6"
@@ -2527,7 +2534,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:4.1.0, date-fns@npm:^4.0.0, date-fns@npm:^4.1.0":
+"date-fns@npm:^4.0.0, date-fns@npm:^4.1.0":
   version: 4.1.0
   resolution: "date-fns@npm:4.1.0"
   checksum: 10c0/b79ff32830e6b7faa009590af6ae0fb8c3fd9ffad46d930548fbb5acf473773b4712ae887e156ba91a7b3dc30591ce0f517d69fd83bd9c38650fdc03b4e0bac8
@@ -5313,16 +5320,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-day-picker@npm:9.7.0":
-  version: 9.7.0
-  resolution: "react-day-picker@npm:9.7.0"
+"react-day-picker@npm:9.14.0":
+  version: 9.14.0
+  resolution: "react-day-picker@npm:9.14.0"
   dependencies:
-    "@date-fns/tz": "npm:1.2.0"
-    date-fns: "npm:4.1.0"
+    "@date-fns/tz": "npm:^1.4.1"
+    "@tabby_ai/hijri-converter": "npm:1.0.5"
+    date-fns: "npm:^4.1.0"
     date-fns-jalali: "npm:4.1.0-0"
   peerDependencies:
     react: ">=16.8.0"
-  checksum: 10c0/c08c45a53aebceda1c938d2e4c95eb1702dcf149715e3457739f8930dce19a3be5780e5bad12dcc9d244d50b7e0efb226c336d81c1c062f616cf422e6a3804a6
+  checksum: 10c0/5d26b2e8e28fb504c2ec577bda2ea26709ccab07555aada0674bd72ae38963de6f5cab135d936bb2fef935f97f73c6510657b15b936766e53d5c65811d13289a
   languageName: node
   linkType: hard
 
