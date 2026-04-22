@@ -16,6 +16,10 @@ import { formatISO } from 'date-fns';
 import { hentDsopVedtak } from 'lib/clientApi';
 import { useState } from 'react';
 
+interface DsopVedtakResponse {
+  vedtak: DsopVedtak[];
+}
+
 interface DsopVedtak {
   virkningsperiode: { fom: string; tom?: string | null };
   aktivitetsfase: string;
@@ -54,7 +58,7 @@ export const ApiInternOppslag = () => {
     defaultSelected: defaultTom,
   });
 
-  const [dsopVedtak, setDsopVedtak] = useState<DsopVedtak[]>();
+  const [dsopVedtak, setDsopVedtak] = useState<DsopVedtakResponse>();
 
   const onClickHentDsopVedtak = async () => {
     if (!fnr || !fom || !tom) {
@@ -134,7 +138,7 @@ export const ApiInternOppslag = () => {
                   </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                  {dsopVedtak.map(
+                  {dsopVedtak.vedtak.map(
                     ({
                       virkningsperiode: { fom, tom },
                       vedtakId,
