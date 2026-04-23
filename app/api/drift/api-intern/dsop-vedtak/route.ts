@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp("api-intern");
   const body = await req.json()
   try {
-    return NextResponse.json(await fetchProxy(`${baseUrl}/kelvin/dsop/vedtak`, scope, 'POST', body));
+    return NextResponse.json(await fetchProxy(`${baseUrl}/kelvin/dsop/vedtak-test`, scope, 'POST', body));
   } catch (err: any) {
     return new Response(err?.message, { status: 500 });
   }
