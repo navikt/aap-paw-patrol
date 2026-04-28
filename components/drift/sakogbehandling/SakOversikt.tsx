@@ -8,10 +8,12 @@ import { SakInfoPanel } from 'components/drift/sakogbehandling/SakInfoPanel';
 import { capitalize } from 'lib/utils/formatting';
 import { BehandlingOversikt } from 'components/drift/sakogbehandling/BehandlingOversikt';
 import { MottatteDokumenter } from 'components/drift/sakogbehandling/dokumenter/MottatteDokumenter';
+import { Dialogmeldinger } from 'components/drift/sakogbehandling/dialogmeldinger/Dialogmeldinger';
 
 enum Tab {
   BEHANDLINGER = 'BEHANDLINGER',
   MOTTATTE_DOKUMENTER = 'MOTTATTE_DOKUMENTER',
+  DIALOGMELDINGER = 'DIALOGMELDINGER',
 }
 
 export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
@@ -79,6 +81,7 @@ export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
             <Tabs.List>
               <Tabs.Tab value={Tab.BEHANDLINGER} label="Behandlinger" />
               <Tabs.Tab value={Tab.MOTTATTE_DOKUMENTER} label="Mottatte dokumenter" />
+              <Tabs.Tab value={Tab.DIALOGMELDINGER} label="Dialogmeldinger" />
             </Tabs.List>
 
             <Tabs.Panel value={Tab.BEHANDLINGER}>
@@ -86,6 +89,9 @@ export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
             </Tabs.Panel>
             <Tabs.Panel value={Tab.MOTTATTE_DOKUMENTER}>
               <MottatteDokumenter saksnummer={saksnummer} />
+            </Tabs.Panel>
+            <Tabs.Panel value={Tab.DIALOGMELDINGER}>
+              <Dialogmeldinger saksnummer={saksnummer} />
             </Tabs.Panel>
           </Tabs>
         </HGrid>

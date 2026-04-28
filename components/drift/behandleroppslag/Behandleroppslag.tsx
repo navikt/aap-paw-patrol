@@ -3,6 +3,7 @@
 import { Alert, BodyShort, Button, Heading, HStack, Loader, Table, TextField, VStack } from '@navikt/ds-react';
 import { useState } from 'react';
 import { Behandler } from 'lib/types';
+import { hentBehandler } from 'lib/clientApi';
 
 export const Behandleroppslag = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -16,11 +17,7 @@ export const Behandleroppslag = () => {
     if (!request.fritekst) return setError('Fritekst må fylles ut.');
 
     setIsLoading(true);
-    fetch('/api/drift/behandleroppslag', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ saksnummer: request.saksnummer, fritekst: request.fritekst }),
-    })
+    hentBehandler(request.saksnummer, request.fritekst)
       .then(async (res) => {
         if (!res.ok) {
           setError(`${res.status} ${res.statusText}: ${await res.text()}`);

@@ -49,7 +49,7 @@ export function oppdaterPersonIdenter(saksnummer: string) {
 export function hentDsopVedtak(personIdent: string, fomDato: string, tomDato: string) {
   return fetch(`/api/drift/api-intern/dsop-vedtak`, {
     method: 'POST',
-    body: JSON.stringify({ personIdent, fomDato, tomDato, }),
+    body: JSON.stringify({ personIdent, fomDato, tomDato }),
   });
 }
 
@@ -91,3 +91,16 @@ export function hentJournalpostInfo(journalpostId: string) {
   return fetch(`/api/drift/postmottak/${journalpostId}/info`, { method: 'GET' });
 }
 
+export function hentBehandler(saksnummer: string, fritekst: string) {
+  return fetch(`/api/drift/dokumentinnhenting/syfo/behandleroppslag/search`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ saksnummer, fritekst }),
+  });
+}
+
+export function hentDialogmeldinger(saksnummer: string) {
+  return fetch(`/api/drift/dokumentinnhenting/sak/${saksnummer}/dialogmelding`, {
+    method: 'POST',
+  });
+}
