@@ -49,6 +49,7 @@ export const MottatteDokumenter = ({ saksnummer }: { saksnummer: string }) => {
       <Table>
         <Table.Header>
           <Table.Row>
+            <Table.HeaderCell scope="col">ID</Table.HeaderCell>
             <Table.HeaderCell scope="col">Referanse</Table.HeaderCell>
             <Table.HeaderCell scope="col">Type</Table.HeaderCell>
             <Table.HeaderCell scope="col">Kanal</Table.HeaderCell>
@@ -59,6 +60,7 @@ export const MottatteDokumenter = ({ saksnummer }: { saksnummer: string }) => {
         <Table.Body>
           {dokumenter.map((dokument) => (
             <Table.Row key={crypto.randomUUID()}>
+              <Table.DataCell>{dokument.referanse.verdi}</Table.DataCell>
               <Table.DataCell>{capitalize(dokument.referanse.type)}</Table.DataCell>
               <Table.DataCell>{capitalize(dokument.type)}</Table.DataCell>
               <Table.DataCell>{dokument.kanal}</Table.DataCell>

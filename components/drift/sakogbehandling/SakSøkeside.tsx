@@ -14,7 +14,7 @@ export const SakSøkeside = () => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        router.push(saksnummer);
+        router.replace(`/drift/sak/${saksnummer}`);
       }}
     >
       <VStack gap="space-16" marginBlock="space-32">

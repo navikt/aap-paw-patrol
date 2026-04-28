@@ -14,7 +14,7 @@ export const JournalpostSøkeside = () => {
       onSubmit={(e) => {
         e.preventDefault();
         if (journalpostId.trim()) {
-          router.push(`/drift/postmottak/${journalpostId.trim()}`);
+          router.replace(`/drift/postmottak/${journalpostId.trim()}`);
         }
       }}
     >
@@ -37,4 +37,3 @@ export const JournalpostSøkeside = () => {
     </form>
   );
 };
-

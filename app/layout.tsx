@@ -3,8 +3,7 @@ import 'styles/globals.css';
 
 import { verifyUserLoggedIn } from '@navikt/aap-felles-utils';
 import { InternalHeader, InternalHeaderTitle } from '@navikt/ds-react/InternalHeader';
-import { SakSøkefelt } from 'components/drift/sakogbehandling/SakSøkefelt';
-import { JournalpostSøkefelt } from 'components/drift/postmottak/JournalpostSøkefelt';
+import { Søkefelt } from 'components/drift/Søkefelt';
 import { hentBrukerInformasjon, hentRollerForBruker, Roller } from 'lib/azure/azureUserService';
 import { InnloggetBrukerDropdown } from 'components/drift/navbar/InnloggetBrukerDropdown';
 import { Spacer } from '@navikt/ds-react';
@@ -30,8 +29,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <InternalHeader>
           <InternalHeaderTitle href="/">Paw Patrol 🐶</InternalHeaderTitle>
 
-          {roller.includes(Roller.DRIFT) && <SakSøkefelt />}
-          {roller.includes(Roller.DRIFT) && <JournalpostSøkefelt />}
+          {roller.includes(Roller.DRIFT) && <Søkefelt />}
 
           <Spacer />
 

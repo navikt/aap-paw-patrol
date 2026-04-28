@@ -30,7 +30,7 @@ export default function Home() {
           </HGrid>
 
           <Heading size={'large'} spacing>
-            Annet
+            Oppslag
           </Heading>
 
           <LinkCard size="small">
@@ -38,16 +38,16 @@ export default function Home() {
               <MagnifyingGlassIcon fontSize="2rem" />
             </LinkCardIcon>
             <LinkCardTitle>
-              <LinkCardAnchor href={`/drift/sak`}>Hent sak</LinkCardAnchor>
+              <LinkCardAnchor href={`/sok/sak`}>Hent sak</LinkCardAnchor>
             </LinkCardTitle>
           </LinkCard>
 
           <LinkCard size="small">
             <LinkCardIcon>
-              <BackwardIcon fontSize="2rem" />
+              <MagnifyingGlassIcon fontSize="2rem" />
             </LinkCardIcon>
             <LinkCardTitle>
-              <LinkCardAnchor href={`/drift/behandlingsflyt`}>Sett aktivt steg for behandling</LinkCardAnchor>
+              <LinkCardAnchor href={`/sok/journalpost`}>Hent journalpost</LinkCardAnchor>
             </LinkCardTitle>
           </LinkCard>
 
@@ -56,7 +56,31 @@ export default function Home() {
               <StethoscopeIcon fontSize="2rem" />
             </LinkCardIcon>
             <LinkCardTitle>
-              <LinkCardAnchor href={`/drift/behandleroppslag`}>Behandleroppslag</LinkCardAnchor>
+              <LinkCardAnchor href={`/drift/behandleroppslag`}>Hent behandler</LinkCardAnchor>
+            </LinkCardTitle>
+          </LinkCard>
+
+          {(isDev() || isLocal()) && (
+            <LinkCard size="small">
+              <LinkCardIcon>
+                <FileJsonIcon fontSize="2rem" />
+              </LinkCardIcon>
+              <LinkCardTitle>
+                <LinkCardAnchor href={`/drift/api-intern`}>Oppslag mot API-intern</LinkCardAnchor>
+              </LinkCardTitle>
+            </LinkCard>
+          )}
+
+          <Heading size={'large'} spacing>
+            Annet
+          </Heading>
+
+          <LinkCard size="small">
+            <LinkCardIcon>
+              <BackwardIcon fontSize="2rem" />
+            </LinkCardIcon>
+            <LinkCardTitle>
+              <LinkCardAnchor href={`/drift/behandlingsflyt`}>Sett aktivt steg for behandling</LinkCardAnchor>
             </LinkCardTitle>
           </LinkCard>
 
@@ -95,17 +119,6 @@ export default function Home() {
               <LinkCardAnchor href={`/drift/person-identer/oppdater`}>Oppdater identer for sak</LinkCardAnchor>
             </LinkCardTitle>
           </LinkCard>
-
-          {(isDev() || isLocal()) ? (
-            <LinkCard size="small">
-              <LinkCardIcon>
-                <FileJsonIcon fontSize="2rem" />
-              </LinkCardIcon>
-              <LinkCardTitle>
-                <LinkCardAnchor href={`/drift/api-intern`}>Oppslag mot API-intern</LinkCardAnchor>
-              </LinkCardTitle>
-            </LinkCard>
-          ) : null}
         </VStack>
       </PageBlock>
     </Page>

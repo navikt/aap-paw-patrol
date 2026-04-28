@@ -4,10 +4,9 @@ import { HStack, Search } from '@navikt/ds-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
-export const SakSøkefelt = () => {
+export const Søkefelt = () => {
   const router = useRouter();
   const searchRef = useRef<HTMLInputElement>(null);
-
   const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
@@ -17,7 +16,6 @@ export const SakSøkefelt = () => {
         searchRef.current?.focus();
       }
     };
-
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, []);
@@ -29,18 +27,20 @@ export const SakSøkefelt = () => {
       align="center"
       onSubmit={(e) => {
         e.preventDefault();
-        router.replace(`/drift/sak/${searchValue}`);
+        const value = searchValue.trim();
+        if (value) {
+          router.push(`/sok?q=${encodeURIComponent(value)}`);
+        }
       }}
     >
       <Search
         ref={searchRef}
-        label="Finn sak"
+        label="Søk"
         size="small"
         variant="simple"
-        placeholder="Saksnummer"
+        placeholder="Søk"
         value={searchValue}
-        onChange={(value) => setSearchValue(value.trim())}
-        error={searchValue && searchValue.length !== 7 ? 'Saksnummer må være 7 tegn' : undefined}
+        onChange={(value) => setSearchValue(value)}
       />
     </HStack>
   );
