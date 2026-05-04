@@ -29,7 +29,7 @@ export const AvklaringsbehovInfo = ({ avklaringsbehov }: { avklaringsbehov: Fore
         title={
           behov.årsakTilSettPåVent
             ? `${capitalize(behov.årsakTilSettPåVent)}`
-            : `${capitalize(behov.definisjon.løsesISteg)}`
+            : `${capitalize(behov.definisjon.løsesISteg)} (${behov.definisjon.kode})`
         }
         timestamp={`${formaterDatoMedTidspunktSekunderForFrontend(behov.tidsstempel)} - ${behov.endretAv}`}
         bullet={avklaringsbehov.length - i}
