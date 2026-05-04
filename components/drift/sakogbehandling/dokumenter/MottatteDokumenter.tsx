@@ -4,6 +4,7 @@ import { MottattDokumentDriftsinfoDTO } from 'lib/types/dokumenter';
 import { Alert, Box, Heading, Loader, Table } from '@navikt/ds-react';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
+import Link from 'next/link';
 
 export const MottatteDokumenter = ({ saksnummer }: { saksnummer: string }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -60,7 +61,13 @@ export const MottatteDokumenter = ({ saksnummer }: { saksnummer: string }) => {
         <Table.Body>
           {dokumenter.map((dokument) => (
             <Table.Row key={crypto.randomUUID()}>
-              <Table.DataCell>{dokument.referanse.verdi}</Table.DataCell>
+              <Table.DataCell>
+                {dokument.referanse.type === 'JOURNALPOST' ? (
+                  <Link href={`/drift/postmottak/${dokument.referanse.verdi}`}>{dokument.referanse.verdi}</Link>
+                ) : (
+                  dokument.referanse.verdi
+                )}
+              </Table.DataCell>
               <Table.DataCell>{capitalize(dokument.referanse.type)}</Table.DataCell>
               <Table.DataCell>{capitalize(dokument.type)}</Table.DataCell>
               <Table.DataCell>{dokument.kanal}</Table.DataCell>
