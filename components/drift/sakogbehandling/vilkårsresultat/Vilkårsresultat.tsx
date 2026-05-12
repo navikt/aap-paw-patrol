@@ -4,7 +4,7 @@ import { ExpansionCard, Table, Tag, VStack } from '@navikt/ds-react';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
 import { VilkårDriftsinfoDTO } from 'lib/types/vilkår';
-import { DriftRettighetstypeDTO } from '../../../../lib/types/rettighetstype';
+import { DriftRettighetstypeDTO, StansOpphørDto } from '../../../../lib/types/rettighetstype';
 
 export const Vilkårsresultat = ({ behandlingsreferanse }: { behandlingsreferanse: string }) => {
   const [vilkår, setVilkår] = useState<VilkårDriftsinfoDTO[]>();
@@ -38,6 +38,7 @@ export const Vilkårsresultat = ({ behandlingsreferanse }: { behandlingsreferans
   return (
     <VStack gap="space-16" paddingBlock="space-32" paddingInline="space-16">
       {rettighetsinfo && <Rettighetsinfo rettighetsinfo={rettighetsinfo} />}
+      {rettighetsinfo && <StansOpphør stansOpphør={rettighetsinfo?.stansOpphør} /> }
       {vilkår?.map((v, i) => <VilkårKort key={`${v.type}-${i}`} vilkår={v} />)}
     </VStack>
   );
@@ -95,8 +96,8 @@ const Rettighetsinfo = ({  rettighetsinfo }: {rettighetsinfo: DriftRettighetstyp
         <Table size="small">
           <Table.Header>
             <Table.HeaderCell style={{ width: '15rem' }}>Periode</Table.HeaderCell>
-            <Table.HeaderCell>Rettighetstype underveis</Table.HeaderCell>
-            <Table.HeaderCell>Rettighetstype grunnlag</Table.HeaderCell>
+            <Table.HeaderCell>RettighetstypeGrunnlag</Table.HeaderCell>
+            <Table.HeaderCell>UnderveisGrunnlag</Table.HeaderCell>
           </Table.Header>
           <Table.Body>
             {rettighetsinfo.rettighetsperioder.map(({ periode, rettighetstypeUnderveis, rettighetstypeGrunnlag }) => {
@@ -105,8 +106,40 @@ const Rettighetsinfo = ({  rettighetsinfo }: {rettighetsinfo: DriftRettighetstyp
                   <Table.DataCell>
                     {formaterDatoForFrontend(periode.fom)} - {formaterDatoForFrontend(periode.tom)}
                   </Table.DataCell>
-                  <Table.DataCell>{rettighetstypeUnderveis}</Table.DataCell>
                   <Table.DataCell>{rettighetstypeGrunnlag}</Table.DataCell>
+                  <Table.DataCell>{rettighetstypeUnderveis}</Table.DataCell>
+                </Table.Row>
+              );
+            })}
+          </Table.Body>
+        </Table>
+      </ExpansionCard.Content>
+    </ExpansionCard>
+  );
+};
+
+const StansOpphør = ({  stansOpphør }: {stansOpphør: StansOpphørDto[]}) => {
+  return (
+    <ExpansionCard aria-label="Stans og opphør" defaultOpen={true} size="small">
+      <ExpansionCard.Header>
+        <ExpansionCard.Title>Stans og opphør</ExpansionCard.Title>
+      </ExpansionCard.Header>
+      <ExpansionCard.Content>
+        <Table size="small">
+          <Table.Header>
+            <Table.HeaderCell style={{ width: '15rem' }}>Fra og med</Table.HeaderCell>
+            <Table.HeaderCell>Type</Table.HeaderCell>
+            <Table.HeaderCell>Avslagsårsaker</Table.HeaderCell>
+          </Table.Header>
+          <Table.Body>
+            {stansOpphør.map(({ fom, stansOpphør, årsaker }) => {
+              return (
+                <Table.Row key={crypto.randomUUID()}>
+                  <Table.DataCell>
+                    {formaterDatoForFrontend(fom)}
+                  </Table.DataCell>
+                  <Table.DataCell>{stansOpphør}</Table.DataCell>
+                  <Table.DataCell>{årsaker.join(", ")}</Table.DataCell>
                 </Table.Row>
               );
             })}
