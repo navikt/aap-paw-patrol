@@ -13,6 +13,6 @@ export const hentTilkjentYtelse = async (behandlingsreferanse: string) => {
 };
 export const hentRettighetsinfo = async (behandlingsreferanse: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
-  const url = `${baseUrl}/api/drift/behandling/${behandlingsreferanse}/rettighetstype`;
+  const url = `${baseUrl}/api/drift/behandling/${behandlingsreferanse}/rettighetsinfo`;
   return await fetchProxy<any>(url, scope, 'POST');
 };
