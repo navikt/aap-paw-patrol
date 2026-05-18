@@ -44,6 +44,7 @@ export const appInfo: AppInfo[] = [
   },
   { name: 'meldekort', displayName: 'Meldekort' },
   { name: 'utbetal', displayName: 'Utbetal' },
+  { name: 'api-intern', displayName: 'api-intern' },
 ];
 
 interface BaseUrlAndScope {
