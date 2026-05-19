@@ -117,3 +117,8 @@ export function hentDialogmeldinger(saksnummer: string) {
     method: 'POST',
   });
 }
+
+export function hentOppgavefiltre() {
+  return fetch(`/api/drift/oppgave/filter`, { method: 'GET' });
+}
+

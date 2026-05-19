@@ -7,6 +7,7 @@ import {
   ClockIcon,
   EnvelopeClosedIcon,
   FileJsonIcon,
+  FilterIcon,
   MagnifyingGlassIcon,
   StethoscopeIcon,
   PersonIcon,
@@ -117,6 +118,15 @@ export default function Home() {
             </LinkCardIcon>
             <LinkCardTitle>
               <LinkCardAnchor href={`/drift/person-identer/oppdater`}>Oppdater identer for sak</LinkCardAnchor>
+            </LinkCardTitle>
+          </LinkCard>
+
+          <LinkCard size="small">
+            <LinkCardIcon>
+              <FilterIcon fontSize="2rem" />
+            </LinkCardIcon>
+            <LinkCardTitle>
+              <LinkCardAnchor href={`/drift/oppgavefilter`}>Oppgavefiltre (køer)</LinkCardAnchor>
             </LinkCardTitle>
           </LinkCard>
         </VStack>
