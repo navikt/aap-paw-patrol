@@ -53,10 +53,10 @@ export function hentDsopVedtak(personIdent: string, fomDato: string, tomDato: st
   });
 }
 
-export function hentMaksimumUtenUtbetaling(personIdent: string, fomDato: string, tomDato: string) {
+export function hentMaksimumUtenUtbetaling(personidentifikator: string, fraOgMedDato: string, tilOgMedDato: string) {
   return fetch(`/api/drift/api-intern/maksimumUtenUtbetaling`, {
     method: 'POST',
-    body: JSON.stringify({ personIdent, fomDato, tomDato }),
+    body: JSON.stringify({ personidentifikator, fraOgMedDato, tilOgMedDato }),
   });
 }
 
