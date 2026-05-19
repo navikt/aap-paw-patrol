@@ -53,6 +53,13 @@ export function hentDsopVedtak(personIdent: string, fomDato: string, tomDato: st
   });
 }
 
+export function hentMaksimumUtenUtbetaling(personIdent: string, fomDato: string, tomDato: string) {
+  return fetch(`/api/drift/api-intern/maksimumUtenUtbetaling`, {
+    method: 'POST',
+    body: JSON.stringify({ personIdent, fomDato, tomDato }),
+  });
+}
+
 export function hentSakDriftsinfo(saksnummer: string) {
   return fetch(`/api/drift/sak/${saksnummer}/info`, {
     method: 'POST',
