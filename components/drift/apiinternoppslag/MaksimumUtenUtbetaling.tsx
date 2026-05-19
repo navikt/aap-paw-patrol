@@ -9,7 +9,6 @@ import {
 } from '@navikt/ds-react';
 import { formatISO } from 'date-fns';
 import { hentMaksimumUtenUtbetaling } from 'lib/clientApi';
-import { Periode } from 'lib/types/felles';
 import { useState } from 'react';
 
 interface MaksimumUtenUtbetalingResponse {
@@ -25,7 +24,7 @@ interface Vedtak {
   vedtaksdato: string;
   vedtaksTypeKode?: string;
   vedtaksTypeNavn?: string;
-  periode: Periode;
+  periode: { fraOgMedDato: string, tilOgMedDato: string };
   rettighetsType: string;
   beregningsgrunnlag: number;
   barnMedStonad: number;
@@ -117,9 +116,9 @@ export const MaksimumUtenUtbetaling = ({fom, tom, fnr}: Props) => {
               <Table.Body>
                 {vedtak.vedtak.map( (v) => {
                     return (
-                      <Table.Row key={`${v.saksnummer}${v.vedtakId}${v.periode.fom}`}>
-                        <Table.DataCell>{v.periode.fom}</Table.DataCell>
-                        <Table.DataCell>{v.periode.tom}</Table.DataCell>
+                      <Table.Row key={`${v.saksnummer}${v.vedtakId}${v.periode.fraOgMedDato}`}>
+                        <Table.DataCell>{v.periode.fraOgMedDato}</Table.DataCell>
+                        <Table.DataCell>{v.periode.tilOgMedDato}</Table.DataCell>
                         <Table.DataCell>{v.kildesystem}</Table.DataCell>
                         <Table.DataCell>{v.saksnummer}</Table.DataCell>
                         <Table.DataCell>{v.vedtakId}</Table.DataCell>
