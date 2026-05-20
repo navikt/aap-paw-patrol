@@ -167,13 +167,13 @@ export const BehandlingOversikt = ({
               </HGrid>
             </Tabs.Panel>
             <Tabs.Panel value={Tab.VILKÅRSRESULTAT}>
-              <Vilkårsresultat behandlingsreferanse={valgtBehandling.referanse} />
+              <Vilkårsresultat key={valgtBehandling.referanse} behandlingsreferanse={valgtBehandling.referanse} />
             </Tabs.Panel>
             <Tabs.Panel value={Tab.OPPGAVER}>
               <Oppgaver behandlingsreferanse={valgtBehandling.referanse} />
             </Tabs.Panel>
             <Tabs.Panel value={Tab.TILKJENT_YTELSE}>
-              <TilkjentYtelse behandlingsreferanse={valgtBehandling.referanse} />
+              <TilkjentYtelse key={valgtBehandling.referanse} behandlingsreferanse={valgtBehandling.referanse} />
             </Tabs.Panel>
           </Tabs>
         </Box>
