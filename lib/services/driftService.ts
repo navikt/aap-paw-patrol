@@ -10,7 +10,8 @@ export type AppNavn =
   | 'utbetal'
   | 'oppgave'
   | 'meldekort'
-  | 'api-intern';
+  | 'api-intern'
+  | 'innsending';
 
 export interface AppInfo {
   name: AppNavn;
@@ -45,6 +46,7 @@ export const appInfo: AppInfo[] = [
   { name: 'meldekort', displayName: 'Meldekort' },
   { name: 'utbetal', displayName: 'Utbetal' },
   { name: 'api-intern', displayName: 'api-intern' },
+  { name: 'innsending', displayName: 'Innsending' },
 ];
 
 interface BaseUrlAndScope {
@@ -120,7 +122,10 @@ export const getBaseUrlAndScopeForApp = async (appNavn: AppNavn): Promise<BaseUr
     return { baseUrl: process.env.UTBETAL_API_BASE_URL ?? '', scope: process.env.UTBETAL_API_SCOPE ?? '' };
   }
   if (appNavn === 'api-intern') {
-    return { baseUrl: process.env.API_INTERN_BASE_URL ?? '', scope: process.env.API_INTERN_SCOPE ?? ''};
+    return { baseUrl: process.env.API_INTERN_BASE_URL ?? '', scope: process.env.API_INTERN_SCOPE ?? '' };
+  }
+  if (appNavn === 'innsending') {
+    return { baseUrl: process.env.INNSENDING_API_BASE_URL ?? '', scope: process.env.INNSENDING_API_SCOPE ?? '' };
   }
   assertUnreachable(appNavn);
   throw new Error(`Ukjent app: ${appNavn}`);
@@ -225,4 +230,3 @@ export const hentJournalpostInfo = async (journalpostId: string) => {
   const url = `${baseUrl}/api/drift/journalpost/${journalpostId}/info`;
   return await fetchProxy<unknown>(url, scope, 'GET');
 };
-

@@ -67,5 +67,6 @@ spec:
         - application: statistikk
         - application: oppgave
         - application: utbetal
+        - application: innsending
         - application: meldekort-backend
         - application: api-intern
