@@ -97,12 +97,21 @@ export const BehandlingOversikt = ({
                 const erValgtBehandling = behandling.referanse === valgtBehandling?.referanse;
                 const opplysningerFlettetInnIDenneBehandlingen =
                   erYtelsesbehandling(behandling) &&
-                  behandlinger.some(
-                    (annenBehandling, j) =>
-                      i < j &&
-                      erYtelsesbehandling(annenBehandling) &&
-                      (!behandling.vedtatt || behandling.vedtatt > (annenBehandling.vedtatt ?? ''))
-                  );
+                  behandlinger.some((annenBehandling, j) => {
+                    if(i < j) {
+                      return false
+                    }
+                    if (!erYtelsesbehandling(annenBehandling)) {
+                      return false
+                    }
+                    if (!behandling.vedtatt && annenBehandling.vedtatt) {
+                      return true;
+                    }
+                    if (behandling.vedtatt && annenBehandling.vedtatt) {
+                      return annenBehandling.vedtatt < behandling.vedtatt
+                    }
+                    return false
+                  });
 
                 return (
                   <Table.Row
