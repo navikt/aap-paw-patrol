@@ -1,4 +1,16 @@
-import { BodyShort, Box, CopyButton, Heading, HGrid, HStack, Table, Tabs, Tag } from '@navikt/ds-react';
+import {
+  BodyShort,
+  Box,
+  CopyButton,
+  Heading,
+  HelpText,
+  HGrid,
+  HStack,
+  InlineMessage,
+  Table,
+  Tabs,
+  Tag,
+} from '@navikt/ds-react';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { capitalize, formaterBehandlingType } from 'lib/utils/formatting';
@@ -75,13 +87,22 @@ export const BehandlingOversikt = ({
                 <Table.HeaderCell>Vurderingsbehov</Table.HeaderCell>
                 <Table.HeaderCell>Årsak til opprettelse</Table.HeaderCell>
                 <Table.HeaderCell>Opprettet</Table.HeaderCell>
+                <Table.HeaderCell>Vedtatt</Table.HeaderCell>
                 <Table.HeaderCell style={{ width: '2rem' }} />
               </Table.Row>
             </Table.Header>
 
             <Table.Body>
-              {behandlinger.map((behandling) => {
+              {behandlinger.map((behandling, i) => {
                 const erValgtBehandling = behandling.referanse === valgtBehandling?.referanse;
+                const opplysningerFlettetInnIDenneBehandlingen =
+                  erYtelsesbehandling(behandling) &&
+                  behandlinger.some(
+                    (annenBehandling, j) =>
+                      i < j &&
+                      erYtelsesbehandling(annenBehandling) &&
+                      (!behandling.vedtatt || behandling.vedtatt > (annenBehandling.vedtatt ?? ''))
+                  );
 
                 return (
                   <Table.Row
@@ -114,6 +135,20 @@ export const BehandlingOversikt = ({
                     <Table.DataCell>
                       <BodyShort style={{ whiteSpace: 'nowrap' }}>
                         {formaterDatoMedTidspunktSekunderForFrontend(behandling.opprettet)}
+                      </BodyShort>
+                    </Table.DataCell>
+                    <Table.DataCell>
+                      <BodyShort style={{ whiteSpace: 'nowrap' }}>
+                        {behandling.vedtatt && formaterDatoMedTidspunktSekunderForFrontend(behandling.vedtatt)}
+                        {opplysningerFlettetInnIDenneBehandlingen && (
+                          <InlineMessage status="warning">
+                            Flettet{' '}
+                            <HelpText title="Flettet">
+                              Det finnes behandlinger opprettet etter denne vedtatt før denne, som betyr at opplysninger
+                              har blitt flettet inn i denne behandlingen.
+                            </HelpText>
+                          </InlineMessage>
+                        )}
                       </BodyShort>
                     </Table.DataCell>
                     <Table.DataCell>
@@ -181,3 +216,6 @@ export const BehandlingOversikt = ({
     </Box>
   );
 };
+
+const erYtelsesbehandling = (behandling: BehandlingDriftsinfo) =>
+  behandling.type === 'ae0034' || behandling.type === 'ae0028';

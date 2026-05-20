@@ -53,6 +53,7 @@ export interface BehandlingDriftsinfo {
   vurderingsbehov: string[];
   årsakTilOpprettelse?: string;
   opprettet: string;
+  vedtatt?: string | null;
   avklaringsbehov: ForenkletAvklaringsbehov[];
 }
 
