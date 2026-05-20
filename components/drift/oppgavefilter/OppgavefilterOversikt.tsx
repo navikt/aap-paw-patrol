@@ -5,18 +5,22 @@ import {
   Alert,
   BodyShort,
   Box,
+  Button,
   Heading,
   HStack,
   Label,
   Loader,
+  Modal,
   Table,
   Tag,
   VStack,
 } from '@navikt/ds-react';
+import { PencilIcon, PlusIcon } from '@navikt/aksel-icons';
 import { hentOppgavefiltre } from 'lib/clientApi';
 import { AvklaringsbehovKodeNavn, FilterDriftsinfoDTO, FilterOversiktDTO } from 'lib/types/oppgave';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
+import { OppgavefilterSkjema } from 'components/drift/oppgavefilter/OppgavefilterSkjema';
 
 const ALLE = 'ALLE';
 
@@ -58,7 +62,7 @@ const EnheterVisning = ({
   );
 };
 
-const FilterDetaljer = ({ filter }: { filter: FilterDriftsinfoDTO }) => (
+const FilterDetaljer = ({ filter, onRediger }: { filter: FilterDriftsinfoDTO; onRediger: () => void }) => (
   <Box padding="space-16" background="neutral-soft" borderRadius="8">
     <HStack gap="space-32" wrap align="start">
       <VStack gap="space-8" style={{ minWidth: '16rem' }}>
@@ -90,6 +94,9 @@ const FilterDetaljer = ({ filter }: { filter: FilterDriftsinfoDTO }) => (
             </BodyShort>
           </div>
         )}
+        <Button size="small" variant="secondary" icon={<PencilIcon />} onClick={onRediger}>
+          Rediger
+        </Button>
       </VStack>
 
       <VStack gap="space-8" style={{ minWidth: '14rem' }}>
@@ -111,32 +118,23 @@ const FilterDetaljer = ({ filter }: { filter: FilterDriftsinfoDTO }) => (
         <div>
           <Label size="small">Avklaringsbehov</Label>
           {filter.avklaringsbehov.length === 0 ? (
-            <BodyShort textColor="subtle" size="small">
-              Ingen
-            </BodyShort>
+            <BodyShort textColor="subtle" size="small">Ingen</BodyShort>
           ) : (
-            <HStack gap="space-4">
-              {filter.avklaringsbehov.map(({kode, navn}) => (
-                <Tag key={kode} size="small">
-                  {navn}({kode})
-                </Tag>
+            <HStack gap="space-4" wrap>
+              {filter.avklaringsbehov.map(({ kode, navn }) => (
+                <Tag key={kode} size="small">{navn} ({kode})</Tag>
               ))}
             </HStack>
           )}
         </div>
-
         <div>
           <Label size="small">Behandlingstyper</Label>
           {filter.behandlingstyper.length === 0 ? (
-            <BodyShort textColor="subtle" size="small">
-              Ingen
-            </BodyShort>
+            <BodyShort textColor="subtle" size="small">Ingen</BodyShort>
           ) : (
             <HStack gap="space-4" wrap>
               {filter.behandlingstyper.map((type) => (
-                <Tag key={type} variant="neutral" size="small">
-                  {type}
-                </Tag>
+                <Tag key={type} variant="neutral" size="small">{type}</Tag>
               ))}
             </HStack>
           )}
@@ -194,8 +192,11 @@ export const OppgavefilterOversikt = () => {
   const [filtre, setFiltre] = useState<FilterDriftsinfoDTO[]>([]);
   const [avklaringsbehovUtenFilter, setAvklaringsbehovUtenFilter] = useState<AvklaringsbehovKodeNavn[]>([]);
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [redigerFilter, setRedigerFilter] = useState<FilterDriftsinfoDTO | null>(null);
+  const [visNyttFilterModal, setVisNyttFilterModal] = useState(false);
 
-  useEffect(() => {
+  const lastFiltre = () => {
+    setIsLoading(true);
     hentOppgavefiltre()
       .then(async (res) => {
         if (res.ok) {
@@ -208,21 +209,40 @@ export const OppgavefilterOversikt = () => {
       })
       .catch((err) => setError(`Noe gikk galt: ${err}`))
       .finally(() => setIsLoading(false));
+  };
+
+  useEffect(() => {
+    lastFiltre();
   }, []);
+
+  // Alle unike avklaringsbehov kjent i systemet (for skjemaet)
+  const alleAvklaringsbehov: AvklaringsbehovKodeNavn[] = [
+    ...avklaringsbehovUtenFilter,
+    ...filtre.flatMap((f) => f.avklaringsbehov),
+  ].filter((b, idx, arr) => arr.findIndex((x) => x.kode === b.kode) === idx)
+   .sort((a, b) => a.kode.localeCompare(b.kode));
 
   if (isLoading) return <Loader />;
 
   return (
     <VStack gap="space-16">
       {error && (
-        <Alert variant="error" size="small">
-          {error}
-        </Alert>
+        <Alert variant="error" size="small">{error}</Alert>
       )}
 
       <AvklaringsbehovUtenFilterBanner behov={avklaringsbehovUtenFilter} />
 
-      <BodyShort textColor="subtle">{filtre.length} filter(e) funnet</BodyShort>
+      <HStack justify="space-between" align="center">
+        <BodyShort textColor="subtle">{filtre.length} filter(e) funnet</BodyShort>
+        <Button
+          size="small"
+          variant="primary"
+          icon={<PlusIcon />}
+          onClick={() => setVisNyttFilterModal(true)}
+        >
+          Nytt filter
+        </Button>
+      </HStack>
 
       <Table size="small">
         <Table.Header>
@@ -238,17 +258,20 @@ export const OppgavefilterOversikt = () => {
         <Table.Body>
           {filtre.map((filter) => {
             const erExpanded = expandedId === filter.id;
-            const inkAlleTag =
-              filter.inkluderteEnheter.length === 1 && filter.inkluderteEnheter[0] === ALLE;
-            const ekskAlleTag =
-              filter.ekskluderteEnheter.length === 1 && filter.ekskluderteEnheter[0] === ALLE;
+            const inkAlleTag = filter.inkluderteEnheter.length === 1 && filter.inkluderteEnheter[0] === ALLE;
+            const ekskAlleTag = filter.ekskluderteEnheter.length === 1 && filter.ekskluderteEnheter[0] === ALLE;
 
             return (
               <Table.ExpandableRow
                 key={filter.id}
                 open={erExpanded}
                 onOpenChange={(open) => setExpandedId(open ? filter.id : null)}
-                content={<FilterDetaljer filter={filter} />}
+                content={
+                  <FilterDetaljer
+                    filter={filter}
+                    onRediger={() => setRedigerFilter(filter)}
+                  />
+                }
                 togglePlacement="left"
               >
                 <Table.DataCell>{filter.id}</Table.DataCell>
@@ -287,6 +310,47 @@ export const OppgavefilterOversikt = () => {
           })}
         </Table.Body>
       </Table>
+
+      {/* Nytt filter-modal */}
+      <Modal
+        width="medium"
+        open={visNyttFilterModal}
+        onClose={() => setVisNyttFilterModal(false)}
+        header={{ heading: 'Nytt oppgavefilter' }}
+      >
+        <Modal.Body>
+          <OppgavefilterSkjema
+            alleAvklaringsbehov={alleAvklaringsbehov}
+            onLagret={() => {
+              setVisNyttFilterModal(false);
+              lastFiltre();
+            }}
+            onAvbryt={() => setVisNyttFilterModal(false)}
+          />
+        </Modal.Body>
+      </Modal>
+
+      {/* Rediger filter-modal */}
+      <Modal
+        open={redigerFilter !== null}
+        onClose={() => setRedigerFilter(null)}
+        header={{ heading: `Rediger: ${redigerFilter?.navn ?? ''}` }}
+      >
+        <Modal.Body>
+          {redigerFilter && (
+            <OppgavefilterSkjema
+              eksisterendeFilter={redigerFilter}
+              alleAvklaringsbehov={alleAvklaringsbehov}
+              onLagret={() => {
+                setRedigerFilter(null);
+                setExpandedId(null);
+                lastFiltre();
+              }}
+              onAvbryt={() => setRedigerFilter(null)}
+            />
+          )}
+        </Modal.Body>
+      </Modal>
     </VStack>
   );
 };

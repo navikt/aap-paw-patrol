@@ -122,3 +122,10 @@ export function hentOppgavefiltre() {
   return fetch(`/api/drift/oppgave/filter`, { method: 'GET' });
 }
 
+export function lagreOppgavefilter(request: object) {
+  return fetch(`/api/drift/oppgave/filter`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(request),
+  });
+}

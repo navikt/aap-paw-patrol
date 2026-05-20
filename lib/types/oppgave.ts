@@ -47,3 +47,34 @@ export enum OppgaveStatus {
   OPPRETTET = 'OPPRETTET',
   AVSLUTTET = 'AVSLUTTET',
 }
+
+export enum Filtermodus {
+  INKLUDERT = 'INKLUDERT',
+  EKSKLUDERT = 'EKSKLUDERT',
+}
+
+export const BEHANDLINGSTYPER = [
+  'FØRSTEGANGSBEHANDLING',
+  'REVURDERING',
+  'KLAGE',
+  'TILBAKEKREVING',
+  'DOKUMENT_HÅNDTERING',
+  'JOURNALFØRING',
+  'OPPFØLGINGSBEHANDLING',
+  'SVAR_FRA_ANDREINSTANS',
+] as const;
+
+export interface EnhetDriftRequest {
+  enhet: string;
+  filtermodus: Filtermodus;
+}
+
+export interface FilterDriftRequest {
+  id?: number;
+  navn: string;
+  beskrivelse: string;
+  type: FilterType;
+  avklaringsbehovKoder: string[];
+  behandlingstyper: string[];
+  enheter: EnhetDriftRequest[];
+}
