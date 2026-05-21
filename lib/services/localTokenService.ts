@@ -5,6 +5,7 @@ export async function hentLocalToken(scope: string) {
     const params = new URLSearchParams({
       aud: scope,
       NAVident: 'Z123456',
+      groups: 'drift-rolle'
     });
 
     const url = new URL('https://fakedings.intern.dev.nav.no/fake/aad?' + params.toString());

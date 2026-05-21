@@ -36,8 +36,8 @@ function mapTilEnheter(
   ekskluderte: string[]
 ): EnhetDriftRequest[] {
   return [
-    ...inkluderte.map((enhet) => ({ enhet, filtermodus: Filtermodus.INKLUDERT })),
-    ...ekskluderte.map((enhet) => ({ enhet, filtermodus: Filtermodus.EKSKLUDERT })),
+    ...inkluderte.map((enhet) => ({ enhet, filtermodus: Filtermodus.INKLUDER })),
+    ...ekskluderte.map((enhet) => ({ enhet, filtermodus: Filtermodus.EKSKLUDER })),
   ];
 }
 

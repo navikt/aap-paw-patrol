@@ -49,8 +49,8 @@ export enum OppgaveStatus {
 }
 
 export enum Filtermodus {
-  INKLUDERT = 'INKLUDERT',
-  EKSKLUDERT = 'EKSKLUDERT',
+  INKLUDER = 'INKLUDER',
+  EKSKLUDER = 'EKSKLUDER',
 }
 
 export const BEHANDLINGSTYPER = [
