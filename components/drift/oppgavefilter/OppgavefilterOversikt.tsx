@@ -15,8 +15,8 @@ import {
   Tag,
   VStack,
 } from '@navikt/ds-react';
-import { PencilIcon, PlusIcon } from '@navikt/aksel-icons';
-import { hentOppgavefiltre } from 'lib/clientApi';
+import { PencilIcon, PlusIcon, TrashIcon } from '@navikt/aksel-icons';
+import { hentOppgavefiltre, slettOppgavefilter } from 'lib/clientApi';
 import { AvklaringsbehovKodeNavn, FilterDriftsinfoDTO, FilterOversiktDTO } from 'lib/types/oppgave';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
@@ -62,7 +62,17 @@ const EnheterVisning = ({
   );
 };
 
-const FilterDetaljer = ({ filter, onRediger }: { filter: FilterDriftsinfoDTO; onRediger: () => void }) => (
+const FilterDetaljer = ({
+  filter,
+  navIdent,
+  onRediger,
+  onSlett,
+}: {
+  filter: FilterDriftsinfoDTO;
+  navIdent: string;
+  onRediger: () => void;
+  onSlett: () => void;
+}) => (
   <Box padding="space-16" background="neutral-soft" borderRadius="8">
     <HStack gap="space-32" wrap align="start">
       <VStack gap="space-8" style={{ minWidth: '16rem' }}>
@@ -94,9 +104,16 @@ const FilterDetaljer = ({ filter, onRediger }: { filter: FilterDriftsinfoDTO; on
             </BodyShort>
           </div>
         )}
-        <Button size="small" variant="secondary" icon={<PencilIcon />} onClick={onRediger}>
-          Rediger
-        </Button>
+        <HStack gap="space-4">
+          <Button size="small" variant="secondary" icon={<PencilIcon />} onClick={onRediger}>
+            Rediger
+          </Button>
+          {filter.opprettetAv.toLowerCase() === navIdent.toLowerCase() && (
+            <Button size="small" variant="danger" icon={<TrashIcon />} onClick={onSlett}>
+              Slett
+            </Button>
+          )}
+        </HStack>
       </VStack>
 
       <VStack gap="space-8" style={{ minWidth: '14rem' }}>
@@ -186,7 +203,7 @@ const AvklaringsbehovUtenFilterBanner = ({ behov }: { behov: AvklaringsbehovKode
   );
 };
 
-export const OppgavefilterOversikt = () => {
+export const OppgavefilterOversikt = ({ navIdent }: { navIdent: string }) => {
   const [error, setError] = useState<string>();
   const [isLoading, setIsLoading] = useState(true);
   const [filtre, setFiltre] = useState<FilterDriftsinfoDTO[]>([]);
@@ -194,6 +211,8 @@ export const OppgavefilterOversikt = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [redigerFilter, setRedigerFilter] = useState<FilterDriftsinfoDTO | null>(null);
   const [visNyttFilterModal, setVisNyttFilterModal] = useState(false);
+  const [slettFilter, setSlettFilter] = useState<FilterDriftsinfoDTO | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const lastFiltre = () => {
     setIsLoading(true);
@@ -215,12 +234,33 @@ export const OppgavefilterOversikt = () => {
     lastFiltre();
   }, []);
 
-  // Alle unike avklaringsbehov kjent i systemet (for skjemaet)
+  const bekreftSlett = async () => {
+    if (!slettFilter) return;
+    setIsDeleting(true);
+    try {
+      const res = await slettOppgavefilter(slettFilter.id);
+      if (res.ok || res.status === 204) {
+        setSlettFilter(null);
+        setExpandedId(null);
+        lastFiltre();
+      } else {
+        setError(`Feil ved sletting: ${await res.text()}`);
+        setSlettFilter(null);
+      }
+    } catch (err) {
+      setError(`Noe gikk galt: ${err}`);
+      setSlettFilter(null);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   const alleAvklaringsbehov: AvklaringsbehovKodeNavn[] = [
     ...avklaringsbehovUtenFilter,
     ...filtre.flatMap((f) => f.avklaringsbehov),
-  ].filter((b, idx, arr) => arr.findIndex((x) => x.kode === b.kode) === idx)
-   .sort((a, b) => a.kode.localeCompare(b.kode));
+  ]
+    .filter((b, idx, arr) => arr.findIndex((x) => x.kode === b.kode) === idx)
+    .sort((a, b) => a.kode.localeCompare(b.kode));
 
   if (isLoading) return <Loader />;
 
@@ -234,12 +274,7 @@ export const OppgavefilterOversikt = () => {
 
       <HStack justify="space-between" align="center">
         <BodyShort textColor="subtle">{filtre.length} filter(e) funnet</BodyShort>
-        <Button
-          size="small"
-          variant="primary"
-          icon={<PlusIcon />}
-          onClick={() => setVisNyttFilterModal(true)}
-        >
+        <Button size="small" variant="primary" icon={<PlusIcon />} onClick={() => setVisNyttFilterModal(true)}>
           Nytt filter
         </Button>
       </HStack>
@@ -269,7 +304,9 @@ export const OppgavefilterOversikt = () => {
                 content={
                   <FilterDetaljer
                     filter={filter}
+                    navIdent={navIdent}
                     onRediger={() => setRedigerFilter(filter)}
+                    onSlett={() => setSlettFilter(filter)}
                   />
                 }
                 togglePlacement="left"
@@ -313,18 +350,15 @@ export const OppgavefilterOversikt = () => {
 
       {/* Nytt filter-modal */}
       <Modal
-        width="medium"
         open={visNyttFilterModal}
         onClose={() => setVisNyttFilterModal(false)}
         header={{ heading: 'Nytt oppgavefilter' }}
+        width = "medium"
       >
         <Modal.Body>
           <OppgavefilterSkjema
             alleAvklaringsbehov={alleAvklaringsbehov}
-            onLagret={() => {
-              setVisNyttFilterModal(false);
-              lastFiltre();
-            }}
+            onLagret={() => { setVisNyttFilterModal(false); lastFiltre(); }}
             onAvbryt={() => setVisNyttFilterModal(false)}
           />
         </Modal.Body>
@@ -335,21 +369,39 @@ export const OppgavefilterOversikt = () => {
         open={redigerFilter !== null}
         onClose={() => setRedigerFilter(null)}
         header={{ heading: `Rediger: ${redigerFilter?.navn ?? ''}` }}
+        width="medium"
       >
         <Modal.Body>
           {redigerFilter && (
             <OppgavefilterSkjema
               eksisterendeFilter={redigerFilter}
               alleAvklaringsbehov={alleAvklaringsbehov}
-              onLagret={() => {
-                setRedigerFilter(null);
-                setExpandedId(null);
-                lastFiltre();
-              }}
+              onLagret={() => { setRedigerFilter(null); setExpandedId(null); lastFiltre(); }}
               onAvbryt={() => setRedigerFilter(null)}
             />
           )}
         </Modal.Body>
+      </Modal>
+
+      {/* Slett-bekreftelsesmodal */}
+      <Modal
+        open={slettFilter !== null}
+        onClose={() => setSlettFilter(null)}
+        header={{ heading: `Slett filter: ${slettFilter?.navn ?? ''}` }}
+      >
+        <Modal.Body>
+          <BodyShort spacing>
+            Er du sikker på at du vil slette filteret <strong>{slettFilter?.navn}</strong>?
+          </BodyShort>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setSlettFilter(null)}>
+            Avbryt
+          </Button>
+          <Button variant="danger" onClick={bekreftSlett} loading={isDeleting}>
+            Slett
+          </Button>
+        </Modal.Footer>
       </Modal>
     </VStack>
   );

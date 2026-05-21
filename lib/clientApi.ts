@@ -129,3 +129,11 @@ export function lagreOppgavefilter(request: object) {
     body: JSON.stringify(request),
   });
 }
+
+export function slettOppgavefilter(id: number) {
+  return fetch(`/api/drift/oppgave/filter/slett`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id }),
+  });
+}
