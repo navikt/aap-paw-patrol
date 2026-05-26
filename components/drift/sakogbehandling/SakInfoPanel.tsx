@@ -1,6 +1,7 @@
-import { BodyShort, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, Label, List, VStack } from '@navikt/ds-react';
 import { SakDriftsinfoDTO } from 'lib/types/avklaringsbehov';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
+import Link from 'next/link';
 
 export const SakInfoPanel = ({ sak }: { sak: SakDriftsinfoDTO }) => (
   <VStack gap="space-32" marginBlock="space-0 space-32">
@@ -19,6 +20,22 @@ export const SakInfoPanel = ({ sak }: { sak: SakDriftsinfoDTO }) => (
       <BodyShort>
         {sak.behandlinger.length} ({sak.behandlinger.filter((b) => b.årsakTilOpprettelse === 'MELDEKORT').length}{' '}
         meldekort)
+      </BodyShort>
+    </div>
+    <div>
+      <Label>Andre saker på bruker</Label>
+      <BodyShort>
+        {!sak.andreSakerPåBruker?.length ? (
+          'Ingen'
+        ) : (
+          <List>
+            {sak.andreSakerPåBruker.map((saksnummer) => (
+              <List.Item key={`rel-sak-${saksnummer}`}>
+                <Link href={`/drift/postmottak/${saksnummer}`}>{saksnummer}</Link>
+              </List.Item>
+            ))}
+          </List>
+        )}
       </BodyShort>
     </div>
   </VStack>

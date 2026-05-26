@@ -37,6 +37,7 @@ export interface SakDriftsinfoDTO {
   rettighetsperiode: Periode;
   opprettetTidspunkt: string;
   behandlinger: BehandlingDriftsinfo[];
+  andreSakerPåBruker: string[];
 }
 
 export enum SakStatus {
