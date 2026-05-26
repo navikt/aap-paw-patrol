@@ -31,7 +31,7 @@ export const SakInfoPanel = ({ sak }: { sak: SakDriftsinfoDTO }) => (
           <List>
             {sak.andreSakerPåBruker.map((saksnummer) => (
               <List.Item key={`rel-sak-${saksnummer}`}>
-                <Link href={`/drift/postmottak/${saksnummer}`}>{saksnummer}</Link>
+                <Link href={`/drift/sak/${saksnummer}`}>{saksnummer}</Link>
               </List.Item>
             ))}
           </List>
