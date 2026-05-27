@@ -11,6 +11,7 @@ import {
   Label,
   Loader,
   Modal,
+  Search,
   Table,
   Tag,
   VStack,
@@ -86,9 +87,7 @@ const FilterDetaljer = ({
         </div>
         <div>
           <Label size="small">Opprettet</Label>
-          <BodyShort size="small">
-            {formaterDatoMedTidspunktSekunderForFrontend(filter.opprettetTidspunkt)}
-          </BodyShort>
+          <BodyShort size="small">{formaterDatoMedTidspunktSekunderForFrontend(filter.opprettetTidspunkt)}</BodyShort>
         </div>
         {filter.endretAv && (
           <div>
@@ -99,9 +98,7 @@ const FilterDetaljer = ({
         {filter.endretTidspunkt && (
           <div>
             <Label size="small">Sist endret</Label>
-            <BodyShort size="small">
-              {formaterDatoMedTidspunktSekunderForFrontend(filter.endretTidspunkt)}
-            </BodyShort>
+            <BodyShort size="small">{formaterDatoMedTidspunktSekunderForFrontend(filter.endretTidspunkt)}</BodyShort>
           </div>
         )}
         <HStack gap="space-4">
@@ -135,11 +132,15 @@ const FilterDetaljer = ({
         <div>
           <Label size="small">Avklaringsbehov</Label>
           {filter.avklaringsbehov.length === 0 ? (
-            <BodyShort textColor="subtle" size="small">Ingen</BodyShort>
+            <BodyShort textColor="subtle" size="small">
+              Alle
+            </BodyShort>
           ) : (
             <HStack gap="space-4" wrap>
               {filter.avklaringsbehov.map(({ kode, navn }) => (
-                <Tag key={kode} size="small">{navn} ({kode})</Tag>
+                <Tag key={kode} size="small">
+                  {navn} ({kode})
+                </Tag>
               ))}
             </HStack>
           )}
@@ -147,11 +148,15 @@ const FilterDetaljer = ({
         <div>
           <Label size="small">Behandlingstyper</Label>
           {filter.behandlingstyper.length === 0 ? (
-            <BodyShort textColor="subtle" size="small">Ingen</BodyShort>
+            <BodyShort textColor="subtle" size="small">
+              Ingen
+            </BodyShort>
           ) : (
             <HStack gap="space-4" wrap>
               {filter.behandlingstyper.map((type) => (
-                <Tag key={type} variant="neutral" size="small">{type}</Tag>
+                <Tag key={type} variant="neutral" size="small">
+                  {type}
+                </Tag>
               ))}
             </HStack>
           )}
@@ -167,15 +172,13 @@ const AvklaringsbehovUtenFilterBanner = ({ behov }: { behov: AvklaringsbehovKode
   return (
     <Alert variant="warning">
       <VStack gap="space-8">
-        <Heading size="small">
-          {behov.length} avklaringsbehov mangler oppgavekø
-        </Heading>
-        <BodyShort size="small">
-          Disse avklaringsbehovene finnes ikke i noen oppgavekø.
-        </BodyShort>
+        <Heading size="small">{behov.length} avklaringsbehov mangler oppgavekø</Heading>
+        <BodyShort size="small">Disse avklaringsbehovene finnes ikke i noen oppgavekø.</BodyShort>
         <details>
           <summary style={{ cursor: 'pointer', marginBottom: '0.5rem' }}>
-            <BodyShort as="span" size="small" weight="semibold">Vis avklaringsbehov</BodyShort>
+            <BodyShort as="span" size="small" weight="semibold">
+              Vis avklaringsbehov
+            </BodyShort>
           </summary>
           <Table size="small">
             <Table.Header>
@@ -213,6 +216,7 @@ export const OppgavefilterOversikt = ({ navIdent }: { navIdent: string }) => {
   const [visNyttFilterModal, setVisNyttFilterModal] = useState(false);
   const [slettFilter, setSlettFilter] = useState<FilterDriftsinfoDTO | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [søkeTekst, setSøkeTekst] = useState('');
 
   const lastFiltre = () => {
     setIsLoading(true);
@@ -262,18 +266,35 @@ export const OppgavefilterOversikt = ({ navIdent }: { navIdent: string }) => {
     .filter((b, idx, arr) => arr.findIndex((x) => x.kode === b.kode) === idx)
     .sort((a, b) => a.kode.localeCompare(b.kode));
 
+  const visFiltre = filtre
+    .filter((f) => f.navn.toLowerCase().includes(søkeTekst.toLowerCase()))
+    .sort((a, b) => a.navn.localeCompare(b.navn, 'nb'));
+
   if (isLoading) return <Loader />;
 
   return (
     <VStack gap="space-16">
       {error && (
-        <Alert variant="error" size="small">{error}</Alert>
+        <Alert variant="error" size="small">
+          {error}
+        </Alert>
       )}
 
       <AvklaringsbehovUtenFilterBanner behov={avklaringsbehovUtenFilter} />
 
+      <Search
+        label="Søk på filternavn"
+        size="small"
+        variant="simple"
+        value={søkeTekst}
+        onChange={setSøkeTekst}
+        onClear={() => setSøkeTekst('')}
+      />
+
       <HStack justify="space-between" align="center">
-        <BodyShort textColor="subtle">{filtre.length} filter(e) funnet</BodyShort>
+        <BodyShort textColor="subtle">
+          {søkeTekst ? `${visFiltre.length} av ${filtre.length} filter(e) funnet` : `${filtre.length} filter(e) funnet`}
+        </BodyShort>
         <Button size="small" variant="primary" icon={<PlusIcon />} onClick={() => setVisNyttFilterModal(true)}>
           Nytt filter
         </Button>
@@ -288,10 +309,11 @@ export const OppgavefilterOversikt = ({ navIdent }: { navIdent: string }) => {
             <Table.HeaderCell>Type</Table.HeaderCell>
             <Table.HeaderCell>Inkluderte enheter</Table.HeaderCell>
             <Table.HeaderCell>Ekskluderte enheter</Table.HeaderCell>
+            <Table.HeaderCell align="right">Antall behov</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {filtre.map((filter) => {
+          {visFiltre.map((filter) => {
             const erExpanded = expandedId === filter.id;
             const inkAlleTag = filter.inkluderteEnheter.length === 1 && filter.inkluderteEnheter[0] === ALLE;
             const ekskAlleTag = filter.ekskluderteEnheter.length === 1 && filter.ekskluderteEnheter[0] === ALLE;
@@ -318,29 +340,44 @@ export const OppgavefilterOversikt = ({ navIdent }: { navIdent: string }) => {
                 </Table.DataCell>
                 <Table.DataCell>
                   {inkAlleTag ? (
-                    <Tag variant="success" size="small">Alle enheter</Tag>
+                    <Tag variant="success" size="small">
+                      Alle enheter
+                    </Tag>
                   ) : filter.inkluderteEnheter.length === 0 ? (
-                    <BodyShort textColor="subtle" size="small">Ingen</BodyShort>
+                    <BodyShort textColor="subtle" size="small">
+                      Ingen
+                    </BodyShort>
                   ) : (
                     <HStack gap="space-4" wrap>
                       {filter.inkluderteEnheter.map((e) => (
-                        <Tag key={e} variant="info" size="small">{e}</Tag>
+                        <Tag key={e} variant="info" size="small">
+                          {e}
+                        </Tag>
                       ))}
                     </HStack>
                   )}
                 </Table.DataCell>
                 <Table.DataCell>
                   {ekskAlleTag ? (
-                    <Tag variant="error" size="small">Alle enheter</Tag>
+                    <Tag variant="error" size="small">
+                      Alle enheter
+                    </Tag>
                   ) : filter.ekskluderteEnheter.length === 0 ? (
-                    <BodyShort textColor="subtle" size="small">Ingen</BodyShort>
+                    <BodyShort textColor="subtle" size="small">
+                      Ingen
+                    </BodyShort>
                   ) : (
                     <HStack gap="space-4" wrap>
                       {filter.ekskluderteEnheter.map((e) => (
-                        <Tag key={e} variant="warning" size="small">{e}</Tag>
+                        <Tag key={e} variant="warning" size="small">
+                          {e}
+                        </Tag>
                       ))}
                     </HStack>
                   )}
+                </Table.DataCell>
+                <Table.DataCell align="right">
+                  {filter.avklaringsbehov.length === 0 ? 'Alle' : filter.avklaringsbehov.length}
                 </Table.DataCell>
               </Table.ExpandableRow>
             );
@@ -353,12 +390,15 @@ export const OppgavefilterOversikt = ({ navIdent }: { navIdent: string }) => {
         open={visNyttFilterModal}
         onClose={() => setVisNyttFilterModal(false)}
         header={{ heading: 'Nytt oppgavefilter' }}
-        width = "medium"
+        width="medium"
       >
         <Modal.Body>
           <OppgavefilterSkjema
             alleAvklaringsbehov={alleAvklaringsbehov}
-            onLagret={() => { setVisNyttFilterModal(false); lastFiltre(); }}
+            onLagret={() => {
+              setVisNyttFilterModal(false);
+              lastFiltre();
+            }}
             onAvbryt={() => setVisNyttFilterModal(false)}
           />
         </Modal.Body>
@@ -376,7 +416,11 @@ export const OppgavefilterOversikt = ({ navIdent }: { navIdent: string }) => {
             <OppgavefilterSkjema
               eksisterendeFilter={redigerFilter}
               alleAvklaringsbehov={alleAvklaringsbehov}
-              onLagret={() => { setRedigerFilter(null); setExpandedId(null); lastFiltre(); }}
+              onLagret={() => {
+                setRedigerFilter(null);
+                setExpandedId(null);
+                lastFiltre();
+              }}
               onAvbryt={() => setRedigerFilter(null)}
             />
           )}
