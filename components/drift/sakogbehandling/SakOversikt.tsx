@@ -23,16 +23,10 @@ export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
   const [tab, setTab] = useState<Tab>(Tab.BEHANDLINGER);
 
   useEffect(() => {
-    if (saksnummer && /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d]{7}$/.test(saksnummer)) {
-      setError(undefined);
-      hentSak();
-    } else if (saksnummer) {
-      setError('Saksnummer skal bestå av 7 tegn og inneholde både bokstaver og tall.');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    hentSak(saksnummer);
   }, [saksnummer]);
 
-  const hentSak = async () => {
+  const hentSak = async (saksnummer: string) => {
     setSak(undefined);
     setError(undefined);
 

@@ -23,7 +23,13 @@ const SakPage = async ({ params }: { params: Promise<{ saksnummer: string }> }) 
       <SakNavbar saksnummer={saksnummer} />
 
       {roller.includes(Roller.DRIFT) ? (
-        <SakOversikt saksnummer={saksnummer} />
+        erGyldigSaksnummer(saksnummer) ? (
+          <SakOversikt saksnummer={saksnummer} />
+        ) : (
+          <Alert variant="error" size="small">
+            Saksnummer skal bestå av 7 tegn og inneholde både bokstaver og tall.
+          </Alert>
+        )
       ) : (
         <Page>
           <PageBlock width="2xl">
@@ -36,6 +42,16 @@ const SakPage = async ({ params }: { params: Promise<{ saksnummer: string }> }) 
       )}
     </>
   );
+};
+
+const erGyldigSaksnummer = (saksnummer: string) => {
+  if (!saksnummer) {
+    return false;
+  } else
+    return !!(
+      saksnummer &&
+      (process.env.NAIS_APP_NAME !== 'prod-gcp' || /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z\d]{7}$/.test(saksnummer))
+    );
 };
 
 export default SakPage;
