@@ -72,6 +72,12 @@ export function hentMottatteDokumenter(saksnummer: string) {
   });
 }
 
+export function hentMeldekortDriftsinfo(saksnummer: string) {
+  return fetch(`/api/drift/sak/${saksnummer}/meldekort`, {
+    method: 'POST',
+  });
+}
+
 export function hentVilkår(behandlingsreferanse: string) {
   return fetch(`/api/drift/behandling/${behandlingsreferanse}/vilkar`, {
     method: 'POST',
