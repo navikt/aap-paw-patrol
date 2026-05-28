@@ -2,6 +2,15 @@ name: Bygg og deploy
 
 on:
   workflow_dispatch:
+    inputs:
+      cluster:
+        description: Cluster
+        required: true
+        default: dev-gcp
+        type: choice
+        options:
+          - dev-gcp
+          - prod-gcp
   push:
     branches:
       - main
@@ -23,6 +32,7 @@ jobs:
       cdn: true
 
   buildProd:
+    if: ${{ github.ref == 'refs/heads/main' || github.event.inputs.cluster == 'prod-gcp' }}
     uses: navikt/aap-workflows/.github/workflows/frontend-next-build.yml@main
     permissions:
       contents: read
@@ -49,7 +59,7 @@ jobs:
       vars: .nais/dev.yaml
 
   deployProd:
-    needs: [buildProd, deployDev]
+    needs: [ buildProd, deployDev ]
     uses: navikt/aap-workflows/.github/workflows/deploy.yml@main
     permissions:
       contents: read
