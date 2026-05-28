@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import { nb } from 'date-fns/locale';
+import { Periode } from 'lib/types/felles';
 
 export const DATO_FORMATER = {
   ddMMyyyy: 'dd.MM.yyyy',
@@ -14,6 +15,10 @@ export function formaterDatoMedTidspunktSekunderForFrontend(dato: Date | string)
 
 export function formaterDatoForFrontend(dato: Date | string): string {
   return format(dato, DATO_FORMATER.ddMMyyyy, { locale: nb });
+}
+
+export function formaterPeriodeV2(periode: Periode): string {
+  return formaterPeriode(periode.fom, periode.tom);
 }
 
 export function formaterPeriode(dato1?: string | null, dato2?: string | null): string {
