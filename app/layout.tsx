@@ -29,9 +29,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <InternalHeader>
           <InternalHeaderTitle href="/">Paw Patrol 🐶</InternalHeaderTitle>
 
-          {roller.includes(Roller.DRIFT) && <Søkefelt />}
-
           <Spacer />
+
+          {roller.includes(Roller.DRIFT) && <Søkefelt />}
 
           <InnloggetBrukerDropdown brukerInformasjon={brukerInformasjon} roller={roller} />
         </InternalHeader>
