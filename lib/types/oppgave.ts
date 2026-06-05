@@ -4,9 +4,25 @@ export enum FilterType {
   KVALITETSSIKRING = 'KVALITETSSIKRING',
 }
 
+export enum Filtermodus {
+  INKLUDER = 'INKLUDER',
+  EKSKLUDER = 'EKSKLUDER',
+}
+
+export enum MarkeringForBehandling {
+  HASTER = 'HASTER',
+  KREVER_SPESIALKOMPETANSE = 'KREVER_SPESIALKOMPETANSE',
+  AVSLAG_11_5 = 'AVSLAG_11_5',
+}
+
 export interface AvklaringsbehovKodeNavn {
   kode: string;
   navn: string;
+}
+
+export interface MarkeringDriftRequest {
+  type: MarkeringForBehandling;
+  filtermodus: Filtermodus;
 }
 
 export interface FilterDriftsinfoDTO {
@@ -18,6 +34,8 @@ export interface FilterDriftsinfoDTO {
   behandlingstyper: string[];
   inkluderteEnheter: string[];
   ekskluderteEnheter: string[];
+  inkluderteMarkeringer: MarkeringForBehandling[];
+  ekskluderteMarkeringer: MarkeringForBehandling[];
   opprettetAv: string;
   opprettetTidspunkt: string;
   endretAv?: string | null;
@@ -48,11 +66,6 @@ export enum OppgaveStatus {
   AVSLUTTET = 'AVSLUTTET',
 }
 
-export enum Filtermodus {
-  INKLUDER = 'INKLUDER',
-  EKSKLUDER = 'EKSKLUDER',
-}
-
 export const BEHANDLINGSTYPER = [
   'FØRSTEGANGSBEHANDLING',
   'REVURDERING',
@@ -79,4 +92,5 @@ export interface FilterDriftRequest {
   avklaringsbehovKoder: string[];
   behandlingstyper: string[];
   enheter: EnhetDriftRequest[];
+  markeringer: MarkeringDriftRequest[];
 }

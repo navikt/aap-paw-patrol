@@ -22,6 +22,8 @@ import {
   FilterDriftsinfoDTO,
   Filtermodus,
   FilterType,
+  MarkeringDriftRequest,
+  MarkeringForBehandling,
 } from 'lib/types/oppgave';
 
 interface Props {
@@ -40,6 +42,24 @@ function mapTilEnheter(
     ...ekskluderte.map((enhet) => ({ enhet, filtermodus: Filtermodus.EKSKLUDER })),
   ];
 }
+
+function mapTilMarkeringer(
+  inkluderte: MarkeringForBehandling[],
+  ekskluderte: MarkeringForBehandling[]
+): MarkeringDriftRequest[] {
+  return [
+    ...inkluderte.map((type) => ({ type, filtermodus: Filtermodus.INKLUDER })),
+    ...ekskluderte.map((type) => ({ type, filtermodus: Filtermodus.EKSKLUDER })),
+  ];
+}
+
+const MARKERINGER = Object.values(MarkeringForBehandling);
+
+const markeringLabel: Record<MarkeringForBehandling, string> = {
+  [MarkeringForBehandling.HASTER]: 'Haster',
+  [MarkeringForBehandling.KREVER_SPESIALKOMPETANSE]: 'Krever spesialkompetanse',
+  [MarkeringForBehandling.AVSLAG_11_5]: 'Avslag § 11-5',
+};
 
 export const OppgavefilterSkjema = ({
   eksisterendeFilter,
@@ -61,6 +81,12 @@ export const OppgavefilterSkjema = ({
   );
   const [ekskluderteEnheter, setEkskluderteEnheter] = useState<string[]>(
     eksisterendeFilter?.ekskluderteEnheter ?? []
+  );
+  const [inkluderteMarkeringer, setInkluderteMarkeringer] = useState<MarkeringForBehandling[]>(
+    eksisterendeFilter?.inkluderteMarkeringer ?? []
+  );
+  const [ekskluderteMarkeringer, setEkskluderteMarkeringer] = useState<MarkeringForBehandling[]>(
+    eksisterendeFilter?.ekskluderteMarkeringer ?? []
   );
   const [nyInkludertEnhet, setNyInkludertEnhet] = useState('');
   const [nyEkskludertEnhet, setNyEkskludertEnhet] = useState('');
@@ -102,6 +128,7 @@ export const OppgavefilterSkjema = ({
       avklaringsbehovKoder: valgteAvklaringsbehov,
       behandlingstyper: valgteBehandlingstyper,
       enheter: mapTilEnheter(inkluderteEnheter, ekskluderteEnheter),
+      markeringer: mapTilMarkeringer(inkluderteMarkeringer, ekskluderteMarkeringer),
     };
     try {
       const res = await lagreOppgavefilter(request);
@@ -278,6 +305,41 @@ export const OppgavefilterSkjema = ({
           </Button>
         </HStack>
       </VStack>
+
+      {/* Markeringer */}
+      <CheckboxGroup
+        legend="Inkluderte markeringer"
+        size="small"
+        value={inkluderteMarkeringer}
+        onChange={(vals) => {
+          const valgt = vals as MarkeringForBehandling[];
+          setInkluderteMarkeringer(valgt);
+          setEkskluderteMarkeringer((prev) => prev.filter((m) => !valgt.includes(m)));
+        }}
+      >
+        {MARKERINGER.map((m) => (
+          <Checkbox key={m} value={m} disabled={ekskluderteMarkeringer.includes(m)}>
+            {markeringLabel[m]}
+          </Checkbox>
+        ))}
+      </CheckboxGroup>
+
+      <CheckboxGroup
+        legend="Ekskluderte markeringer"
+        size="small"
+        value={ekskluderteMarkeringer}
+        onChange={(vals) => {
+          const valgt = vals as MarkeringForBehandling[];
+          setEkskluderteMarkeringer(valgt);
+          setInkluderteMarkeringer((prev) => prev.filter((m) => !valgt.includes(m)));
+        }}
+      >
+        {MARKERINGER.map((m) => (
+          <Checkbox key={m} value={m} disabled={inkluderteMarkeringer.includes(m)}>
+            {markeringLabel[m]}
+          </Checkbox>
+        ))}
+      </CheckboxGroup>
 
       <HStack gap="space-8">
         <Button size="small" variant="secondary" onClick={onAvbryt}>
