@@ -6,7 +6,9 @@ import { InternalHeader, InternalHeaderTitle } from '@navikt/ds-react/InternalHe
 import { Søkefelt } from 'components/drift/Søkefelt';
 import { hentBrukerInformasjon, hentRollerForBruker, Roller } from 'lib/azure/azureUserService';
 import { InnloggetBrukerDropdown } from 'components/drift/navbar/InnloggetBrukerDropdown';
-import { Spacer } from '@navikt/ds-react';
+import { Spacer, Theme } from '@navikt/ds-react';
+import { cookies } from 'next/headers';
+import { ThemeToggle } from 'components/drift/ThemeToggle';
 
 export const metadata = {
   title: 'Paw Patrol',
@@ -19,6 +21,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const roller = await hentRollerForBruker();
   const brukerInformasjon = await hentBrukerInformasjon();
 
+  const cookieStore = await cookies();
+  const theme = (cookieStore.get('theme')?.value as 'light' | 'dark') || 'light';
+
   return (
     <html lang="nb">
       <link
@@ -26,17 +31,21 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐶</text></svg>"
       />
       <body>
-        <InternalHeader>
-          <InternalHeaderTitle href="/">Paw Patrol 🐶</InternalHeaderTitle>
+        <Theme theme={theme}>
+          <InternalHeader>
+            <InternalHeaderTitle href="/">Paw Patrol 🐶</InternalHeaderTitle>
 
-          <Spacer />
+            <Spacer />
 
-          {roller.includes(Roller.DRIFT) && <Søkefelt />}
+            {roller.includes(Roller.DRIFT) && <Søkefelt />}
 
-          <InnloggetBrukerDropdown brukerInformasjon={brukerInformasjon} roller={roller} />
-        </InternalHeader>
+            <ThemeToggle theme={theme} />
 
-        {children}
+            <InnloggetBrukerDropdown brukerInformasjon={brukerInformasjon} roller={roller} />
+          </InternalHeader>
+
+          {children}
+        </Theme>
       </body>
     </html>
   );

@@ -19,7 +19,7 @@ const SakPage = async ({ params }: { params: Promise<{ saksnummer: string }> }) 
   const roller = await hentRollerForBruker();
 
   return (
-    <>
+    <Page>
       <SakNavbar saksnummer={saksnummer} />
 
       {roller.includes(Roller.DRIFT) ? (
@@ -31,16 +31,14 @@ const SakPage = async ({ params }: { params: Promise<{ saksnummer: string }> }) 
           </Alert>
         )
       ) : (
-        <Page>
-          <PageBlock width="2xl">
-            <Alert variant="warning">
-              Du har ikke tilgang til denne siden. AD-rollen <strong>0000-GA-AAP_DRIFT</strong> er påkrevd for å gjøre
-              hente saksinformasjon.
-            </Alert>
-          </PageBlock>
-        </Page>
+        <PageBlock width="2xl">
+          <Alert variant="warning">
+            Du har ikke tilgang til denne siden. AD-rollen <strong>0000-GA-AAP_DRIFT</strong> er påkrevd for å gjøre
+            hente saksinformasjon.
+          </Alert>
+        </PageBlock>
       )}
-    </>
+    </Page>
   );
 };
 
