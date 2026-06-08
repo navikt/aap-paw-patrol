@@ -18,12 +18,45 @@ import {
 } from '@navikt/ds-react';
 import { PencilIcon, PlusIcon, TrashIcon } from '@navikt/aksel-icons';
 import { hentOppgavefiltre, slettOppgavefilter } from 'lib/clientApi';
-import { AvklaringsbehovKodeNavn, FilterDriftsinfoDTO, FilterOversiktDTO } from 'lib/types/oppgave';
+import { AvklaringsbehovKodeNavn, FilterDriftsinfoDTO, FilterOversiktDTO, MarkeringForBehandling } from 'lib/types/oppgave';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
 import { OppgavefilterSkjema } from 'components/drift/oppgavefilter/OppgavefilterSkjema';
 
 const ALLE = 'ALLE';
+
+const markeringLabel: Record<MarkeringForBehandling, string> = {
+  [MarkeringForBehandling.HASTER]: 'Haster',
+  [MarkeringForBehandling.KREVER_SPESIALKOMPETANSE]: 'Krever spesialkompetanse',
+  [MarkeringForBehandling.AVSLAG_11_5]: 'Avslag § 11-5',
+};
+
+const MarkeringerVisning = ({
+  label,
+  markeringer,
+  variant,
+}: {
+  label: string;
+  markeringer: MarkeringForBehandling[];
+  variant: 'success' | 'warning' | 'info' | 'neutral';
+}) => (
+  <div>
+    <Label size="small">{label}</Label>
+    {markeringer.length === 0 ? (
+      <BodyShort textColor="subtle" size="small">
+        Ingen
+      </BodyShort>
+    ) : (
+      <HStack gap="space-4" wrap>
+        {markeringer.map((m) => (
+          <Tag key={m} variant={variant} size="small">
+            {markeringLabel[m]}
+          </Tag>
+        ))}
+      </HStack>
+    )}
+  </div>
+);
 
 const EnheterVisning = ({
   label,
@@ -125,6 +158,19 @@ const FilterDetaljer = ({
           enheter={filter.ekskluderteEnheter}
           variantAlle="error"
           variantEnkelt="warning"
+        />
+      </VStack>
+
+      <VStack gap="space-8" style={{ minWidth: '14rem' }}>
+        <MarkeringerVisning
+          label="Inkluderte markeringer"
+          markeringer={filter.inkluderteMarkeringer}
+          variant="success"
+        />
+        <MarkeringerVisning
+          label="Ekskluderte markeringer"
+          markeringer={filter.ekskluderteMarkeringer}
+          variant="warning"
         />
       </VStack>
 
