@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { hentMottatteDokumenter } from 'lib/clientApi';
 import { MottattDokumentDriftsinfoDTO } from 'lib/types/dokumenter';
-import { Alert, Box, Heading, Loader, Table } from '@navikt/ds-react';
+import { Alert, BodyShort, Box, Heading, HelpText, HStack, Loader, Table } from '@navikt/ds-react';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
 import Link from 'next/link';
@@ -47,6 +47,11 @@ export const MottatteDokumenter = ({ saksnummer }: { saksnummer: string }) => {
         Mottatte dokumenter ({dokumenter.length})
       </Heading>
 
+      <BodyShort textColor="subtle" spacing>
+        Kan være både dokumenter og generelle hendelser på saken. Eksempelvis dokument behandlet i postmottak (vil kun
+        vises her når det er ferdig behandlet), manuelt opprettet revurdering, m.m.
+      </BodyShort>
+
       <Table>
         <Table.Header>
           <Table.Row>
@@ -55,7 +60,16 @@ export const MottatteDokumenter = ({ saksnummer }: { saksnummer: string }) => {
             <Table.HeaderCell scope="col">Type</Table.HeaderCell>
             <Table.HeaderCell scope="col">Kanal</Table.HeaderCell>
             <Table.HeaderCell scope="col">Status</Table.HeaderCell>
-            <Table.HeaderCell scope="col">Mottatt tidspunkt</Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <HStack gap="space-8">
+                <span>Mottatt tidspunkt</span>
+                <HelpText>
+                  Må ikke forveksles med journalpost mottattDato. Denne kan være manuelt satt dato fra
+                  digitaliseringsflyten i Postmottak, eller journalposten sin mottattTid/mottattDato. Hvis revurdering
+                  er det tidspunktet revurderingen ble opprettet.
+                </HelpText>
+              </HStack>
+            </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
