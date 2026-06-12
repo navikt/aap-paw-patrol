@@ -1,5 +1,5 @@
 import { Alert, Button, Heading, InlineMessage, Tag, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
-import { muligeSteg } from 'components/drift/settaktivtsteg/SettAktivtSteg';
+import { muligeStegOptions } from 'components/drift/settaktivtsteg/SettAktivtSteg';
 import { useState } from 'react';
 import { kjørFraSteg } from 'lib/clientApi';
 import { BehandlingDriftsinfo, BehandlingStatus } from 'lib/types/avklaringsbehov';
@@ -47,7 +47,7 @@ export const SettAktivtStegV2 = ({ behandling }: { behandling: BehandlingDriftsi
 
       <UNSAFE_Combobox
         label="Steg"
-        options={Object.entries(muligeSteg).map(([key, value]) => ({ label: value, value: key }))}
+        options={muligeStegOptions(behandling.type)}
         multiple={false}
         onToggleSelected={(value) => setSteg(value)}
         shouldAutocomplete={false}

@@ -51,7 +51,7 @@ export const KjørFraSteg = () => {
 
       <UNSAFE_Combobox
         label="Steg"
-        options={Object.entries(muligeSteg).map(([key, value]) => ({ label: value, value: key }))}
+        options={Object.entries(revurderingSteg).map(([key, value]) => ({ label: value, value: key }))}
         multiple={false}
         onToggleSelected={(value) => setSteg(value)}
         shouldAutocomplete={false}
@@ -69,7 +69,7 @@ export const KjørFraSteg = () => {
   );
 };
 
-export const muligeSteg: Record<string, string> = {
+export const revurderingSteg: Record<string, string> = {
   SØKNAD: 'Søknad',
   AVBRYT_REVURDERING: 'Avbryt revurdering',
   VURDER_RETTIGHETSPERIODE: 'Vurder rettighetsperiode',
@@ -113,3 +113,31 @@ export const muligeSteg: Record<string, string> = {
   FORESLÅ_VEDTAK: 'Foreslå vedtak',
   FATTE_VEDTAK: 'Fatte vedtak',
 };
+
+export const klageSteg: Record<string, string> = {
+  TREKK_KLAGE: 'Trekk klage',
+  PÅKLAGET_BEHANDLING: 'Påklaget behandling',
+  FULLMEKTIG: 'Fullmektig',
+  FORMKRAV: 'Formkrav',
+  BEHANDLENDE_ENHET: 'Behandlende enhet',
+  KLAGEBEHANDLING_KONTOR: 'Klagebehandling kontor',
+  KLAGEBEHANDLING_NAY: 'Klagebehandling NAY',
+  KLAGEBEHANDLING_OPPSUMMERING: 'Klagebehandling oppsummering',
+  FATTE_VEDTAK: 'Fatte vedtak',
+};
+
+function utledMuligeSteg(behandlingstype: string) {
+  switch (behandlingstype) {
+    case 'ae0034':
+    case 'ae0028':
+      return Object.entries(revurderingSteg)
+    case 'ae0058':
+      return Object.entries(klageSteg)
+    default: return [] // Ikke implementert
+  }
+}
+
+export function muligeStegOptions(behandlingstype: string) {
+  return utledMuligeSteg(behandlingstype).map(([key, value]) => ({ label: value, value: key }));
+}
+
