@@ -10,12 +10,14 @@ import { useEffect, useState } from 'react';
 import { BehandlingDriftsinfo } from 'lib/types/avklaringsbehov';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { TilkjentYtelse } from 'components/drift/sakogbehandling/tilkjentytelse/TilkjentYtelse';
+import { TidligereVurderinger } from 'components/drift/sakogbehandling/tidligereVurderinger/TidligereVurderinger';
 
 enum Tab {
   AVKLARINGSBEHOV = 'AVKLARINGSBEHOV',
   VILKÅRSRESULTAT = 'VILKÅRSRESULTAT',
   OPPGAVER = 'OPPGAVER',
   TILKJENT_YTELSE = 'TILKJENT_YTELSE',
+  TIDLIGERE_VURDERINGER = 'TIDLIGERE_VURDERINGER',
 }
 
 export const BehandlingOversikt = ({
@@ -184,6 +186,7 @@ export const BehandlingOversikt = ({
               <Tabs.Tab value={Tab.VILKÅRSRESULTAT} label="Vilkårsresultat" />
               <Tabs.Tab value={Tab.OPPGAVER} label="Oppgaver" />
               <Tabs.Tab value={Tab.TILKJENT_YTELSE} label="Tilkjent ytelse" />
+              <Tabs.Tab value={Tab.TIDLIGERE_VURDERINGER} label="Tidligere vurderinger" />
             </Tabs.List>
 
             <Tabs.Panel value={Tab.AVKLARINGSBEHOV}>
@@ -206,6 +209,9 @@ export const BehandlingOversikt = ({
             </Tabs.Panel>
             <Tabs.Panel value={Tab.TILKJENT_YTELSE}>
               <TilkjentYtelse key={valgtBehandling.referanse} behandlingsreferanse={valgtBehandling.referanse} />
+            </Tabs.Panel>
+            <Tabs.Panel value={Tab.TIDLIGERE_VURDERINGER}>
+              <TidligereVurderinger key={valgtBehandling.referanse} behandlingsreferanse={valgtBehandling.referanse} />
             </Tabs.Panel>
           </Tabs>
         </Box>

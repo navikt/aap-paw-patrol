@@ -137,6 +137,10 @@ function utledMuligeSteg(behandlingstype: string) {
   }
 }
 
+export function optionsFra(steg: Record<string, string>): {label: string, value: string} {
+  return {label: steg.key, value: steg.value};
+}
+
 export function muligeStegOptions(behandlingstype: string) {
   return utledMuligeSteg(behandlingstype).map(([key, value]) => ({ label: value, value: key }));
 }

@@ -96,6 +96,14 @@ export function hentTilkjentYtelse(behandlingsreferanse: string) {
   });
 }
 
+export function hentTidligereVurderinger(behandlingsreferanse: string, førSteg?: string, etterSteg?: string) {
+  const params = new URLSearchParams();
+  if (førSteg) params.set('førSteg', førSteg);
+  if (etterSteg) params.set('etterSteg', etterSteg);
+  const query = params.size > 0 ? `?${params.toString()}` : '';
+  return fetch(`/api/drift/behandling/${behandlingsreferanse}/tidligere-vurderinger${query}`, { method: 'GET' });
+}
+
 export function hentOppgaver(behandlingsreferanse: string) {
   return fetch(`/api/drift/oppgave/behandling/${behandlingsreferanse}`, {
     method: 'POST',
