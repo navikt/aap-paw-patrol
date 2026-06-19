@@ -59,11 +59,22 @@ export interface OppgaveDriftsinfoDTO {
   opprettetTidspunkt: string;
   endretTidspunkt?: string;
   avklaringsbehovKode: string;
+  historikk: OppgaveHistorikkDto[];
 }
 
 export enum OppgaveStatus {
   OPPRETTET = 'OPPRETTET',
   AVSLUTTET = 'AVSLUTTET',
+}
+
+export interface OppgaveHistorikkDto {
+  status: OppgaveStatus;
+  reservertAv?: string;
+  reservertTidspunkt?: string;
+  endretAv?: string;
+  endretTidspunkt?: string;
+  enhet: string;
+  oppfølgingsenhet?: string;
 }
 
 export const BEHANDLINGSTYPER = [
