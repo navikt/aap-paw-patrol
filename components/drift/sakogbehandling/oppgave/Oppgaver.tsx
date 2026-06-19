@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { hentOppgaver } from 'lib/clientApi';
-import { BodyShort, Box, HStack, Label, Loader, Table, Tag } from '@navikt/ds-react';
-import { OppgaveDriftsinfoDTO, OppgaveStatus } from 'lib/types/oppgave';
+import { BodyShort, Box, HStack, Loader, Table, Tag } from '@navikt/ds-react';
+import { OppgaveDriftsinfoDTO, OppgaveHistorikkDto, OppgaveStatus } from 'lib/types/oppgave';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
 import { mapBehovskodeTilBehovstype } from 'lib/utils/oversettelser';
@@ -54,35 +54,23 @@ export const Oppgaver = ({ behandlingsreferanse }: { behandlingsreferanse: strin
             <Table.HeaderCell>Enhet</Table.HeaderCell>
             <Table.HeaderCell title="Oppfølgingsenhet">Oppf.enhet</Table.HeaderCell>
             <Table.HeaderCell>Reservert av</Table.HeaderCell>
+            <Table.HeaderCell>Veil. arb/syk</Table.HeaderCell>
             <Table.HeaderCell>Opprettet</Table.HeaderCell>
-            <Table.HeaderCell>Endret</Table.HeaderCell>
+            <Table.HeaderCell>Sist endret</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {oppgaver?.map((oppg) => (
-            <Table.ExpandableRow
-              key={oppg.oppgaveId}
-              content={
-                <Box background="default" padding="space-16">
-                  <HStack gap="space-16">
-                    <div>
-                      <Label>Veileder arbeid</Label>
-                      <BodyShort>{oppg.veilederArbeid}</BodyShort>
-                    </div>
-                    <div>
-                      <Label>Veileder sykdom</Label>
-                      <BodyShort>{oppg.veilederSykdom}</BodyShort>
-                    </div>
-                  </HStack>
-                </Box>
-              }
-            >
+            <Table.ExpandableRow key={oppg.oppgaveId} content={<OppgaveHistorikk historikk={oppg.historikk} />}>
               <Table.DataCell>{oppg.oppgaveId}</Table.DataCell>
               <Table.DataCell>{tag(oppg.status)}</Table.DataCell>
               <Table.DataCell>{mapBehovskodeTilBehovstype(oppg.avklaringsbehovKode)}</Table.DataCell>
               <Table.DataCell>{oppg.enhet || '-'}</Table.DataCell>
               <Table.DataCell>{oppg.oppfølgingsenhet || '-'}</Table.DataCell>
               <Table.DataCell>{oppg.reservertAv ?? '-'}</Table.DataCell>
+              <Table.DataCell>
+                {oppg.veilederArbeid} / {oppg.veilederSykdom}
+              </Table.DataCell>
               <Table.DataCell style={{ whiteSpace: 'nowrap' }}>
                 {formaterDatoMedTidspunktSekunderForFrontend(oppg.opprettetTidspunkt)}
               </Table.DataCell>
@@ -90,6 +78,49 @@ export const Oppgaver = ({ behandlingsreferanse }: { behandlingsreferanse: strin
                 {oppg.endretTidspunkt ? formaterDatoMedTidspunktSekunderForFrontend(oppg.endretTidspunkt) : '-'}
               </Table.DataCell>
             </Table.ExpandableRow>
+          ))}
+        </Table.Body>
+      </Table>
+    </Box>
+  );
+};
+
+const OppgaveHistorikk = ({ historikk }: { historikk: OppgaveHistorikkDto[] }) => {
+  if (!historikk?.length) {
+    return <BodyShort>Ingen historikk</BodyShort>;
+  }
+
+  return (
+    <Box background="default" padding="space-16" borderWidth="1" borderColor="neutral-subtle" borderRadius="12">
+      <Table size="small">
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Status</Table.HeaderCell>
+            <Table.HeaderCell>Enhet</Table.HeaderCell>
+            <Table.HeaderCell title="Oppfølgingsenhet">Oppf.enhet</Table.HeaderCell>
+            <Table.HeaderCell>Reservert av</Table.HeaderCell>
+            <Table.HeaderCell>Reservert tidspunkt</Table.HeaderCell>
+            <Table.HeaderCell>Endret av</Table.HeaderCell>
+            <Table.HeaderCell>Endret tidspunkt</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {historikk.map((innslag, idx) => (
+            <Table.Row key={idx}>
+              <Table.DataCell>{tag(innslag.status)}</Table.DataCell>
+              <Table.DataCell>{innslag.enhet}</Table.DataCell>
+              <Table.DataCell>{innslag.oppfølgingsenhet ?? '-'}</Table.DataCell>
+              <Table.DataCell>{innslag.reservertAv ?? '-'}</Table.DataCell>
+              <Table.DataCell style={{ whiteSpace: 'nowrap' }}>
+                {innslag.reservertTidspunkt
+                  ? formaterDatoMedTidspunktSekunderForFrontend(innslag.reservertTidspunkt)
+                  : '-'}
+              </Table.DataCell>
+              <Table.DataCell>{innslag.endretAv ?? '-'}</Table.DataCell>
+              <Table.DataCell style={{ whiteSpace: 'nowrap' }}>
+                {innslag.endretTidspunkt ? formaterDatoMedTidspunktSekunderForFrontend(innslag.endretTidspunkt) : '-'}
+              </Table.DataCell>
+            </Table.Row>
           ))}
         </Table.Body>
       </Table>
