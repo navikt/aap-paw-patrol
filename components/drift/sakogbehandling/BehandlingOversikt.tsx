@@ -11,6 +11,7 @@ import { BehandlingDriftsinfo } from 'lib/types/avklaringsbehov';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { TilkjentYtelse } from 'components/drift/sakogbehandling/tilkjentytelse/TilkjentYtelse';
 import { TidligereVurderinger } from 'components/drift/sakogbehandling/tidligereVurderinger/TidligereVurderinger';
+import { ProsesserBehandling } from './avklaringsbehov/ProsesserBehandling';
 
 enum Tab {
   AVKLARINGSBEHOV = 'AVKLARINGSBEHOV',
@@ -18,6 +19,7 @@ enum Tab {
   OPPGAVER = 'OPPGAVER',
   TILKJENT_YTELSE = 'TILKJENT_YTELSE',
   TIDLIGERE_VURDERINGER = 'TIDLIGERE_VURDERINGER',
+  PROSESSER = 'PROSESSER',
 }
 
 export const BehandlingOversikt = ({
@@ -187,6 +189,7 @@ export const BehandlingOversikt = ({
               <Tabs.Tab value={Tab.OPPGAVER} label="Oppgaver" />
               <Tabs.Tab value={Tab.TILKJENT_YTELSE} label="Tilkjent ytelse" />
               <Tabs.Tab value={Tab.TIDLIGERE_VURDERINGER} label="Tidligere vurderinger" />
+              <Tabs.Tab value={Tab.PROSESSER} label="Prossesser behandling" />
             </Tabs.List>
 
             <Tabs.Panel value={Tab.AVKLARINGSBEHOV}>
@@ -212,6 +215,9 @@ export const BehandlingOversikt = ({
             </Tabs.Panel>
             <Tabs.Panel value={Tab.TIDLIGERE_VURDERINGER}>
               <TidligereVurderinger key={valgtBehandling.referanse} behandlingsreferanse={valgtBehandling.referanse} />
+            </Tabs.Panel>
+            <Tabs.Panel value={Tab.PROSESSER}>
+              <ProsesserBehandling behandling={valgtBehandling} />
             </Tabs.Panel>
           </Tabs>
         </Box>
