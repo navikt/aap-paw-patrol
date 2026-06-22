@@ -27,6 +27,13 @@ export function kjørFraSteg(behandlingsreferanse: string, steg: string) {
   });
 }
 
+export function prosesserBehandling(behandlingsreferanse: string, skalForberede: Boolean) {
+  return fetch(`/api/drift/behandling/${behandlingsreferanse}/prosesser/`, {
+    method: 'POST',
+    body: JSON.stringify({ skalForberede }),
+  });
+}
+
 export function utvidRettighetsperiodeOgKjørFraStart(behandlingsreferanse: string) {
   return fetch(`/api/drift/behandling/${behandlingsreferanse}/utvidrettighetsperiode-og-kjorfrastart/`, {
     method: 'POST',
