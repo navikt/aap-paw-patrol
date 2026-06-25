@@ -33,6 +33,10 @@ export enum AvklaringsbehovStatus {
 
 export interface SakDriftsinfoDTO {
   saksnummer: string;
+  person: {
+    personId: string;
+    antallIdenter: number;
+  };
   status: SakStatus;
   rettighetsperiode: Periode;
   opprettetTidspunkt: string;

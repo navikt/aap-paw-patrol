@@ -23,6 +23,14 @@ export const SakInfoPanel = ({ sak }: { sak: SakDriftsinfoDTO }) => (
       </BodyShort>
     </div>
     <div>
+      <Label>PersonId</Label>
+      <BodyShort>{sak.person.personId}</BodyShort>
+    </div>
+    <div>
+      <Label>Antall identer (fnr, dnr)</Label>
+      <BodyShort>{sak.person.antallIdenter}</BodyShort>
+    </div>
+    <div>
       <Label>Andre saker på bruker</Label>
       <BodyShort>
         {!sak.andreSakerPåBruker?.length ? (
