@@ -1,6 +1,24 @@
 export interface MeldekortDriftsinfoDto {
+  aktuelleMeldeperioder: AktuelleMeldeperioderDriftsinfo[];
+  historiskeMeldeperioder: HistoriskeMeldeperioderDriftsinfo[];
   utfyllinger: UtfyllingDriftsinfo[];
   varsler: Varsel[];
+}
+
+export interface Meldeperiode {
+  meldeperioden: Periode;
+  meldevindu: Periode;
+}
+
+export interface AktuelleMeldeperioderDriftsinfo {
+  antallUbesvarteMeldeperioder: number;
+  manglerOpplysninger: Periode | null;
+  nesteMeldeperiode: Meldeperiode | null;
+}
+
+export interface HistoriskeMeldeperioderDriftsinfo {
+  meldeperiode: Meldeperiode;
+  totaltAntallTimerIPerioden: number;
 }
 
 export interface UtfyllingDriftsinfo {
