@@ -84,6 +84,7 @@ export const revurderingSteg: Record<string, string> = {
   OVERGANG_ARBEID: 'Overgang arbeid',
   VURDER_SYKEPENGEERSTATNING: 'Vurder sykepengeerstatning',
   FASTSETT_SYKDOMSVILKÅRET: 'Fastsett sykdomsvilkåret',
+  VURDER_INNTEKTSBORTFALL: 'Vurder inntektsbortfall',
   VURDER_YRKESSKADE: 'Vurder yrkesskade',
   FRITAK_MELDEPLIKT: 'Fritak meldeplikt',
   SYKDOMSVURDERING_BREV: 'Sykdomsvurdering brev',
@@ -130,18 +131,18 @@ function utledMuligeSteg(behandlingstype: string) {
   switch (behandlingstype) {
     case 'ae0034':
     case 'ae0028':
-      return Object.entries(revurderingSteg)
+      return Object.entries(revurderingSteg);
     case 'ae0058':
-      return Object.entries(klageSteg)
-    default: return [] // Ikke implementert
+      return Object.entries(klageSteg);
+    default:
+      return []; // Ikke implementert
   }
 }
 
-export function optionsFra(steg: Record<string, string>): {label: string, value: string} {
-  return {label: steg.key, value: steg.value};
+export function optionsFra(steg: Record<string, string>): { label: string; value: string } {
+  return { label: steg.key, value: steg.value };
 }
 
 export function muligeStegOptions(behandlingstype: string) {
   return utledMuligeSteg(behandlingstype).map(([key, value]) => ({ label: value, value: key }));
 }
-
