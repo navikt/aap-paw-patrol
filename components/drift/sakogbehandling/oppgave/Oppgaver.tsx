@@ -105,8 +105,8 @@ const OppgaveHistorikk = ({ historikk }: { historikk: OppgaveHistorikkDto[] }) =
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {historikk.map((innslag, idx) => (
-            <Table.Row key={idx}>
+          {historikk.map((innslag) => (
+            <Table.Row key={crypto.randomUUID()}>
               <Table.DataCell>{tag(innslag.status)}</Table.DataCell>
               <Table.DataCell>{innslag.enhet}</Table.DataCell>
               <Table.DataCell>{innslag.oppfølgingsenhet ?? '-'}</Table.DataCell>
