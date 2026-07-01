@@ -13,26 +13,23 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
   const [mounted, setMounted] = useState(false);
   const [visAvbrytModal, setVisAvbrytModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>();
-  const [error, setError] = useState<string>();
+  const [result, setResult] = useState<{ success: boolean; message: string }>();
 
   async function onRekjørJobbClick(id: number) {
-    setError(undefined);
+    setResult(undefined);
     setIsLoading(true);
     await rekjørJobb(appNavn, id)
-      .then((res) => res.text())
-      .then((msg) => setMessage(msg))
-      .catch((err) => setError(err.message || 'Noe gikk galt'))
+      .then(async (res) => setResult({ success: res.ok, message: await res.text() }))
+      .catch((err) => setResult({ success: false, message: err.message || 'Noe gikk galt' }))
       .finally(() => setIsLoading(false));
   }
 
   async function onAvbrytJobbClick(id: number) {
-    setError(undefined);
+    setResult(undefined);
     setIsLoading(true);
     await avbrytKjørendeJobb(appNavn, id)
-      .then((res) => res.text())
-      .then((msg) => setMessage(msg))
-      .catch((err) => setError(err.message || 'Noe gikk galt'))
+      .then(async (res) => setResult({ success: res.ok, message: await res.text() }))
+      .catch((err) => setResult({ success: false, message: err.message || 'Noe gikk galt' }))
       .finally(() => setIsLoading(false));
   }
 
@@ -69,24 +66,19 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
           </Heading>
 
           <VStack gap="space-16">
-            <HStack justify={'end'} gap="space-16">
-              <Button size="small" loading={isLoading} onClick={() => onRekjørJobbClick(jobb.id)}>
-                Rekjør
-              </Button>
-              <Button size="small" loading={isLoading} onClick={() => setVisAvbrytModal(true)} variant="danger">
-                Avbryt
-              </Button>
-            </HStack>
-
-            {error && (
-              <Alert variant="error" size="small">
-                {error}
+            {result ? (
+              <Alert variant={result.success ? 'success' : 'error'} size="small">
+                {result.message}
               </Alert>
-            )}
-            {message && (
-              <Alert variant="info" size="small">
-                {message}
-              </Alert>
+            ) : (
+              <HStack justify={'end'} gap="space-16">
+                <Button size="small" loading={isLoading} onClick={() => onRekjørJobbClick(jobb.id)}>
+                  Rekjør
+                </Button>
+                <Button size="small" loading={isLoading} onClick={() => setVisAvbrytModal(true)} variant="danger">
+                  Avbryt
+                </Button>
+              </HStack>
             )}
           </VStack>
         </HStack>
