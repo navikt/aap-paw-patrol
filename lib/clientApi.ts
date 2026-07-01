@@ -53,6 +53,12 @@ export function oppdaterPersonIdenter(saksnummer: string) {
   });
 }
 
+export function oppdaterMeldeperioder(saksnummer: string) {
+  return fetch(`/api/drift/sak/${saksnummer}/oppdater-meldeperioder`, {
+    method: 'POST',
+  });
+}
+
 export function hentDsopVedtak(personIdent: string, fomDato: string, tomDato: string) {
   return fetch(`/api/drift/api-intern/dsop-vedtak`, {
     method: 'POST',

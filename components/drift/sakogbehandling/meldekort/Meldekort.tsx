@@ -37,7 +37,10 @@ export const Meldekort = ({ saksnummer }: { saksnummer: string }) => {
     <Box padding="space-16">
       {error && <Alert variant="error">{error}</Alert>}
 
-      <MeldekortAktuelleMeldeperioder aktuelleMeldeperioder={data?.aktuelleMeldeperioder || []} />
+      <MeldekortAktuelleMeldeperioder
+        saksnummer={saksnummer}
+        aktuelleMeldeperioder={data?.aktuelleMeldeperioder || []}
+      />
 
       <MeldekortHistoriskeMeldeperioder historiskeMeldeperioder={data?.historiskeMeldeperioder || []} />
 

@@ -10,7 +10,11 @@ export async function POST(_: NextRequest, { params }: { params: Promise<{ slug:
 
     const url = `${baseUrl}/api/drift/sak/${slug.join('/')}`;
 
-    return NextResponse.json(await fetchProxy<any>(url, scope, 'POST'));
+    const result = await fetchProxy<any>(url, scope, 'POST');
+    if (result !== null && typeof result === 'object') {
+      return NextResponse.json(result);
+    }
+    return new NextResponse(result, { status: 200 });
   } catch (err: any) {
     return new Response(err?.message, { status: 500 });
   }
