@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { InternalHeader } from '@navikt/ds-react/InternalHeader';
 import { isMacOs } from 'environment';
+import { StorageKey } from 'lib/keys';
 
 export const Søkefelt = () => {
   const router = useRouter();
@@ -34,7 +35,14 @@ export const Søkefelt = () => {
 
   const handleSearch = (value: string) => {
     const trimmed = value.trim();
-    if (trimmed) {
+    if (!trimmed) return;
+
+    if (/^\d{11}$/.test(trimmed)) {
+      // Forhindre ident i URL-en
+      sessionStorage.setItem(StorageKey.PersonSøkIdent, trimmed);
+      router.push('/sok/person');
+      setOpen(false);
+    } else {
       router.push(`/sok?q=${encodeURIComponent(trimmed)}`);
       setOpen(false);
     }

@@ -33,16 +33,7 @@ export default async function SøkPage({ searchParams }: Props) {
   // Nøyaktig 11 siffer antas å være fødselsnummer
   // TODO: Håndtere fødselsnummer
   if (kunSiffer && søkeord.length === 11) {
-    return (
-      <Page>
-        <PageBlock width="2xl">
-          <Heading size="medium" spacing>
-            Søk
-          </Heading>
-          <Alert variant="info">Fødselsnummer-søk er ikke implementert ennå.</Alert>
-        </PageBlock>
-      </Page>
-    );
+    redirect(`/drift/sok/person`);
   }
 
   // Saksnummer skal bestå av både tall og bokstaver

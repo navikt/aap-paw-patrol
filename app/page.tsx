@@ -9,8 +9,8 @@ import {
   FileJsonIcon,
   FilterIcon,
   MagnifyingGlassIcon,
-  StethoscopeIcon,
   PersonIcon,
+  StethoscopeIcon,
 } from '@navikt/aksel-icons';
 import { FeilendeJobberLinkCard } from 'components/drift/feilendejobber/FeilendeJobberLinkCard';
 import { isDev, isLocal } from '@navikt/aap-felles-utils';
@@ -49,6 +49,15 @@ export default function Home() {
             </LinkCardIcon>
             <LinkCardTitle>
               <LinkCardAnchor href={`/sok/journalpost`}>Hent journalpost</LinkCardAnchor>
+            </LinkCardTitle>
+          </LinkCard>
+
+          <LinkCard size="small">
+            <LinkCardIcon>
+              <PersonIcon fontSize="2rem" />
+            </LinkCardIcon>
+            <LinkCardTitle>
+              <LinkCardAnchor href={`/sok/person`}>Hent persondata</LinkCardAnchor>
             </LinkCardTitle>
           </LinkCard>
 
