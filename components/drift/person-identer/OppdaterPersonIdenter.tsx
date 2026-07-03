@@ -1,10 +1,11 @@
 'use client';
+
 import { useState } from 'react';
 import { BodyShort, Button, Heading, InfoCard, List, TextField, VStack } from '@navikt/ds-react';
-import { oppdaterPersonIdenter } from '../../../lib/clientApi';
+import { oppdaterPersonIdenter } from 'lib/clientApi';
 
-export const OppdaterPersonIdenter = () => {
-  const [saksnummer, setSaksnummer] = useState('');
+export const OppdaterPersonIdenter = ({ overstyrtSaksnummer }: { overstyrtSaksnummer?: string }) => {
+  const [saksnummer, setSaksnummer] = useState(overstyrtSaksnummer || '');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
 
@@ -36,7 +37,8 @@ export const OppdaterPersonIdenter = () => {
 
   return (
     <VStack gap="space-16" marginBlock="space-32">
-      <Heading size="medium">Oppdater identer for sak</Heading>
+      {!overstyrtSaksnummer && <Heading size="medium">Oppdater identer for sak</Heading>}
+
       <InfoCard data-color="info">
         <InfoCard.Header>
           <InfoCard.Title>Person tilknyttet sak får tilført identer fra PDL</InfoCard.Title>
@@ -59,11 +61,15 @@ export const OppdaterPersonIdenter = () => {
           </List>
         </InfoCard.Content>
       </InfoCard>
-      <TextField
-        label="Saksnummer i behandlingsflyt"
-        value={saksnummer}
-        onChange={(e) => setSaksnummer(e.target.value)}
-      />
+
+      {!overstyrtSaksnummer && (
+        <TextField
+          label="Saksnummer i behandlingsflyt"
+          value={saksnummer}
+          onChange={(e) => setSaksnummer(e.target.value)}
+        />
+      )}
+
       <Button onClick={onClick} loading={isLoading}>
         Oppdater identer
       </Button>

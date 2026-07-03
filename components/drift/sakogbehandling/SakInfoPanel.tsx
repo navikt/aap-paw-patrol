@@ -1,7 +1,8 @@
-import { BodyShort, Label, List, VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, Label, List, VStack } from '@navikt/ds-react';
 import { SakDriftsinfoDTO } from 'lib/types/avklaringsbehov';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import Link from 'next/link';
+import { OppdaterIdenterModal } from 'components/drift/person-identer/OppdaterIdenterModal';
 
 export const SakInfoPanel = ({ sak }: { sak: SakDriftsinfoDTO }) => (
   <VStack gap="space-32" marginBlock="space-0 space-32">
@@ -27,7 +28,10 @@ export const SakInfoPanel = ({ sak }: { sak: SakDriftsinfoDTO }) => (
       <BodyShort>{sak.person.personId}</BodyShort>
     </div>
     <div>
-      <Label>Antall identer (fnr, dnr)</Label>
+      <HStack gap="space-8" justify="space-between">
+        <Label>Antall identer (fnr, dnr)</Label>
+        <OppdaterIdenterModal saksnummer={sak.saksnummer} />
+      </HStack>
       <BodyShort>{sak.person.antallIdenter}</BodyShort>
     </div>
     <div>
