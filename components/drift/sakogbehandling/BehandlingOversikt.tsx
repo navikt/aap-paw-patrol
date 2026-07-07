@@ -12,6 +12,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { TilkjentYtelse } from 'components/drift/sakogbehandling/tilkjentytelse/TilkjentYtelse';
 import { TidligereVurderinger } from 'components/drift/sakogbehandling/tidligereVurderinger/TidligereVurderinger';
 import { ProsesserBehandling } from './avklaringsbehov/ProsesserBehandling';
+import { BrevBestillinger } from 'components/drift/sakogbehandling/brev/BrevBestillinger';
 
 enum Tab {
   AVKLARINGSBEHOV = 'AVKLARINGSBEHOV',
@@ -20,6 +21,7 @@ enum Tab {
   TILKJENT_YTELSE = 'TILKJENT_YTELSE',
   TIDLIGERE_VURDERINGER = 'TIDLIGERE_VURDERINGER',
   PROSESSER = 'PROSESSER',
+  BREV = 'BREV',
 }
 
 export const BehandlingOversikt = ({
@@ -189,6 +191,7 @@ export const BehandlingOversikt = ({
               <Tabs.Tab value={Tab.OPPGAVER} label="Oppgaver" />
               <Tabs.Tab value={Tab.TILKJENT_YTELSE} label="Tilkjent ytelse" />
               <Tabs.Tab value={Tab.TIDLIGERE_VURDERINGER} label="Tidligere vurderinger" />
+              <Tabs.Tab value={Tab.BREV} label="Brev" />
               <Tabs.Tab value={Tab.PROSESSER} label="Prossesser behandling" />
             </Tabs.List>
 
@@ -215,6 +218,9 @@ export const BehandlingOversikt = ({
             </Tabs.Panel>
             <Tabs.Panel value={Tab.TIDLIGERE_VURDERINGER}>
               <TidligereVurderinger key={valgtBehandling.referanse} behandlingsreferanse={valgtBehandling.referanse} />
+            </Tabs.Panel>
+            <Tabs.Panel value={Tab.BREV}>
+              <BrevBestillinger behandlingRef={valgtBehandling.referanse} />
             </Tabs.Panel>
             <Tabs.Panel value={Tab.PROSESSER}>
               <ProsesserBehandling behandling={valgtBehandling} />

@@ -164,3 +164,11 @@ export function slettOppgavefilter(id: number) {
     body: JSON.stringify({ id }),
   });
 }
+
+export function hentBrevbestillingerForSak(saksnummer: string) {
+  return fetch(`/api/drift/brev/bestillinger/sak/${saksnummer}`, { method: 'GET' });
+}
+
+export function hentBrevbestillingerForBehandling(behandlingReferanse: string) {
+  return fetch(`/api/drift/brev/bestillinger/behandling/${behandlingReferanse}`, { method: 'GET' });
+}

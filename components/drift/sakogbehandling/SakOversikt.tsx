@@ -10,12 +10,14 @@ import { BehandlingOversikt } from 'components/drift/sakogbehandling/BehandlingO
 import { MottatteDokumenter } from 'components/drift/sakogbehandling/dokumenter/MottatteDokumenter';
 import { Dialogmeldinger } from 'components/drift/sakogbehandling/dialogmeldinger/Dialogmeldinger';
 import { Meldekort } from 'components/drift/sakogbehandling/meldekort/Meldekort';
+import { BrevBestillinger } from 'components/drift/sakogbehandling/brev/BrevBestillinger';
 
 enum Tab {
   BEHANDLINGER = 'BEHANDLINGER',
   MOTTATTE_DOKUMENTER = 'MOTTATTE_DOKUMENTER',
   DIALOGMELDINGER = 'DIALOGMELDINGER',
   MELDEKORT = 'MELDEKORT',
+  BREV = 'BREV',
 }
 
 export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
@@ -79,6 +81,7 @@ export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
               <Tabs.Tab value={Tab.MOTTATTE_DOKUMENTER} label="Mottatte dokumenter" />
               <Tabs.Tab value={Tab.DIALOGMELDINGER} label="Dialogmeldinger" />
               <Tabs.Tab value={Tab.MELDEKORT} label="Meldekort" />
+              <Tabs.Tab value={Tab.BREV} label="Brev" />
             </Tabs.List>
 
             <Tabs.Panel value={Tab.BEHANDLINGER}>
@@ -92,6 +95,9 @@ export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
             </Tabs.Panel>
             <Tabs.Panel value={Tab.MELDEKORT}>
               <Meldekort saksnummer={saksnummer} />
+            </Tabs.Panel>
+            <Tabs.Panel value={Tab.BREV}>
+              <BrevBestillinger saksnummer={saksnummer} />
             </Tabs.Panel>
           </Tabs>
         </HGrid>
