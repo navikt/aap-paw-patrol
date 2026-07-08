@@ -62,7 +62,6 @@ spec:
     outbound:
       rules:
         - application: behandlingsflyt
-        - application: brev
         - application: postmottak-backend
         - application: dokumentinnhenting
         - application: statistikk
