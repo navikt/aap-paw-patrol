@@ -27,7 +27,6 @@ const ALLE = 'ALLE';
 
 const markeringLabel: Record<MarkeringForBehandling, string> = {
   [MarkeringForBehandling.HASTER]: 'Haster',
-  [MarkeringForBehandling.KREVER_SPESIALKOMPETANSE]: 'Krever spesialkompetanse',
   [MarkeringForBehandling.AVSLAG_11_5]: 'Avslag § 11-5',
 };
 

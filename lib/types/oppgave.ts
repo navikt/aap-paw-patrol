@@ -11,7 +11,6 @@ export enum Filtermodus {
 
 export enum MarkeringForBehandling {
   HASTER = 'HASTER',
-  KREVER_SPESIALKOMPETANSE = 'KREVER_SPESIALKOMPETANSE',
   AVSLAG_11_5 = 'AVSLAG_11_5',
 }
 
