@@ -43,7 +43,7 @@
     "lint-staged": "^16.4.0",
     "prettier": "^3.3.3",
     "typescript": "^5.9.3",
-    "vitest": "^3.2.6",
+    "vitest": "^3.2.7",
     "vitest-fetch-mock": "^0.4.5"
   },
   "lint-staged": {
