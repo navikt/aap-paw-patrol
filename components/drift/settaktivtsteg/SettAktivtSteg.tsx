@@ -70,6 +70,7 @@ export const KjørFraSteg = () => {
 };
 
 export const revurderingSteg: Record<string, string> = {
+  KRAV: 'Krav',
   SØKNAD: 'Søknad',
   AVBRYT_REVURDERING: 'Avbryt revurdering',
   VURDER_RETTIGHETSPERIODE: 'Vurder rettighetsperiode',
