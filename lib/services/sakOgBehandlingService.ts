@@ -12,17 +12,18 @@ export const hentTilkjentYtelse = async (behandlingsreferanse: string) => {
   const url = `${baseUrl}/api/drift/behandling/${behandlingsreferanse}/tilkjent-ytelse`;
   return await fetchProxy<any>(url, scope, 'POST');
 };
+export const hentYrkesskader = async (behandlingsreferanse: string) => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
+  const url = `${baseUrl}/api/drift/behandling/${behandlingsreferanse}/yrkesskade`;
+  return await fetchProxy<any>(url, scope, 'GET');
+};
 export const hentRettighetsinfo = async (behandlingsreferanse: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
   const url = `${baseUrl}/api/drift/behandling/${behandlingsreferanse}/rettighetsinfo`;
   return await fetchProxy<any>(url, scope, 'POST');
 };
 
-export const hentTidligereVurderinger = async (
-  behandlingsreferanse: string,
-  førSteg?: string,
-  etterSteg?: string,
-) => {
+export const hentTidligereVurderinger = async (behandlingsreferanse: string, førSteg?: string, etterSteg?: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
   const params = new URLSearchParams();
   if (førSteg) params.set('førSteg', førSteg);

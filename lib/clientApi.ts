@@ -109,6 +109,12 @@ export function hentTilkjentYtelse(behandlingsreferanse: string) {
   });
 }
 
+export function hentYrkesskader(behandlingsreferanse: string) {
+  return fetch(`/api/drift/behandling/${behandlingsreferanse}/yrkesskade`, {
+    method: 'GET',
+  });
+}
+
 export function hentTidligereVurderinger(behandlingsreferanse: string, førSteg?: string, etterSteg?: string) {
   const params = new URLSearchParams();
   if (førSteg) params.set('førSteg', førSteg);
