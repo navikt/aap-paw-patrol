@@ -87,6 +87,22 @@ export default function Home() {
 
           <Box background="neutral-soft" padding="space-20" borderRadius="16">
             <Heading size="medium" spacing>
+              Utbetaling
+            </Heading>
+            <HGrid columns={{ xs: 1, md: 2 }} gap="space-12">
+              <LinkCard size="small">
+                <LinkCardIcon>
+                  <MagnifyingGlassIcon fontSize="2rem" />
+                </LinkCardIcon>
+                <LinkCardTitle>
+                  <LinkCardAnchor href={`/drift/utbetaling`}>Sjekk status på utbetalinger</LinkCardAnchor>
+                </LinkCardTitle>
+              </LinkCard>
+            </HGrid>
+          </Box>
+
+          <Box background="neutral-soft" padding="space-20" borderRadius="16">
+            <Heading size="medium" spacing>
               Annet
             </Heading>
             <HGrid columns={{ xs: 1, md: 2 }} gap="space-12">
