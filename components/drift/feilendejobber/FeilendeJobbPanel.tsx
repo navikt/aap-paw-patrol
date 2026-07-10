@@ -1,17 +1,16 @@
 'use client';
 
-import { Alert, BodyShort, Box, Button, CopyButton, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Box, Button, CopyButton, Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { objectToMap } from 'components/drift/jobbtabell/JobbTabell';
 import React, { useEffect, useState } from 'react';
 import { AppNavn, JobbInfo } from 'lib/services/driftService';
-import { avbrytKjørendeJobb, rekjørJobb } from 'lib/clientApi';
+import { rekjørJobb } from 'lib/clientApi';
 import { format } from 'date-fns';
-import { ExclamationmarkTriangleIcon, LinkIcon } from '@navikt/aksel-icons';
-import Link from 'next/link';
+import { LinkIcon } from '@navikt/aksel-icons';
+import { AvbrytJobbDialog } from 'components/drift/feilendejobber/AvbrytJobbDialog';
 
 export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: AppNavn }) => {
   const [mounted, setMounted] = useState(false);
-  const [visAvbrytModal, setVisAvbrytModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [result, setResult] = useState<{ success: boolean; message: string }>();
 
@@ -19,15 +18,6 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
     setResult(undefined);
     setIsLoading(true);
     await rekjørJobb(appNavn, id)
-      .then(async (res) => setResult({ success: res.ok, message: await res.text() }))
-      .catch((err) => setResult({ success: false, message: err.message || 'Noe gikk galt' }))
-      .finally(() => setIsLoading(false));
-  }
-
-  async function onAvbrytJobbClick(id: number) {
-    setResult(undefined);
-    setIsLoading(true);
-    await avbrytKjørendeJobb(appNavn, id)
       .then(async (res) => setResult({ success: res.ok, message: await res.text() }))
       .catch((err) => setResult({ success: false, message: err.message || 'Noe gikk galt' }))
       .finally(() => setIsLoading(false));
@@ -52,7 +42,8 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
         <HStack gap="space-16" justify="space-between">
           <Heading size="medium">
             <HStack gap="space-8" align="center">
-              <Link href={`#${jobb.id}`}>Jobb {jobb.id}</Link>
+              <span>Jobb {jobb.id}</span>
+
               {mounted && (
                 <CopyButton
                   icon={<LinkIcon aria-hidden />}
@@ -75,9 +66,8 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
                 <Button size="small" loading={isLoading} onClick={() => onRekjørJobbClick(jobb.id)}>
                   Rekjør
                 </Button>
-                <Button size="small" loading={isLoading} onClick={() => setVisAvbrytModal(true)} variant="danger">
-                  Avbryt
-                </Button>
+
+                <AvbrytJobbDialog appNavn={appNavn} jobbId={jobb.id} setResult={setResult} />
               </HStack>
             )}
           </VStack>
@@ -136,41 +126,6 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
           </Box>
         </div>
       </VStack>
-
-      <Modal
-        open={visAvbrytModal}
-        header={{
-          heading: `Avbryt jobb (ID: ${jobb.id})`,
-          icon: <ExclamationmarkTriangleIcon fontSize={'inherit'} />,
-        }}
-        onClose={() => {
-          setVisAvbrytModal(false);
-        }}
-        onBeforeClose={() => {
-          setVisAvbrytModal(false);
-          return true;
-        }}
-      >
-        <Modal.Body>
-          <BodyShort spacing>Er du sikker på at du vil avbryte denne jobben?</BodyShort>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button type="button" variant="secondary" onClick={() => setVisAvbrytModal(false)}>
-            Nei, gå tilbake
-          </Button>
-          <Button
-            type="button"
-            variant="danger"
-            onClick={async () => {
-              await onAvbrytJobbClick(jobb.id);
-
-              setVisAvbrytModal(false);
-            }}
-          >
-            Ja, avbryt jobb
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </Box>
   );
 };

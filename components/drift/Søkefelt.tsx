@@ -1,6 +1,6 @@
 'use client';
 
-import { ActionMenu, Box, HStack, Modal, Search } from '@navikt/ds-react';
+import { ActionMenu, Box, Dialog, HStack, Search } from '@navikt/ds-react';
 import { MagnifyingGlassIcon } from '@navikt/aksel-icons';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -62,28 +62,33 @@ export const Søkefelt = () => {
         </ActionMenu.Trigger>
       </ActionMenu>
 
-      <Modal open={open} onClose={() => setOpen(false)} header={{ heading: 'Søk' }} size="medium">
-        <Modal.Body>
-          <Box margin="space-8">
-            <Search
-              ref={searchRef}
-              label="Søk"
-              size="medium"
-              variant="simple"
-              placeholder="Saksnummer, journalpostID, ..."
-              value={searchValue}
-              onChange={(value) => setSearchValue(value)}
-              onSearchClick={handleSearch}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                  handleSearch(searchValue);
-                }
-              }}
-            />
-          </Box>
-        </Modal.Body>
-      </Modal>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog.Popup>
+          <Dialog.Header>
+            <Dialog.Title>Søk</Dialog.Title>
+          </Dialog.Header>
+          <Dialog.Body>
+            <Box margin="space-8">
+              <Search
+                ref={searchRef}
+                label="Søk"
+                size="medium"
+                variant="simple"
+                placeholder="Saksnummer, journalpostID, ..."
+                value={searchValue}
+                onChange={(value) => setSearchValue(value)}
+                onSearchClick={handleSearch}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleSearch(searchValue);
+                  }
+                }}
+              />
+            </Box>
+          </Dialog.Body>
+        </Dialog.Popup>
+      </Dialog>
     </>
   );
 };
