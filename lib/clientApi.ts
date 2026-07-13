@@ -149,6 +149,10 @@ export function hentOppgavefiltre() {
   return fetch(`/api/drift/oppgave/filter`, { method: 'GET' });
 }
 
+export function hentUtbetalingStatus() {
+  return fetch(`/api/drift/utbetaling/feilstatus`, { method: 'GET' });
+}
+
 export function lagreOppgavefilter(request: object) {
   return fetch(`/api/drift/oppgave/filter`, {
     method: 'POST',

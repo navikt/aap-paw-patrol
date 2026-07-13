@@ -1,5 +1,6 @@
 import { fetchProxy } from 'lib/services/fetchProxy';
 import { isDev, isLocal } from '@navikt/aap-felles-utils';
+import { UtbetalingStatusDto } from 'lib/types/utbetaling';
 
 export type AppNavn =
   | 'behandlingsflyt'
@@ -198,6 +199,12 @@ export const hentSisteKjørteJobber = async (appNavn: AppNavn) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp(appNavn);
   const url = `${baseUrl}/drift/api/jobb/sisteKjørte`;
   return await fetchProxy<JobbInfo[]>(url, scope, 'GET');
+};
+
+export const hentUtbetalingFeilstatus = async () => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('utbetal');
+  const url = `${baseUrl}/admin/status`;
+  return await fetchProxy<UtbetalingStatusDto>(url, scope, 'GET');
 };
 
 export const kjørFraSteg = async (behandlingsreferanse: string, steg: string) => {
