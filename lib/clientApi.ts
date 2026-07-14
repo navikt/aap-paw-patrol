@@ -157,6 +157,10 @@ export function hentMigreringsStatus() {
   return fetch(`/api/drift/utbetaling/migrering`, { method: 'GET' });
 }
 
+export function hentUtbetalingstidslinje(saksnummer: string) {
+  return fetch(`/api/drift/utbetaling/tidslinje/${saksnummer}`, { method: 'GET' });
+}
+
 export function lagreOppgavefilter(request: object) {
   return fetch(`/api/drift/oppgave/filter`, {
     method: 'POST',

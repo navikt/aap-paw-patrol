@@ -1,6 +1,6 @@
 import { fetchProxy } from 'lib/services/fetchProxy';
 import { isDev, isLocal } from '@navikt/aap-felles-utils';
-import { MigreringsStatusDto, UtbetalingStatusDto } from 'lib/types/utbetaling';
+import { MigreringsStatusDto, UtbetalingStatusDto, UtbetalingstidslinjeDto } from 'lib/types/utbetaling';
 
 export type AppNavn =
   | 'behandlingsflyt'
@@ -211,6 +211,12 @@ export const hentMigreringsStatus = async () => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('utbetal');
   const url = `${baseUrl}/admin/migrering/status`;
   return await fetchProxy<MigreringsStatusDto>(url, scope, 'GET');
+};
+
+export const hentUtbetalingstidslinje = async (saksnummer: string) => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('utbetal');
+  const url = `${baseUrl}/admin/utbetalingstidslinje/${saksnummer}`;
+  return await fetchProxy<UtbetalingstidslinjeDto>(url, scope, 'GET');
 };
 
 export const kjørFraSteg = async (behandlingsreferanse: string, steg: string) => {
