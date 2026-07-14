@@ -28,7 +28,7 @@ export const AvklaringsbehovInfo = ({ avklaringsbehov }: { avklaringsbehov: Fore
         key={`${behov.definisjon}-${i}`}
         title={
           behov.årsakTilSettPåVent
-            ? `${capitalize(behov.årsakTilSettPåVent)}`
+            ? `${capitalize(behov.årsakTilSettPåVent)} (frist ${behov.fristSettPåVent ? formaterDatoForFrontend(behov.fristSettPåVent) : 'N/A'})`
             : `${capitalize(behov.definisjon.løsesISteg)} (${behov.definisjon.kode})`
         }
         timestamp={`${formaterDatoMedTidspunktSekunderForFrontend(behov.tidsstempel)} - ${behov.endretAv}`}
