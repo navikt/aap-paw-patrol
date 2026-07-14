@@ -98,6 +98,15 @@ export default function Home() {
                   <LinkCardAnchor href={`/drift/utbetaling`}>Sjekk status på utbetalinger</LinkCardAnchor>
                 </LinkCardTitle>
               </LinkCard>
+
+              <LinkCard size="small">
+                <LinkCardIcon>
+                  <MagnifyingGlassIcon fontSize="2rem" />
+                </LinkCardIcon>
+                <LinkCardTitle>
+                  <LinkCardAnchor href={`/drift/utbetaling/migrering`}>Sjekk migreringsstatus</LinkCardAnchor>
+                </LinkCardTitle>
+              </LinkCard>
             </HGrid>
           </Box>
 

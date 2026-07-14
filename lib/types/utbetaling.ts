@@ -11,3 +11,8 @@ export interface UtbetalingInfoDto {
   utbetalingOpprettet: string;
   utbetalingEndret?: string | null;
 }
+
+export interface MigreringsStatusDto {
+  antallGammeltApi: number;
+  antallNyttApi: number;
+}
