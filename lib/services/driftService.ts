@@ -1,6 +1,6 @@
 import { fetchProxy } from 'lib/services/fetchProxy';
 import { isDev, isLocal } from '@navikt/aap-felles-utils';
-import { UtbetalingStatusDto } from 'lib/types/utbetaling';
+import { MigreringsStatusDto, UtbetalingStatusDto } from 'lib/types/utbetaling';
 
 export type AppNavn =
   | 'behandlingsflyt'
@@ -205,6 +205,12 @@ export const hentUtbetalingFeilstatus = async () => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('utbetal');
   const url = `${baseUrl}/admin/status`;
   return await fetchProxy<UtbetalingStatusDto>(url, scope, 'GET');
+};
+
+export const hentMigreringsStatus = async () => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('utbetal');
+  const url = `${baseUrl}/admin/migrering/status`;
+  return await fetchProxy<MigreringsStatusDto>(url, scope, 'GET');
 };
 
 export const kjørFraSteg = async (behandlingsreferanse: string, steg: string) => {
