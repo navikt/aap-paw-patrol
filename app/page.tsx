@@ -3,6 +3,7 @@ import { Page, PageBlock } from '@navikt/ds-react/Page';
 import { appInfo } from 'lib/services/driftService';
 import { LinkCard, LinkCardAnchor, LinkCardIcon, LinkCardTitle } from '@navikt/ds-react/LinkCard';
 import {
+  ArrowsSquarepathIcon,
   BackwardIcon,
   ClockIcon,
   EnvelopeClosedIcon,
@@ -114,6 +115,17 @@ export default function Home() {
                 </LinkCardIcon>
                 <LinkCardTitle>
                   <LinkCardAnchor href={`/drift/utbetaling/tidslinje`}>Utbetalinger for sak</LinkCardAnchor>
+                </LinkCardTitle>
+              </LinkCard>
+
+              <LinkCard size="small">
+                <LinkCardIcon>
+                  <ArrowsSquarepathIcon fontSize="2rem" />
+                </LinkCardIcon>
+                <LinkCardTitle>
+                  <LinkCardAnchor href={`/drift/utbetaling/referansekonverter`}>
+                    Konverter behandlingsreferanse
+                  </LinkCardAnchor>
                 </LinkCardTitle>
               </LinkCard>
             </HGrid>
