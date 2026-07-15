@@ -1,13 +1,21 @@
 import { useEffect, useState } from 'react';
 import { hentMeldekortDriftsinfo } from 'lib/clientApi';
 import { MeldekortDriftsinfoDto } from 'lib/types/meldekort';
-import { Alert, Box, Loader } from '@navikt/ds-react';
+import { Alert, BodyShort, Box, HStack, Label, Loader } from '@navikt/ds-react';
 import { MeldekortVarsler } from 'components/drift/sakogbehandling/meldekort/MeldekortVarsler';
 import { MeldekortUtfyllinger } from 'components/drift/sakogbehandling/meldekort/MeldekortUtfyllinger';
 import { MeldekortAktuelleMeldeperioder } from 'components/drift/sakogbehandling/meldekort/MeldekortAktuelleMeldeperioder';
 import { MeldekortHistoriskeMeldeperioder } from 'components/drift/sakogbehandling/meldekort/MeldekortHistoriskeMeldeperioder';
+import { formaterPeriodeV2, perioderErLike } from 'lib/utils/date';
+import { Periode } from 'lib/types/felles';
 
-export const Meldekort = ({ saksnummer }: { saksnummer: string }) => {
+export const Meldekort = ({
+  saksnummer,
+  sakRettighetsperiode,
+}: {
+  saksnummer: string;
+  sakRettighetsperiode: Periode;
+}) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [data, setData] = useState<MeldekortDriftsinfoDto>();
   const [error, setError] = useState<string>();
@@ -36,6 +44,32 @@ export const Meldekort = ({ saksnummer }: { saksnummer: string }) => {
   return (
     <Box padding="space-16">
       {error && <Alert variant="error">{error}</Alert>}
+
+      <Box
+        background="info-soft"
+        padding="space-16"
+        marginBlock="space-16"
+        borderRadius="16"
+        borderColor="neutral-subtle"
+        borderWidth="1"
+      >
+        <HStack gap="space-16">
+          <div>
+            <Label>Status</Label>
+            <BodyShort>{data?.sak.status}</BodyShort>
+          </div>
+          <div>
+            <Label>Rettighetsperiode</Label>
+            <BodyShort>{data?.sak.rettighetsperiode && formaterPeriodeV2(data.sak.rettighetsperiode)}</BodyShort>
+          </div>
+          {data && !perioderErLike(data.sak.rettighetsperiode, sakRettighetsperiode) && (
+            <Alert variant="warning">
+              Rettighetsperioden lagret i meldekort-backend samsvarer ikke med den i behandlingsflyt. Dette må
+              korrigeres manuelt i databasen til meldekort-backend.
+            </Alert>
+          )}
+        </HStack>
+      </Box>
 
       <MeldekortAktuelleMeldeperioder
         saksnummer={saksnummer}

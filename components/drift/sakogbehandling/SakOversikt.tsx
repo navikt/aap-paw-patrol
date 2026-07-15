@@ -94,7 +94,7 @@ export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
               <Dialogmeldinger saksnummer={saksnummer} />
             </Tabs.Panel>
             <Tabs.Panel value={Tab.MELDEKORT}>
-              <Meldekort saksnummer={saksnummer} />
+              <Meldekort saksnummer={saksnummer} sakRettighetsperiode={sak.rettighetsperiode} />
             </Tabs.Panel>
             <Tabs.Panel value={Tab.BREV}>
               <BrevBestillinger saksnummer={saksnummer} />

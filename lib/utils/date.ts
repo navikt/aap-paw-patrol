@@ -21,6 +21,10 @@ export function formaterPeriodeV2(periode: Periode): string {
   return formaterPeriode(periode.fom, periode.tom);
 }
 
+export function perioderErLike(p1: Periode, p2: Periode): boolean {
+  return p1.fom === p2.fom && p1.tom === p2.tom;
+}
+
 export function formaterPeriode(dato1?: string | null, dato2?: string | null): string {
   if (dato1 && !dato2) {
     return `${formaterDatoForFrontend(dato1)} - `;

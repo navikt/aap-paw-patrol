@@ -1,8 +1,16 @@
+import { Periode } from 'lib/types/felles';
+
 export interface MeldekortDriftsinfoDto {
+  sak: KelvinSak;
   aktuelleMeldeperioder: AktuelleMeldeperioderDriftsinfo[];
   historiskeMeldeperioder: HistoriskeMeldeperioderDriftsinfo[];
   utfyllinger: UtfyllingDriftsinfo[];
   varsler: Varsel[];
+}
+
+export interface KelvinSak {
+  status?: string;
+  rettighetsperiode: Periode;
 }
 
 export interface Meldeperiode {
@@ -42,11 +50,6 @@ export type FagsystemNavn = 'ARENA' | 'KELVIN';
 
 export interface Fagsaknummer {
   asString: string;
-}
-
-export interface Periode {
-  fom: string;
-  tom: string;
 }
 
 export type UtfyllingFlytNavn = 'AAP_FLYT' | 'AAP_FLYT_V2' | 'AAP_KORRIGERING_FLYT' | 'AAP_KORRIGERING_FLYT_V2';
