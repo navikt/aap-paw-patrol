@@ -11,6 +11,7 @@ import { notFound } from 'next/navigation';
 import { Page, PageBlock } from '@navikt/ds-react/Page';
 import { JobberNavbar } from 'components/drift/navbar/JobberNavbar';
 import { Metadata } from 'next';
+import { hentBrukerInformasjon } from 'lib/azure/azureUserService';
 
 interface Params {
   app: AppNavn;
@@ -30,9 +31,13 @@ const DriftPage = async ({ params }: { params: Promise<Params> }) => {
   if (appInfo.find((appInfo) => appInfo.name === app) === undefined) {
     return notFound();
   }
-  const feilendeJobber = await hentFeilendeJobber(app);
-  const planlagteJobber = await hentPlanlagteJobber(app);
-  const sisteKjørteJobber = await hentSisteKjørteJobber(app);
+
+  const [feilendeJobber, planlagteJobber, sisteKjørteJobber, brukerInformasjon] = await Promise.all([
+    hentFeilendeJobber(app),
+    hentPlanlagteJobber(app),
+    hentSisteKjørteJobber(app),
+    hentBrukerInformasjon(),
+  ]);
 
   return (
     <>
@@ -50,6 +55,7 @@ const DriftPage = async ({ params }: { params: Promise<Params> }) => {
               feilendeJobber={feilendeJobber}
               planlagteJobber={planlagteJobber}
               sisteKjørteJobber={sisteKjørteJobber}
+              navIdent={brukerInformasjon.NAVident ?? ''}
             />
           </Box>
         </PageBlock>
