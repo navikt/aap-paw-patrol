@@ -9,17 +9,8 @@ import { format } from 'date-fns';
 import { LinkIcon } from '@navikt/aksel-icons';
 import { AvbrytJobbDialog } from 'components/drift/feilendejobber/AvbrytJobbDialog';
 import { Kommentarfelt } from 'components/drift/feilendejobber/Kommentarfelt';
-import { AnsvarligUtvikler } from 'components/drift/feilendejobber/AnsvarligUtvikler';
 
-export const FeilendeJobbPanel = ({
-  jobb,
-  appNavn,
-  innloggetNavIdent,
-}: {
-  jobb: JobbInfo;
-  appNavn: AppNavn;
-  innloggetNavIdent: string;
-}) => {
+export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: AppNavn }) => {
   const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [result, setResult] = useState<{ success: boolean; message: string }>();
@@ -97,19 +88,12 @@ export const FeilendeJobbPanel = ({
             </BodyShort>
           </div>
           {[...objectToMap(jobb.metadata)].map(([key, value]) => (
-            <div key={key}>
+            <div key={`jobb-${jobb.id}-meta-${key}`}>
               <Detail>{key}</Detail>
               <CopyButton size="xsmall" copyText={value} text={value} activeText={`Kopierte ${key}`} />
             </div>
           ))}
         </HStack>
-
-        <AnsvarligUtvikler
-          jobbId={jobb.id}
-          appNavn={appNavn}
-          innloggetNavIdent={innloggetNavIdent}
-          initiellAnsvarlig={jobb.tilleggsinfo?.ansvarlig ?? null}
-        />
 
         <Box
           background="warning-soft"
@@ -127,7 +111,7 @@ export const FeilendeJobbPanel = ({
           </pre>
         </Box>
 
-        <Kommentarfelt jobbId={jobb.id} appNavn={appNavn} kommentarer={jobb.tilleggsinfo?.kommentarer ?? []} />
+        <Kommentarfelt jobbId={jobb.id} appNavn={appNavn} initielleKommentarer={jobb.tilleggsinfo?.kommentarer ?? []} />
       </VStack>
     </Box>
   );

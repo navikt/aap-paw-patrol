@@ -5,10 +5,9 @@ import { FeilendeJobbPanel } from 'components/drift/feilendejobber/FeilendeJobbP
 interface Props {
   appNavn: AppNavn;
   jobber: JobbInfo[];
-  navIdent: string;
 }
 
-export const FeilendeJobber = ({ jobber, appNavn, navIdent }: Props) => {
+export const FeilendeJobber = ({ jobber, appNavn }: Props) => {
   return (
     <VStack gap="space-16" marginBlock="space-32">
       <Heading size={'small'} level={'3'}>
@@ -20,8 +19,8 @@ export const FeilendeJobber = ({ jobber, appNavn, navIdent }: Props) => {
           <Alert variant={'error'}>Det finnes {jobber.length} feilede jobb(er)</Alert>
 
           <VStack gap="space-16">
-            {jobber.map((jobb, index) => (
-              <FeilendeJobbPanel jobb={jobb} appNavn={appNavn} innloggetNavIdent={navIdent} key={index} />
+            {jobber.map((jobb) => (
+              <FeilendeJobbPanel jobb={jobb} appNavn={appNavn} key={`jobb-${jobb.id}`} />
             ))}
           </VStack>
         </>

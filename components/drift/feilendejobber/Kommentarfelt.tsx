@@ -1,37 +1,59 @@
-import { Alert, BodyShort, Box, Button, Detail, HStack, Label, Tag, Textarea, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Box, Button, Detail, HStack, Label, Link, Tag, Textarea, VStack } from '@navikt/ds-react';
 import { AppNavn, JobbKommentar } from 'lib/services/driftService';
 import React, { useState } from 'react';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { leggTilKommentar } from 'lib/clientApi';
 
+const URL_REGEX = /(https?:\/\/\S+)/g;
+
+function BodyShortMedLenker({ tekst }: { tekst: string }) {
+  const deler = tekst.split(URL_REGEX);
+  return (
+    <BodyShort size="small" style={{ paddingLeft: '36px' }}>
+      {deler.map((del, i) =>
+        del.startsWith('http') ? (
+          <Link key={i} href={del} target="_blank" rel="noopener noreferrer">
+            {del}
+          </Link>
+        ) : (
+          <React.Fragment key={i}>{del}</React.Fragment>
+        )
+      )}
+    </BodyShort>
+  );
+}
+
 export const Kommentarfelt = ({
   jobbId,
   appNavn,
-  kommentarer,
+  initielleKommentarer,
 }: {
   jobbId: number;
   appNavn: AppNavn;
-  kommentarer: JobbKommentar[];
+  initielleKommentarer: JobbKommentar[];
 }) => {
   const [nyKommentar, setNyKommentar] = useState('');
-  const [kommentarLoading, setKommentarLoading] = useState(false);
-  const [kommentarResult, setKommentarResult] = useState<{ success: boolean; message: string }>();
+  const [kommentarer, setKommentarer] = useState(initielleKommentarer || []);
+  const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState<{ success: boolean; message: string }>();
 
-  async function onLeggTilKommentarClick(id: number) {
+  async function onLeggTilKommentarClick() {
     if (!nyKommentar.trim()) return;
-    setKommentarResult(undefined);
-    setKommentarLoading(true);
-    await leggTilKommentar(appNavn, id, nyKommentar.trim())
+    setResult(undefined);
+    setIsLoading(true);
+    await leggTilKommentar(appNavn, jobbId, nyKommentar.trim())
       .then(async (res) => {
         if (res.ok) {
+          const nyKommentarObj = await res.json();
+          setKommentarer([...kommentarer, nyKommentarObj]);
+          setResult({ success: true, message: 'Kommentar lagt til' });
           setNyKommentar('');
-          setKommentarResult({ success: true, message: 'Kommentar lagt til' });
         } else {
-          setKommentarResult({ success: false, message: await res.text() });
+          setResult({ success: false, message: await res.text() });
         }
       })
-      .catch((err) => setKommentarResult({ success: false, message: err.message || 'Noe gikk galt' }))
-      .finally(() => setKommentarLoading(false));
+      .catch((err) => setResult({ success: false, message: err.message || 'Noe gikk galt' }))
+      .finally(() => setIsLoading(false));
   }
 
   return (
@@ -49,7 +71,7 @@ export const Kommentarfelt = ({
         <VStack gap="space-4" marginBlock="space-0 space-12">
           {kommentarer.map((k, i) => (
             <Box
-              key={i}
+              key={`jobb-${jobbId}-kommentar-${i}`}
               background="neutral-soft"
               borderRadius="8"
               padding="space-12"
@@ -64,9 +86,7 @@ export const Kommentarfelt = ({
                   {formaterDatoMedTidspunktSekunderForFrontend(k.tidspunkt)}
                 </Detail>
               </HStack>
-              <BodyShort size="small" style={{ paddingLeft: '36px' }}>
-                {k.tekst}
-              </BodyShort>
+              <BodyShortMedLenker tekst={k.tekst} />
             </Box>
           ))}
         </VStack>
@@ -87,15 +107,15 @@ export const Kommentarfelt = ({
           <Button
             size="small"
             variant="secondary"
-            loading={kommentarLoading}
+            loading={isLoading}
             disabled={!nyKommentar.trim()}
-            onClick={() => onLeggTilKommentarClick(jobbId)}
+            onClick={onLeggTilKommentarClick}
           >
             Legg til kommentar
           </Button>
-          {kommentarResult && (
-            <Alert variant={kommentarResult.success ? 'success' : 'error'} size="small" inline>
-              {kommentarResult.message}
+          {result && (
+            <Alert variant={result.success ? 'success' : 'error'} size="small" inline>
+              {result.message}
             </Alert>
           )}
         </HStack>

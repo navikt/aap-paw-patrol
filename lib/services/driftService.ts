@@ -62,7 +62,6 @@ export interface JobbKommentar {
 }
 
 export interface JobbTilleggsinfo {
-  ansvarlig?: string | null;
   kommentarer: JobbKommentar[];
 }
 
@@ -205,12 +204,6 @@ export const avbrytFeiledeJobber = async (appNavn: AppNavn) => {
   } else {
     throw new Error('Kan ikke avbryte feilede jobber i prod');
   }
-};
-
-export const settAnsvarlig = async (appNavn: AppNavn, jobbId: string, ansvarlig: string) => {
-  const { baseUrl, scope } = await getBaseUrlAndScopeForApp(appNavn);
-  const url = `${baseUrl}/drift/api/jobb/${jobbId}/settAnsvarlig`;
-  return await fetchProxy<string>(url, scope, 'POST', { ansvarlig });
 };
 
 export const leggTilKommentar = async (appNavn: AppNavn, jobbId: string, kommentar: string) => {

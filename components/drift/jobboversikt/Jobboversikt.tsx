@@ -15,17 +15,16 @@ interface Props {
   planlagteJobber: JobbInfo[];
   feilendeJobber: JobbInfo[];
   sisteKjørteJobber: JobbInfo[];
-  navIdent: string;
 }
 
-export const Jobboversikt = ({ appNavn, planlagteJobber, feilendeJobber, sisteKjørteJobber, navIdent }: Props) => {
+export const Jobboversikt = ({ appNavn, planlagteJobber, feilendeJobber, sisteKjørteJobber }: Props) => {
   return (
     <VStack gap="space-32">
       <RekjørFeiledeJobber appNavn={appNavn} />
       {(isLocal() || isDev()) && <AvbrytFeiledeJobber appNavn={appNavn} />}
       <RekjørSpesifikkJobb appNavn={appNavn} />
       <PlanlagteJobber planlagteJobber={planlagteJobber} appNavn={appNavn} />
-      <FeilendeJobber appNavn={appNavn} jobber={feilendeJobber} navIdent={navIdent} />
+      <FeilendeJobber appNavn={appNavn} jobber={feilendeJobber} />
       <SisteKjørteJobber sisteKjørteJobber={sisteKjørteJobber} />
     </VStack>
   );

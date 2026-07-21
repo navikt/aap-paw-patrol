@@ -20,13 +20,6 @@ export function avbrytKjørendeJobb(appNavn: AppNavn, jobbId: number) {
   return fetch(`/api/drift/jobber/${appNavn}/jobb/avbryt/${jobbId}`, { method: 'GET' });
 }
 
-export function settAnsvarlig(appNavn: AppNavn, jobbId: number, ansvarlig: string) {
-  return fetch(`/api/drift/jobber/${appNavn}/jobb/${jobbId}/settAnsvarlig`, {
-    method: 'POST',
-    body: JSON.stringify({ ansvarlig }),
-  });
-}
-
 export function leggTilKommentar(appNavn: AppNavn, jobbId: number, kommentar: string) {
   return fetch(`/api/drift/jobber/${appNavn}/jobb/${jobbId}/leggTilKommentar`, {
     method: 'POST',
