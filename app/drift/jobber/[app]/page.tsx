@@ -30,9 +30,12 @@ const DriftPage = async ({ params }: { params: Promise<Params> }) => {
   if (appInfo.find((appInfo) => appInfo.name === app) === undefined) {
     return notFound();
   }
-  const feilendeJobber = await hentFeilendeJobber(app);
-  const planlagteJobber = await hentPlanlagteJobber(app);
-  const sisteKjørteJobber = await hentSisteKjørteJobber(app);
+
+  const [feilendeJobber, planlagteJobber, sisteKjørteJobber] = await Promise.all([
+    hentFeilendeJobber(app),
+    hentPlanlagteJobber(app),
+    hentSisteKjørteJobber(app),
+  ]);
 
   return (
     <>

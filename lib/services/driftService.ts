@@ -55,6 +55,16 @@ interface BaseUrlAndScope {
   scope: string;
 }
 
+export interface JobbKommentar {
+  skrevetAv: string;
+  tekst: string;
+  tidspunkt: string;
+}
+
+export interface JobbTilleggsinfo {
+  kommentarer: JobbKommentar[];
+}
+
 // TODO: Importere fra swaggerdoc
 export interface JobbInfo {
   /** Format: int32 */
@@ -77,6 +87,7 @@ export interface JobbInfo {
   status: 'KLAR' | 'PLUKKET' | 'FERDIG' | 'FEILET' | 'AVBRUTT';
   type: string;
   opprettetTidspunkt?: string | null;
+  tilleggsinfo?: JobbTilleggsinfo | null;
 }
 
 export const getBaseUrlAndScopeForApp = async (appNavn: AppNavn): Promise<BaseUrlAndScope> => {
@@ -193,6 +204,12 @@ export const avbrytFeiledeJobber = async (appNavn: AppNavn) => {
   } else {
     throw new Error('Kan ikke avbryte feilede jobber i prod');
   }
+};
+
+export const leggTilKommentar = async (appNavn: AppNavn, jobbId: string, kommentar: string) => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp(appNavn);
+  const url = `${baseUrl}/drift/api/jobb/${jobbId}/leggTilKommentar`;
+  return await fetchProxy<string>(url, scope, 'POST', { kommentar });
 };
 
 export const hentSisteKjørteJobber = async (appNavn: AppNavn) => {

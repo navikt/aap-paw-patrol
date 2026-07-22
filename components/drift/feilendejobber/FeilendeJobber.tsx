@@ -19,8 +19,8 @@ export const FeilendeJobber = ({ jobber, appNavn }: Props) => {
           <Alert variant={'error'}>Det finnes {jobber.length} feilede jobb(er)</Alert>
 
           <VStack gap="space-16">
-            {jobber.map((jobb, index) => (
-              <FeilendeJobbPanel jobb={jobb} appNavn={appNavn} key={index} />
+            {jobber.map((jobb) => (
+              <FeilendeJobbPanel jobb={jobb} appNavn={appNavn} key={`jobb-${jobb.id}`} />
             ))}
           </VStack>
         </>
