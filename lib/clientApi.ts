@@ -16,8 +16,12 @@ export function avbrytAlleFeiledeJobber(appNavn: AppNavn) {
   return fetch(`/api/drift/jobber/${appNavn}/jobb/avbrytfeilede`, { method: 'GET' });
 }
 
-export function avbrytKjørendeJobb(appNavn: AppNavn, jobbId: number) {
-  return fetch(`/api/drift/jobber/${appNavn}/jobb/avbryt/${jobbId}`, { method: 'GET' });
+export function avbrytKjørendeJobb(appNavn: AppNavn, jobbId: number, begrunnelse: string) {
+  return fetch(`/api/drift/jobber/${appNavn}/jobb/avbryt/${jobbId}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ begrunnelse }),
+  });
 }
 
 export function leggTilKommentar(appNavn: AppNavn, jobbId: number, kommentar: string) {
