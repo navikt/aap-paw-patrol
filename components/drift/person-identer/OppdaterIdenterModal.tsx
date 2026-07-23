@@ -13,7 +13,7 @@ export const OppdaterIdenterModal = ({ saksnummer }: { saksnummer: string }) => 
 
       <Dialog.Popup>
         <Dialog.Header>
-          <Dialog.Title>Oppdater identer for sak ${saksnummer}</Dialog.Title>
+          <Dialog.Title>Oppdater identer for sak {saksnummer}</Dialog.Title>
         </Dialog.Header>
         <Dialog.Body>
           <OppdaterPersonIdenter overstyrtSaksnummer={saksnummer} />
