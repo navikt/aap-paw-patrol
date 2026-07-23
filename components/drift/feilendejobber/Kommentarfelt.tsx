@@ -10,13 +10,13 @@ function BodyShortMedLenker({ tekst }: { tekst: string }) {
   const deler = tekst.split(URL_REGEX);
   return (
     <BodyShort size="small" style={{ paddingLeft: '36px' }}>
-      {deler.map((del, i) =>
+      {deler.map((del) =>
         del.startsWith('http') ? (
-          <Link key={i} href={del} target="_blank" rel="noopener noreferrer">
+          <Link key={crypto.randomUUID()} href={del} target="_blank" rel="noopener noreferrer">
             {del}
           </Link>
         ) : (
-          <React.Fragment key={i}>{del}</React.Fragment>
+          <React.Fragment key={crypto.randomUUID()}>{del}</React.Fragment>
         )
       )}
     </BodyShort>

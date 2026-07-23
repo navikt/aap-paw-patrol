@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  InlineMessage,
-  Loader,
-  LocalAlert,
-  Table,
-  VStack,
-} from '@navikt/ds-react';
+import { Box, Button, InlineMessage, Loader, LocalAlert, Table, VStack } from '@navikt/ds-react';
 import { formatISO } from 'date-fns';
 import { hentDsopVedtak } from 'lib/clientApi';
 import { useState } from 'react';
@@ -31,7 +23,7 @@ export interface Props {
   fnr?: string | null;
 }
 
-export const DsopVedtak = ({fom, tom, fnr}: Props) => {
+export const DsopVedtak = ({ fom, tom, fnr }: Props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
   const [dsopVedtak, setDsopVedtak] = useState<DsopVedtakResponse>();
@@ -98,7 +90,7 @@ export const DsopVedtak = ({fom, tom, fnr}: Props) => {
                 {dsopVedtak.vedtak.map(
                   ({ virkningsperiode: { fom, tom }, vedtakId, vedtakStatus, vedtaksType, vedtaksvariant, utfall }) => {
                     return (
-                      <Table.Row key={fom}>
+                      <Table.Row key={crypto.randomUUID()}>
                         <Table.DataCell>{fom}</Table.DataCell>
                         <Table.DataCell>{tom ?? ''}</Table.DataCell>
                         <Table.DataCell>{vedtakId}</Table.DataCell>
@@ -117,4 +109,4 @@ export const DsopVedtak = ({fom, tom, fnr}: Props) => {
       </VStack>
     </Box>
   );
-}
+};

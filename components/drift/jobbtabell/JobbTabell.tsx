@@ -52,7 +52,7 @@ export const JobbTabell = ({ jobber, appNavn }: Props) => {
           {jobber.map((jobb) => {
             return (
               <Table.ExpandableRow
-                key={jobb.id}
+                key={`jobb-${jobb.id}`}
                 content={
                   <HStack>
                     <VStack gap="space-16">
@@ -70,7 +70,7 @@ export const JobbTabell = ({ jobber, appNavn }: Props) => {
                     <VStack gap="space-16">
                       {[...objectToMap(jobb.metadata)].map(([key, value]) => {
                         return (
-                          <div key={key}>
+                          <div key={crypto.randomUUID()}>
                             <Label>{key}</Label>
                             <BodyShort>{value}</BodyShort>
                           </div>

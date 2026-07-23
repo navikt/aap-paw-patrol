@@ -20,7 +20,7 @@ export const FeilendeJobber = ({ jobber, appNavn }: Props) => {
 
           <VStack gap="space-16">
             {jobber.map((jobb) => (
-              <FeilendeJobbPanel jobb={jobb} appNavn={appNavn} key={`jobb-${jobb.id}`} />
+              <FeilendeJobbPanel jobb={jobb} appNavn={appNavn} key={`feilet-jobb-${jobb.id}`} />
             ))}
           </VStack>
         </>

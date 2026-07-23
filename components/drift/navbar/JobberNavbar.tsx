@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Button, Detail, HStack, Label } from '@navikt/ds-react';
 import { appInfo } from 'lib/services/driftService';
 import { ChevronRightIcon } from '@navikt/aksel-icons';
@@ -17,8 +18,8 @@ export const JobberNavbar = ({ currentApp }: { currentApp: string }) => (
       <ChevronRightIcon />
 
       {appInfo.map((app, i) => (
-        <>
-          <div key={app.name}>
+        <React.Fragment key={app.name}>
+          <div>
             <Button
               as="a"
               href={`/drift/jobber/${app.name}`}
@@ -30,7 +31,7 @@ export const JobberNavbar = ({ currentApp }: { currentApp: string }) => (
             </Button>
           </div>
           {i !== appInfo.length - 1 && <Detail textColor="subtle"> | </Detail>}
-        </>
+        </React.Fragment>
       ))}
     </HStack>
   </Box>
