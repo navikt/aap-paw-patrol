@@ -34,13 +34,16 @@ export const Kommentarfelt = ({
 }) => {
   const [nyKommentar, setNyKommentar] = useState('');
   const [kommentarer, setKommentarer] = useState(initielleKommentarer || []);
+  const [showInput, setShowInput] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<{ success: boolean; message: string }>();
 
   async function onLeggTilKommentarClick() {
     if (!nyKommentar.trim()) return;
+
     setResult(undefined);
     setIsLoading(true);
+
     await leggTilKommentar(appNavn, jobbId, nyKommentar.trim())
       .then(async (res) => {
         if (res.ok) {
@@ -53,7 +56,10 @@ export const Kommentarfelt = ({
         }
       })
       .catch((err) => setResult({ success: false, message: err.message || 'Noe gikk galt' }))
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+        setTimeout(() => setResult(undefined), 3000);
+      });
   }
 
   return (
@@ -96,29 +102,45 @@ export const Kommentarfelt = ({
         <Textarea
           label="Ny kommentar"
           hideLabel
-          placeholder="Skriv en kommentar…"
-          value={nyKommentar}
-          onChange={(e) => setNyKommentar(e.target.value)}
-          minRows={2}
-          maxRows={6}
           size="small"
+          placeholder={!showInput ? 'Trykk for å legge til kommentar' : 'Skriv en kommentar…'}
+          readOnly={!showInput}
+          value={nyKommentar}
+          onFocus={() => !showInput && setShowInput(true)}
+          onClick={() => !showInput && setShowInput(true)}
+          onChange={(e) => setNyKommentar(e.target.value)}
+          style={{ cursor: !showInput ? 'pointer' : 'text' }}
+          minRows={!showInput ? 1 : 2}
+          maxRows={6}
+          /* eslint-disable-next-line jsx-a11y/no-autofocus */
+          autoFocus={showInput}
         />
-        <HStack gap="space-8" align="center">
-          <Button
-            size="small"
-            variant="secondary"
-            loading={isLoading}
-            disabled={!nyKommentar.trim()}
-            onClick={onLeggTilKommentarClick}
-          >
-            Legg til kommentar
-          </Button>
-          {result && (
-            <Alert variant={result.success ? 'success' : 'error'} size="small" inline>
-              {result.message}
-            </Alert>
-          )}
-        </HStack>
+
+        {showInput && (
+          <HStack gap="space-8" align="center" justify="end">
+            <Button
+              size="small"
+              disabled={isLoading}
+              variant="tertiary"
+              onClick={() => {
+                setShowInput(false);
+                setNyKommentar('');
+              }}
+            >
+              Avbryt
+            </Button>
+
+            <Button size="small" loading={isLoading} onClick={onLeggTilKommentarClick} disabled={!nyKommentar.trim()}>
+              Lagre
+            </Button>
+
+            {result && (
+              <Alert variant={result.success ? 'success' : 'error'} size="small" inline>
+                {result.message}
+              </Alert>
+            )}
+          </HStack>
+        )}
       </VStack>
     </div>
   );
