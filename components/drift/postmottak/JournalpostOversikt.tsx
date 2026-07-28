@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   Alert,
   BodyShort,
@@ -199,14 +199,7 @@ export const JournalpostOversikt = ({ journalpostId }: { journalpostId: string }
   const [isLoading, setIsLoading] = useState(true);
   const [journalpost, setJournalpost] = useState<JournalpostInfoDTO>();
 
-  useEffect(() => {
-    if (journalpostId.length > 0) {
-      setError(undefined);
-      hentJournalpost();
-    }
-  }, [journalpostId]);
-
-  const hentJournalpost = async () => {
+  const hentJournalpost = useCallback(async () => {
     setJournalpost(undefined);
     setError(undefined);
     try {
@@ -230,7 +223,14 @@ export const JournalpostOversikt = ({ journalpostId }: { journalpostId: string }
       setError(`Noe gikk galt: ${err}`);
     }
     setIsLoading(false);
-  };
+  }, [journalpostId]);
+
+  useEffect(() => {
+    if (journalpostId.length > 0) {
+      setError(undefined);
+      hentJournalpost();
+    }
+  }, [journalpostId, hentJournalpost]);
 
   if (isLoading) return <Loader />;
   if (!journalpost) return <BodyShort>Ingen journalpost funnet for journalpostId {journalpostId}</BodyShort>;
