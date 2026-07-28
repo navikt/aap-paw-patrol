@@ -126,7 +126,7 @@ export function hentYrkesskader(behandlingsreferanse: string) {
   });
 }
 
-export function hentTidligereVurderinger(behandlingsreferanse: string, førSteg?: string, etterSteg?: string) {
+export function hentTidligereVurderinger(behandlingsreferanse: string, førSteg: string, etterSteg: string) {
   const params = new URLSearchParams();
   if (førSteg) params.set('førSteg', førSteg);
   if (etterSteg) params.set('etterSteg', etterSteg);
