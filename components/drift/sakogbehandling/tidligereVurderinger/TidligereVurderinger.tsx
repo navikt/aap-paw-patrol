@@ -1,21 +1,22 @@
 'use client';
-import { useState } from 'react';
 import { Alert, Button, HStack, Table, Tag, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
 import { hentTidligereVurderinger } from 'lib/clientApi';
 import {
   BehandlingsutfallType,
   RettighetsType,
-  rettighetsTypeHjemmel,
   TidligereVurderingerDto,
+  rettighetsTypeHjemmel,
 } from 'lib/types/tidligereVurderinger';
 import { formaterDatoForFrontend } from 'lib/utils/date';
+import { useState } from 'react';
+
 import { revurderingSteg } from 'components/drift/settaktivtsteg/SettAktivtSteg';
 
 const stegOptions = Object.entries(revurderingSteg).map(([key, value]) => ({ label: value, value: key }));
 
 export const TidligereVurderinger = ({ behandlingsreferanse }: { behandlingsreferanse: string }) => {
-  const [førSteg, setFørSteg] = useState<string>();
-  const [etterSteg, setEtterSteg] = useState<string>();
+  const [førSteg, setFørSteg] = useState<string>('VURDER_SYKEPENGEERSTATNING');
+  const [etterSteg, setEtterSteg] = useState<string>('VURDER_ALDER');
   const [vurderinger, setVurderinger] = useState<TidligereVurderingerDto>();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>();
@@ -48,18 +49,16 @@ export const TidligereVurderinger = ({ behandlingsreferanse }: { behandlingsrefe
           options={stegOptions}
           defaultValue={revurderingSteg['VURDER_ALDER']}
           multiple={false}
-          onToggleSelected={(value, isSelected) => setEtterSteg(isSelected ? value : undefined)}
+          onToggleSelected={(value, isSelected) => setEtterSteg(isSelected ? value : 'VURDER_ALDER')}
           shouldAutocomplete
-          clearButton
         />
         <UNSAFE_Combobox
           label="Frem til steg"
           options={stegOptions}
           defaultValue={revurderingSteg['VURDER_SYKEPENGEERSTATNING']}
           multiple={false}
-          onToggleSelected={(value, isSelected) => setFørSteg(isSelected ? value : undefined)}
+          onToggleSelected={(value, isSelected) => setFørSteg(isSelected ? value : 'VURDER_SYKEPENGEERSTATNING')}
           shouldAutocomplete
-          clearButton
         />
         <Button onClick={hent} loading={isLoading}>
           Hent

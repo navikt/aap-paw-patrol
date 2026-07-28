@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { BodyShort, Button, Heading, HStack, InfoCard, Textarea, TextField, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, InfoCard, Textarea, TextField, VStack } from '@navikt/ds-react';
 import { avbrytBrev } from '../../../lib/clientApi';
 
 export const AvbrytBrev = () => {
