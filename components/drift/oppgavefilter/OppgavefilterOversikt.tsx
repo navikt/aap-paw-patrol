@@ -264,7 +264,6 @@ export const OppgavefilterOversikt = ({ navIdent }: { navIdent: string }) => {
   const [søkeTekst, setSøkeTekst] = useState('');
 
   const lastFiltre = () => {
-    setIsLoading(true);
     hentOppgavefiltre()
       .then(async (res) => {
         if (res.ok) {
@@ -291,6 +290,7 @@ export const OppgavefilterOversikt = ({ navIdent }: { navIdent: string }) => {
       if (res.ok || res.status === 204) {
         setSlettFilter(null);
         setExpandedId(null);
+        setIsLoading(true);
         lastFiltre();
       } else {
         setError(`Feil ved sletting: ${await res.text()}`);
@@ -442,6 +442,7 @@ export const OppgavefilterOversikt = ({ navIdent }: { navIdent: string }) => {
             alleAvklaringsbehov={alleAvklaringsbehov}
             onLagret={() => {
               setVisNyttFilterModal(false);
+              setIsLoading(true);
               lastFiltre();
             }}
             onAvbryt={() => setVisNyttFilterModal(false)}
@@ -464,6 +465,7 @@ export const OppgavefilterOversikt = ({ navIdent }: { navIdent: string }) => {
               onLagret={() => {
                 setRedigerFilter(null);
                 setExpandedId(null);
+                setIsLoading(true);
                 lastFiltre();
               }}
               onAvbryt={() => setRedigerFilter(null)}

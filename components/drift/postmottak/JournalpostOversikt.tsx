@@ -227,7 +227,7 @@ export const JournalpostOversikt = ({ journalpostId }: { journalpostId: string }
 
   useEffect(() => {
     if (journalpostId.length > 0) {
-      setError(undefined);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       hentJournalpost();
     }
   }, [journalpostId, hentJournalpost]);

@@ -12,6 +12,7 @@ export const KjørFraSteg = () => {
 
   useEffect(() => {
     if (behandlingsreferanse && steg) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setError(undefined);
     }
   }, [behandlingsreferanse, steg]);

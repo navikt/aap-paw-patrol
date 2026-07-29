@@ -25,7 +25,6 @@ export const Yrkesskader = ({ behandlingsreferanse }: { behandlingsreferanse: st
         .then((data: YrkesskadeDriftsinfoDto[]) => setYrkesskader(data))
         .finally(() => setIsLoading(false));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [behandlingsreferanse]);
 
   if (isLoading) {

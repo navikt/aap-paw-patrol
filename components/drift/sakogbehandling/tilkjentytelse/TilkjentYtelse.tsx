@@ -23,7 +23,6 @@ export const TilkjentYtelse = ({ behandlingsreferanse }: { behandlingsreferanse:
     }, 1000);
 
     return () => clearTimeout(timeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [behandlingsreferanse]);
 
   if (isLoading) {

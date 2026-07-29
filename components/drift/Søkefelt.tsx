@@ -29,6 +29,7 @@ export const Søkefelt = () => {
     if (open) {
       setTimeout(() => searchRef.current?.focus(), 50);
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSearchValue('');
     }
   }, [open]);

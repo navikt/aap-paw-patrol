@@ -33,7 +33,6 @@ export const Vilkårsresultat = ({ behandlingsreferanse }: { behandlingsreferans
     }, 1000);
 
     return () => clearTimeout(timeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [behandlingsreferanse]);
 
   return (
