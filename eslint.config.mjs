@@ -1,13 +1,8 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
+  baseDirectory: import.meta.dirname,
   recommendedConfig: js.configs.recommended,
   allConfig: js.configs.all,
 });
@@ -19,11 +14,7 @@ export default [
   })),
   {
     files: ['**/*.{js,cjs,mjs,jsx,ts,tsx}'],
-    settings: {
-      react: {
-        version: '19.2.8',
-      },
-    },
+    settings: { react: { version: '19.2.8' } },
     rules: {
       'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
