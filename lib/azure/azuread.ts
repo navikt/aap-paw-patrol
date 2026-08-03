@@ -1,33 +1,13 @@
-import { Client, Issuer } from 'openid-client';
-import { createRemoteJWKSet, FlattenedJWSInput, GetKeyFunction, JWSHeaderParameters, jwtVerify } from 'jose';
-import { getToken } from '@navikt/oasis';
+import { getToken, validateAzureToken } from '@navikt/oasis';
 import { redirect } from 'next/navigation';
 import { isLocal } from '@navikt/aap-felles-utils';
 
-let _issuer: Issuer<Client>;
-let _remoteJWKSet: GetKeyFunction<JWSHeaderParameters, FlattenedJWSInput>;
-
-export async function validerToken(token: string | Uint8Array) {
-  return jwtVerify(token, await jwks(), {
-    issuer: (await issuer()).metadata.issuer,
-  });
-}
-
-async function jwks() {
-  if (typeof _remoteJWKSet === 'undefined') {
-    _remoteJWKSet = createRemoteJWKSet(new URL(process.env.AZURE_OPENID_CONFIG_JWKS_URI as string));
+export async function validerToken(token: string) {
+  const validationResult = await validateAzureToken(token);
+  if (!validationResult.ok) {
+    throw new Error(`Klarte ikke å validere token: ${validationResult.error.message}`);
   }
-
-  return _remoteJWKSet;
-}
-
-async function issuer() {
-  if (typeof _issuer === 'undefined') {
-    if (!process.env.AZURE_APP_WELL_KNOWN_URL)
-      throw new Error(`Miljøvariabelen "AZURE_APP_WELL_KNOWN_URL" må være satt`);
-    _issuer = await Issuer.discover(process.env.AZURE_APP_WELL_KNOWN_URL);
-  }
-  return _issuer;
+  return validationResult.payload;
 }
 
 const lokalFakeAccessToken = isLocal();

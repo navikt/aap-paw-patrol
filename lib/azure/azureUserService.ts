@@ -16,8 +16,8 @@ export async function hentBrukerInformasjon(): Promise<BrukerInformasjon> {
   const requestHeaders = await headers();
   const token = getAccessTokenOrRedirectToLogin(requestHeaders);
 
-  const JWTVerifyResult = await validerToken(token);
-  return { navn: JWTVerifyResult.payload.name as string, NAVident: JWTVerifyResult.payload.NAVident as string };
+  const payload = await validerToken(token);
+  return { navn: payload.name as string, NAVident: payload.NAVident as string };
 }
 
 export enum Roller {
@@ -46,9 +46,9 @@ export async function hentRollerForBruker(): Promise<Roller[]> {
   const requestHeaders = await headers();
   const token = getAccessTokenOrRedirectToLogin(requestHeaders);
 
-  const JWTVerifyResult = await validerToken(token);
+  const payload = await validerToken(token);
 
-  const grupper = JWTVerifyResult.payload.groups as string[];
+  const grupper = payload.groups as string[];
 
   const isDevelopment = isDev();
 
