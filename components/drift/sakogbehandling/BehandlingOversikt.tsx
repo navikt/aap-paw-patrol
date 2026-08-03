@@ -6,7 +6,7 @@ import { AvklaringsbehovInfo } from 'components/drift/sakogbehandling/avklarings
 import { SettAktivtStegV2 } from 'components/drift/sakogbehandling/avklaringsbehov/SettAktivtStegV2';
 import { Vilkårsresultat } from 'components/drift/sakogbehandling/vilkårsresultat/Vilkårsresultat';
 import { Oppgaver } from 'components/drift/sakogbehandling/oppgave/Oppgaver';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { BehandlingDriftsinfo } from 'lib/types/avklaringsbehov';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { TilkjentYtelse } from 'components/drift/sakogbehandling/tilkjentytelse/TilkjentYtelse';
@@ -39,24 +39,28 @@ export const BehandlingOversikt = ({
   const [tab, setTab] = useState<Tab>(Tab.AVKLARINGSBEHOV);
   const [valgtBehandling, setValgtBehandling] = useState<BehandlingDriftsinfo>();
 
+  const oppdaterValgtBehandling = useCallback(
+    (behandling?: BehandlingDriftsinfo) => {
+      if (behandling) {
+        router.replace(`?behandlingref=${behandling.referanse}`);
+      } else {
+        router.replace('');
+      }
+      setValgtBehandling(behandling);
+    },
+    [router]
+  );
+
   useEffect(() => {
     if (behandlinger?.length === 1) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       oppdaterValgtBehandling(behandlinger[0]);
     } else if (searchParams.get('behandlingref')) {
       const behandling = behandlinger.find((b) => b.referanse === searchParams.get('behandlingref'));
       oppdaterValgtBehandling(behandling);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [behandlinger]);
-
-  const oppdaterValgtBehandling = (behandling?: BehandlingDriftsinfo) => {
-    if (behandling) {
-      router.replace(`?behandlingref=${behandling.referanse}`);
-    } else {
-      router.replace('');
-    }
-    setValgtBehandling(behandling);
-  };
+  }, [behandlinger, oppdaterValgtBehandling]);
 
   return (
     <Box margin="space-16">

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Alert, BodyShort, Box, Heading, HGrid, HStack, Loader, Tabs, Tag, VStack } from '@navikt/ds-react';
 import { hentSakDriftsinfo } from 'lib/clientApi';
 import { SakDriftsinfoDTO } from 'lib/types/avklaringsbehov';
@@ -26,11 +26,7 @@ export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
   const [sak, setSak] = useState<SakDriftsinfoDTO>();
   const [tab, setTab] = useState<Tab>(Tab.BEHANDLINGER);
 
-  useEffect(() => {
-    hentSak(saksnummer);
-  }, [saksnummer]);
-
-  const hentSak = async (saksnummer: string) => {
+  const hentSak = useCallback(async (saksnummer: string) => {
     setSak(undefined);
     setError(undefined);
 
@@ -48,7 +44,12 @@ export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
       setError(`Noe gikk galt: ${err}`);
     }
     setIsLoading(false);
-  };
+  }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    hentSak(saksnummer);
+  }, [saksnummer, hentSak]);
 
   if (isLoading) return <Loader />;
   else if (!sak) return <BodyShort>Ingen sak funnet for saksnummer {saksnummer}</BodyShort>;

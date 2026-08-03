@@ -1,7 +1,7 @@
 'use client';
 
 import { Alert, Box, Button, Heading, Link, Table, TextField, VStack } from '@navikt/ds-react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { MagnifyingGlassIcon } from '@navikt/aksel-icons';
 import { Periode } from 'lib/types/felles';
 import { formaterPeriodeV2 } from 'lib/utils/date';
@@ -20,16 +20,7 @@ export const PersonSøkeside = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const lagretIdent = sessionStorage.getItem(StorageKey.PersonSøkIdent);
-    if (lagretIdent) {
-      sessionStorage.removeItem(StorageKey.PersonSøkIdent);
-      setIdent(lagretIdent);
-      hentDataForIdent(lagretIdent);
-    }
-  }, []);
-
-  const hentDataForIdent = async (ident: string) => {
+  const hentDataForIdent = useCallback(async (ident: string) => {
     setIsLoading(true);
     setError(null);
     setResult(null);
@@ -53,7 +44,17 @@ export const PersonSøkeside = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    const lagretIdent = sessionStorage.getItem(StorageKey.PersonSøkIdent);
+    if (lagretIdent) {
+      sessionStorage.removeItem(StorageKey.PersonSøkIdent);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIdent(lagretIdent);
+      hentDataForIdent(lagretIdent);
+    }
+  }, [hentDataForIdent]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

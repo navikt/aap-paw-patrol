@@ -11,6 +11,7 @@ export const UtvidRettighetsperiodeSteg = () => {
 
   useEffect(() => {
     if (behandlingsreferanse) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setError(undefined);
     }
   }, [behandlingsreferanse]);
