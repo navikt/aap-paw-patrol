@@ -29,3 +29,8 @@ export interface UtbetalingDto {
   fastsattDagsats: number;
   utbetalingsdato: string;
 }
+
+export interface MigreringsresultatDto {
+  migrerteSaker: string[];
+  feiledeMigreringer: string[];
+}
