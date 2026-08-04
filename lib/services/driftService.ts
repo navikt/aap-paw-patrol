@@ -1,6 +1,6 @@
 import { fetchProxy } from 'lib/services/fetchProxy';
 import { isDev, isLocal } from '@navikt/aap-felles-utils';
-import { MigreringsStatusDto, UtbetalingStatusDto, UtbetalingstidslinjeDto } from 'lib/types/utbetaling';
+import { MigreringsresultatDto, MigreringsStatusDto, UtbetalingStatusDto, UtbetalingstidslinjeDto } from 'lib/types/utbetaling';
 
 export type AppNavn =
   | 'behandlingsflyt'
@@ -234,6 +234,18 @@ export const hentUtbetalingstidslinje = async (saksnummer: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('utbetal');
   const url = `${baseUrl}/admin/utbetalingstidslinje/${saksnummer}`;
   return await fetchProxy<UtbetalingstidslinjeDto>(url, scope, 'GET');
+};
+
+export const migrerAntallSaker = async (maxAntall: number, dryRun: boolean) => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('utbetal');
+  const url = `${baseUrl}/migrering`;
+  return await fetchProxy<MigreringsresultatDto>(url, scope, 'POST', { maxAntall, dryRun });
+};
+
+export const migrerSak = async (saksnummer: string, dryRun: boolean) => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('utbetal');
+  const url = `${baseUrl}/migrering/sak`;
+  return await fetchProxy<MigreringsresultatDto>(url, scope, 'POST', { saksnummer, dryRun });
 };
 
 export const kjørFraSteg = async (behandlingsreferanse: string, steg: string) => {

@@ -174,6 +174,22 @@ export function hentMigreringsStatus() {
   return fetch(`/api/drift/utbetaling/migrering`, { method: 'GET' });
 }
 
+export function startMigreringAntall(maxAntall: number, dryRun: boolean) {
+  return fetch(`/api/drift/utbetal/migrer/antall`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ maxAntall, dryRun }),
+  });
+}
+
+export function startMigreringEnkeltSak(saksnummer: string, dryRun: boolean) {
+  return fetch(`/api/drift/utbetal/migrer/sak`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ saksnummer, dryRun }),
+  });
+}
+
 export function hentUtbetalingstidslinje(saksnummer: string) {
   return fetch(`/api/drift/utbetaling/tidslinje/${saksnummer}`, { method: 'GET' });
 }
