@@ -1,15 +1,15 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import {
   Alert,
   BodyShort,
   Box,
   CopyButton,
-  Heading,
-  HelpText,
   HGrid,
   HStack,
+  Heading,
+  HelpText,
   Label,
   Loader,
   Table,
@@ -18,19 +18,20 @@ import {
   VStack,
 } from '@navikt/ds-react';
 import { hentJournalpostInfo } from 'lib/clientApi';
+import { ForenkletAvklaringsbehov } from 'lib/types/avklaringsbehov';
 import {
   Fordelingsresultat,
   JournalpostInfoDTO,
-  kanalInfo,
   PostmottakAvklaringsbehov,
   PostmottakBehandling,
+  kanalInfo,
 } from 'lib/types/postmottak';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { formaterBehandlingType } from 'lib/utils/formatting';
-import { AvklaringsbehovInfo } from 'components/drift/sakogbehandling/avklaringsbehov/AvklaringsbehovInfo';
-import { ForenkletAvklaringsbehov } from 'lib/types/avklaringsbehov';
-import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import Link from 'next/link';
+import { useCallback, useEffect, useState } from 'react';
+
+import { AvklaringsbehovInfo } from 'components/drift/sakogbehandling/avklaringsbehov/AvklaringsbehovInfo';
 import { Oppgaver } from 'components/drift/sakogbehandling/oppgave/Oppgaver';
 
 function mapTilForenkletAvklaringsbehov(behov: PostmottakAvklaringsbehov): ForenkletAvklaringsbehov {
@@ -174,14 +175,20 @@ const BehandlingerPanel = ({ behandlinger }: { behandlinger: PostmottakBehandlin
 
       {valgtBehandling && (
         <Box marginBlock="space-16" borderWidth="1 0 0 0" borderColor="neutral-subtle">
-          <Tabs defaultValue={BehandlingTab.AVKLARINGSBEHOV} onChange={(value) => setTab(value as BehandlingTab)} value={tab}>
+          <Tabs
+            defaultValue={BehandlingTab.AVKLARINGSBEHOV}
+            onChange={(value) => setTab(value as BehandlingTab)}
+            value={tab}
+          >
             <Tabs.List>
               <Tabs.Tab value={BehandlingTab.AVKLARINGSBEHOV} label="Avklaringsbehov" />
               <Tabs.Tab value={BehandlingTab.OPPGAVER} label="Oppgaver" />
             </Tabs.List>
             <Tabs.Panel value={BehandlingTab.AVKLARINGSBEHOV}>
               <Box padding="space-16">
-                <AvklaringsbehovInfo avklaringsbehov={valgtBehandling.avklaringsbehov.map(mapTilForenkletAvklaringsbehov)} />
+                <AvklaringsbehovInfo
+                  avklaringsbehov={valgtBehandling.avklaringsbehov.map(mapTilForenkletAvklaringsbehov)}
+                />
               </Box>
             </Tabs.Panel>
             <Tabs.Panel value={BehandlingTab.OPPGAVER}>
@@ -258,27 +265,29 @@ export const JournalpostOversikt = ({ journalpostId }: { journalpostId: string }
               )}
               <div>
                 <Label size="small">Brevkode</Label>
-                <BodyShort>{journalpost.brevkode}</BodyShort>
+                <BodyShort>{journalpost.brevkode || '-'}</BodyShort>
               </div>
               <div>
                 <Label size="small">Tema</Label>
-                <BodyShort>{journalpost.tema}</BodyShort>
+                <BodyShort>{journalpost.tema || '-'}</BodyShort>
               </div>
               <div>
                 <Label size="small">Journalstatus</Label>
-                <BodyShort>{journalpost.journalstatus}</BodyShort>
+                <BodyShort>{journalpost.journalstatus || '-'}</BodyShort>
               </div>
               <div>
                 <Label size="small">Mottatt dato</Label>
-                <BodyShort>{formaterDatoForFrontend(journalpost.mottattDato)}</BodyShort>
+                <BodyShort>
+                  {journalpost.mottattDato ? formaterDatoForFrontend(journalpost.mottattDato) : '-'}
+                </BodyShort>
               </div>
               <div>
                 <Label size="small">Kanal</Label>
-                <KanalTag kanal={journalpost.kanal} />
+                {journalpost.kanal ? <KanalTag kanal={journalpost.kanal} /> : '-'}
               </div>
               <div>
                 <Label size="small">Saksnummer</Label>
-                {journalpost.saksnummer && journalpost.saksnummer !== 'null' ? (
+                {journalpost.saksnummer ? (
                   <Link href={`/drift/sak/${journalpost.saksnummer}`}>{journalpost.saksnummer}</Link>
                 ) : (
                   <BodyShort textColor="subtle">Ikke tildelt</BodyShort>

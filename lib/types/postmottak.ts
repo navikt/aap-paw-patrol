@@ -1,12 +1,12 @@
 export interface JournalpostInfoDTO {
   innkommendeStatus: string | null;
   brevkode: string | null;
-  tema: string;
+  tema: string | null;
   fordelingsresultat: Fordelingsresultat | null;
-  journalstatus: string;
-  mottattDato: string;
-  kanal: Kanal;
-  saksnummer: string;
+  journalstatus: string | null;
+  mottattDato: string | null;
+  kanal: Kanal | null;
+  saksnummer: string | null;
   behandlinger: PostmottakBehandling[];
 }
 
