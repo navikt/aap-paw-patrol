@@ -288,7 +288,9 @@ export const JournalpostOversikt = ({ journalpostId }: { journalpostId: string }
               <div>
                 <Label size="small">Saksnummer</Label>
                 {journalpost.saksnummer ? (
-                  <Link href={`/drift/sak/${journalpost.saksnummer}`}>{journalpost.saksnummer}</Link>
+                  <BodyShort>
+                    <Link href={`/drift/sak/${journalpost.saksnummer}`}>{journalpost.saksnummer}</Link>
+                  </BodyShort>
                 ) : (
                   <BodyShort textColor="subtle">Ikke tildelt</BodyShort>
                 )}

@@ -13,7 +13,9 @@ export function formaterBehandlingType(type: string) {
     case 'ae2000':
       return 'Journalføring';
     case 'ae1999':
-      return 'Dokumenthåndtering'
+      return 'Dokumenthåndtering';
+    case 'ae1998':
+      return 'Fordeling';
     default:
       return type;
   }
