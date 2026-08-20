@@ -87,6 +87,7 @@ export const BEHANDLINGSTYPER = [
   'AKTIVITETSPLIKT_11_9',
   'DOKUMENT_HÅNDTERING',
   'JOURNALFØRING',
+  'FORDELING',
 ] as const;
 
 export interface EnhetDriftRequest {
