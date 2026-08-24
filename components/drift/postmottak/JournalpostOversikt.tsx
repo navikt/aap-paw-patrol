@@ -143,11 +143,20 @@ const mapRegel = (regel: string, resultat: boolean) => {
       <Table.DataCell>
         <HStack gap="space-4" align="center">
           {erOK === null ? (
-            <InformationSquareFillIcon style={{ color: 'var(--ax-text-info-decoration)' }} title={tittel} />
+            <InformationSquareFillIcon
+              style={{ color: 'var(--ax-text-info-decoration)' }}
+              title={`Resultat = ${resultat}`}
+            />
           ) : erOK ? (
-            <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success-decoration)' }} title={tittel} />
+            <CheckmarkCircleFillIcon
+              style={{ color: 'var(--ax-text-success-decoration)' }}
+              title={`Resultat = ${resultat}`}
+            />
           ) : (
-            <XMarkOctagonFillIcon style={{ color: 'var(--ax-text-danger-decoration)' }} title={tittel} />
+            <XMarkOctagonFillIcon
+              style={{ color: 'var(--ax-text-danger-decoration)' }}
+              title={`Resultat = ${resultat}`}
+            />
           )}
           <BodyShort>{tittel}</BodyShort>
         </HStack>
