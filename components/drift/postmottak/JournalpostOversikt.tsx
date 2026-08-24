@@ -75,6 +75,7 @@ const regelKravForKelvin = (regel: string): boolean | null => {
     case 'ManueltOverstyrtTilArenaRegel':
     case 'ArenaHistorikkRegel':
       return false;
+    case 'KelvinSakRegel':
     case 'ArenaSakRegel':
       return null;
     default:
@@ -142,11 +143,11 @@ const mapRegel = (regel: string, resultat: boolean) => {
       <Table.DataCell>
         <HStack gap="space-4" align="center">
           {erOK === null ? (
-            <InformationSquareFillIcon style={{ color: 'var(--ax-text-info)' }} title={tittel} />
+            <InformationSquareFillIcon style={{ color: 'var(--ax-text-info-decoration)' }} title={tittel} />
           ) : erOK ? (
-            <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success)' }} title={tittel} />
+            <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success-decoration)' }} title={tittel} />
           ) : (
-            <XMarkOctagonFillIcon style={{ color: 'var(--ax-text-danger)' }} title={tittel} />
+            <XMarkOctagonFillIcon style={{ color: 'var(--ax-text-danger-decoration)' }} title={tittel} />
           )}
           <BodyShort>{tittel}</BodyShort>
         </HStack>
