@@ -1,6 +1,6 @@
 'use client';
 
-import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
+import { CheckmarkCircleFillIcon, InformationSquareFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import {
   Alert,
   BodyShort,
@@ -67,6 +67,44 @@ const KanalTag = ({ kanal }: { kanal: string }) => {
   );
 };
 
+// Hva som kreves for at regelen skal bidra til Kelvin-fordeling.
+// null = kun logging, påvirker ikke resultatet.
+const regelKravForKelvin = (regel: string): boolean | null => {
+  switch (regel) {
+    // Disse to har omvendt logikk i forhold til de andre reglene, så vi må snu resultatet for å øke lesbarheten.
+    case 'ManueltOverstyrtTilArenaRegel':
+    case 'ArenaHistorikkRegel':
+      return false;
+    case 'ArenaSakRegel':
+      return null;
+    default:
+      return true;
+  }
+};
+
+const mapRegelForventet = (regel: string): string => {
+  switch (regel) {
+    case 'ManueltOverstyrtTilArenaRegel':
+      return 'Ikke overstyrt til Arena';
+    case 'ArenaHistorikkRegel':
+      return 'Ingen signifikant Arena-historikk';
+    case 'Aldersregel':
+      return '≥ 18 år';
+    case 'ArenaSakRegel':
+      return 'Kun logging - uten betydning';
+    case 'ErIkkeAnkeRegel':
+      return 'Ikke anke';
+    case 'ErIkkeReisestønadRegel':
+      return 'Ikke reisestønad';
+    case 'KelvinSakRegel':
+      return 'Har Kelvin-sak (hurtigbane)';
+    case 'SøknadRegel':
+      return 'Brevkoden er søknad';
+    default:
+      return '-';
+  }
+};
+
 const mapRegelTittel = (regel: string, resultat: boolean) => {
   switch (regel) {
     case 'ManueltOverstyrtTilArenaRegel':
@@ -76,7 +114,7 @@ const mapRegelTittel = (regel: string, resultat: boolean) => {
     case 'Aldersregel':
       return resultat ? 'Bruker er over 18 år' : 'Bruker er under 18 år';
     case 'ArenaSakRegel':
-      return resultat ? 'Bruker har Arena-sak (ingen betydning)' : 'Bruker har ikke Arena-sak';
+      return resultat ? 'Bruker har Arena-sak' : 'Bruker har ikke Arena-sak';
     case 'ErIkkeAnkeRegel':
       return resultat ? 'Brevkoden er ikke anke' : 'Brevkoden er anke';
     case 'ErIkkeReisestønadRegel':
@@ -92,18 +130,24 @@ const mapRegelTittel = (regel: string, resultat: boolean) => {
 
 const mapRegel = (regel: string, resultat: boolean) => {
   const tittel = mapRegelTittel(regel, resultat);
+  const krav = regelKravForKelvin(regel);
+  const erOK = krav === null ? null : resultat === krav;
 
   return (
     <Table.Row key={regel}>
       <Table.DataCell>{regel}</Table.DataCell>
-      <Table.DataCell style={{ textAlign: 'center' }}>
-        <HStack gap="space-4">
-          {resultat ? (
+      <Table.DataCell>
+        <BodyShort textColor="subtle">{mapRegelForventet(regel)}</BodyShort>
+      </Table.DataCell>
+      <Table.DataCell>
+        <HStack gap="space-4" align="center">
+          {erOK === null ? (
+            <InformationSquareFillIcon style={{ color: 'var(--ax-text-info)' }} title={tittel} />
+          ) : erOK ? (
             <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success)' }} title={tittel} />
           ) : (
             <XMarkOctagonFillIcon style={{ color: 'var(--ax-text-danger)' }} title={tittel} />
           )}
-
           <BodyShort>{tittel}</BodyShort>
         </HStack>
       </Table.DataCell>
@@ -135,7 +179,7 @@ const FordelingsresultatPanel = ({ fordelingsresultat }: { fordelingsresultat: F
                 <HelpText>Hva som forventes for at en journalpost skal gå til Kelvin</HelpText>
               </HStack>
             </Table.HeaderCell>
-            <Table.HeaderCell style={{ width: '4rem', textAlign: 'center' }}>Resultat</Table.HeaderCell>
+            <Table.HeaderCell>Resultat</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
