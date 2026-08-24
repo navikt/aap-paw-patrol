@@ -1,15 +1,15 @@
 'use client';
 
-import { CheckmarkCircleFillIcon, QuestionmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
+import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import {
   Alert,
   BodyShort,
   Box,
   CopyButton,
-  HGrid,
-  HStack,
   Heading,
   HelpText,
+  HGrid,
+  HStack,
   Label,
   Loader,
   Table,
@@ -22,9 +22,9 @@ import { ForenkletAvklaringsbehov } from 'lib/types/avklaringsbehov';
 import {
   Fordelingsresultat,
   JournalpostInfoDTO,
+  kanalInfo,
   PostmottakAvklaringsbehov,
   PostmottakBehandling,
-  kanalInfo,
 } from 'lib/types/postmottak';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { formaterBehandlingType } from 'lib/utils/formatting';
@@ -67,29 +67,48 @@ const KanalTag = ({ kanal }: { kanal: string }) => {
   );
 };
 
-const mapForventetResultat = (regel: string) => {
+const mapRegelTittel = (regel: string, resultat: boolean) => {
   switch (regel) {
     case 'ManueltOverstyrtTilArenaRegel':
-      return <XMarkOctagonFillIcon style={{ color: 'var(--ax-text-danger)' }} title="Ikke overstyrt til Arena" />;
+      return resultat ? 'Overstyrt til Arena' : 'Ikke overstyrt til Arena';
     case 'ArenaHistorikkRegel':
-      return (
-        <XMarkOctagonFillIcon style={{ color: 'var(--ax-text-danger)' }} title="Bruker har ingen historikk i Arena" />
-      );
+      return resultat ? 'Bruker har signifikant Arena-historikk' : 'Bruker har ingen Arena-historikk';
     case 'Aldersregel':
-      return <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success)' }} title="Bruker er over 18 år" />;
+      return resultat ? 'Bruker er over 18 år' : 'Bruker er under 18 år';
     case 'ArenaSakRegel':
-      return <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success)' }} title="Bruker har Arena-sak" />;
+      return resultat ? 'Bruker har Arena-sak (ingen betydning)' : 'Bruker har ikke Arena-sak';
     case 'ErIkkeAnkeRegel':
-      return <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success)' }} title="Brevkoden er ikke anke" />;
+      return resultat ? 'Brevkoden er ikke anke' : 'Brevkoden er anke';
     case 'ErIkkeReisestønadRegel':
-      return (
-        <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success)' }} title="Brevkoden er ikke reisestønad" />
-      );
+      return resultat ? 'Brevkoden er ikke reisestønad' : 'Brevkoden er reisestønad';
     case 'KelvinSakRegel':
-      return <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success)' }} title="Bruker har Kelvin-sak" />;
+      return resultat ? 'Bruker har Kelvin-sak (fast-track)' : 'Bruker har ikke Kelvin-sak';
+    case 'SøknadRegel':
+      return resultat ? 'Brevkoden er søknad' : 'Brevkoden er ikke søknad';
     default:
-      return <QuestionmarkCircleFillIcon style={{ color: 'var(--ax-text-info)' }} title={`Ukjent regel: ${regel}`} />;
+      return `Ukjent regel: ${regel}`;
   }
+};
+
+const mapRegel = (regel: string, resultat: boolean) => {
+  const tittel = mapRegelTittel(regel, resultat);
+
+  return (
+    <Table.Row key={regel}>
+      <Table.DataCell>{regel}</Table.DataCell>
+      <Table.DataCell style={{ textAlign: 'center' }}>
+        <HStack gap="space-4">
+          {resultat ? (
+            <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success)' }} title={tittel} />
+          ) : (
+            <XMarkOctagonFillIcon style={{ color: 'var(--ax-text-danger)' }} title={tittel} />
+          )}
+
+          <BodyShort>{tittel}</BodyShort>
+        </HStack>
+      </Table.DataCell>
+    </Table.Row>
+  );
 };
 
 const FordelingsresultatPanel = ({ fordelingsresultat }: { fordelingsresultat: Fordelingsresultat }) => (
@@ -101,7 +120,7 @@ const FordelingsresultatPanel = ({ fordelingsresultat }: { fordelingsresultat: F
 
       <HStack gap="space-8" align="center">
         <Label size="small">Fordelt til:</Label>
-        <Tag variant="info" size="medium">
+        <Tag variant={fordelingsresultat.systemNavn === 'KELVIN' ? 'success' : 'warning'} size="medium">
           {fordelingsresultat.systemNavn}
         </Tag>
       </HStack>
@@ -120,19 +139,7 @@ const FordelingsresultatPanel = ({ fordelingsresultat }: { fordelingsresultat: F
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {Object.entries(fordelingsresultat.regelMap).map(([regel, resultat]) => (
-            <Table.Row key={regel}>
-              <Table.DataCell>{regel}</Table.DataCell>
-              <Table.DataCell>{mapForventetResultat(regel)}</Table.DataCell>
-              <Table.DataCell style={{ textAlign: 'center' }}>
-                {resultat ? (
-                  <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success)' }} title="Ja" />
-                ) : (
-                  <XMarkOctagonFillIcon style={{ color: 'var(--ax-text-danger)' }} title="Nei" />
-                )}
-              </Table.DataCell>
-            </Table.Row>
-          ))}
+          {Object.entries(fordelingsresultat.regelMap).map(([regel, resultat]) => mapRegel(regel, resultat))}
         </Table.Body>
       </Table>
     </VStack>
