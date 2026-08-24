@@ -1,6 +1,6 @@
 'use client';
 
-import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
+import { CheckmarkCircleFillIcon, QuestionmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import {
   Alert,
   BodyShort,
@@ -67,6 +67,31 @@ const KanalTag = ({ kanal }: { kanal: string }) => {
   );
 };
 
+const mapForventetResultat = (regel: string) => {
+  switch (regel) {
+    case 'ManueltOverstyrtTilArenaRegel':
+      return <XMarkOctagonFillIcon style={{ color: 'var(--ax-text-danger)' }} title="Ikke overstyrt til Arena" />;
+    case 'ArenaHistorikkRegel':
+      return (
+        <XMarkOctagonFillIcon style={{ color: 'var(--ax-text-danger)' }} title="Bruker har ingen historikk i Arena" />
+      );
+    case 'Aldersregel':
+      return <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success)' }} title="Bruker er over 18 år" />;
+    case 'ArenaSakRegel':
+      return <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success)' }} title="Bruker har Arena-sak" />;
+    case 'ErIkkeAnkeRegel':
+      return <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success)' }} title="Brevkoden er ikke anke" />;
+    case 'ErIkkeReisestønadRegel':
+      return (
+        <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success)' }} title="Brevkoden er ikke reisestønad" />
+      );
+    case 'KelvinSakRegel':
+      return <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success)' }} title="Bruker har Kelvin-sak" />;
+    default:
+      return <QuestionmarkCircleFillIcon style={{ color: 'var(--ax-text-info)' }} title={`Ukjent regel: ${regel}`} />;
+  }
+};
+
 const FordelingsresultatPanel = ({ fordelingsresultat }: { fordelingsresultat: Fordelingsresultat }) => (
   <Box background="neutral-soft" padding="space-16" borderRadius="16" borderColor="neutral-subtle" borderWidth="1">
     <VStack gap="space-16">
@@ -85,6 +110,12 @@ const FordelingsresultatPanel = ({ fordelingsresultat }: { fordelingsresultat: F
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Regel</Table.HeaderCell>
+            <Table.HeaderCell>
+              <HStack gap="space-4">
+                Forventet
+                <HelpText>Hva som forventes for at en journalpost skal gå til Kelvin</HelpText>
+              </HStack>
+            </Table.HeaderCell>
             <Table.HeaderCell style={{ width: '4rem', textAlign: 'center' }}>Resultat</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
@@ -92,6 +123,7 @@ const FordelingsresultatPanel = ({ fordelingsresultat }: { fordelingsresultat: F
           {Object.entries(fordelingsresultat.regelMap).map(([regel, resultat]) => (
             <Table.Row key={regel}>
               <Table.DataCell>{regel}</Table.DataCell>
+              <Table.DataCell>{mapForventetResultat(regel)}</Table.DataCell>
               <Table.DataCell style={{ textAlign: 'center' }}>
                 {resultat ? (
                   <CheckmarkCircleFillIcon style={{ color: 'var(--ax-text-success)' }} title="Ja" />
