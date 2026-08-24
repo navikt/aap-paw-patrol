@@ -73,7 +73,6 @@ const regelKravForKelvin = (regel: string): boolean | null => {
   switch (regel) {
     // Disse to har omvendt logikk i forhold til de andre reglene, så vi må snu resultatet for å øke lesbarheten.
     case 'ManueltOverstyrtTilArenaRegel':
-    case 'ArenaHistorikkRegel':
       return false;
     case 'KelvinSakRegel':
     case 'ArenaSakRegel':
@@ -111,7 +110,7 @@ const mapRegelTittel = (regel: string, resultat: boolean) => {
     case 'ManueltOverstyrtTilArenaRegel':
       return resultat ? 'Overstyrt til Arena' : 'Ikke overstyrt til Arena';
     case 'ArenaHistorikkRegel':
-      return resultat ? 'Bruker har signifikant Arena-historikk' : 'Bruker har ingen Arena-historikk';
+      return resultat ? 'Bruker har ingen signifikant Arena-historikk' : 'Bruker har signifikant Arena-historikk';
     case 'Aldersregel':
       return resultat ? 'Bruker er over 18 år' : 'Bruker er under 18 år';
     case 'ArenaSakRegel':
