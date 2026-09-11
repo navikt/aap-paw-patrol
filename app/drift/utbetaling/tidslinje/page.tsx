@@ -1,23 +1,16 @@
-import { Alert } from '@navikt/ds-react';
 import { Page, PageBlock } from '@navikt/ds-react/Page';
 import { Utbetalingstidslinje } from 'components/drift/utbetaling/Utbetalingstidslinje';
-import { hentRollerForBruker, Roller } from 'lib/azure/azureUserService';
+import { harLeseTilgang, hentRollerForBruker } from 'lib/azure/azureUserService';
+import { IngenTilgangAlert } from 'components/drift/IngenTilgangAlert';
 
 const UtbetalingstidslinjeePage = async () => {
   const roller = await hentRollerForBruker();
-  const harTilgang = roller.includes(Roller.DRIFT);
+  const harTilgang = harLeseTilgang(roller);
 
   return (
     <Page>
       <PageBlock width="lg">
-        {harTilgang ? (
-          <Utbetalingstidslinje />
-        ) : (
-          <Alert variant="warning">
-            Du har ikke tilgang til denne siden. AD-rollen <strong>0000-GA-AAP_DRIFT</strong> er påkrevd for å gjøre
-            oppslag.
-          </Alert>
-        )}
+        {harTilgang ? <Utbetalingstidslinje /> : <IngenTilgangAlert krevesLeseTilgang handling="oppslag" />}
       </PageBlock>
     </Page>
   );

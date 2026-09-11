@@ -4,7 +4,7 @@ import 'styles/globals.css';
 import { verifyUserLoggedIn } from '@navikt/aap-felles-utils';
 import { InternalHeader, InternalHeaderTitle } from '@navikt/ds-react/InternalHeader';
 import { Søkefelt } from 'components/drift/Søkefelt';
-import { hentBrukerInformasjon, hentRollerForBruker, Roller } from 'lib/azure/azureUserService';
+import { hentBrukerInformasjon, harLeseTilgang, hentRollerForBruker } from 'lib/azure/azureUserService';
 import { InnloggetBrukerDropdown } from 'components/drift/navbar/InnloggetBrukerDropdown';
 import { Spacer, Theme } from '@navikt/ds-react';
 import { cookies } from 'next/headers';
@@ -37,7 +37,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
             <Spacer />
 
-            {roller.includes(Roller.DRIFT) && <Søkefelt />}
+            {harLeseTilgang(roller) && <Søkefelt />}
 
             <ThemeToggle theme={theme} />
 

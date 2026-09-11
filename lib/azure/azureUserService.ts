@@ -1,7 +1,7 @@
+import { isDev, isLocal } from '@navikt/aap-felles-utils';
 import { headers } from 'next/headers';
 
 import { getAccessTokenOrRedirectToLogin, validerToken } from './azuread';
-import { isDev, isLocal } from '@navikt/aap-felles-utils';
 
 export interface BrukerInformasjon {
   navn: string;
@@ -27,6 +27,7 @@ export enum Roller {
   KVALITETSSIKRER = 'Kvalitetssikrer',
   SAKSBEHANDLER_NASJONAL = 'Saksbehandler',
   DRIFT = 'Drift',
+  DRIFT_LES = 'Drift leserolle',
   PRODUKSJONSSTYRING = 'Produksjonsstyring',
 }
 
@@ -40,6 +41,7 @@ export async function hentRollerForBruker(): Promise<Roller[]> {
       Roller.SAKSBEHANDLER_NASJONAL,
       Roller.SAKSBEHANDLER_OPPFØLGING,
       Roller.DRIFT,
+      Roller.DRIFT_LES,
       Roller.PRODUKSJONSSTYRING,
     ];
   }
@@ -67,6 +69,20 @@ export async function hentRollerForBruker(): Promise<Roller[]> {
   return roller;
 }
 
+/**
+ * Krever AAP_DRIFT-rollen. Brukes for operasjoner som endrer noe (oppslag med sideeffekter, migrering, osv.).
+ */
+export function harDriftTilgang(roller: Roller[]): boolean {
+  return roller.includes(Roller.DRIFT);
+}
+
+/**
+ * Krever enten AAP_DRIFT_LES eller AAP_DRIFT. Brukes for ren lesing/søk uten sideeffekter.
+ */
+export function harLeseTilgang(roller: Roller[]): boolean {
+  return roller.includes(Roller.DRIFT) || roller.includes(Roller.DRIFT_LES);
+}
+
 // Disse må stemme med UUID i dev.yaml
 enum RollerDev {
   BESLUTTER = 'f0f6cad5-e3c0-4308-99a2-3630ac60174a',
@@ -75,6 +91,7 @@ enum RollerDev {
   KVALITETSSIKRER = 'c3e18aef-a7ac-49df-806e-4fe58b81460d',
   SAKSBEHANDLER_NASJONAL = '3377dc51-ca61-4e36-b812-21b5fc34474f',
   DRIFT = 'bc89623f-4624-4978-ac54-acd048c0f2a5',
+  DRIFT_LES = '8e5bc6be-a934-41f0-8a92-e974ea7b80d3',
   PRODUKSJONSSTYRING = 'c75883f9-4cb2-42c7-b75c-3f0f29ee3ead',
 }
 
@@ -92,6 +109,8 @@ function mapRollerFraTokenTilKelvinRollerDev(rolle: string): Roller | undefined 
       return Roller.SAKSBEHANDLER_NASJONAL;
     case RollerDev.DRIFT:
       return Roller.DRIFT;
+    case RollerDev.DRIFT_LES:
+      return Roller.DRIFT_LES;
     case RollerDev.PRODUKSJONSSTYRING:
       return Roller.PRODUKSJONSSTYRING;
   }
@@ -105,6 +124,7 @@ enum RollerProd {
   KVALITETSSIKRER = 'a6bf143f-fee9-41ab-a487-f54503a28de6',
   SAKSBEHANDLER_NASJONAL = '3a65f41a-b3f3-4b1c-830a-df20ff020980',
   DRIFT = 'ff9a228b-4aab-47bd-8aee-598d80f0fb4b',
+  DRIFT_LES = 'ec868c89-5d4f-47b4-8298-e954035d3873',
   PRODUKSJONSSTYRING = '1d61ecf2-fcca-4dbb-ba49-82ab01aef96e',
 }
 
@@ -122,6 +142,8 @@ function mapRollerFraTokenTilKelvinRollerProd(rolle: string): Roller | undefined
       return Roller.SAKSBEHANDLER_NASJONAL;
     case RollerProd.DRIFT:
       return Roller.DRIFT;
+    case RollerProd.DRIFT_LES:
+      return Roller.DRIFT_LES;
     case RollerProd.PRODUKSJONSSTYRING:
       return Roller.PRODUKSJONSSTYRING;
   }

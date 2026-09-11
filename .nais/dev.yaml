@@ -2,3 +2,4 @@ ingresses:
   - 'https://aap-paw-patrol.intern.dev.nav.no'
   - 'https://aap-paw-patrol.ansatt.dev.nav.no'
 driftrolle: bc89623f-4624-4978-ac54-acd048c0f2a5
+driftlesrolle: 8e5bc6be-a934-41f0-8a92-e974ea7b80d3
