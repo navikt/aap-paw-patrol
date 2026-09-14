@@ -1,8 +1,9 @@
 import { Page, PageBlock } from '@navikt/ds-react/Page';
-import { hentRollerForBruker, Roller } from 'lib/azure/azureUserService';
+import { harLeseTilgang, hentRollerForBruker } from 'lib/azure/azureUserService';
 import { Alert } from '@navikt/ds-react';
 import { SakOversikt } from 'components/drift/sakogbehandling/SakOversikt';
 import { SakNavbar } from 'components/drift/navbar/SakNavbar';
+import { IngenTilgangAlert } from 'components/drift/IngenTilgangAlert';
 import { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: Promise<{ saksnummer: string }> }): Promise<Metadata> {
@@ -22,7 +23,7 @@ const SakPage = async ({ params }: { params: Promise<{ saksnummer: string }> }) 
     <Page>
       <SakNavbar saksnummer={saksnummer} />
 
-      {roller.includes(Roller.DRIFT) ? (
+      {harLeseTilgang(roller) ? (
         erGyldigSaksnummer(saksnummer) ? (
           <SakOversikt saksnummer={saksnummer} />
         ) : (
@@ -32,10 +33,7 @@ const SakPage = async ({ params }: { params: Promise<{ saksnummer: string }> }) 
         )
       ) : (
         <PageBlock width="2xl">
-          <Alert variant="warning">
-            Du har ikke tilgang til denne siden. AD-rollen <strong>0000-GA-AAP_DRIFT</strong> er påkrevd for å gjøre
-            hente saksinformasjon.
-          </Alert>
+          <IngenTilgangAlert krevesLeseTilgang handling="hente saksinformasjon" />
         </PageBlock>
       )}
     </Page>

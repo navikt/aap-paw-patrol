@@ -1,7 +1,7 @@
 import { Page, PageBlock } from '@navikt/ds-react/Page';
-import { hentRollerForBruker, Roller } from 'lib/azure/azureUserService';
-import { Alert } from '@navikt/ds-react';
+import { harLeseTilgang, hentRollerForBruker } from 'lib/azure/azureUserService';
 import { PersonSøkeside } from 'components/drift/person/PersonSøkeside';
+import { IngenTilgangAlert } from 'components/drift/IngenTilgangAlert';
 
 const SakSøkPage = async () => {
   const roller = await hentRollerForBruker();
@@ -9,13 +9,10 @@ const SakSøkPage = async () => {
   return (
     <Page>
       <PageBlock width="md">
-        {roller.includes(Roller.DRIFT) ? (
+        {harLeseTilgang(roller) ? (
           <PersonSøkeside />
         ) : (
-          <Alert variant="warning">
-            Du har ikke tilgang til denne siden. AD-rollen <strong>0000-GA-AAP_DRIFT</strong> er påkrevd for å gjøre
-            hente saksinformasjon.
-          </Alert>
+          <IngenTilgangAlert krevesLeseTilgang handling="hente saksinformasjon" />
         )}
       </PageBlock>
     </Page>
