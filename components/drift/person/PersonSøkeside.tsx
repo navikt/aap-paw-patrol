@@ -187,7 +187,7 @@ export const PersonSøkeside = () => {
                       <Link href={`/drift/postmottak/${jp.journalpostId}`}>{jp.journalpostId}</Link>
                     </Table.DataCell>
                     <Table.DataCell>{jp.brevkode ?? '-'}</Table.DataCell>
-                    <Table.DataCell>{jp.enhet?.enhetNr ?? '-'}</Table.DataCell>
+                    <Table.DataCell>{jp.enhet ?? '-'}</Table.DataCell>
                     <Table.DataCell>{jp.regelresultat?.systemNavn ?? '-'}</Table.DataCell>
                     <Table.DataCell>{jp.status}</Table.DataCell>
                     <Table.DataCell>{jp.årsakTilStatus ?? '-'}</Table.DataCell>
