@@ -1,3 +1,31 @@
+export interface PersonSøkJournalposterDto {
+  journalposter: InnkommendeJournalpostDto[];
+}
+
+export interface InnkommendeJournalpostDto {
+  journalpostId: string;
+  brevkode: string | null;
+  behandlingstema: string | null;
+  status: InnkommendeJournalpostStatus;
+  regelresultat: RegelresultatDto | null;
+  årsakTilStatus: ÅrsakTilStatus | null;
+  enhet: string | null;
+}
+
+export type InnkommendeJournalpostStatus =
+  | 'EVALUERT'
+  | 'VIDERSENDT_TIL_KELVIN'
+  | 'VIDERESENDT_TIL_ARENA'
+  | 'GOSYS_JFR'
+  | 'GOSYS_FDR'
+  | 'IGNORERT';
+
+export type ÅrsakTilStatus = 'MANGLER_IDENT' | 'ORGNR' | 'ALLEREDE_JOURNALFØRT' | 'UTGÅTT';
+
+export interface RegelresultatDto {
+  systemNavn: string;
+}
+
 export interface JournalpostInfoDTO {
   innkommendeStatus: string | null;
   brevkode: string | null;

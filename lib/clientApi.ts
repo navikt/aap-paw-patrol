@@ -148,6 +148,14 @@ export function hentJournalpostInfo(journalpostId: string) {
   return fetch(`/api/drift/postmottak/${journalpostId}/info`, { method: 'GET' });
 }
 
+export function hentJournalposterForPerson(ident: string) {
+  return fetch(`/api/drift/person/journalposter`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ident }),
+  });
+}
+
 export function hentBehandler(saksnummer: string, fritekst: string) {
   return fetch(`/api/drift/dokumentinnhenting/syfo/behandleroppslag/search`, {
     method: 'POST',
