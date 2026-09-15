@@ -1,4 +1,16 @@
-import { BodyShort, Box, CopyButton, Heading, HelpText, HGrid, HStack, Table, Tabs, Tag } from '@navikt/ds-react';
+import {
+  BodyShort,
+  Box,
+  CopyButton,
+  Heading,
+  HelpText,
+  HGrid,
+  HStack,
+  Table,
+  Tabs,
+  Tag,
+  type SortState,
+} from '@navikt/ds-react';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { capitalize, formaterBehandlingType } from 'lib/utils/formatting';
@@ -38,6 +50,30 @@ export const BehandlingOversikt = ({
 
   const [tab, setTab] = useState<Tab>(Tab.AVKLARINGSBEHOV);
   const [valgtBehandling, setValgtBehandling] = useState<BehandlingDriftsinfo>();
+  const [sort, setSort] = useState<SortState | undefined>({ orderBy: 'opprettet', direction: 'descending' });
+
+  const handleSortChange = (sortKey: string) => {
+    setSort((currentSort) => {
+      if (currentSort?.orderBy !== sortKey) {
+        return { orderBy: sortKey, direction: 'ascending' };
+      }
+      if (currentSort.direction === 'ascending') {
+        return { orderBy: sortKey, direction: 'descending' };
+      }
+      return undefined;
+    });
+  };
+
+  const sorterteBehandlinger = [...behandlinger].sort((a, b) => {
+    if (!sort) {
+      return 0;
+    }
+    const verdi = (behandling: BehandlingDriftsinfo) =>
+      sort.orderBy === 'vedtatt' ? (behandling.vedtatt ?? '') : behandling.opprettet;
+
+    const sammenligning = verdi(a).localeCompare(verdi(b));
+    return sort.direction === 'descending' ? -sammenligning : sammenligning;
+  });
 
   const oppdaterValgtBehandling = useCallback(
     (behandling?: BehandlingDriftsinfo) => {
@@ -78,7 +114,7 @@ export const BehandlingOversikt = ({
             Alle behandlinger ({behandlinger.length})
           </Heading>
 
-          <Table size="small">
+          <Table size="small" sort={sort} onSortChange={handleSortChange}>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Type</Table.HeaderCell>
@@ -86,19 +122,23 @@ export const BehandlingOversikt = ({
                 <Table.HeaderCell>Status</Table.HeaderCell>
                 <Table.HeaderCell>Vurderingsbehov</Table.HeaderCell>
                 <Table.HeaderCell>Årsak til opprettelse</Table.HeaderCell>
-                <Table.HeaderCell>Opprettet</Table.HeaderCell>
+                <Table.ColumnHeader sortKey="opprettet" sortable>
+                  Opprettet
+                </Table.ColumnHeader>
                 <Table.HeaderCell style={{ width: '2rem' }} />
-                <Table.HeaderCell>Vedtatt</Table.HeaderCell>
+                <Table.ColumnHeader sortKey="vedtatt" sortable>
+                  Vedtatt
+                </Table.ColumnHeader>
                 <Table.HeaderCell style={{ width: '2rem' }} />
               </Table.Row>
             </Table.Header>
 
             <Table.Body>
-              {behandlinger.map((behandling, i) => {
+              {sorterteBehandlinger.map((behandling, i) => {
                 const erValgtBehandling = behandling.referanse === valgtBehandling?.referanse;
                 const opplysningerFlettetInnIDenneBehandlingen =
                   erYtelsesbehandling(behandling) &&
-                  behandlinger.some((annenBehandling, j) => {
+                  sorterteBehandlinger.some((annenBehandling, j) => {
                     if (i < j) {
                       return false;
                     }

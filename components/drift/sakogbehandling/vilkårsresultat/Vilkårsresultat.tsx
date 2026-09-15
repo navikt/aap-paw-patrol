@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import { hentRettighetsinfo, hentVilkår } from 'lib/clientApi';
-import { CopyButton, ExpansionCard, Table, Tag, VStack } from '@navikt/ds-react';
+import { CopyButton, ExpansionCard, HStack, Loader, Table, Tag, VStack } from '@navikt/ds-react';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
 import { VilkårDriftsinfoDTO } from 'lib/types/vilkår';
 import { DriftRettighetstypeDTO, StansOpphørDto } from 'lib/types/rettighetstype';
 
 export const Vilkårsresultat = ({ behandlingsreferanse }: { behandlingsreferanse: string }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [vilkår, setVilkår] = useState<VilkårDriftsinfoDTO[]>();
   const [rettighetsinfo, setRettighetsinfo] = useState<DriftRettighetstypeDTO>();
   const vilkårCopyText = useMemo(() => vilkårTilCSV(vilkår), [vilkår]);
@@ -28,12 +29,22 @@ export const Vilkårsresultat = ({ behandlingsreferanse }: { behandlingsreferans
               else throw Error(await res.text());
             })
             .then((rettighetsinfo: DriftRettighetstypeDTO) => setRettighetsinfo(rettighetsinfo)),
-        ]);
+        ])
+          .finally(() => setIsLoading(false));
       }
     }, 1000);
 
     return () => clearTimeout(timeout);
   }, [behandlingsreferanse]);
+
+  if (isLoading) {
+    return (
+      <HStack gap="space-16" paddingBlock="space-32" paddingInline="space-16">
+        <Loader />
+        <span>Henter vilkårsresultat for behandling ...</span>
+      </HStack>
+    );
+  }
 
   return (
     <VStack gap="space-16" paddingBlock="space-32" paddingInline="space-16">
