@@ -36,19 +36,17 @@ export const SakInfoPanel = ({ sak }: { sak: SakDriftsinfoDTO }) => (
     </div>
     <div>
       <Label>Andre saker på bruker</Label>
-      <BodyShort>
-        {!sak.andreSakerPåBruker?.length ? (
-          'Ingen'
-        ) : (
-          <List>
-            {sak.andreSakerPåBruker.map((saksnummer) => (
-              <List.Item key={`rel-sak-${saksnummer}`}>
-                <Link href={`/drift/sak/${saksnummer}`}>{saksnummer}</Link>
-              </List.Item>
-            ))}
-          </List>
-        )}
-      </BodyShort>
+      {!sak.andreSakerPåBruker?.length ? (
+        <BodyShort>Ingen</BodyShort>
+      ) : (
+        <List>
+          {sak.andreSakerPåBruker.map((saksnummer) => (
+            <List.Item key={`rel-sak-${saksnummer}`}>
+              <Link href={`/drift/sak/${saksnummer}`}>{saksnummer}</Link>
+            </List.Item>
+          ))}
+        </List>
+      )}
     </div>
   </VStack>
 );
