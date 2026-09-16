@@ -1,6 +1,18 @@
 'use client';
 
-import { Alert, BodyShort, Box, Button, CopyButton, Detail, Heading, HStack, Label, VStack } from '@navikt/ds-react';
+import {
+  Alert,
+  BodyShort,
+  Box,
+  Button,
+  CopyButton,
+  Detail,
+  Heading,
+  HelpText,
+  HStack,
+  Label,
+  VStack,
+} from '@navikt/ds-react';
 import { objectToMap } from 'components/drift/jobbtabell/JobbTabell';
 import React, { useEffect, useState } from 'react';
 import { AppNavn, JobbInfo } from 'lib/services/driftService';
@@ -76,7 +88,10 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
         <HStack gap="space-24" wrap={false}>
           <div>
             <Detail>Type</Detail>
-            <BodyShort size="small">{jobb.type}</BodyShort>
+            <BodyShort size="small">
+              {jobb.type}
+              <HelpText>{jobb.beskrivelse}</HelpText>
+            </BodyShort>
           </div>
           <div>
             <Detail>Forsøk</Detail>

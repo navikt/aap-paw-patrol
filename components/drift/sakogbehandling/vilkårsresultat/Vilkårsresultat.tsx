@@ -109,9 +109,11 @@ const Rettighetsinfo = ({ rettighetsinfo }: { rettighetsinfo: DriftRettighetstyp
       <ExpansionCard.Content>
         <Table size="small">
           <Table.Header>
-            <Table.HeaderCell style={{ width: '15rem' }}>Periode</Table.HeaderCell>
-            <Table.HeaderCell>RettighetstypeGrunnlag</Table.HeaderCell>
-            <Table.HeaderCell>UnderveisGrunnlag</Table.HeaderCell>
+            <Table.Row>
+              <Table.HeaderCell style={{ width: '15rem' }}>Periode</Table.HeaderCell>
+              <Table.HeaderCell>RettighetstypeGrunnlag</Table.HeaderCell>
+              <Table.HeaderCell>UnderveisGrunnlag</Table.HeaderCell>
+            </Table.Row>
           </Table.Header>
           <Table.Body>
             {rettighetsinfo.rettighetsperioder.map(({ periode, rettighetstypeUnderveis, rettighetstypeGrunnlag }) => {

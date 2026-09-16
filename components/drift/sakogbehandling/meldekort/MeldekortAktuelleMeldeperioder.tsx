@@ -7,9 +7,11 @@ import { useState } from 'react';
 export const MeldekortAktuelleMeldeperioder = ({
   saksnummer,
   aktuelleMeldeperioder,
+  harDriftTilgang,
 }: {
   saksnummer: string;
   aktuelleMeldeperioder: AktuelleMeldeperioderDriftsinfo[];
+  harDriftTilgang: boolean;
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [result, setResult] = useState<{ success: boolean; message: string }>();
@@ -41,9 +43,11 @@ export const MeldekortAktuelleMeldeperioder = ({
       <Heading size="medium" textColor="subtle" spacing>
         <HStack justify="space-between">
           <span>Aktuelle meldeperioder ({aktuelleMeldeperioder.length ?? 0})</span>
-          <Button size="small" onClick={oppdater} loading={isLoading}>
-            Oppdater meldeperioder
-          </Button>
+          {harDriftTilgang && (
+            <Button size="small" onClick={oppdater} loading={isLoading}>
+              Oppdater meldeperioder
+            </Button>
+          )}
         </HStack>
       </Heading>
 
