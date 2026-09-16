@@ -1,5 +1,5 @@
 import { Page, PageBlock } from '@navikt/ds-react/Page';
-import { harLeseTilgang, hentRollerForBruker } from 'lib/azure/azureUserService';
+import { harDriftTilgang, harLeseTilgang, hentRollerForBruker } from 'lib/azure/azureUserService';
 import { Alert } from '@navikt/ds-react';
 import { SakOversikt } from 'components/drift/sakogbehandling/SakOversikt';
 import { SakNavbar } from 'components/drift/navbar/SakNavbar';
@@ -25,7 +25,7 @@ const SakPage = async ({ params }: { params: Promise<{ saksnummer: string }> }) 
 
       {harLeseTilgang(roller) ? (
         erGyldigSaksnummer(saksnummer) ? (
-          <SakOversikt saksnummer={saksnummer} />
+          <SakOversikt saksnummer={saksnummer} harDriftTilgang={harDriftTilgang(roller)} />
         ) : (
           <Alert variant="error" size="small">
             Saksnummer skal bestå av 7 tegn og inneholde både bokstaver og tall.

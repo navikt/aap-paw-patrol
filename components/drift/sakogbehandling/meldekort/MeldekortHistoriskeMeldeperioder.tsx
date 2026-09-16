@@ -1,4 +1,4 @@
-import { Alert, Box, Heading, Table } from '@navikt/ds-react';
+import { Alert, BodyShort, Box, Heading, Table } from '@navikt/ds-react';
 import { HistoriskeMeldeperioderDriftsinfo } from 'lib/types/meldekort';
 import { formaterPeriodeV2 } from 'lib/utils/date';
 
@@ -18,6 +18,10 @@ export const MeldekortHistoriskeMeldeperioder = ({
     <Heading size="medium" textColor="subtle" spacing>
       Historiske meldeperioder ({historiskeMeldeperioder.length ?? 0})
     </Heading>
+
+    <BodyShort size="small" textColor="subtle" spacing>
+      Meldevindu er tidsrommet meldekortet kan sendes inn i.
+    </BodyShort>
 
     {!historiskeMeldeperioder.length ? (
       <Alert variant="info">Ingen historiske meldeperioder funnet</Alert>

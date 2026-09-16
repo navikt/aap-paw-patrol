@@ -12,9 +12,11 @@ import { Periode } from 'lib/types/felles';
 export const Meldekort = ({
   saksnummer,
   sakRettighetsperiode,
+  harDriftTilgang,
 }: {
   saksnummer: string;
   sakRettighetsperiode: Periode;
+  harDriftTilgang: boolean;
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [data, setData] = useState<MeldekortDriftsinfoDto>();
@@ -56,13 +58,13 @@ export const Meldekort = ({
         <HStack gap="space-16">
           <div>
             <Label>Status</Label>
-            <BodyShort>{data?.sak.status}</BodyShort>
+            <BodyShort>{data?.sak?.status}</BodyShort>
           </div>
           <div>
             <Label>Rettighetsperiode</Label>
-            <BodyShort>{data?.sak.rettighetsperiode && formaterPeriodeV2(data.sak.rettighetsperiode)}</BodyShort>
+            <BodyShort>{data?.sak?.rettighetsperiode && formaterPeriodeV2(data.sak?.rettighetsperiode)}</BodyShort>
           </div>
-          {data && !perioderErLike(data.sak.rettighetsperiode, sakRettighetsperiode) && (
+          {data && data.sak && !perioderErLike(data.sak?.rettighetsperiode, sakRettighetsperiode) && (
             <Alert variant="warning">
               Rettighetsperioden lagret i meldekort-backend samsvarer ikke med den i behandlingsflyt. Dette må
               korrigeres manuelt i databasen til meldekort-backend.
@@ -74,6 +76,7 @@ export const Meldekort = ({
       <MeldekortAktuelleMeldeperioder
         saksnummer={saksnummer}
         aktuelleMeldeperioder={data?.aktuelleMeldeperioder || []}
+        harDriftTilgang={harDriftTilgang}
       />
 
       <MeldekortHistoriskeMeldeperioder historiskeMeldeperioder={data?.historiskeMeldeperioder || []} />

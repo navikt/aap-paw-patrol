@@ -22,7 +22,13 @@ enum Tab {
   UTBETALING = 'UTBETALING',
 }
 
-export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
+export const SakOversikt = ({
+  saksnummer,
+  harDriftTilgang,
+}: {
+  saksnummer: string;
+  harDriftTilgang: boolean;
+}) => {
   const [error, setError] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [sak, setSak] = useState<SakDriftsinfoDTO>();
@@ -98,7 +104,11 @@ export const SakOversikt = ({ saksnummer }: { saksnummer: string }) => {
               <Dialogmeldinger saksnummer={saksnummer} />
             </Tabs.Panel>
             <Tabs.Panel value={Tab.MELDEKORT}>
-              <Meldekort saksnummer={saksnummer} sakRettighetsperiode={sak.rettighetsperiode} />
+              <Meldekort
+                saksnummer={saksnummer}
+                sakRettighetsperiode={sak.rettighetsperiode}
+                harDriftTilgang={harDriftTilgang}
+              />
             </Tabs.Panel>
             <Tabs.Panel value={Tab.BREV}>
               <BrevBestillinger saksnummer={saksnummer} />
