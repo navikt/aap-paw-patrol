@@ -9,7 +9,8 @@ export async function hentLocalToken(scope: string) {
     });
 
     const url = new URL('https://fakedings.intern.dev.nav.no/fake/aad?' + params.toString());
-    return fetch(url, { method: 'POST', next: { revalidate: 0 } }).then((token) => token.text());
+    const token = await fetch(url, { method: 'POST', next: { revalidate: 0 } });
+    return await token.text();
   } catch (err) {
     logWarning('hentLocalToken feilet', err);
     return Promise.resolve('dummy-token');

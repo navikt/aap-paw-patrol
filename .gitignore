@@ -43,6 +43,9 @@ next-env.d.ts
 # Yarn
 .yarn/install-state.gz
 
+# Auto-generated MSW mock handlers (see scripts/generate-mocks.mjs, `yarn mock:generate`)
+/mocks/generated/
+
 # IntelliJ
 .*.iml
 .idea/
