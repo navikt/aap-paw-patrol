@@ -46,14 +46,14 @@ I tillegg må du kopiere `.env-template` til `.env.local` for å kunne kjøre lo
 yarn dev
 ```
 
-### URL-er for å hente openapi.json-filer
+### Oppdatere openapi.json-filer
 
-|App              |URl                                                         |
-|-----------------|------------------------------------------------------------|
-|behandlingsflyt  |https://aap-behandlingsflyt.intern.dev.nav.no/openapi.json  |
-|utbetal          |https://aap-utbetal.intern.dev.nav.no/openapi.json          |
-|oppgave          |https://aap-oppgave.intern.dev.nav.no/openapi.json          |
-|meldekort-backend|https://aap-meldekort-backend.intern.dev.nav.no/openapi.json|
+Backendenes openapi.json-URL-er er kodet inn i `scripts/update-openapi-specs.mjs`. Kjør
+følgende for å hente ferske spesifikasjoner ned til `openapi/`:
+
+```
+yarn openapi:update
+```
 
 
 

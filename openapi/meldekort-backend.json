@@ -1,1 +1,1732 @@
-{"components": {"schemas": {"kotlin.Any": {"nullable": false, "type": "object", "example": {"sak": {"status": "LOPENDE", "rettighetsperiode": {"fom": "2025-01-01", "tom": "2025-12-31"}}, "aktuelleMeldeperioder": [{"antallUbesvarteMeldeperioder": 1, "manglerOpplysninger": null, "nesteMeldeperiode": {"meldeperioden": {"fom": "2025-04-01", "tom": "2025-04-14"}, "meldevindu": {"fom": "2025-04-15", "tom": "2025-04-21"}}}], "historiskeMeldeperioder": [{"meldeperiode": {"meldeperioden": {"fom": "2025-03-01", "tom": "2025-03-14"}, "meldevindu": {"fom": "2025-03-15", "tom": "2025-03-21"}}, "totaltAntallTimerIPerioden": 37.5}], "utfyllinger": [{"referanse": "d290f1ee-6c54-4b01-90e6-d701748f0851", "fagsak": {"system": "KELVIN", "nummer": {"asString": "A1234"}}, "periode": {"fom": "2025-03-01", "tom": "2025-03-14"}, "flyt": "AAP_FLYT_V2", "aktivtSteg": "KVITTERING", "svar": {"svarerDuSant": true, "harDuJobbet": false, "aktivitetsInformasjon": [], "stemmerOpplysningene": true, "harDuHattAvtalteAktiviteter": false, "harDuHattFravær": false}, "opprettet": "2025-03-15T09:00:00", "sistEndret": "2025-03-16T10:30:00", "erDigitalisert": true}], "varsler": []}}, "no.nav.aap.meldekort.DagSvarDto": {"nullable": false, "properties": {"dato": {"example": "2025-04-01", "format": "date", "nullable": false, "type": "string"}, "fravær": {"enum": ["ANNEN", "OMSORG_ANNEN_STERK_GRUNN", "OMSORG_DØDSFALL_I_FAMILIE_ELLER_VENNEKRETS", "OMSORG_FØRSTE_SKOLEDAG_TILVENNING_ELLER_ANNEN_OPPFØLGING_BARN", "OMSORG_PLEIE_I_HJEMMET_AV_NÆR_PÅRØRENDE", "SYKDOM_ELLER_SKADE"], "nullable": true, "type": "string"}, "timerArbeidet": {"format": "double", "nullable": true, "type": "number"}}, "required": ["dato"], "type": "object"}, "no.nav.aap.meldekort.EndreUtfyllingRequest": {"nullable": false, "properties": {"nyTilstand": {"$ref": "#/components/schemas/no.nav.aap.meldekort.UtfyllingTilstandDto"}}, "required": ["nyTilstand"], "type": "object"}, "no.nav.aap.meldekort.HistoriskMeldeperiodeDto": {"nullable": false, "properties": {"antallTimerArbeidetIPerioden": {"format": "double", "nullable": false, "type": "number"}, "meldeperiode": {"$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDto"}, "status": {"enum": ["KELVIN"], "nullable": false, "type": "string"}}, "required": ["antallTimerArbeidetIPerioden", "meldeperiode", "status"], "type": "object"}, "no.nav.aap.meldekort.KommendeMeldeperioderDto": {"nullable": false, "properties": {"antallUbesvarteMeldeperioder": {"format": "int32", "nullable": false, "type": "integer"}, "manglerOpplysninger": {"$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDto"}, "nesteMeldeperiode": {"$ref": "#/components/schemas/no.nav.aap.meldekort.MeldeperiodeDto"}}, "required": ["antallUbesvarteMeldeperioder"], "type": "object"}, "no.nav.aap.meldekort.MeldekortTilUtfyllingDto": {"nullable": false, "properties": {"fristForInnsending": {"example": "2025-04-01", "format": "date", "nullable": true, "type": "string"}, "kanFyllesUtFra": {"example": "2025-04-01", "format": "date", "nullable": true, "type": "string"}, "kanSendesFra": {"example": "2025-04-01", "format": "date", "nullable": false, "type": "string"}}, "required": ["kanSendesFra"], "type": "object"}, "no.nav.aap.meldekort.MeldekortstatusDto": {"nullable": false, "properties": {"harInnsendteMeldekort": {"nullable": false, "type": "boolean"}, "meldekortTilUtfylling": {"items": {"$ref": "#/components/schemas/no.nav.aap.meldekort.MeldekortTilUtfyllingDto"}, "nullable": false, "type": "array"}, "redirectUrl": {"nullable": true, "type": "string"}}, "required": ["harInnsendteMeldekort", "meldekortTilUtfylling"], "type": "object"}, "no.nav.aap.meldekort.MeldeperiodeDto": {"nullable": false, "properties": {"innsendingsvindu": {"$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDto"}, "meldeperiode": {"$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDto"}}, "required": ["innsendingsvindu", "meldeperiode"], "type": "object"}, "no.nav.aap.meldekort.MetadataDto": {"nullable": false, "properties": {"brukerHarSakUnderBehandling": {"nullable": true, "type": "boolean"}, "brukerHarVedtakIKelvin": {"nullable": true, "type": "boolean"}}, "type": "object"}, "no.nav.aap.meldekort.PeriodeDetaljerDto": {"nullable": false, "properties": {"bruttoBeløp": {"format": "double", "nullable": true, "type": "number"}, "innsendtDato": {"example": "2025-04-01", "format": "date", "nullable": true, "type": "string"}, "kanEndres": {"nullable": false, "type": "boolean"}, "periode": {"$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDto"}, "status": {"enum": ["KELVIN"], "nullable": false, "type": "string"}, "svar": {"$ref": "#/components/schemas/no.nav.aap.meldekort.SvarDto"}, "type": {"enum": ["KELVIN"], "nullable": false, "type": "string"}}, "required": ["kanEndres", "periode", "status", "svar", "type"], "type": "object"}, "no.nav.aap.meldekort.PeriodeDto": {"nullable": false, "properties": {"fom": {"example": "2025-04-01", "format": "date", "nullable": false, "type": "string"}, "tom": {"example": "2025-04-01", "format": "date", "nullable": false, "type": "string"}}, "required": ["fom", "tom"], "type": "object"}, "no.nav.aap.meldekort.StartUtfyllingRequest": {"nullable": false, "properties": {"fom": {"example": "2025-04-01", "format": "date", "nullable": false, "type": "string"}, "tom": {"example": "2025-04-01", "format": "date", "nullable": false, "type": "string"}}, "required": ["fom", "tom"], "type": "object"}, "no.nav.aap.meldekort.StartUtfyllingResponse": {"nullable": false, "properties": {"feil": {"nullable": true, "type": "string"}, "metadata": {"$ref": "#/components/schemas/no.nav.aap.meldekort.UtfyllingMetadataDto"}, "tilstand": {"$ref": "#/components/schemas/no.nav.aap.meldekort.UtfyllingTilstandDto"}}, "type": "object"}, "no.nav.aap.meldekort.SvarDto": {"nullable": false, "properties": {"dager": {"items": {"$ref": "#/components/schemas/no.nav.aap.meldekort.DagSvarDto"}, "nullable": false, "type": "array"}, "harDuHattAvtalteAktiviteter": {"nullable": true, "type": "boolean"}, "harDuHattFravær": {"nullable": true, "type": "boolean"}, "harDuJobbet": {"nullable": true, "type": "boolean"}, "stemmerOpplysningene": {"nullable": true, "type": "boolean"}, "vilSvareRiktig": {"nullable": true, "type": "boolean"}}, "required": ["dager"], "type": "object"}, "no.nav.aap.meldekort.UtfyllingMetadataDto": {"nullable": false, "properties": {"antallUbesvarteMeldeperioder": {"format": "int32", "nullable": false, "type": "integer"}, "fristForInnsending": {"example": "2025-04-01T12:30:00", "format": "date-time", "nullable": true, "type": "string"}, "harBrukerSakUnderBehandling": {"nullable": true, "type": "boolean"}, "harBrukerVedtakIKelvin": {"nullable": true, "type": "boolean"}, "kanSendesInn": {"nullable": false, "type": "boolean"}, "periode": {"$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDto"}, "referanse": {"format": "uuid", "nullable": false, "type": "string"}, "tidligsteInnsendingstidspunkt": {"example": "2025-04-01T12:30:00", "format": "date-time", "nullable": true, "type": "string"}, "visFrist": {"nullable": false, "type": "boolean"}}, "required": ["antallUbesvarteMeldeperioder", "kanSendesInn", "periode", "referanse", "visFrist"], "type": "object"}, "no.nav.aap.meldekort.UtfyllingResponseDto": {"nullable": false, "properties": {"feil": {"nullable": true, "type": "string"}, "metadata": {"$ref": "#/components/schemas/no.nav.aap.meldekort.UtfyllingMetadataDto"}, "tilstand": {"$ref": "#/components/schemas/no.nav.aap.meldekort.UtfyllingTilstandDto"}}, "required": ["metadata", "tilstand"], "type": "object"}, "no.nav.aap.meldekort.UtfyllingTilstandDto": {"nullable": false, "properties": {"aktivtSteg": {"enum": ["BEKREFT", "FRAVÆR_SPØRSMÅL", "FRAVÆR_UTFYLLING", "INTRODUKSJON", "KVITTERING", "SPØRSMÅL", "UTFYLLING"], "nullable": false, "type": "string"}, "svar": {"$ref": "#/components/schemas/no.nav.aap.meldekort.SvarDto"}}, "required": ["aktivtSteg", "svar"], "type": "object"}, "no.nav.aap.meldekort.kontrakt.Periode": {"nullable": false, "properties": {"fom": {"example": "2025-04-01", "format": "date", "nullable": false, "type": "string"}, "tom": {"example": "2025-04-01", "format": "date", "nullable": false, "type": "string"}}, "required": ["fom", "tom"], "type": "object"}, "no.nav.aap.meldekort.kontrakt.sak.BehandslingsflytUtfyllingRequest": {"nullable": false, "properties": {"dager": {"items": {"$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.sak.TimerArbeidetDto"}, "nullable": false, "type": "array"}, "erDigitalisert": {"nullable": true, "type": "boolean"}, "harDuJobbet": {"nullable": false, "type": "boolean"}, "ident": {"nullable": false, "type": "string"}, "opprettetAv": {"nullable": true, "type": "string"}, "periode": {"$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.Periode"}, "sakenGjelderFor": {"$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.Periode"}, "saksnummer": {"nullable": false, "type": "string"}}, "required": ["dager", "harDuJobbet", "ident", "periode", "sakenGjelderFor", "saksnummer"], "type": "object"}, "no.nav.aap.meldekort.kontrakt.sak.Ident": {"nullable": false, "properties": {"aktiv": {"nullable": false, "type": "boolean"}, "ident": {"nullable": false, "type": "string"}}, "required": ["aktiv", "ident"], "type": "object"}, "no.nav.aap.meldekort.kontrakt.sak.MeldeperioderV0": {"nullable": false, "properties": {"meldeperioder": {"items": {"$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.Periode"}, "nullable": false, "type": "array"}, "meldeplikt": {"items": {"$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.Periode"}, "nullable": false, "type": "array"}, "opplysningsbehov": {"items": {"$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.Periode"}, "nullable": false, "type": "array"}, "personIdenter": {"items": {"$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.sak.Ident"}, "nullable": false, "type": "array"}, "sakStatus": {"enum": ["AVSLUTTET", "LØPENDE", "UTREDES"], "nullable": true, "type": "string"}, "sakenGjelderFor": {"$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.Periode"}, "saksnummer": {"nullable": false, "type": "string"}}, "required": ["meldeperioder", "meldeplikt", "opplysningsbehov", "personIdenter", "sakenGjelderFor", "saksnummer"], "type": "object"}, "no.nav.aap.meldekort.kontrakt.sak.OppdaterIdenterV0": {"nullable": false, "properties": {"personIdenter": {"items": {"$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.sak.Ident"}, "nullable": false, "type": "array"}, "saksnummer": {"nullable": false, "type": "string"}}, "required": ["personIdenter", "saksnummer"], "type": "object"}, "no.nav.aap.meldekort.kontrakt.sak.TimerArbeidetDto": {"nullable": false, "properties": {"dato": {"example": "2025-04-01", "format": "date", "nullable": false, "type": "string"}, "timerArbeidet": {"format": "double", "nullable": false, "type": "number"}}, "required": ["dato", "timerArbeidet"], "type": "object"}, "no.nav.aap.motor.JobbTilleggsinfo": {"nullable": false, "properties": {"kommentarer": {"items": {"$ref": "#/components/schemas/no.nav.aap.motor.Kommentar"}, "nullable": false, "type": "array"}}, "required": ["kommentarer"], "type": "object"}, "no.nav.aap.motor.Kommentar": {"nullable": false, "properties": {"skrevetAv": {"nullable": false, "type": "string"}, "tekst": {"nullable": false, "type": "string"}, "tidspunkt": {"example": "2025-04-01T12:30:00", "format": "date-time", "nullable": false, "type": "string"}}, "required": ["skrevetAv", "tekst", "tidspunkt"], "type": "object"}, "no.nav.aap.motor.api.JobbInfoDto": {"nullable": false, "properties": {"antallFeilendeForsøk": {"format": "int32", "nullable": false, "type": "integer"}, "beskrivelse": {"nullable": false, "type": "string"}, "feilmelding": {"nullable": true, "type": "string"}, "id": {"format": "int64", "nullable": false, "type": "integer"}, "metadata": {"additionalProperties": {"nullable": false, "type": "string"}, "description": "Key type: kotlin.String", "nullable": false, "type": "object"}, "navn": {"nullable": false, "type": "string"}, "opprettetTidspunkt": {"example": "2025-04-01T12:30:00", "format": "date-time", "nullable": true, "type": "string"}, "planlagtKjøretidspunkt": {"example": "2025-04-01T12:30:00", "format": "date-time", "nullable": false, "type": "string"}, "prioritet": {"format": "int32", "nullable": true, "type": "integer"}, "status": {"enum": ["AVBRUTT", "FEILET", "FERDIG", "KLAR", "PLUKKET"], "nullable": false, "type": "string"}, "tilleggsinfo": {"$ref": "#/components/schemas/no.nav.aap.motor.JobbTilleggsinfo"}, "type": {"nullable": false, "type": "string"}}, "required": ["antallFeilendeForsøk", "beskrivelse", "id", "metadata", "navn", "planlagtKjøretidspunkt", "status", "type"], "type": "object"}, "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$5$LeggTilKommentarRequest`": {"nullable": false, "properties": {"kommentar": {"nullable": false, "type": "string"}}, "required": ["kommentar"], "type": "object"}, "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`": {"nullable": false, "properties": {"begrunnelse": {"nullable": false, "type": "string"}}, "required": ["begrunnelse"], "type": "object"}}, "securitySchemes": {"jwtAuth": {"bearerFormat": "JWT", "scheme": "bearer", "type": "http"}}}, "info": {"description": "For å teste API i dev, besøk\n<a href=\"https://tokenx-token-generator.intern.dev.nav.no/api/obo?aud=dev-gcp:aap:meldekort-backend\">Token Generator</a> for å få token.", "title": "AAP - Meldekort", "version": "6502b22c256aa83e1a154611de95b0d34142d2d6"}, "openapi": "3.0.0", "paths": {"/api/ansvarlig-system": {"get": {"responses": {"200": {"content": {"application/json": {"schema": {"enum": ["AAP", "FELLES"], "nullable": false, "type": "string"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}]}}, "/api/ansvarlig-system-felles": {"get": {"responses": {"200": {"content": {"application/json": {"schema": {"enum": ["AAP", "FELLES"], "nullable": false, "type": "string"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}]}}, "/api/meldeperiode/kommende": {"get": {"responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.KommendeMeldeperioderDto"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}]}}, "/api/meldeperiode/historiske": {"get": {"responses": {"200": {"content": {"application/json": {"schema": {"items": {"$ref": "#/components/schemas/no.nav.aap.meldekort.HistoriskMeldeperiodeDto"}, "nullable": false, "type": "array"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}]}}, "/api/meldeperiode/detaljer": {"post": {"requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDto"}}}}, "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDetaljerDto"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}]}}, "/api/start-innsending": {"post": {"requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.StartUtfyllingRequest"}}}}, "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.StartUtfyllingResponse"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}]}}, "/api/start-korrigering": {"post": {"requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.StartUtfyllingRequest"}}}}, "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.StartUtfyllingResponse"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}]}}, "/api/utfylling/{referanse}": {"get": {"parameters": [{"deprecated": false, "description": "referanse", "explode": false, "in": "path", "name": "referanse", "required": true, "schema": {"format": "uuid", "nullable": false, "type": "string"}, "style": "simple"}], "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.UtfyllingResponseDto"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}]}, "delete": {"parameters": [{"deprecated": false, "description": "referanse", "explode": false, "in": "path", "name": "referanse", "required": true, "schema": {"format": "uuid", "nullable": false, "type": "string"}, "style": "simple"}], "responses": {"200": {"description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}]}}, "/api/utfylling/{referanse}/lagre-neste": {"post": {"parameters": [{"deprecated": false, "description": "referanse", "explode": false, "in": "path", "name": "referanse", "required": true, "schema": {"format": "uuid", "nullable": false, "type": "string"}, "style": "simple"}], "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.EndreUtfyllingRequest"}}}}, "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.UtfyllingResponseDto"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}]}}, "/api/utfylling/{referanse}/lagre": {"post": {"parameters": [{"deprecated": false, "description": "referanse", "explode": false, "in": "path", "name": "referanse", "required": true, "schema": {"format": "uuid", "nullable": false, "type": "string"}, "style": "simple"}], "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.EndreUtfyllingRequest"}}}}, "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.UtfyllingResponseDto"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}]}}, "/api/hent-metadata": {"get": {"responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.MetadataDto"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}]}}, "/api/meldekort-status": {"get": {"responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.MeldekortstatusDto"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}]}}, "/api/drift/sak/{saksnummer}/meldekort": {"get": {"parameters": [{"deprecated": false, "description": "saksnummer", "explode": false, "in": "path", "name": "saksnummer", "required": true, "schema": {"nullable": false, "type": "string"}, "style": "simple"}], "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/kotlin.Any"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}], "tags": ["DriftAPI", "Tilgangkontrollert"]}}, "/drift/api/jobb/feilende": {"get": {"responses": {"200": {"content": {"application/json": {"schema": {"items": {"$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"}, "nullable": false, "type": "array"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}], "tags": ["MotorAPI"]}}, "/drift/api/jobb/feilende/antall": {"get": {"responses": {"200": {"content": {"application/json": {"schema": {"format": "int32", "nullable": false, "type": "integer"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}], "tags": ["MotorAPI"]}}, "/drift/api/jobb/planlagte-jobber": {"get": {"responses": {"200": {"content": {"application/json": {"schema": {"items": {"$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"}, "nullable": false, "type": "array"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}], "tags": ["MotorAPI"]}}, "/drift/api/jobb/{jobbId}/kjor": {"post": {"parameters": [{"deprecated": false, "description": "ID", "explode": false, "in": "path", "name": "jobbId", "required": true, "schema": {"format": "int64", "nullable": false, "type": "integer"}, "style": "simple"}], "responses": {"200": {"content": {"application/json": {"schema": {"nullable": false, "type": "string"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}], "tags": ["MotorAPI"]}}, "/drift/api/jobb/{jobbId}/leggTilKommentar": {"post": {"parameters": [{"deprecated": false, "description": "ID", "explode": false, "in": "path", "name": "jobbId", "required": true, "schema": {"format": "int64", "nullable": false, "type": "integer"}, "style": "simple"}], "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.motor.api.`MotorApiKt$motorApi$1$5$LeggTilKommentarRequest`"}}}}, "responses": {"200": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.motor.Kommentar"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}], "tags": ["MotorAPI"]}}, "/drift/api/jobb/rekjor/{jobbId}": {"get": {"parameters": [{"deprecated": false, "description": "ID", "explode": false, "in": "path", "name": "jobbId", "required": true, "schema": {"format": "int64", "nullable": false, "type": "integer"}, "style": "simple"}], "responses": {"200": {"content": {"application/json": {"schema": {"nullable": false, "type": "string"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}], "tags": ["MotorAPI"]}}, "/drift/api/jobb/avbryt/{jobbId}": {"post": {"parameters": [{"deprecated": false, "description": "ID", "explode": false, "in": "path", "name": "jobbId", "required": true, "schema": {"format": "int64", "nullable": false, "type": "integer"}, "style": "simple"}], "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`"}}}}, "responses": {"200": {"content": {"application/json": {"schema": {"nullable": false, "type": "string"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}], "tags": ["MotorAPI"]}, "get": {"parameters": [{"deprecated": false, "description": "ID", "explode": false, "in": "path", "name": "jobbId", "required": true, "schema": {"format": "int64", "nullable": false, "type": "integer"}, "style": "simple"}], "responses": {"200": {"content": {"application/json": {"schema": {"nullable": false, "type": "string"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}], "tags": ["MotorAPI"]}}, "/drift/api/jobb/avbrytAlleFeilede": {"get": {"responses": {"200": {"content": {"application/json": {"schema": {"nullable": false, "type": "string"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}], "tags": ["MotorAPI"]}}, "/drift/api/jobb/rekjorAlleFeilede": {"get": {"responses": {"200": {"content": {"application/json": {"schema": {"nullable": false, "type": "string"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}], "tags": ["MotorAPI"]}}, "/drift/api/jobb/sisteKjørte": {"get": {"responses": {"200": {"content": {"application/json": {"schema": {"items": {"$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"}, "nullable": false, "type": "array"}}}, "description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}], "tags": ["MotorAPI"]}}, "/api/behandlingsflyt/sak/meldeperioder": {"post": {"requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.sak.MeldeperioderV0"}}}}, "responses": {"200": {"description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}], "tags": ["Tilgangkontrollert"]}}, "/api/behandlingsflyt/sak/timer": {"post": {"requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.sak.BehandslingsflytUtfyllingRequest"}}}}, "responses": {"200": {"description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}], "tags": ["Tilgangkontrollert"]}}, "/api/behandlingsflyt/sak/oppdater-identer": {"post": {"requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.sak.OppdaterIdenterV0"}}}}, "responses": {"200": {"description": "OK"}}, "security": [{"jwtAuth": ["BEHANDLINGSFLYT"]}], "tags": ["Tilgangkontrollert"]}}}, "tags": [{"description": "Driftsendepunkter for Paw Patrol", "name": "DriftAPI"}, {"description": "Dette endepunktet er tilgangkontrollert.", "name": "Tilgangkontrollert"}, {"description": "Disse endepunktene er drift-endepunkter for motoren.", "name": "MotorAPI"}]}
+{
+  "components": {
+    "schemas": {
+      "kotlin.Any": {
+        "nullable": false,
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.DagSvarDto": {
+        "nullable": false,
+        "properties": {
+          "dato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "fravær": {
+            "enum": [
+              "ANNEN",
+              "OMSORG_ANNEN_STERK_GRUNN",
+              "OMSORG_DØDSFALL_I_FAMILIE_ELLER_VENNEKRETS",
+              "OMSORG_FØRSTE_SKOLEDAG_TILVENNING_ELLER_ANNEN_OPPFØLGING_BARN",
+              "OMSORG_PLEIE_I_HJEMMET_AV_NÆR_PÅRØRENDE",
+              "SYKDOM_ELLER_SKADE"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "timerArbeidet": {
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          }
+        },
+        "required": [
+          "dato"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.EndreUtfyllingRequest": {
+        "nullable": false,
+        "properties": {
+          "nyTilstand": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.UtfyllingTilstandDto"
+          }
+        },
+        "required": [
+          "nyTilstand"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.HistoriskMeldeperiodeDto": {
+        "nullable": false,
+        "properties": {
+          "antallTimerArbeidetIPerioden": {
+            "format": "double",
+            "nullable": false,
+            "type": "number"
+          },
+          "meldeperiode": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDto"
+          },
+          "status": {
+            "enum": [
+              "KELVIN"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "antallTimerArbeidetIPerioden",
+          "meldeperiode",
+          "status"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.KommendeMeldeperioderDto": {
+        "nullable": false,
+        "properties": {
+          "antallUbesvarteMeldeperioder": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "manglerOpplysninger": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDto"
+          },
+          "nesteMeldeperiode": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.MeldeperiodeDto"
+          }
+        },
+        "required": [
+          "antallUbesvarteMeldeperioder"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.MeldekortTilUtfyllingDto": {
+        "nullable": false,
+        "properties": {
+          "fristForInnsending": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "kanFyllesUtFra": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "kanSendesFra": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kanSendesFra"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.MeldekortstatusDto": {
+        "nullable": false,
+        "properties": {
+          "harInnsendteMeldekort": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "meldekortTilUtfylling": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldekort.MeldekortTilUtfyllingDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "redirectUrl": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "harInnsendteMeldekort",
+          "meldekortTilUtfylling"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.MeldeperiodeDto": {
+        "nullable": false,
+        "properties": {
+          "innsendingsvindu": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDto"
+          },
+          "meldeperiode": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDto"
+          }
+        },
+        "required": [
+          "innsendingsvindu",
+          "meldeperiode"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.MetadataDto": {
+        "nullable": false,
+        "properties": {
+          "brukerHarSakUnderBehandling": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "brukerHarVedtakIKelvin": {
+            "nullable": true,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.PeriodeDetaljerDto": {
+        "nullable": false,
+        "properties": {
+          "bruttoBeløp": {
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          },
+          "innsendtDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "kanEndres": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "periode": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDto"
+          },
+          "status": {
+            "enum": [
+              "KELVIN"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "svar": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.SvarDto"
+          },
+          "type": {
+            "enum": [
+              "KELVIN"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kanEndres",
+          "periode",
+          "status",
+          "svar",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.PeriodeDto": {
+        "nullable": false,
+        "properties": {
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fom",
+          "tom"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.StartUtfyllingRequest": {
+        "nullable": false,
+        "properties": {
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fom",
+          "tom"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.StartUtfyllingResponse": {
+        "nullable": false,
+        "properties": {
+          "feil": {
+            "nullable": true,
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.UtfyllingMetadataDto"
+          },
+          "tilstand": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.UtfyllingTilstandDto"
+          }
+        },
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.SvarDto": {
+        "nullable": false,
+        "properties": {
+          "dager": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldekort.DagSvarDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "harDuHattAvtalteAktiviteter": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "harDuHattFravær": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "harDuJobbet": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "stemmerOpplysningene": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "vilSvareRiktig": {
+            "nullable": true,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "dager"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.UtfyllingMetadataDto": {
+        "nullable": false,
+        "properties": {
+          "antallUbesvarteMeldeperioder": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "fristForInnsending": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "harBrukerSakUnderBehandling": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "harBrukerVedtakIKelvin": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "kanSendesInn": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "periode": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDto"
+          },
+          "referanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "tidligsteInnsendingstidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "visFrist": {
+            "nullable": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "antallUbesvarteMeldeperioder",
+          "kanSendesInn",
+          "periode",
+          "referanse",
+          "visFrist"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.UtfyllingResponseDto": {
+        "nullable": false,
+        "properties": {
+          "feil": {
+            "nullable": true,
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.UtfyllingMetadataDto"
+          },
+          "tilstand": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.UtfyllingTilstandDto"
+          }
+        },
+        "required": [
+          "metadata",
+          "tilstand"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.UtfyllingTilstandDto": {
+        "nullable": false,
+        "properties": {
+          "aktivtSteg": {
+            "enum": [
+              "BEKREFT",
+              "FRAVÆR_SPØRSMÅL",
+              "FRAVÆR_UTFYLLING",
+              "INTRODUKSJON",
+              "KVITTERING",
+              "SPØRSMÅL",
+              "UTFYLLING"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "svar": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.SvarDto"
+          }
+        },
+        "required": [
+          "aktivtSteg",
+          "svar"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.kontrakt.Periode": {
+        "nullable": false,
+        "properties": {
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fom",
+          "tom"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.kontrakt.sak.BehandslingsflytUtfyllingRequest": {
+        "nullable": false,
+        "properties": {
+          "dager": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.sak.TimerArbeidetDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "erDigitalisert": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "harDuJobbet": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "ident": {
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettetAv": {
+            "nullable": true,
+            "type": "string"
+          },
+          "periode": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.Periode"
+          },
+          "sakenGjelderFor": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.Periode"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dager",
+          "harDuJobbet",
+          "ident",
+          "periode",
+          "sakenGjelderFor",
+          "saksnummer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.kontrakt.sak.Ident": {
+        "nullable": false,
+        "properties": {
+          "aktiv": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "ident": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "aktiv",
+          "ident"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.kontrakt.sak.MeldeperioderV0": {
+        "nullable": false,
+        "properties": {
+          "meldeperioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "meldeplikt": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "opplysningsbehov": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "personIdenter": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.sak.Ident"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "sakStatus": {
+            "enum": [
+              "AVSLUTTET",
+              "LØPENDE",
+              "UTREDES"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "sakenGjelderFor": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.Periode"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "meldeperioder",
+          "meldeplikt",
+          "opplysningsbehov",
+          "personIdenter",
+          "sakenGjelderFor",
+          "saksnummer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.kontrakt.sak.OppdaterIdenterV0": {
+        "nullable": false,
+        "properties": {
+          "personIdenter": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.sak.Ident"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "personIdenter",
+          "saksnummer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.kontrakt.sak.TimerArbeidetDto": {
+        "nullable": false,
+        "properties": {
+          "dato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "timerArbeidet": {
+            "format": "double",
+            "nullable": false,
+            "type": "number"
+          }
+        },
+        "required": [
+          "dato",
+          "timerArbeidet"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.JobbTilleggsinfo": {
+        "nullable": false,
+        "properties": {
+          "kommentarer": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.motor.Kommentar"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "kommentarer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.Kommentar": {
+        "nullable": false,
+        "properties": {
+          "skrevetAv": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tekst": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "skrevetAv",
+          "tekst",
+          "tidspunkt"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.JobbInfoDto": {
+        "nullable": false,
+        "properties": {
+          "antallFeilendeForsøk": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "beskrivelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "feilmelding": {
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          },
+          "metadata": {
+            "additionalProperties": {
+              "nullable": false,
+              "type": "string"
+            },
+            "description": "Key type: kotlin.String",
+            "nullable": false,
+            "type": "object"
+          },
+          "navn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettetTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "planlagtKjøretidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "prioritet": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "AVBRUTT",
+              "FEILET",
+              "FERDIG",
+              "KLAR",
+              "PLUKKET"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "tilleggsinfo": {
+            "$ref": "#/components/schemas/no.nav.aap.motor.JobbTilleggsinfo"
+          },
+          "type": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "antallFeilendeForsøk",
+          "beskrivelse",
+          "id",
+          "metadata",
+          "navn",
+          "planlagtKjøretidspunkt",
+          "status",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$5$LeggTilKommentarRequest`": {
+        "nullable": false,
+        "properties": {
+          "kommentar": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kommentar"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "begrunnelse"
+        ],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "jwtAuth": {
+        "bearerFormat": "JWT",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "description": "For å teste API i dev, besøk\n<a href=\"https://tokenx-token-generator.intern.dev.nav.no/api/obo?aud=dev-gcp:aap:meldekort-backend\">Token Generator</a> for å få token.",
+    "title": "AAP - Meldekort",
+    "version": "18f07fa0d1730d6f04a4226f922c79ff450ca760"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/ansvarlig-system": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "enum": [
+                    "AAP",
+                    "FELLES"
+                  ],
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/ansvarlig-system-felles": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "enum": [
+                    "AAP",
+                    "FELLES"
+                  ],
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/meldeperiode/kommende": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.meldekort.KommendeMeldeperioderDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/meldeperiode/historiske": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.meldekort.HistoriskMeldeperiodeDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/meldeperiode/detaljer": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDetaljerDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/start-innsending": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.meldekort.StartUtfyllingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.meldekort.StartUtfyllingResponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/start-korrigering": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.meldekort.StartUtfyllingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.meldekort.StartUtfyllingResponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/utfylling/{referanse}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.meldekort.UtfyllingResponseDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/utfylling/{referanse}/lagre-neste": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.meldekort.EndreUtfyllingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.meldekort.UtfyllingResponseDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/utfylling/{referanse}/lagre": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.meldekort.EndreUtfyllingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.meldekort.UtfyllingResponseDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/hent-metadata": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.meldekort.MetadataDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/meldekort-status": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.meldekort.MeldekortstatusDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/drift/sak/{saksnummer}/meldekort": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "saksnummer",
+            "explode": false,
+            "in": "path",
+            "name": "saksnummer",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/kotlin.Any"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "DriftAPI",
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/drift/api/jobb/feilende": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/feilende/antall": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "format": "int32",
+                  "nullable": false,
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/planlagte-jobber": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/{jobbId}/kjor": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/{jobbId}/leggTilKommentar": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.motor.api.`MotorApiKt$motorApi$1$5$LeggTilKommentarRequest`"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.motor.Kommentar"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/rekjor/{jobbId}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/avbryt/{jobbId}": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/avbrytAlleFeilede": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/rekjorAlleFeilede": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/sisteKjørte": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/api/behandlingsflyt/sak/meldeperioder": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.sak.MeldeperioderV0"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/behandlingsflyt/sak/timer": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.sak.BehandslingsflytUtfyllingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/behandlingsflyt/sak/oppdater-identer": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.sak.OppdaterIdenterV0"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "Driftsendepunkter for Paw Patrol",
+      "name": "DriftAPI"
+    },
+    {
+      "description": "Dette endepunktet er tilgangkontrollert.",
+      "name": "Tilgangkontrollert"
+    },
+    {
+      "description": "Disse endepunktene er drift-endepunkter for motoren.",
+      "name": "MotorAPI"
+    }
+  ]
+}

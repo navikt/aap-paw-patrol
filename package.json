@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "dev:mock": "node scripts/dev-with-mocks.mjs",
     "mock:generate": "node scripts/generate-mocks.mjs",
+    "openapi:update": "node scripts/update-openapi-specs.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint app components lib",

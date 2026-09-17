@@ -1,1 +1,1728 @@
-{"components":{"schemas":{"no.nav.aap.motor.JobbTilleggsinfo":{"nullable":false,"properties":{"kommentarer":{"items":{"$ref":"#/components/schemas/no.nav.aap.motor.Kommentar"},"nullable":false,"type":"array"}},"required":["kommentarer"],"type":"object"},"no.nav.aap.motor.Kommentar":{"nullable":false,"properties":{"skrevetAv":{"nullable":false,"type":"string"},"tekst":{"nullable":false,"type":"string"},"tidspunkt":{"example":"2025-04-01T12:30:00","format":"date-time","nullable":false,"type":"string"}},"required":["skrevetAv","tekst","tidspunkt"],"type":"object"},"no.nav.aap.motor.api.JobbInfoDto":{"nullable":false,"properties":{"antallFeilendeForsøk":{"format":"int32","nullable":false,"type":"integer"},"beskrivelse":{"nullable":false,"type":"string"},"feilmelding":{"nullable":true,"type":"string"},"id":{"format":"int64","nullable":false,"type":"integer"},"metadata":{"additionalProperties":{"nullable":false,"type":"string"},"description":"Key type: kotlin.String","nullable":false,"type":"object"},"navn":{"nullable":false,"type":"string"},"opprettetTidspunkt":{"example":"2025-04-01T12:30:00","format":"date-time","nullable":true,"type":"string"},"planlagtKjøretidspunkt":{"example":"2025-04-01T12:30:00","format":"date-time","nullable":false,"type":"string"},"prioritet":{"format":"int32","nullable":true,"type":"integer"},"status":{"enum":["AVBRUTT","FEILET","FERDIG","KLAR","PLUKKET"],"nullable":false,"type":"string"},"tilleggsinfo":{"$ref":"#/components/schemas/no.nav.aap.motor.JobbTilleggsinfo"},"type":{"nullable":false,"type":"string"}},"required":["antallFeilendeForsøk","beskrivelse","id","metadata","navn","planlagtKjøretidspunkt","status","type"],"type":"object"},"no.nav.aap.motor.api.`MotorApiKt$motorApi$1$5$LeggTilKommentarRequest`":{"nullable":false,"properties":{"kommentar":{"nullable":false,"type":"string"}},"required":["kommentar"],"type":"object"},"no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`":{"nullable":false,"properties":{"begrunnelse":{"nullable":false,"type":"string"}},"required":["begrunnelse"],"type":"object"},"no.nav.aap.utbetal.admin.UtbetalingDto":{"nullable":false,"properties":{"beløp":{"maximum":4294967295,"minimum":0,"nullable":false,"type":"integer"},"fastsattDagsats":{"maximum":4294967295,"minimum":0,"nullable":false,"type":"integer"},"fom":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"},"tom":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"},"utbetalingRef":{"format":"uuid","nullable":false,"type":"string"},"utbetalingsdato":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"}},"required":["beløp","fastsattDagsats","fom","tom","utbetalingRef","utbetalingsdato"],"type":"object"},"no.nav.aap.utbetal.admin.UtbetalingInfoDto":{"nullable":false,"properties":{"behandlingsreferanse":{"format":"uuid","nullable":false,"type":"string"},"saksnummer":{"nullable":false,"type":"string"},"utbetalingEndret":{"example":"2025-04-01T12:30:00","format":"date-time","nullable":true,"type":"string"},"utbetalingOpprettet":{"example":"2025-04-01T12:30:00","format":"date-time","nullable":false,"type":"string"},"utbetalingRef":{"format":"uuid","nullable":false,"type":"string"},"utbetalingStatus":{"enum":["BEKREFTET","FEILET","INGEN_PERIODER","OPPRETTET","SENDT"],"nullable":false,"type":"string"}},"required":["behandlingsreferanse","saksnummer","utbetalingOpprettet","utbetalingRef","utbetalingStatus"],"type":"object"},"no.nav.aap.utbetal.admin.UtbetalingMigreringStatusDto":{"nullable":false,"properties":{"antallGammeltApi":{"format":"int32","nullable":false,"type":"integer"},"antallNyttApi":{"format":"int32","nullable":false,"type":"integer"}},"required":["antallGammeltApi","antallNyttApi"],"type":"object"},"no.nav.aap.utbetal.admin.UtbetalingStatusDto":{"nullable":false,"properties":{"utbetalingerMedFeiletStatus":{"items":{"$ref":"#/components/schemas/no.nav.aap.utbetal.admin.UtbetalingInfoDto"},"nullable":false,"type":"array"},"utbetalingerSomManglerKvittering":{"items":{"$ref":"#/components/schemas/no.nav.aap.utbetal.admin.UtbetalingInfoDto"},"nullable":false,"type":"array"}},"required":["utbetalingerMedFeiletStatus","utbetalingerSomManglerKvittering"],"type":"object"},"no.nav.aap.utbetal.admin.UtbetalingstidslinjeDto":{"nullable":false,"properties":{"utbetalinger":{"items":{"$ref":"#/components/schemas/no.nav.aap.utbetal.admin.UtbetalingDto"},"nullable":false,"type":"array"}},"required":["utbetalinger"],"type":"object"},"no.nav.aap.utbetal.migrering.MigrerSakDto":{"nullable":false,"properties":{"dryRun":{"nullable":false,"type":"boolean"},"saksnummer":{"nullable":false,"type":"string"}},"required":["dryRun","saksnummer"],"type":"object"},"no.nav.aap.utbetal.migrering.MigreringDto":{"nullable":false,"properties":{"dryRun":{"nullable":false,"type":"boolean"},"maxAntall":{"format":"int32","nullable":false,"type":"integer"}},"required":["dryRun","maxAntall"],"type":"object"},"no.nav.aap.utbetal.migrering.MigreringsresultatDto":{"nullable":false,"properties":{"feiledeMigreringer":{"items":{"nullable":false,"type":"string"},"nullable":false,"type":"array"},"migrerteSaker":{"items":{"nullable":false,"type":"string"},"nullable":false,"type":"array"}},"required":["feiledeMigreringer","migrerteSaker"],"type":"object"},"no.nav.aap.utbetal.simulering.SimuleringDto":{"nullable":false,"properties":{"perioder":{"items":{"$ref":"#/components/schemas/no.nav.aap.utbetal.simulering.SimuleringsperiodeDto"},"nullable":false,"type":"array"}},"required":["perioder"],"type":"object"},"no.nav.aap.utbetal.simulering.SimuleringsperiodeDto":{"nullable":false,"properties":{"fom":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"},"tom":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"},"utbetalinger":{"items":{"$ref":"#/components/schemas/no.nav.aap.utbetal.simulering.SimulertUtbetalingDto"},"nullable":false,"type":"array"}},"required":["fom","tom","utbetalinger"],"type":"object"},"no.nav.aap.utbetal.simulering.SimulertUtbetalingDto":{"nullable":false,"properties":{"fagsystem":{"nullable":false,"type":"string"},"nyttBeløp":{"format":"int32","nullable":false,"type":"integer"},"sakId":{"nullable":false,"type":"string"},"stønadstype":{"nullable":false,"type":"string"},"tidligereUtbetalt":{"format":"int32","nullable":false,"type":"integer"},"utbetalesTil":{"nullable":false,"type":"string"}},"required":["fagsystem","nyttBeløp","sakId","stønadstype","tidligereUtbetalt","utbetalesTil"],"type":"object"},"no.nav.aap.utbetal.simulering.UtbetalingOgSimuleringDto":{"nullable":false,"properties":{"simuleringDto":{"$ref":"#/components/schemas/no.nav.aap.utbetal.simulering.SimuleringDto"},"utbetalingDto":{"$ref":"#/components/schemas/no.nav.aap.utbetaling.UtbetalingDto"}},"required":["simuleringDto","utbetalingDto"],"type":"object"},"no.nav.aap.utbetal.tilkjentytelse.MeldeperiodeDto":{"nullable":false,"properties":{"fom":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"},"tom":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"}},"required":["fom","tom"],"type":"object"},"no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseAvventDto":{"nullable":false,"properties":{"feilregistrering":{"nullable":false,"type":"boolean"},"fom":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"},"overføres":{"example":"2025-04-01","format":"date","nullable":true,"type":"string"},"tom":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"},"årsak":{"enum":["AVVENT_AVREGNING","AVVENT_REFUSJONSKRAV"],"nullable":true,"type":"string"}},"required":["feilregistrering","fom","tom"],"type":"object"},"no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseDetaljerDto":{"nullable":false,"properties":{"antallBarn":{"format":"int32","nullable":false,"type":"integer"},"barnepensjonDagsats":{"nullable":false,"type":"number"},"barnetillegg":{"nullable":false,"type":"number"},"barnetilleggsats":{"nullable":false,"type":"number"},"dagsats":{"nullable":false,"type":"number"},"gradering":{"format":"int32","nullable":false,"type":"integer"},"grunnbeløp":{"nullable":false,"type":"number"},"grunnlag":{"nullable":false,"type":"number"},"grunnlagsfaktor":{"nullable":false,"type":"number"},"meldeperiode":{"$ref":"#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.MeldeperiodeDto"},"redusertDagsats":{"nullable":false,"type":"number"},"utbetalingsdato":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"}},"required":["antallBarn","barnepensjonDagsats","barnetillegg","barnetilleggsats","dagsats","gradering","grunnbeløp","grunnlag","grunnlagsfaktor","redusertDagsats","utbetalingsdato"],"type":"object"},"no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseDto":{"nullable":false,"properties":{"avvent":{"$ref":"#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseAvventDto"},"behandlingsreferanse":{"format":"uuid","nullable":false,"type":"string"},"beslutterId":{"nullable":false,"type":"string"},"forrigeBehandlingsreferanse":{"format":"uuid","nullable":true,"type":"string"},"nyMeldeperiode":{"$ref":"#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.MeldeperiodeDto"},"perioder":{"items":{"$ref":"#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelsePeriodeDto"},"nullable":false,"type":"array"},"personIdent":{"nullable":false,"type":"string"},"saksbehandlerId":{"nullable":false,"type":"string"},"saksnummer":{"nullable":false,"type":"string"},"trekk":{"items":{"$ref":"#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseTrekkDto"},"nullable":false,"type":"array"},"vedtakstidspunkt":{"example":"2025-04-01T12:30:00","format":"date-time","nullable":false,"type":"string"}},"required":["behandlingsreferanse","beslutterId","perioder","personIdent","saksbehandlerId","saksnummer","trekk","vedtakstidspunkt"],"type":"object"},"no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelsePeriodeDto":{"nullable":false,"properties":{"detaljer":{"$ref":"#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseDetaljerDto"},"fom":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"},"tom":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"}},"required":["detaljer","fom","tom"],"type":"object"},"no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseTrekkDto":{"nullable":false,"properties":{"beløp":{"format":"int32","nullable":false,"type":"integer"},"dato":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"}},"required":["beløp","dato"],"type":"object"},"no.nav.aap.utbetal.trekk.TrekkDto":{"nullable":false,"properties":{"aktiv":{"nullable":false,"type":"boolean"},"behandlingsreferanse":{"format":"uuid","nullable":false,"type":"string"},"beløp":{"format":"int32","nullable":false,"type":"integer"},"dato":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"},"posteringer":{"items":{"$ref":"#/components/schemas/no.nav.aap.utbetal.trekk.TrekkPosteringDto"},"nullable":false,"type":"array"},"saksnummer":{"nullable":false,"type":"string"}},"required":["aktiv","behandlingsreferanse","beløp","dato","posteringer","saksnummer"],"type":"object"},"no.nav.aap.utbetal.trekk.TrekkPosteringDto":{"nullable":false,"properties":{"beløp":{"format":"int32","nullable":false,"type":"integer"},"dato":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"}},"required":["beløp","dato"],"type":"object"},"no.nav.aap.utbetal.trekk.TrekkResponsDto":{"nullable":false,"properties":{"trekkListe":{"items":{"$ref":"#/components/schemas/no.nav.aap.utbetal.trekk.TrekkDto"},"nullable":false,"type":"array"}},"required":["trekkListe"],"type":"object"},"no.nav.aap.utbetaling.HentUtbetalingerDto":{"nullable":false,"properties":{"behandlingsreferanse":{"format":"uuid","nullable":false,"type":"string"}},"required":["behandlingsreferanse"],"type":"object"},"no.nav.aap.utbetaling.UtbetalingDto":{"nullable":false,"properties":{"perioder":{"items":{"$ref":"#/components/schemas/no.nav.aap.utbetaling.UtbetalingsperiodeDto"},"nullable":false,"type":"array"},"utbetalingBekreftet":{"example":"2025-04-01T12:30:00","format":"date-time","nullable":true,"type":"string"},"utbetalingOversendt":{"example":"2025-04-01T12:30:00","format":"date-time","nullable":false,"type":"string"},"utbetalingStatus":{"enum":["BEKREFTET","FEILET","INGEN_PERIODER","OPPRETTET","SENDT"],"nullable":false,"type":"string"}},"required":["perioder","utbetalingOversendt","utbetalingStatus"],"type":"object"},"no.nav.aap.utbetaling.UtbetalingsperiodeDto":{"nullable":false,"properties":{"beløp":{"format":"int32","nullable":false,"type":"integer"},"fastsattDagsats":{"format":"int32","nullable":false,"type":"integer"},"fom":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"},"tom":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"},"utbetalingsdato":{"example":"2025-04-01","format":"date","nullable":false,"type":"string"},"utbetalingsperiodeType":{"enum":["ENDRET","NY","UENDRET"],"nullable":false,"type":"string"}},"required":["beløp","fastsattDagsats","fom","tom","utbetalingsdato","utbetalingsperiodeType"],"type":"object"}},"securitySchemes":{"jwtAuth":{"bearerFormat":"JWT","scheme":"bearer","type":"http"}}},"info":{"description":"For å teste API i dev, besøk\n<a href=\"https://azure-token-generator.intern.dev.nav.no/api/m2m?aud=dev-gcp:aap:utbetal\">Token Generator</a> for å få token.\n\nFor å test lokalt:\n<pre>curl -s -XPOST http://localhost:8081/token  | jq -r '.access_token' | pbcopy</pre>","title":"AAP - Utbetal","version":"0.0.1"},"openapi":"3.0.0","paths":{"/tilkjentytelse":{"post":{"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseDto"}}}},"responses":{"200":{"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["Tilgangkontrollert"]}},"/utbetalinger":{"post":{"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.utbetaling.HentUtbetalingerDto"}}}},"responses":{"200":{"content":{"application/json":{"schema":{"items":{"$ref":"#/components/schemas/no.nav.aap.utbetaling.UtbetalingDto"},"nullable":false,"type":"array"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["Tilgangkontrollert"]}},"/simulering":{"post":{"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseDto"}}}},"responses":{"200":{"content":{"application/json":{"schema":{"items":{"$ref":"#/components/schemas/no.nav.aap.utbetal.simulering.UtbetalingOgSimuleringDto"},"nullable":false,"type":"array"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["Tilgangkontrollert"]}},"/drift/api/jobb/feilende":{"get":{"responses":{"200":{"content":{"application/json":{"schema":{"items":{"$ref":"#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"},"nullable":false,"type":"array"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["MotorAPI"]}},"/drift/api/jobb/feilende/antall":{"get":{"responses":{"200":{"content":{"application/json":{"schema":{"format":"int32","nullable":false,"type":"integer"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["MotorAPI"]}},"/drift/api/jobb/planlagte-jobber":{"get":{"responses":{"200":{"content":{"application/json":{"schema":{"items":{"$ref":"#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"},"nullable":false,"type":"array"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["MotorAPI"]}},"/drift/api/jobb/{jobbId}/kjor":{"post":{"parameters":[{"deprecated":false,"description":"ID","explode":false,"in":"path","name":"jobbId","required":true,"schema":{"format":"int64","nullable":false,"type":"integer"},"style":"simple"}],"responses":{"200":{"content":{"application/json":{"schema":{"nullable":false,"type":"string"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["MotorAPI"]}},"/drift/api/jobb/{jobbId}/leggTilKommentar":{"post":{"parameters":[{"deprecated":false,"description":"ID","explode":false,"in":"path","name":"jobbId","required":true,"schema":{"format":"int64","nullable":false,"type":"integer"},"style":"simple"}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.motor.api.`MotorApiKt$motorApi$1$5$LeggTilKommentarRequest`"}}}},"responses":{"200":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.motor.Kommentar"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["MotorAPI"]}},"/drift/api/jobb/rekjor/{jobbId}":{"get":{"parameters":[{"deprecated":false,"description":"ID","explode":false,"in":"path","name":"jobbId","required":true,"schema":{"format":"int64","nullable":false,"type":"integer"},"style":"simple"}],"responses":{"200":{"content":{"application/json":{"schema":{"nullable":false,"type":"string"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["MotorAPI"]}},"/drift/api/jobb/avbryt/{jobbId}":{"post":{"parameters":[{"deprecated":false,"description":"ID","explode":false,"in":"path","name":"jobbId","required":true,"schema":{"format":"int64","nullable":false,"type":"integer"},"style":"simple"}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`"}}}},"responses":{"200":{"content":{"application/json":{"schema":{"nullable":false,"type":"string"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["MotorAPI"]},"get":{"parameters":[{"deprecated":false,"description":"ID","explode":false,"in":"path","name":"jobbId","required":true,"schema":{"format":"int64","nullable":false,"type":"integer"},"style":"simple"}],"responses":{"200":{"content":{"application/json":{"schema":{"nullable":false,"type":"string"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["MotorAPI"]}},"/drift/api/jobb/avbrytAlleFeilede":{"get":{"responses":{"200":{"content":{"application/json":{"schema":{"nullable":false,"type":"string"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["MotorAPI"]}},"/drift/api/jobb/rekjorAlleFeilede":{"get":{"responses":{"200":{"content":{"application/json":{"schema":{"nullable":false,"type":"string"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["MotorAPI"]}},"/drift/api/jobb/sisteKjørte":{"get":{"responses":{"200":{"content":{"application/json":{"schema":{"items":{"$ref":"#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"},"nullable":false,"type":"array"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["MotorAPI"]}},"/trekk/{saksnummer}":{"get":{"parameters":[{"deprecated":false,"description":"saksnummer","explode":false,"in":"path","name":"saksnummer","required":true,"schema":{"nullable":false,"type":"string"},"style":"simple"}],"responses":{"200":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.utbetal.trekk.TrekkResponsDto"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["Tilgangkontrollert"]}},"/trekk/{saksnummer}/alle":{"get":{"parameters":[{"deprecated":false,"description":"saksnummer","explode":false,"in":"path","name":"saksnummer","required":true,"schema":{"nullable":false,"type":"string"},"style":"simple"}],"responses":{"200":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.utbetal.trekk.TrekkResponsDto"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["Tilgangkontrollert"]}},"/admin/status":{"get":{"responses":{"200":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.utbetal.admin.UtbetalingStatusDto"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["Tilgangkontrollert"]}},"/admin/migrering/status":{"get":{"responses":{"200":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.utbetal.admin.UtbetalingMigreringStatusDto"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["Tilgangkontrollert"]}},"/admin/utbetalingstidslinje/{saksnummer}":{"get":{"parameters":[{"deprecated":false,"description":"saksnummer","explode":false,"in":"path","name":"saksnummer","required":true,"schema":{"nullable":false,"type":"string"},"style":"simple"}],"responses":{"200":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.utbetal.admin.UtbetalingstidslinjeDto"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["Tilgangkontrollert"]}},"/simulering/v2":{"post":{"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseDto"}}}},"responses":{"200":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.utbetal.simulering.SimuleringDto"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["Tilgangkontrollert"]}},"/migrering":{"post":{"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.utbetal.migrering.MigreringDto"}}}},"responses":{"200":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.utbetal.migrering.MigreringsresultatDto"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["Tilgangkontrollert"]}},"/migrering/sak":{"post":{"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.utbetal.migrering.MigrerSakDto"}}}},"responses":{"200":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/no.nav.aap.utbetal.migrering.MigreringsresultatDto"}}},"description":"OK"}},"security":[{"jwtAuth":["BEHANDLINGSFLYT"]}],"tags":["Tilgangkontrollert"]}}},"tags":[{"description":"Dette endepunktet er tilgangkontrollert.","name":"Tilgangkontrollert"},{"description":"Disse endepunktene er drift-endepunkter for motoren.","name":"MotorAPI"}]}
+{
+  "components": {
+    "schemas": {
+      "no.nav.aap.motor.JobbTilleggsinfo": {
+        "nullable": false,
+        "properties": {
+          "kommentarer": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.motor.Kommentar"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "kommentarer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.Kommentar": {
+        "nullable": false,
+        "properties": {
+          "skrevetAv": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tekst": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "skrevetAv",
+          "tekst",
+          "tidspunkt"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.JobbInfoDto": {
+        "nullable": false,
+        "properties": {
+          "antallFeilendeForsøk": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "beskrivelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "feilmelding": {
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          },
+          "metadata": {
+            "additionalProperties": {
+              "nullable": false,
+              "type": "string"
+            },
+            "description": "Key type: kotlin.String",
+            "nullable": false,
+            "type": "object"
+          },
+          "navn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettetTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "planlagtKjøretidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "prioritet": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "AVBRUTT",
+              "FEILET",
+              "FERDIG",
+              "KLAR",
+              "PLUKKET"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "tilleggsinfo": {
+            "$ref": "#/components/schemas/no.nav.aap.motor.JobbTilleggsinfo"
+          },
+          "type": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "antallFeilendeForsøk",
+          "beskrivelse",
+          "id",
+          "metadata",
+          "navn",
+          "planlagtKjøretidspunkt",
+          "status",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$5$LeggTilKommentarRequest`": {
+        "nullable": false,
+        "properties": {
+          "kommentar": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kommentar"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "begrunnelse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.admin.UtbetalingDto": {
+        "nullable": false,
+        "properties": {
+          "beløp": {
+            "maximum": 4294967295,
+            "minimum": 0,
+            "nullable": false,
+            "type": "integer"
+          },
+          "fastsattDagsats": {
+            "maximum": 4294967295,
+            "minimum": 0,
+            "nullable": false,
+            "type": "integer"
+          },
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "utbetalingRef": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "utbetalingsdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "beløp",
+          "fastsattDagsats",
+          "fom",
+          "tom",
+          "utbetalingRef",
+          "utbetalingsdato"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.admin.UtbetalingInfoDto": {
+        "nullable": false,
+        "properties": {
+          "behandlingsreferanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          },
+          "utbetalingEndret": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "utbetalingOpprettet": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "utbetalingRef": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "utbetalingStatus": {
+            "enum": [
+              "BEKREFTET",
+              "FEILET",
+              "INGEN_PERIODER",
+              "OPPRETTET",
+              "SENDT"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behandlingsreferanse",
+          "saksnummer",
+          "utbetalingOpprettet",
+          "utbetalingRef",
+          "utbetalingStatus"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.admin.UtbetalingMigreringStatusDto": {
+        "nullable": false,
+        "properties": {
+          "antallGammeltApi": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "antallNyttApi": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "antallGammeltApi",
+          "antallNyttApi"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.admin.UtbetalingStatusDto": {
+        "nullable": false,
+        "properties": {
+          "utbetalingerMedFeiletStatus": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.utbetal.admin.UtbetalingInfoDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "utbetalingerSomManglerKvittering": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.utbetal.admin.UtbetalingInfoDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "utbetalingerMedFeiletStatus",
+          "utbetalingerSomManglerKvittering"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.admin.UtbetalingstidslinjeDto": {
+        "nullable": false,
+        "properties": {
+          "utbetalinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.utbetal.admin.UtbetalingDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "utbetalinger"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.migrering.MigrerSakDto": {
+        "nullable": false,
+        "properties": {
+          "dryRun": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dryRun",
+          "saksnummer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.migrering.MigreringDto": {
+        "nullable": false,
+        "properties": {
+          "dryRun": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "maxAntall": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "dryRun",
+          "maxAntall"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.migrering.MigreringsresultatDto": {
+        "nullable": false,
+        "properties": {
+          "feiledeMigreringer": {
+            "items": {
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "migrerteSaker": {
+            "items": {
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "feiledeMigreringer",
+          "migrerteSaker"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.simulering.SimuleringDto": {
+        "nullable": false,
+        "properties": {
+          "perioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.utbetal.simulering.SimuleringsperiodeDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "perioder"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.simulering.SimuleringsperiodeDto": {
+        "nullable": false,
+        "properties": {
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "utbetalinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.utbetal.simulering.SimulertUtbetalingDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "fom",
+          "tom",
+          "utbetalinger"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.simulering.SimulertUtbetalingDto": {
+        "nullable": false,
+        "properties": {
+          "fagsystem": {
+            "nullable": false,
+            "type": "string"
+          },
+          "nyttBeløp": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "sakId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "stønadstype": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tidligereUtbetalt": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "utbetalesTil": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fagsystem",
+          "nyttBeløp",
+          "sakId",
+          "stønadstype",
+          "tidligereUtbetalt",
+          "utbetalesTil"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.simulering.UtbetalingOgSimuleringDto": {
+        "nullable": false,
+        "properties": {
+          "simuleringDto": {
+            "$ref": "#/components/schemas/no.nav.aap.utbetal.simulering.SimuleringDto"
+          },
+          "utbetalingDto": {
+            "$ref": "#/components/schemas/no.nav.aap.utbetaling.UtbetalingDto"
+          }
+        },
+        "required": [
+          "simuleringDto",
+          "utbetalingDto"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.tilkjentytelse.MeldeperiodeDto": {
+        "nullable": false,
+        "properties": {
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fom",
+          "tom"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseAvventDto": {
+        "nullable": false,
+        "properties": {
+          "feilregistrering": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "overføres": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "årsak": {
+            "enum": [
+              "AVVENT_AVREGNING",
+              "AVVENT_REFUSJONSKRAV"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "feilregistrering",
+          "fom",
+          "tom"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseDetaljerDto": {
+        "nullable": false,
+        "properties": {
+          "antallBarn": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "barnepensjonDagsats": {
+            "nullable": false,
+            "type": "number"
+          },
+          "barnetillegg": {
+            "nullable": false,
+            "type": "number"
+          },
+          "barnetilleggsats": {
+            "nullable": false,
+            "type": "number"
+          },
+          "dagsats": {
+            "nullable": false,
+            "type": "number"
+          },
+          "gradering": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "grunnbeløp": {
+            "nullable": false,
+            "type": "number"
+          },
+          "grunnlag": {
+            "nullable": false,
+            "type": "number"
+          },
+          "grunnlagsfaktor": {
+            "nullable": false,
+            "type": "number"
+          },
+          "meldeperiode": {
+            "$ref": "#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.MeldeperiodeDto"
+          },
+          "redusertDagsats": {
+            "nullable": false,
+            "type": "number"
+          },
+          "utbetalingsdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "antallBarn",
+          "barnepensjonDagsats",
+          "barnetillegg",
+          "barnetilleggsats",
+          "dagsats",
+          "gradering",
+          "grunnbeløp",
+          "grunnlag",
+          "grunnlagsfaktor",
+          "redusertDagsats",
+          "utbetalingsdato"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseDto": {
+        "nullable": false,
+        "properties": {
+          "avvent": {
+            "$ref": "#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseAvventDto"
+          },
+          "behandlingsreferanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "beslutterId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "forrigeBehandlingsreferanse": {
+            "format": "uuid",
+            "nullable": true,
+            "type": "string"
+          },
+          "nyMeldeperiode": {
+            "$ref": "#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.MeldeperiodeDto"
+          },
+          "perioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelsePeriodeDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "personIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "saksbehandlerId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          },
+          "trekk": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseTrekkDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "vedtakstidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behandlingsreferanse",
+          "beslutterId",
+          "perioder",
+          "personIdent",
+          "saksbehandlerId",
+          "saksnummer",
+          "trekk",
+          "vedtakstidspunkt"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelsePeriodeDto": {
+        "nullable": false,
+        "properties": {
+          "detaljer": {
+            "$ref": "#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseDetaljerDto"
+          },
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "detaljer",
+          "fom",
+          "tom"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseTrekkDto": {
+        "nullable": false,
+        "properties": {
+          "beløp": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "dato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "beløp",
+          "dato"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.trekk.TrekkDto": {
+        "nullable": false,
+        "properties": {
+          "aktiv": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "behandlingsreferanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "beløp": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "dato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "posteringer": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.utbetal.trekk.TrekkPosteringDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "aktiv",
+          "behandlingsreferanse",
+          "beløp",
+          "dato",
+          "posteringer",
+          "saksnummer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.trekk.TrekkPosteringDto": {
+        "nullable": false,
+        "properties": {
+          "beløp": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "dato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "beløp",
+          "dato"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.trekk.TrekkResponsDto": {
+        "nullable": false,
+        "properties": {
+          "trekkListe": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.utbetal.trekk.TrekkDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "trekkListe"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetaling.HentUtbetalingerDto": {
+        "nullable": false,
+        "properties": {
+          "behandlingsreferanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behandlingsreferanse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetaling.UtbetalingDto": {
+        "nullable": false,
+        "properties": {
+          "perioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.utbetaling.UtbetalingsperiodeDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "utbetalingBekreftet": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "utbetalingOversendt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "utbetalingStatus": {
+            "enum": [
+              "BEKREFTET",
+              "FEILET",
+              "INGEN_PERIODER",
+              "OPPRETTET",
+              "SENDT"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "perioder",
+          "utbetalingOversendt",
+          "utbetalingStatus"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetaling.UtbetalingsperiodeDto": {
+        "nullable": false,
+        "properties": {
+          "beløp": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "fastsattDagsats": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "utbetalingsdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "utbetalingsperiodeType": {
+            "enum": [
+              "ENDRET",
+              "NY",
+              "UENDRET"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "beløp",
+          "fastsattDagsats",
+          "fom",
+          "tom",
+          "utbetalingsdato",
+          "utbetalingsperiodeType"
+        ],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "jwtAuth": {
+        "bearerFormat": "JWT",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "description": "For å teste API i dev, besøk\n<a href=\"https://azure-token-generator.intern.dev.nav.no/api/m2m?aud=dev-gcp:aap:utbetal\">Token Generator</a> for å få token.\n\nFor å test lokalt:\n<pre>curl -s -XPOST http://localhost:8081/token  | jq -r '.access_token' | pbcopy</pre>",
+    "title": "AAP - Utbetal",
+    "version": "0.0.1"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/tilkjentytelse": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/utbetalinger": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.utbetaling.HentUtbetalingerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.utbetaling.UtbetalingDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/simulering": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.utbetal.simulering.UtbetalingOgSimuleringDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/drift/api/jobb/feilende": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/feilende/antall": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "format": "int32",
+                  "nullable": false,
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/planlagte-jobber": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/{jobbId}/kjor": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/{jobbId}/leggTilKommentar": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.motor.api.`MotorApiKt$motorApi$1$5$LeggTilKommentarRequest`"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.motor.Kommentar"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/rekjor/{jobbId}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/avbryt/{jobbId}": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/avbrytAlleFeilede": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/rekjorAlleFeilede": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/sisteKjørte": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/trekk/{saksnummer}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "saksnummer",
+            "explode": false,
+            "in": "path",
+            "name": "saksnummer",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.utbetal.trekk.TrekkResponsDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/trekk/{saksnummer}/alle": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "saksnummer",
+            "explode": false,
+            "in": "path",
+            "name": "saksnummer",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.utbetal.trekk.TrekkResponsDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/admin/status": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.utbetal.admin.UtbetalingStatusDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/admin/migrering/status": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.utbetal.admin.UtbetalingMigreringStatusDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/admin/utbetalingstidslinje/{saksnummer}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "saksnummer",
+            "explode": false,
+            "in": "path",
+            "name": "saksnummer",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.utbetal.admin.UtbetalingstidslinjeDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/simulering/v2": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.utbetal.tilkjentytelse.TilkjentYtelseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.utbetal.simulering.SimuleringDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/migrering": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.utbetal.migrering.MigreringDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.utbetal.migrering.MigreringsresultatDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/migrering/sak": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.utbetal.migrering.MigrerSakDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.utbetal.migrering.MigreringsresultatDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "Dette endepunktet er tilgangkontrollert.",
+      "name": "Tilgangkontrollert"
+    },
+    {
+      "description": "Disse endepunktene er drift-endepunkter for motoren.",
+      "name": "MotorAPI"
+    }
+  ]
+}
