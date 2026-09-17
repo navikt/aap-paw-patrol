@@ -46,6 +46,17 @@ I tillegg må du kopiere `.env-template` til `.env.local` for å kunne kjøre lo
 yarn dev
 ```
 
+### URL-er for å hente openapi.json-filer
+
+|App              |URl                                                         |
+|-----------------|------------------------------------------------------------|
+|behandlingsflyt  |https://aap-behandlingsflyt.intern.dev.nav.no/openapi.json  |
+|utbetal          |https://aap-utbetal.intern.dev.nav.no/openapi.json          |
+|oppgave          |https://aap-oppgave.intern.dev.nav.no/openapi.json          |
+|meldekort-backend|https://aap-meldekort-backend.intern.dev.nav.no/openapi.json|
+
+
+
 ### Kjøre lokalt med falske (mockede) backend-svar
 
 Appen kaller flere backend-tjenester (behandlingsflyt, oppgave, meldekort, m.fl.) via URL-er
