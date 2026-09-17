@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:mock": "node scripts/dev-with-mocks.mjs",
+    "mock:generate": "node scripts/generate-mocks.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint app components lib",
+    "tsc": "yarn mock:generate && tsc --noEmit",
     "test": "vitest --run",
     "run-prettier": "prettier --write ."
   },
@@ -25,6 +28,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.7",
     "@eslint/js": "^10.0.1",
+    "@faker-js/faker": "^10.6.0",
     "@navikt/aap-felles-prettier": "^6.3.3",
     "@navikt/eslint-config-aap": "^6.1.2",
     "@types/eslint-plugin-jsx-a11y": "^6.10.1",
@@ -42,6 +46,8 @@
     "eslint-plugin-react-hooks": "^7",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
+    "msw": "^2.15.0",
+    "msw-auto-mock": "^0.32.1",
     "prettier": "^3.3.3",
     "typescript": "^5.9.3",
     "vitest": "^4.1.11",
