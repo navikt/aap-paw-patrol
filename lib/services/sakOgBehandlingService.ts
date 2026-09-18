@@ -1,6 +1,7 @@
 import { fetchProxy } from 'lib/services/fetchProxy';
 import { getBaseUrlAndScopeForApp } from 'lib/services/driftService';
 import { TidligereVurderingDto } from 'lib/types/tidligereVurderinger';
+import { KravOgStønadsperiodeDto } from 'lib/types/kravOgStonadsperiode';
 
 export const hentVilkår = async (behandlingsreferanse: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
@@ -21,6 +22,12 @@ export const hentRettighetsinfo = async (behandlingsreferanse: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
   const url = `${baseUrl}/api/drift/behandling/${behandlingsreferanse}/rettighetsinfo`;
   return await fetchProxy<any>(url, scope, 'POST');
+};
+
+export const hentKravOgStønadsperiode = async (behandlingsreferanse: string) => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
+  const url = `${baseUrl}/api/drift/behandling/${behandlingsreferanse}/krav`;
+  return await fetchProxy<KravOgStønadsperiodeDto>(url, scope, 'POST');
 };
 
 export const hentTidligereVurderinger = async (behandlingsreferanse: string, førSteg?: string, etterSteg?: string) => {

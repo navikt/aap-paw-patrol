@@ -114,6 +114,12 @@ export function hentRettighetsinfo(behandlingsreferanse: string) {
   });
 }
 
+export function hentKravOgStønadsperiode(behandlingsreferanse: string) {
+  return fetch(`/api/drift/behandling/${behandlingsreferanse}/krav`, {
+    method: 'POST',
+  });
+}
+
 export function hentTilkjentYtelse(behandlingsreferanse: string) {
   return fetch(`/api/drift/behandling/${behandlingsreferanse}/tilkjent-ytelse`, {
     method: 'POST',

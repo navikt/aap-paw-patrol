@@ -26,10 +26,12 @@ import { TidligereVurderinger } from 'components/drift/sakogbehandling/tidligere
 import { ProsesserBehandling } from './avklaringsbehov/ProsesserBehandling';
 import { BrevBestillinger } from 'components/drift/sakogbehandling/brev/BrevBestillinger';
 import { Yrkesskader } from 'components/drift/sakogbehandling/yrkesskade/Yrkesskader';
+import { KravOgStønadsperiode } from 'components/drift/sakogbehandling/kravogstonadsperiode/KravOgStonadsperiode';
 
 enum Tab {
   AVKLARINGSBEHOV = 'AVKLARINGSBEHOV',
   VILKÅRSRESULTAT = 'VILKÅRSRESULTAT',
+  KRAV_OG_STØNADSPERIODE = 'KRAV_OG_STØNADSPERIODE',
   OPPGAVER = 'OPPGAVER',
   TILKJENT_YTELSE = 'TILKJENT_YTELSE',
   TIDLIGERE_VURDERINGER = 'TIDLIGERE_VURDERINGER',
@@ -234,6 +236,7 @@ export const BehandlingOversikt = ({
             <Tabs.List>
               <Tabs.Tab value={Tab.AVKLARINGSBEHOV} label="Avklaringsbehov" />
               <Tabs.Tab value={Tab.VILKÅRSRESULTAT} label="Vilkårsresultat" />
+              <Tabs.Tab value={Tab.KRAV_OG_STØNADSPERIODE} label="Krav og stønadsperiode" />
               <Tabs.Tab value={Tab.OPPGAVER} label="Oppgaver" />
               <Tabs.Tab value={Tab.TILKJENT_YTELSE} label="Tilkjent ytelse" />
               <Tabs.Tab value={Tab.TIDLIGERE_VURDERINGER} label="Tidligere vurderinger" />
@@ -256,6 +259,9 @@ export const BehandlingOversikt = ({
             </Tabs.Panel>
             <Tabs.Panel value={Tab.VILKÅRSRESULTAT}>
               <Vilkårsresultat key={valgtBehandling.referanse} behandlingsreferanse={valgtBehandling.referanse} />
+            </Tabs.Panel>
+            <Tabs.Panel value={Tab.KRAV_OG_STØNADSPERIODE}>
+              <KravOgStønadsperiode key={valgtBehandling.referanse} behandlingsreferanse={valgtBehandling.referanse} />
             </Tabs.Panel>
             <Tabs.Panel value={Tab.OPPGAVER}>
               <Oppgaver behandlingsreferanse={valgtBehandling.referanse} />
