@@ -16,10 +16,6 @@ export const KravOgStønadsperiode = ({ behandlingsreferanse }: { behandlingsref
   const [error, setError] = useState<string>();
 
   useEffect(() => {
-    setIsLoading(true);
-    setError(undefined);
-    setData(undefined);
-
     hentKravOgStønadsperiode(behandlingsreferanse)
       .then(async (res) => {
         if (res.ok) return await res.json();
