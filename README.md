@@ -55,7 +55,32 @@ følgende for å hente ferske spesifikasjoner ned til `openapi/`:
 yarn openapi:update
 ```
 
+Dette regenererer også TypeScript-typene i `lib/types/generated/` (se under).
 
+### TypeScript-typer generert fra openapi.json-filene
+
+`lib/types/generated/<app>.ts` inneholder TypeScript-typer generert fra spesifikasjonene i
+`openapi/` med [openapi-typescript](https://openapi-typescript.dev). Disse filene er
+auto-generert og skal ikke redigeres for hånd (de er ekskludert fra eslint/prettier via
+`lib/types/generated/**`-ignore).
+
+Bruk dem til å typesjekke svar fra backendene, f.eks.:
+
+```ts
+import type { components } from 'lib/types/generated/behandlingsflyt';
+
+type TidligereVurderingDto =
+  components['schemas']['no.nav.aap.behandlingsflyt.behandling.tidligerevurderinger.TidligereVurderingDto'];
+```
+
+For å regenerere typene manuelt (uten å hente nye spesifikasjoner):
+
+```
+yarn openapi:types
+```
+
+Kjør `yarn openapi:update` etter at en backend har endret sitt API, for å sjekke om
+håndskrevne typer (f.eks. i `lib/types/`) fortsatt stemmer overens med de genererte.
 
 ### Kjøre lokalt med falske (mockede) backend-svar
 

@@ -1,7 +1,16 @@
 import { fetchProxy } from 'lib/services/fetchProxy';
 import { isDev, isLocal } from '@navikt/aap-felles-utils';
-import { MigreringsresultatDto, MigreringsStatusDto, UtbetalingStatusDto, UtbetalingstidslinjeDto } from 'lib/types/utbetaling';
+import {
+  MigreringsresultatDto,
+  MigreringsStatusDto,
+  UtbetalingStatusDto,
+  UtbetalingstidslinjeDto,
+} from 'lib/types/utbetaling';
 import { PersonSøkJournalposterDto } from 'lib/types/postmottak';
+import { components as PostmottakComponents } from 'lib/types/generated/postmottak';
+
+type JournalpostDriftsinfoDto =
+  PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.JournalpostDriftsinfoDto'];
 
 export type AppNavn =
   | 'behandlingsflyt'
@@ -289,7 +298,7 @@ export const kopierJournalpostIPostmottak = async (referanse: string) => {
 export const hentJournalpostInfo = async (journalpostId: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('postmottak');
   const url = `${baseUrl}/api/drift/journalpost/${journalpostId}/info`;
-  return await fetchProxy<unknown>(url, scope, 'GET');
+  return await fetchProxy<JournalpostDriftsinfoDto>(url, scope, 'GET');
 };
 
 export const hentJournalposterForPerson = async (ident: string) => {

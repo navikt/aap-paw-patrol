@@ -176,7 +176,7 @@ const FordelingsresultatPanel = ({ fordelingsresultat }: { fordelingsresultat: F
       <HStack gap="space-8" align="center">
         <Label size="small">Fordelt til:</Label>
         <Tag variant={fordelingsresultat.systemNavn === 'KELVIN' ? 'success' : 'warning'} size="medium">
-          {fordelingsresultat.systemNavn}
+          {fordelingsresultat.systemNavn ?? 'Ukjent'}
         </Tag>
       </HStack>
 

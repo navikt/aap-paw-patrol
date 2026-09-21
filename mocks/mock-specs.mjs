@@ -12,5 +12,7 @@ export const MOCK_SPECS = [
   { spec: 'behandlingsflyt.json', envVar: 'BEHANDLING_API_BASE_URL', outDir: 'behandlingsflyt' },
   { spec: 'oppgave.json', envVar: 'OPPGAVE_API_BASE_URL', outDir: 'oppgave' },
   { spec: 'utbetal.json', envVar: 'UTBETAL_API_BASE_URL', outDir: 'utbetal' },
-    { spec: 'meldekort-backend.json', envVar: 'MELDEKORT_API_BASE_URL', outDir: 'meldekort-backend' },        
+  { spec: 'meldekort-backend.json', envVar: 'MELDEKORT_API_BASE_URL', outDir: 'meldekort-backend' },
+  { spec: 'brev.json', envVar: 'BREV_API_BASE_URL', outDir: 'brev' },
+  { spec: 'postmottak.json', envVar: 'POSTMOTTAK_API_BASE_URL', outDir: 'postmottak' },
 ];

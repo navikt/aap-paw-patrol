@@ -4,6 +4,7 @@
  * to, and writes them to ./openapi/<app>.json. See README.md for usage.
  */
 import { writeFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -14,10 +15,12 @@ const SPECS = [
   { app: 'behandlingsflyt', url: 'https://aap-behandlingsflyt.intern.dev.nav.no/openapi.json' },
   { app: 'utbetal', url: 'https://aap-utbetal.intern.dev.nav.no/openapi.json' },
   { app: 'oppgave', url: 'https://aap-oppgave.intern.dev.nav.no/openapi.json' },
+  { app: 'brev', url: 'https://aap-brev.intern.dev.nav.no/openapi.json' },
   {
     app: 'meldekort-backend',
     url: 'https://aap-meldekort-backend.intern.dev.nav.no/openapi.json',
   },
+  { app: 'postmottak', url: 'https://aap-postmottak-backend.intern.dev.nav.no/openapi.json' },
 ];
 
 async function downloadSpec({ app, url }) {
@@ -42,6 +45,15 @@ async function main() {
   }
   if (failures.length > 0) {
     process.exit(1);
+  }
+
+  // Regenerate the TypeScript types derived from the specs so they stay in sync.
+  const typesResult = spawnSync('node', [path.join(rootDir, 'scripts', 'generate-openapi-types.mjs')], {
+    stdio: 'inherit',
+    cwd: rootDir,
+  });
+  if (typesResult.status !== 0) {
+    process.exit(typesResult.status ?? 1);
   }
 }
 
