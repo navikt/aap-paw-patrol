@@ -1,6 +1,7 @@
 import { Alert, Heading } from '@navikt/ds-react';
 import { Page, PageBlock } from '@navikt/ds-react/Page';
 import { redirect } from 'next/navigation';
+import { erFødselsnummer, erSaksnummer } from 'lib/utils/validering.ts';
 
 interface Props {
   searchParams: Promise<{ q?: string }>;
@@ -30,16 +31,11 @@ export default async function SøkPage({ searchParams }: Props) {
     redirect(`/drift/postmottak/${søkeord}`);
   }
 
-  // Nøyaktig 11 siffer antas å være fødselsnummer
-  // TODO: Håndtere fødselsnummer
-  if (kunSiffer && søkeord.length === 11) {
+  if (erFødselsnummer(søkeord)) {
     redirect(`/drift/sok/person`);
   }
 
-  // Saksnummer skal bestå av både tall og bokstaver
-  const erSaksnummer = /[a-zA-ZæøåÆØÅ]/.test(søkeord) && /\d/.test(søkeord);
-
-  if (erSaksnummer) {
+  if (erSaksnummer(søkeord)) {
     redirect(`/drift/sak/${søkeord}`);
   }
 

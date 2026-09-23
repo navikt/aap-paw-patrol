@@ -67,18 +67,36 @@ const KanalTag = ({ kanal }: { kanal: string }) => {
   );
 };
 
-// Hva som kreves for at regelen skal bidra til Kelvin-fordeling.
-// null = kun logging, påvirker ikke resultatet.
-const regelKravForKelvin = (regel: string): boolean | null => {
+const mapIkon = (regel: string, resultat: boolean) => {
   switch (regel) {
-    // Disse to har omvendt logikk i forhold til de andre reglene, så vi må snu resultatet for å øke lesbarheten.
+    // Legger til litt omvendt logikk her for å kunne vise grønn hake når det IKKE er overstyrt til Arena.
     case 'ManueltOverstyrtTilArenaRegel':
-      return false;
+      return !resultat ? (
+        <CheckmarkCircleFillIcon
+          style={{ color: 'var(--ax-text-success-decoration)' }}
+          title={`Resultat = ${resultat}`}
+        />
+      ) : (
+        <XMarkOctagonFillIcon style={{ color: 'var(--ax-text-danger-decoration)' }} title={`Resultat = ${resultat}`} />
+      );
+    // Disse brukes primært til logging og påvirker ikke resultatet. Viser derfor bare et info-ikon.
     case 'KelvinSakRegel':
     case 'ArenaSakRegel':
-      return null;
+      return (
+        <InformationSquareFillIcon
+          style={{ color: 'var(--ax-text-info-decoration)' }}
+          title={`Resultat = ${resultat}`}
+        />
+      );
     default:
-      return true;
+      return resultat ? (
+        <CheckmarkCircleFillIcon
+          style={{ color: 'var(--ax-text-success-decoration)' }}
+          title={`Resultat = ${resultat}`}
+        />
+      ) : (
+        <XMarkOctagonFillIcon style={{ color: 'var(--ax-text-danger-decoration)' }} title={`Resultat = ${resultat}`} />
+      );
   }
 };
 
@@ -97,7 +115,7 @@ const mapRegelForventet = (regel: string): string => {
     case 'ErIkkeReisestønadRegel':
       return 'Ikke reisestønad';
     case 'KelvinSakRegel':
-      return 'Har Kelvin-sak (hurtigbane)';
+      return 'Har Kelvin-sak (fast-track)';
     case 'SøknadRegel':
       return 'Brevkoden er søknad';
     default:
@@ -130,8 +148,6 @@ const mapRegelTittel = (regel: string, resultat: boolean) => {
 
 const mapRegel = (regel: string, resultat: boolean) => {
   const tittel = mapRegelTittel(regel, resultat);
-  const krav = regelKravForKelvin(regel);
-  const erOK = krav === null ? null : resultat === krav;
 
   return (
     <Table.Row key={regel}>
@@ -141,22 +157,7 @@ const mapRegel = (regel: string, resultat: boolean) => {
       </Table.DataCell>
       <Table.DataCell>
         <HStack gap="space-4" align="center">
-          {erOK === null ? (
-            <InformationSquareFillIcon
-              style={{ color: 'var(--ax-text-info-decoration)' }}
-              title={`Resultat = ${resultat}`}
-            />
-          ) : erOK ? (
-            <CheckmarkCircleFillIcon
-              style={{ color: 'var(--ax-text-success-decoration)' }}
-              title={`Resultat = ${resultat}`}
-            />
-          ) : (
-            <XMarkOctagonFillIcon
-              style={{ color: 'var(--ax-text-danger-decoration)' }}
-              title={`Resultat = ${resultat}`}
-            />
-          )}
+          {mapIkon(regel, resultat)}
           <BodyShort>{tittel}</BodyShort>
         </HStack>
       </Table.DataCell>

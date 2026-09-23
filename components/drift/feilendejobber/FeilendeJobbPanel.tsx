@@ -88,9 +88,11 @@ export const FeilendeJobbPanel = ({ jobb, appNavn }: { jobb: JobbInfo; appNavn: 
         <HStack gap="space-24" wrap={false}>
           <div>
             <Detail>Type</Detail>
-            <BodyShort size="small">
-              {jobb.type}
-              <HelpText>{jobb.beskrivelse}</HelpText>
+            <BodyShort size="small" as="div">
+              <HStack gap="space-4">
+                {jobb.type}
+                <HelpText>{jobb.beskrivelse}</HelpText>
+              </HStack>
             </BodyShort>
           </div>
           <div>
