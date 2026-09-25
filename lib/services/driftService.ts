@@ -282,7 +282,7 @@ export const triggProsesserBehandlingIPostmottak = async (referanse: string) => 
 
 export const kopierJournalpostIPostmottak = async (referanse: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('postmottak');
-  const url = `${baseUrl}/api/drift/behandling/${referanse}/kopier-journalpost`;
+  const url = `${baseUrl}/api/drift/journalpost/${referanse}/kopier-journalpost`;
   return await fetchProxy<string>(url, scope, 'POST', {});
 };
 
