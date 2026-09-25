@@ -1,0 +1,3558 @@
+{
+  "components": {
+    "schemas": {
+      "java.time.Year": {
+        "nullable": false,
+        "type": "object"
+      },
+      "no.nav.aap.brev.api.BrevbestillingDriftsinfoDto": {
+        "nullable": false,
+        "properties": {
+          "behandlingReferanse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "bestillingReferanse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "brevtype": {
+            "nullable": false,
+            "type": "string"
+          },
+          "id": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          },
+          "oppdatert": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettet": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "prosesseringStatus": {
+            "enum": [
+              "AVBRUTT",
+              "BREVBESTILLING_LØST",
+              "BREV_FERDIGSTILT",
+              "DISTRIBUERT",
+              "FERDIG",
+              "JOURNALFORT",
+              "JOURNALPOST_FERDIGSTILT",
+              "JOURNALPOST_VEDLEGG_TILKNYTTET",
+              "STARTET"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "språk": {
+            "nullable": false,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "AVBRUTT",
+              "FERDIGSTILT",
+              "UNDER_ARBEID"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behandlingReferanse",
+          "bestillingReferanse",
+          "brevtype",
+          "id",
+          "oppdatert",
+          "opprettet",
+          "språk"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Adresse": {
+        "nullable": false,
+        "properties": {
+          "adresselinje1": {
+            "nullable": false,
+            "type": "string"
+          },
+          "adresselinje2": {
+            "nullable": true,
+            "type": "string"
+          },
+          "adresselinje3": {
+            "nullable": true,
+            "type": "string"
+          },
+          "landkode": {
+            "nullable": false,
+            "type": "string"
+          },
+          "postnummer": {
+            "nullable": true,
+            "type": "string"
+          },
+          "poststed": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "adresselinje1",
+          "landkode"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.AvbrytBrevbestillingRequest": {
+        "nullable": false,
+        "properties": {
+          "referanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "referanse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.BestillBrevResponse": {
+        "nullable": false,
+        "properties": {
+          "referanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "referanse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.BestillBrevV2Request": {
+        "nullable": false,
+        "properties": {
+          "behandlingReferanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "brevtype": {
+            "enum": [
+              "AVSLAG",
+              "AVSLAG_11_27",
+              "AVSLAG_11_5",
+              "AVSLAG_UNDER_17_AAR_9_MAANEDER",
+              "BARNETILLEGG_SATS_REGULERING",
+              "FORHÅNDSVARSEL_BRUDD_AKTIVITETSPLIKT",
+              "FORHÅNDSVARSEL_KLAGE_FORMKRAV",
+              "FORVALTNINGSMELDING",
+              "INNVILGELSE",
+              "KLAGE_AVVIST",
+              "KLAGE_MOTTATT",
+              "KLAGE_OPPRETTHOLDELSE",
+              "KLAGE_TRUKKET",
+              "OMGJØRING_VEDTAK_11_9",
+              "STANS_AV_YTELSE",
+              "VARSEL_OM_BESTILLING",
+              "VEDTAK_11_17",
+              "VEDTAK_11_18",
+              "VEDTAK_11_18_OPPHØR_DELVIS_UFØR",
+              "VEDTAK_11_18_OPPHØR_FULL_UFØR",
+              "VEDTAK_11_23_SJETTE_LEDD",
+              "VEDTAK_11_7",
+              "VEDTAK_11_9",
+              "VEDTAK_ENDRING",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_12",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_26",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_27",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_3",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_4",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_MEDLEMSKAP",
+              "VEDTAK_UTVID_VEDTAKSLENGDE"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "brukerIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "faktagrunnlag": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag"
+            },
+            "nullable": false,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "ferdigstillAutomatisk": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          },
+          "sprak": {
+            "enum": [
+              "EN",
+              "NB",
+              "NN"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "unikReferanse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "vedlegg": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Vedlegg"
+            },
+            "nullable": false,
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "behandlingReferanse",
+          "brevtype",
+          "brukerIdent",
+          "faktagrunnlag",
+          "ferdigstillAutomatisk",
+          "saksnummer",
+          "sprak",
+          "unikReferanse",
+          "vedlegg"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Blokk": {
+        "nullable": false,
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "innhold": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BlokkInnhold"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "type": {
+            "enum": [
+              "AVSNITT",
+              "LISTE"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "innhold",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.BlokkInnhold": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BlokkInnhold.Faktagrunnlag"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BlokkInnhold.FormattertTekst"
+          }
+        ]
+      },
+      "no.nav.aap.brev.kontrakt.BlokkInnhold.Faktagrunnlag": {
+        "nullable": false,
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "tekniskNavn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "visningsnavn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "FAKTAGRUNNLAG",
+              "TEKST"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "tekniskNavn",
+          "visningsnavn",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.BlokkInnhold.FormattertTekst": {
+        "nullable": false,
+        "properties": {
+          "formattering": {
+            "items": {
+              "enum": [
+                "FET",
+                "KURSIV",
+                "UNDERSTREK"
+              ],
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "id": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "tekst": {
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "FAKTAGRUNNLAG",
+              "TEKST"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "formattering",
+          "id",
+          "tekst",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Brev": {
+        "nullable": false,
+        "properties": {
+          "journalpostTittel": {
+            "nullable": true,
+            "type": "string"
+          },
+          "kanOverstyreBrevtittel": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "kanSendesAutomatisk": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "overskrift": {
+            "nullable": true,
+            "type": "string"
+          },
+          "tekstbolker": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Tekstbolk"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "tekstbolker"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.BrevbestillingResponse": {
+        "nullable": false,
+        "properties": {
+          "behandlingReferanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "brev": {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Brev"
+          },
+          "brevdata": {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BrevdataDto"
+          },
+          "brevmal": {
+            "nullable": true,
+            "type": "string"
+          },
+          "brevtype": {
+            "enum": [
+              "AVSLAG",
+              "AVSLAG_11_27",
+              "AVSLAG_11_5",
+              "AVSLAG_UNDER_17_AAR_9_MAANEDER",
+              "BARNETILLEGG_SATS_REGULERING",
+              "FORHÅNDSVARSEL_BRUDD_AKTIVITETSPLIKT",
+              "FORHÅNDSVARSEL_KLAGE_FORMKRAV",
+              "FORVALTNINGSMELDING",
+              "INNVILGELSE",
+              "KLAGE_AVVIST",
+              "KLAGE_MOTTATT",
+              "KLAGE_OPPRETTHOLDELSE",
+              "KLAGE_TRUKKET",
+              "OMGJØRING_VEDTAK_11_9",
+              "STANS_AV_YTELSE",
+              "VARSEL_OM_BESTILLING",
+              "VEDTAK_11_17",
+              "VEDTAK_11_18",
+              "VEDTAK_11_18_OPPHØR_DELVIS_UFØR",
+              "VEDTAK_11_18_OPPHØR_FULL_UFØR",
+              "VEDTAK_11_23_SJETTE_LEDD",
+              "VEDTAK_11_7",
+              "VEDTAK_11_9",
+              "VEDTAK_ENDRING",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_12",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_26",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_27",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_3",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_4",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_MEDLEMSKAP",
+              "VEDTAK_UTVID_VEDTAKSLENGDE"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "oppdatert": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettet": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "referanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "språk": {
+            "enum": [
+              "EN",
+              "NB",
+              "NN"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "AVBRUTT",
+              "FERDIGSTILT",
+              "UNDER_ARBEID"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behandlingReferanse",
+          "brevtype",
+          "oppdatert",
+          "opprettet",
+          "referanse",
+          "språk",
+          "status"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.BrevdataDto": {
+        "nullable": false,
+        "properties": {
+          "betingetTekst": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BrevdataDto.BetingetTekst"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "delmaler": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BrevdataDto.Delmal"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "fritekster": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BrevdataDto.Fritekst"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "valg": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BrevdataDto.Valg"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "betingetTekst",
+          "delmaler",
+          "fritekster",
+          "valg"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.BrevdataDto.BetingetTekst": {
+        "nullable": false,
+        "properties": {
+          "id": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.BrevdataDto.Delmal": {
+        "nullable": false,
+        "properties": {
+          "id": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.BrevdataDto.Fritekst": {
+        "nullable": false,
+        "properties": {
+          "fritekst": {
+            "nullable": false,
+            "type": "string"
+          },
+          "key": {
+            "nullable": false,
+            "type": "string"
+          },
+          "parentId": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fritekst",
+          "key",
+          "parentId"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.BrevdataDto.Valg": {
+        "nullable": false,
+        "properties": {
+          "id": {
+            "nullable": false,
+            "type": "string"
+          },
+          "key": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "key"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.EkspederBehandlerBestillingRequest": {
+        "nullable": false,
+        "properties": {
+          "journalpostId": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "journalpostId"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.AapFomDato"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.AarsakTidspunktVurdering"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.BarnUtenBarnetillegg"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.DatoAvklartForJobbsøk"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.FristDato11_7"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.FritakMeldepliktGrunnlag"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.GrunnlagAndreYtelser"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.GrunnlagBeregning"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.InnvilgetUføretrygd"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.KravdatoUføretrygd"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.SisteDagMedYtelse"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.Sykdomsvurdering"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.TilkjentYtelse"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.UtvidetAapFomDato"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.YrkesskadeBeregning"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.YrkesskadeISøknadIkkeIRegister"
+          }
+        ]
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.AapFomDato": {
+        "nullable": false,
+        "properties": {
+          "dato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dato",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.AarsakTidspunktVurdering": {
+        "nullable": false,
+        "properties": {
+          "aarsakBeregningsTidspunktVurdering": {
+            "enum": [
+              "ANNET",
+              "DATO_PAA_LEGEERKLAERING",
+              "HENVIST_TIL_BEHANDLING",
+              "KRAVDATO",
+              "SEKSTEN_AAR_SOM_BEREGNINGSTIDSPUNKT",
+              "SYKEMELDINGSDATO",
+              "UFOERETIDSPUNKT"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "aarsakYtterligereNedsattTidspunktVurdering": {
+            "enum": [
+              "ANNET",
+              "IKKE_BETYDNING_IKKE_RELEVANT",
+              "OKT_UFOEREGRAD",
+              "UFOERETIDSPUNKT",
+              "YTTERLIGERE_NEDSATT"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.BarnUtenBarnetillegg": {
+        "nullable": false,
+        "properties": {
+          "barn": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.BarnUtenBarnetillegg.Barn"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "barn",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.BarnUtenBarnetillegg.Barn": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "erFosterforelder": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "harForeldreAnsvar": {
+            "nullable": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "begrunnelse",
+          "harForeldreAnsvar"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.DatoAvklartForJobbsøk": {
+        "nullable": false,
+        "properties": {
+          "dato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dato",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser": {
+        "nullable": false,
+        "properties": {
+          "fradragAndreYtelser": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.FradragYtelse"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "reduksjonArbeidsgiver": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.ReduksjonArbeidsgiver"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "refusjonskravTjenestepensjon": {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.RefusjonskravTjenestepensjon"
+          },
+          "samordningAndreYtelser": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.SamordningYtelse"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "samordningBarnepensjon": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.SamordningBarnepensjon"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "samordningUføre": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.SamordningUføre"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "sykestipend": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.Sykestipend"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fradragAndreYtelser",
+          "reduksjonArbeidsgiver",
+          "samordningAndreYtelser",
+          "samordningBarnepensjon",
+          "samordningUføre",
+          "sykestipend",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.FradragYtelse": {
+        "nullable": false,
+        "properties": {
+          "fraOgMed": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tilOgMed": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "ytelseNavn": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fraOgMed",
+          "tilOgMed",
+          "ytelseNavn"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.ReduksjonArbeidsgiver": {
+        "nullable": false,
+        "properties": {
+          "fraOgMed": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tilOgMed": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fraOgMed",
+          "tilOgMed"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.RefusjonskravTjenestepensjon": {
+        "nullable": false,
+        "properties": {
+          "fraOgMed": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "skalEtterbetalingHoldesIgjen": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "tilOgMed": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "skalEtterbetalingHoldesIgjen"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.SamordningBarnepensjon": {
+        "nullable": false,
+        "properties": {
+          "fraOgMed": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "månedsats": {
+            "nullable": false,
+            "type": "number"
+          },
+          "tilOgMed": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fraOgMed",
+          "månedsats"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.SamordningUføre": {
+        "nullable": false,
+        "properties": {
+          "uføregradProsent": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "virkningstidspunkt": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "uføregradProsent",
+          "virkningstidspunkt"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.SamordningYtelse": {
+        "nullable": false,
+        "properties": {
+          "fraOgMed": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "gradering": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "tilOgMed": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "ytelseNavn": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fraOgMed",
+          "gradering",
+          "tilOgMed",
+          "ytelseNavn"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.Sykestipend": {
+        "nullable": false,
+        "properties": {
+          "fraOgMed": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tilOgMed": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fraOgMed",
+          "tilOgMed"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.FristDato11_7": {
+        "nullable": false,
+        "properties": {
+          "frist": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "frist",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.FritakMeldepliktGrunnlag": {
+        "nullable": false,
+        "properties": {
+          "fritakMeldepliktGrunnlag": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.FritakMeldepliktGrunnlag.FritakMeldepliktVurdering"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fritakMeldepliktGrunnlag",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.FritakMeldepliktGrunnlag.FritakMeldepliktVurdering": {
+        "nullable": false,
+        "properties": {
+          "fraDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "harFritak": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "tilDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fraDato",
+          "harFritak"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.GrunnlagAndreYtelser": {
+        "nullable": false,
+        "properties": {
+          "sykepengeGrunnlagOver2G": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "ytelseTom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "ytelseType": {
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "sykepengeGrunnlagOver2G",
+          "ytelseTom",
+          "ytelseType",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.GrunnlagBeregning": {
+        "nullable": false,
+        "properties": {
+          "beregningsgrunnlag": {
+            "nullable": true,
+            "type": "number"
+          },
+          "beregningstidspunkt": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "beregningsutfallKategori": {
+            "enum": [
+              "GJENNOMSNITT",
+              "INNTEKT_OVER_6G",
+              "MINSTESATS_OVER_25",
+              "MINSTESATS_UNDER_25",
+              "SISTE_AAR"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "inntekterPerÅr": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.GrunnlagBeregning.InntektPerÅr"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "inntekterPerÅr",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.GrunnlagBeregning.InntektPerÅr": {
+        "nullable": false,
+        "properties": {
+          "inntekt": {
+            "nullable": false,
+            "type": "number"
+          },
+          "år": {
+            "$ref": "#/components/schemas/java.time.Year"
+          }
+        },
+        "required": [
+          "inntekt",
+          "år"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.InnvilgetUføretrygd": {
+        "nullable": false,
+        "properties": {
+          "virkningsTidspunkt": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "virkningsTidspunkt",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.KravdatoUføretrygd": {
+        "nullable": false,
+        "properties": {
+          "dato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dato",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.SisteDagMedYtelse": {
+        "nullable": false,
+        "properties": {
+          "dato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dato",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.Sykdomsvurdering": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "begrunnelse",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.TilkjentYtelse": {
+        "nullable": false,
+        "properties": {
+          "antallBarn": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "barnetillegg": {
+            "nullable": true,
+            "type": "number"
+          },
+          "barnetilleggSats": {
+            "nullable": true,
+            "type": "number"
+          },
+          "dagsats": {
+            "nullable": true,
+            "type": "number"
+          },
+          "gradertBarnetillegg": {
+            "nullable": true,
+            "type": "number"
+          },
+          "gradertDagsats": {
+            "nullable": true,
+            "type": "number"
+          },
+          "gradertDagsatsInkludertBarnetillegg": {
+            "nullable": true,
+            "type": "number"
+          },
+          "minsteÅrligYtelse": {
+            "nullable": true,
+            "type": "number"
+          },
+          "minsteÅrligYtelseUnder25": {
+            "nullable": true,
+            "type": "number"
+          },
+          "årligYtelse": {
+            "nullable": true,
+            "type": "number"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.UtvidetAapFomDato": {
+        "nullable": false,
+        "properties": {
+          "dato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dato",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.YrkesskadeBeregning": {
+        "nullable": false,
+        "properties": {
+          "andelAvNedsettelseSomSkyldesYrkesskade": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "yrkesskader": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.YrkesskadeBeregning.Yrkesskade"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "yrkesskader",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.YrkesskadeBeregning.Yrkesskade": {
+        "nullable": false,
+        "properties": {
+          "arbeidsinntektPaaSkadetidspunktet": {
+            "nullable": true,
+            "type": "number"
+          },
+          "diagnose": {
+            "nullable": true,
+            "type": "string"
+          },
+          "relevantForArbeidsevne": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "yrkesskadedato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "relevantForArbeidsevne"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.YrkesskadeISøknadIkkeIRegister": {
+        "nullable": false,
+        "properties": {
+          "verdi": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "verdi",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.FerdigstillBrevRequest": {
+        "nullable": false,
+        "properties": {
+          "mottakere": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.MottakerDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "referanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "signaturer": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.SignaturGrunnlag"
+            },
+            "nullable": true,
+            "type": "array"
+          }
+        },
+        "required": [
+          "mottakere",
+          "referanse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.ForhandsvisBrevRequest": {
+        "nullable": false,
+        "properties": {
+          "signaturer": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.SignaturGrunnlag"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "signaturer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.GjenopptaBrevbestillingRequest": {
+        "nullable": false,
+        "properties": {
+          "referanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "referanse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.HentSignaturDokumentinnhentingRequest": {
+        "nullable": false,
+        "properties": {
+          "bestillerNavIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "brukerFnr": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "bestillerNavIdent",
+          "brukerFnr"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.HentSignaturerRequest": {
+        "nullable": false,
+        "properties": {
+          "brevtype": {
+            "enum": [
+              "AVSLAG",
+              "AVSLAG_11_27",
+              "AVSLAG_11_5",
+              "AVSLAG_UNDER_17_AAR_9_MAANEDER",
+              "BARNETILLEGG_SATS_REGULERING",
+              "FORHÅNDSVARSEL_BRUDD_AKTIVITETSPLIKT",
+              "FORHÅNDSVARSEL_KLAGE_FORMKRAV",
+              "FORVALTNINGSMELDING",
+              "INNVILGELSE",
+              "KLAGE_AVVIST",
+              "KLAGE_MOTTATT",
+              "KLAGE_OPPRETTHOLDELSE",
+              "KLAGE_TRUKKET",
+              "OMGJØRING_VEDTAK_11_9",
+              "STANS_AV_YTELSE",
+              "VARSEL_OM_BESTILLING",
+              "VEDTAK_11_17",
+              "VEDTAK_11_18",
+              "VEDTAK_11_18_OPPHØR_DELVIS_UFØR",
+              "VEDTAK_11_18_OPPHØR_FULL_UFØR",
+              "VEDTAK_11_23_SJETTE_LEDD",
+              "VEDTAK_11_7",
+              "VEDTAK_11_9",
+              "VEDTAK_ENDRING",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_12",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_26",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_27",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_3",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_4",
+              "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_MEDLEMSKAP",
+              "VEDTAK_UTVID_VEDTAKSLENGDE"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "brukerIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "signaturGrunnlag": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.SignaturGrunnlag"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "brevtype",
+          "brukerIdent",
+          "signaturGrunnlag"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.HentSignaturerResponse": {
+        "nullable": false,
+        "properties": {
+          "signaturer": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Signatur"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "signaturer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Innhold": {
+        "nullable": false,
+        "properties": {
+          "blokker": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Blokk"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "erFullstendig": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "id": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "kanRedigeres": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "overskrift": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "blokker",
+          "erFullstendig",
+          "id",
+          "kanRedigeres"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.JournalførBehandlerBestillingRequest": {
+        "nullable": false,
+        "properties": {
+          "bestillerNavIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "brevAvsnitt": {
+            "items": {
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "brevkode": {
+            "nullable": false,
+            "type": "string"
+          },
+          "brukerFnr": {
+            "nullable": false,
+            "type": "string"
+          },
+          "dato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "eksternReferanseId": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "mottakerHprnr": {
+            "nullable": false,
+            "type": "string"
+          },
+          "mottakerNavn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "overstyrInnsynsregel": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tittel": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "bestillerNavIdent",
+          "brevAvsnitt",
+          "brevkode",
+          "brukerFnr",
+          "dato",
+          "eksternReferanseId",
+          "mottakerHprnr",
+          "mottakerNavn",
+          "overstyrInnsynsregel",
+          "saksnummer",
+          "tittel"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.JournalførBehandlerBestillingResponse": {
+        "nullable": false,
+        "properties": {
+          "dokumenter": {
+            "items": {
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "journalpostFerdigstilt": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "journalpostId": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dokumenter",
+          "journalpostFerdigstilt",
+          "journalpostId"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.KanDistribuereBrevReponse": {
+        "nullable": false,
+        "properties": {
+          "mottakereDistStatus": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.MottakerDistStatus"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "mottakereDistStatus"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.KanDistribuereBrevRequest": {
+        "nullable": false,
+        "properties": {
+          "brukerIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "mottakerIdentListe": {
+            "items": {
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "brukerIdent",
+          "mottakerIdentListe"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.MottakerDistStatus": {
+        "nullable": false,
+        "properties": {
+          "kanDistribuere": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "mottakerIdent": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kanDistribuere",
+          "mottakerIdent"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.MottakerDto": {
+        "nullable": false,
+        "properties": {
+          "ident": {
+            "nullable": true,
+            "type": "string"
+          },
+          "identType": {
+            "enum": [
+              "FNR",
+              "HPRNR",
+              "ORGNR",
+              "UTL_ORG"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "navnOgAdresse": {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.NavnOgAdresse"
+          }
+        },
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.NavnOgAdresse": {
+        "nullable": false,
+        "properties": {
+          "adresse": {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Adresse"
+          },
+          "navn": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "adresse",
+          "navn"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.OppdaterBrevmalRequest": {
+        "nullable": false,
+        "properties": {
+          "referanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "referanse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Signatur": {
+        "nullable": false,
+        "properties": {
+          "enhet": {
+            "nullable": false,
+            "type": "string"
+          },
+          "navn": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "enhet",
+          "navn"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.SignaturGrunnlag": {
+        "nullable": false,
+        "properties": {
+          "enhet": {
+            "nullable": true,
+            "type": "string"
+          },
+          "navIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "rolle": {
+            "enum": [
+              "BESLUTTER",
+              "KVALITETSSIKRER",
+              "SAKSBEHANDLER_NASJONAL",
+              "SAKSBEHANDLER_OPPFOLGING"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "navIdent"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Tekstbolk": {
+        "nullable": false,
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "innhold": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Innhold"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "overskrift": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "innhold"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Vedlegg": {
+        "nullable": false,
+        "properties": {
+          "dokumentInfoId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "journalpostId": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dokumentInfoId",
+          "journalpostId"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.JobbTilleggsinfo": {
+        "nullable": false,
+        "properties": {
+          "kommentarer": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.motor.Kommentar"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "kommentarer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.Kommentar": {
+        "nullable": false,
+        "properties": {
+          "skrevetAv": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tekst": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "skrevetAv",
+          "tekst",
+          "tidspunkt"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.JobbInfoDto": {
+        "nullable": false,
+        "properties": {
+          "antallFeilendeForsøk": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "beskrivelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "feilmelding": {
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          },
+          "metadata": {
+            "additionalProperties": {
+              "nullable": false,
+              "type": "string"
+            },
+            "description": "Key type: kotlin.String",
+            "nullable": false,
+            "type": "object"
+          },
+          "navn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettetTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "planlagtKjøretidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "prioritet": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "AVBRUTT",
+              "FEILET",
+              "FERDIG",
+              "KLAR",
+              "PLUKKET"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "tilleggsinfo": {
+            "$ref": "#/components/schemas/no.nav.aap.motor.JobbTilleggsinfo"
+          },
+          "type": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "antallFeilendeForsøk",
+          "beskrivelse",
+          "id",
+          "metadata",
+          "navn",
+          "planlagtKjøretidspunkt",
+          "status",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$5$LeggTilKommentarRequest`": {
+        "nullable": false,
+        "properties": {
+          "kommentar": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kommentar"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "begrunnelse"
+        ],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "jwtAuth": {
+        "bearerFormat": "JWT",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "title": "AAP - Brev",
+    "version": "0.0.1"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v2/bestill": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BestillBrevV2Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BestillBrevResponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/v3/bestill": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BestillBrevV2Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BestillBrevResponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/bestilling/{referanse}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BrevbestillingResponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/bestilling/{referanse}/oppdater": {
+      "put": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Brev"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/bestilling/{referanse}/v3/oppdater": {
+      "put": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BrevdataDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/bestilling/{referanse}/forhandsvis": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.ForhandsvisBrevRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "format": "byte",
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/bestilling/{referanse}/forhandsvis-html": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.ForhandsvisBrevRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/bestilling/{referanse}/brevbygger-preview": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.ForhandsvisBrevRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/ferdigstill": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.FerdigstillBrevRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/avbryt": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.AvbrytBrevbestillingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/forhandsvis-signaturer": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.HentSignaturerRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.HentSignaturerResponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/gjenoppta-bestilling": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.GjenopptaBrevbestillingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/oppdater-brevmal": {
+      "put": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.OppdaterBrevmalRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/dokumentinnhenting/journalfor-behandler-bestilling": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.JournalførBehandlerBestillingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.JournalførBehandlerBestillingResponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/dokumentinnhenting/ekspeder-journalpost-behandler-bestilling": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.EkspederBehandlerBestillingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/dokumentinnhenting/forhandsvis-signatur": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.HentSignaturDokumentinnhentingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Signatur"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/{brevbestillingReferanse}/kan-distribuere-brev": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.KanDistribuereBrevRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.KanDistribuereBrevReponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/drift/api/jobb/feilende": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/feilende/antall": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "format": "int32",
+                  "nullable": false,
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/planlagte-jobber": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/{jobbId}/kjor": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/{jobbId}/leggTilKommentar": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.motor.api.`MotorApiKt$motorApi$1$5$LeggTilKommentarRequest`"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.motor.Kommentar"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/rekjor/{jobbId}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/avbryt/{jobbId}": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/avbrytAlleFeilede": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/rekjorAlleFeilede": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/sisteKjørte": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/api/drift/bestillinger/sak/{saksnummer}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "saksnummer",
+            "explode": false,
+            "in": "path",
+            "name": "saksnummer",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.brev.api.BrevbestillingDriftsinfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/drift/bestillinger/behandling/{referanse}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.brev.api.BrevbestillingDriftsinfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "Dette endepunktet er tilgangkontrollert.",
+      "name": "Tilgangkontrollert"
+    },
+    {
+      "description": "Disse endepunktene er drift-endepunkter for motoren.",
+      "name": "MotorAPI"
+    }
+  ]
+}

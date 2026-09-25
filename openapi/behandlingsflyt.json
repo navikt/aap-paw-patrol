@@ -17376,6 +17376,102 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.behandlingsflyt.drift.KravDto": {
+        "nullable": false,
+        "properties": {
+          "erNy": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "journalpostId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "muligRettFra": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "opprettet": {
+            "example": "2025-04-01T10:30:00Z",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "overstyrMuligRettFra": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "overstyrMuligRettFraÅrsak": {
+            "nullable": true,
+            "type": "string"
+          },
+          "referanse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "søknadsdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "søknadsdatoÅrsak": {
+            "nullable": true,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "KLAGE",
+              "MIGRERT_KRAV",
+              "RELEVANT_KRAV",
+              "TILLEGGSOPPLYSNING",
+              "TRUKKET_SØKNAD"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "vurdertAv": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "erNy",
+          "opprettet",
+          "referanse",
+          "type",
+          "vurdertAv"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.drift.KravOgStønadsperiodeDto": {
+        "nullable": false,
+        "properties": {
+          "krav": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.drift.KravDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "stønadsperioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.drift.StønadsperiodeDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "krav",
+          "stønadsperioder"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.behandlingsflyt.drift.MottattDokumentDriftsinfoDTO": {
         "nullable": false,
         "properties": {
@@ -17570,6 +17666,58 @@
         "required": [
           "rettighetsperiode",
           "saksnummer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.drift.StønadsperiodeDto": {
+        "nullable": false,
+        "properties": {
+          "erNy": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "harGjenværendeKvote": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "harHattOrdinærSiste52Uker": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "kravReferanse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettet": {
+            "example": "2025-04-01T10:30:00Z",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "startdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "nullable": false,
+            "type": "string"
+          },
+          "vurdertAv": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "erNy",
+          "harGjenværendeKvote",
+          "harHattOrdinærSiste52Uker",
+          "kravReferanse",
+          "opprettet",
+          "startdato",
+          "type",
+          "vurdertAv"
         ],
         "type": "object"
       },
@@ -20426,7 +20574,7 @@
         "properties": {
           "gradering": {
             "format": "int32",
-            "nullable": true,
+            "nullable": false,
             "type": "integer"
           },
           "manuell": {
@@ -20451,6 +20599,7 @@
           }
         },
         "required": [
+          "gradering",
           "periode",
           "ytelseType"
         ],
@@ -25503,6 +25652,10 @@
             "nullable": false,
             "type": "boolean"
           },
+          "harRettNåEllerIFramtiden": {
+            "nullable": true,
+            "type": "boolean"
+          },
           "periode": {
             "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
           },
@@ -27120,7 +27273,7 @@
   "info": {
     "description": "For å teste API i dev, besøk\n<a href=\"https://azure-token-generator.intern.dev.nav.no/api/m2m?aud=dev-gcp:aap:behandlingsflyt\">Token Generator</a> for å få token.",
     "title": "AAP - Behandlingsflyt",
-    "version": "cfd969b7b028a1ea99153a3b17c5e46a01f07cec"
+    "version": "98507b995ce2bc17511e5ca24835cd1b9460d739"
   },
   "openapi": "3.0.0",
   "paths": {
@@ -33249,6 +33402,48 @@
         },
         "responses": {
           "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/drift/behandling/{referanse}/krav": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.drift.KravOgStønadsperiodeDto"
+                }
+              }
+            },
             "description": "OK"
           }
         },

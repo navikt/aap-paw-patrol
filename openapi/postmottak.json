@@ -1,0 +1,3152 @@
+{
+  "components": {
+    "schemas": {
+      "no.nav.aap.fordeler.EnhetMedOppfølgingsKontor": {
+        "nullable": false,
+        "properties": {
+          "norgEnhet": {
+            "nullable": true,
+            "type": "string"
+          },
+          "oppfølgingsenhet": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "no.nav.aap.fordeler.Regelresultat": {
+        "nullable": false,
+        "properties": {
+          "forJournalpost": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          },
+          "regelMap": {
+            "additionalProperties": {
+              "nullable": false,
+              "type": "boolean"
+            },
+            "description": "Key type: kotlin.String",
+            "nullable": false,
+            "type": "object"
+          },
+          "systemNavn": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "forJournalpost",
+          "regelMap"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.komponenter.type.Periode": {
+        "nullable": false,
+        "properties": {
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fom",
+          "tom"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.JobbTilleggsinfo": {
+        "nullable": false,
+        "properties": {
+          "kommentarer": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.motor.Kommentar"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "kommentarer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.Kommentar": {
+        "nullable": false,
+        "properties": {
+          "skrevetAv": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tekst": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "skrevetAv",
+          "tekst",
+          "tidspunkt"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.JobbInfoDto": {
+        "nullable": false,
+        "properties": {
+          "antallFeilendeForsøk": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "beskrivelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "feilmelding": {
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          },
+          "metadata": {
+            "additionalProperties": {
+              "nullable": false,
+              "type": "string"
+            },
+            "description": "Key type: kotlin.String",
+            "nullable": false,
+            "type": "object"
+          },
+          "navn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettetTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "planlagtKjøretidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "prioritet": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "AVBRUTT",
+              "FEILET",
+              "FERDIG",
+              "KLAR",
+              "PLUKKET"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "tilleggsinfo": {
+            "$ref": "#/components/schemas/no.nav.aap.motor.JobbTilleggsinfo"
+          },
+          "type": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "antallFeilendeForsøk",
+          "beskrivelse",
+          "id",
+          "metadata",
+          "navn",
+          "planlagtKjøretidspunkt",
+          "status",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$5$LeggTilKommentarRequest`": {
+        "nullable": false,
+        "properties": {
+          "kommentar": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kommentar"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "begrunnelse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.drift.BehandlingDriftsinfo": {
+        "nullable": false,
+        "properties": {
+          "aktivtSteg": {
+            "nullable": false,
+            "type": "string"
+          },
+          "avklaringsbehov": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.ForenkletAvklaringsbehov"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "opprettet": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "referanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "AVSLUTTET",
+              "IVERKSETTES",
+              "OPPRETTET",
+              "UTREDES"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "aktivtSteg",
+          "avklaringsbehov",
+          "opprettet",
+          "referanse",
+          "status",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.drift.ForenkletAvklaringsbehov": {
+        "nullable": false,
+        "properties": {
+          "definisjon": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.kontrakt.avklaringsbehov.Definisjon"
+          },
+          "endretAv": {
+            "nullable": false,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "AVBRUTT",
+              "AVSLUTTET",
+              "OPPRETTET",
+              "SENDT_TILBAKE_FRA_BESLUTTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "tidsstempel": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "årsakTilSettPåVent": {
+            "enum": [
+              "VENTER_PÅ_BEHANDLING_I_GOSYS",
+              "VENTER_PÅ_MEDISINSKE_OPPLYSNINGER",
+              "VENTER_PÅ_OPPLYSNINGER",
+              "VENTER_PÅ_OPPLYSNINGER_FRA_UTENLANDSKE_MYNDIGHETER",
+              "VENTER_PÅ_SVAR_FRA_BRUKER",
+              "VENTER_PÅ_VURDERING_AV_ROL"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "definisjon",
+          "endretAv",
+          "status",
+          "tidsstempel"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.drift.IdentDto": {
+        "nullable": false,
+        "properties": {
+          "ident": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "ident"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.drift.InnkommendeJournalpostDto": {
+        "nullable": false,
+        "properties": {
+          "behandlingstema": {
+            "nullable": true,
+            "type": "string"
+          },
+          "brevkode": {
+            "nullable": true,
+            "type": "string"
+          },
+          "enhet": {
+            "nullable": true,
+            "type": "string"
+          },
+          "journalpostId": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.kontrakt.journalpost.JournalpostId"
+          },
+          "regelresultat": {
+            "$ref": "#/components/schemas/no.nav.aap.fordeler.Regelresultat"
+          },
+          "status": {
+            "enum": [
+              "EVALUERT",
+              "GOSYS_FDR",
+              "GOSYS_JFR",
+              "IGNORERT",
+              "VIDERESENDT_TIL_ARENA",
+              "VIDERSENDT_TIL_KELVIN"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "årsakTilStatus": {
+            "enum": [
+              "ALLEREDE_JOURNALFØRT",
+              "MANGLER_IDENT",
+              "ORGNR",
+              "UTGÅTT"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "journalpostId",
+          "status"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.drift.JournalpostDriftsinfoDto": {
+        "nullable": false,
+        "properties": {
+          "behandlinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.BehandlingDriftsinfo"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "brevkode": {
+            "nullable": true,
+            "type": "string"
+          },
+          "fordelingsresultat": {
+            "$ref": "#/components/schemas/no.nav.aap.fordeler.Regelresultat"
+          },
+          "innkommendeStatus": {
+            "enum": [
+              "EVALUERT",
+              "GOSYS_FDR",
+              "GOSYS_JFR",
+              "IGNORERT",
+              "VIDERESENDT_TIL_ARENA",
+              "VIDERSENDT_TIL_KELVIN"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "journalstatus": {
+            "enum": [
+              "AVBRUTT",
+              "EKSPEDERT",
+              "FEILREGISTRERT",
+              "FERDIGSTILT",
+              "JOURNALFOERT",
+              "MOTTATT",
+              "OPPLASTING_DOKUMENT",
+              "RESERVERT",
+              "UKJENT",
+              "UKJENT_BRUKER",
+              "UNDER_ARBEID",
+              "UTGAAR"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "kanal": {
+            "enum": [
+              "ALTINN",
+              "ALTINN_INNBOKS",
+              "DPVT",
+              "EESSI",
+              "EIA",
+              "EKST_OPPS",
+              "E_POST",
+              "HELSENETTET",
+              "INGEN_DISTRIBUSJON",
+              "INNSENDT_NAV_ANSATT",
+              "LOKAL_UTSKRIFT",
+              "NAV_NO",
+              "NAV_NO_CHAT",
+              "NAV_NO_UINNLOGGET",
+              "SDP",
+              "SENTRAL_UTSKRIFT",
+              "SKAN_IM",
+              "SKAN_NETS",
+              "SKAN_PEN",
+              "TRYGDERETTEN",
+              "UKJENT"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "mottattDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": true,
+            "type": "string"
+          },
+          "tema": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behandlinger"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.drift.PersonSøkDriftsinfoDto": {
+        "nullable": false,
+        "properties": {
+          "journalposter": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.InnkommendeJournalpostDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "journalposter"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.faktagrunnlag.dokument.DokumentDto": {
+        "nullable": false,
+        "properties": {
+          "dokumentInfoId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tittel": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dokumentInfoId"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.faktagrunnlag.dokument.DokumentIdent": {
+        "nullable": false,
+        "properties": {
+          "ident": {
+            "nullable": true,
+            "type": "string"
+          },
+          "navn": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.faktagrunnlag.dokument.DokumentInfoResponsDTO": {
+        "nullable": false,
+        "properties": {
+          "avsender": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.dokument.DokumentIdent"
+          },
+          "dokumenter": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.dokument.DokumentDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "journalpostId": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          },
+          "registrertDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "søker": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.dokument.DokumentIdent"
+          }
+        },
+        "required": [
+          "dokumenter",
+          "journalpostId"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.faktagrunnlag.overlevering.OverleveringGrunnlagDto": {
+        "nullable": false,
+        "properties": {
+          "vurdering": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.overlevering.OverleveringVurderingDto"
+          }
+        },
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.faktagrunnlag.overlevering.OverleveringVurderingDto": {
+        "nullable": false,
+        "properties": {
+          "skalOverleveres": {
+            "nullable": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "skalOverleveres"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.faktagrunnlag.sak.AvklarSakGrunnlagDto": {
+        "nullable": false,
+        "properties": {
+          "avsenderMottaker": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.journalpostogbehandling.journalpost.AvsenderMottaker"
+          },
+          "brevkode": {
+            "nullable": false,
+            "type": "string"
+          },
+          "dokumenter": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.journalpostogbehandling.journalpost.Dokument"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "journalposttittel": {
+            "nullable": true,
+            "type": "string"
+          },
+          "kanEndreAvsenderMottaker": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "kanOppretteNySak": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "saksinfo": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.sak.SaksInfoDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "vurdering": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.sak.AvklarSakVurderingDto"
+          }
+        },
+        "required": [
+          "brevkode",
+          "dokumenter",
+          "kanEndreAvsenderMottaker",
+          "kanOppretteNySak",
+          "saksinfo"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.faktagrunnlag.sak.AvklarSakVurderingDto": {
+        "nullable": false,
+        "properties": {
+          "førPåGenerellSak": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "saksnummer": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "førPåGenerellSak"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.faktagrunnlag.sak.BehandlinginfoDTO": {
+        "nullable": false,
+        "properties": {
+          "journalPostId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettet": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "referanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "AVSLUTTET",
+              "IVERKSETTES",
+              "OPPRETTET",
+              "UTREDES"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "typeBehandling": {
+            "enum": [
+              "DokumentHåndtering",
+              "Fordeling",
+              "Journalføring"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "journalPostId",
+          "opprettet",
+          "referanse",
+          "status",
+          "typeBehandling"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.faktagrunnlag.sak.FinnBehandlingerResponse": {
+        "nullable": false,
+        "properties": {
+          "behandlinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.sak.BehandlinginfoDTO"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "behandlinger"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.faktagrunnlag.sak.IdentRequest": {
+        "nullable": false,
+        "properties": {
+          "ident": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "ident"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.faktagrunnlag.sak.SaksInfoDto": {
+        "nullable": false,
+        "properties": {
+          "periode": {
+            "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+          },
+          "resultat": {
+            "enum": [
+              "AVBRUTT",
+              "AVSLAG",
+              "INNVILGET",
+              "KLAGE_AVSLÅTT",
+              "KLAGE_DELVIS_OMGJØRES",
+              "KLAGE_OMGJØRES",
+              "KLAGE_OPPRETTHOLDES",
+              "KLAGE_TRUKKET",
+              "TRUKKET"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "periode",
+          "saksnummer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.faktagrunnlag.strukturering.DigitaliseringGrunnlagDto": {
+        "nullable": false,
+        "properties": {
+          "erPapir": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "klagebehandlinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.gateway.Klagebehandling"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "vurdering": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.strukturering.DigitaliseringvurderingDto"
+          }
+        },
+        "required": [
+          "erPapir",
+          "klagebehandlinger"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.faktagrunnlag.strukturering.DigitaliseringvurderingDto": {
+        "nullable": false,
+        "properties": {
+          "kategori": {
+            "enum": [
+              "AKTIVITETSKORT",
+              "ANNET_RELEVANT_DOKUMENT",
+              "DIALOGMELDING",
+              "FAGSYSTEMINFO_BEHOV_HENDELSE",
+              "FORELDREPENGE_VEDTAK_HENDELSE",
+              "INSTITUSJONSOPPHOLD",
+              "KABAL_HENDELSE",
+              "KLAGE",
+              "LEGEERKLÆRING",
+              "LEGEERKLÆRING_AVVIST",
+              "MANUELL_REVURDERING",
+              "MELDEKORT",
+              "MIGRERING_FRA_ARENA",
+              "NY_ÅRSAK_TIL_BEHANDLING",
+              "OMGJØRING_KLAGE_REVURDERING",
+              "OPPFØLGINGSOPPGAVE",
+              "PDL_HENDELSE_DODSFALL_BARN",
+              "PDL_HENDELSE_DODSFALL_BRUKER",
+              "PDL_HENDELSE_FOLKEREGISTERIDENT",
+              "SYKEPENGE_VEDTAK_HENDELSE",
+              "SØKNAD",
+              "TILBAKEKREVING_HENDELSE",
+              "UFØRE_VEDTAK_HENDELSE"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "strukturertDokumentJson": {
+            "nullable": true,
+            "type": "string"
+          },
+          "søknadsdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kategori"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.faktagrunnlag.tema.AvklarTemaGrunnlagDto": {
+        "nullable": false,
+        "properties": {
+          "dokumenter": {
+            "items": {
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "journalpostMetadata": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.tema.JournalpostMetadata"
+          },
+          "vurdering": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.tema.AvklarTemaVurderingDto"
+          }
+        },
+        "required": [
+          "dokumenter",
+          "journalpostMetadata"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.faktagrunnlag.tema.AvklarTemaVurderingDto": {
+        "nullable": false,
+        "properties": {
+          "skalTilAap": {
+            "nullable": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "skalTilAap"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.faktagrunnlag.tema.JournalpostMetadata": {
+        "nullable": false,
+        "properties": {
+          "brevkode": {
+            "nullable": true,
+            "type": "string"
+          },
+          "journalfoerendeEnhet": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.flyt.AvklaringsbehovDTO": {
+        "nullable": false,
+        "properties": {
+          "definisjon": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.kontrakt.avklaringsbehov.Definisjon"
+          },
+          "endringer": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.api.flyt.EndringDTO"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "AVBRUTT",
+              "AVSLUTTET",
+              "OPPRETTET",
+              "SENDT_TILBAKE_FRA_BESLUTTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "definisjon",
+          "endringer",
+          "status"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.flyt.BehandlingFlytOgTilstandDto": {
+        "nullable": false,
+        "properties": {
+          "aktivGruppe": {
+            "enum": [
+              "AVKLAR_FORDELING",
+              "AVKLAR_SAK",
+              "AVKLAR_TEMA",
+              "DIGITALISER",
+              "ENDELIG_JOURNALFØRING",
+              "IVERKSETTES",
+              "KATEGORISER",
+              "OVERLEVER_TIL_FAGSYSTEM",
+              "SETT_FAGSAK",
+              "START_BEHANDLING",
+              "UDEFINERT",
+              "VIDERESEND"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "aktivtSteg": {
+            "enum": [
+              "AVKLAR_FORDELING",
+              "AVKLAR_FORDELING_VIDERESEND",
+              "AVKLAR_SAK",
+              "AVKLAR_TEMA",
+              "DIGITALISER_DOKUMENT",
+              "ENDELIG_JOURNALFØRING",
+              "IVERKSETTES",
+              "OVERLEVER_TIL_FAGSYSTEM",
+              "SETT_FAGSAK",
+              "START_BEHANDLING",
+              "UDEFINERT",
+              "VIDERESEND"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "behandlingVersjon": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          },
+          "flyt": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.api.flyt.FlytGruppe"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "nesteBehandlingId": {
+            "format": "uuid",
+            "nullable": true,
+            "type": "string"
+          },
+          "prosessering": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.api.flyt.Prosessering"
+          },
+          "visning": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.flyt.flate.visning.Visning"
+          }
+        },
+        "required": [
+          "aktivGruppe",
+          "aktivtSteg",
+          "behandlingVersjon",
+          "flyt",
+          "prosessering",
+          "visning"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.flyt.BehandlingResultatDto": {
+        "nullable": false,
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.flyt.DetaljertBehandlingDto": {
+        "nullable": false,
+        "properties": {
+          "aktivtSteg": {
+            "enum": [
+              "AVKLAR_FORDELING",
+              "AVKLAR_FORDELING_VIDERESEND",
+              "AVKLAR_SAK",
+              "AVKLAR_TEMA",
+              "DIGITALISER_DOKUMENT",
+              "ENDELIG_JOURNALFØRING",
+              "IVERKSETTES",
+              "OVERLEVER_TIL_FAGSYSTEM",
+              "SETT_FAGSAK",
+              "START_BEHANDLING",
+              "UDEFINERT",
+              "VIDERESEND"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "avklaringsbehov": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.api.flyt.AvklaringsbehovDTO"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "opprettet": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "referanse": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.journalpostogbehandling.behandling.BehandlingsreferansePathParam"
+          },
+          "skalForberede": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "status": {
+            "enum": [
+              "AVSLUTTET",
+              "IVERKSETTES",
+              "OPPRETTET",
+              "UTREDES"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "nullable": false,
+            "type": "string"
+          },
+          "versjon": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "aktivtSteg",
+          "avklaringsbehov",
+          "opprettet",
+          "referanse",
+          "skalForberede",
+          "status",
+          "type",
+          "versjon"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.flyt.EndringDTO": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": true,
+            "type": "string"
+          },
+          "endretAv": {
+            "nullable": false,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "AVBRUTT",
+              "AVSLUTTET",
+              "OPPRETTET",
+              "SENDT_TILBAKE_FRA_BESLUTTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "tidsstempel": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "endretAv",
+          "status",
+          "tidsstempel"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.flyt.FlytGruppe": {
+        "nullable": false,
+        "properties": {
+          "erFullført": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "skalVises": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "steg": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.api.flyt.FlytSteg"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "stegGruppe": {
+            "enum": [
+              "AVKLAR_FORDELING",
+              "AVKLAR_SAK",
+              "AVKLAR_TEMA",
+              "DIGITALISER",
+              "ENDELIG_JOURNALFØRING",
+              "IVERKSETTES",
+              "KATEGORISER",
+              "OVERLEVER_TIL_FAGSYSTEM",
+              "SETT_FAGSAK",
+              "START_BEHANDLING",
+              "UDEFINERT",
+              "VIDERESEND"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "erFullført",
+          "skalVises",
+          "steg",
+          "stegGruppe"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.flyt.FlytSteg": {
+        "nullable": false,
+        "properties": {
+          "avklaringsbehov": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.api.flyt.AvklaringsbehovDTO"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "stegType": {
+            "enum": [
+              "AVKLAR_FORDELING",
+              "AVKLAR_FORDELING_VIDERESEND",
+              "AVKLAR_SAK",
+              "AVKLAR_TEMA",
+              "DIGITALISER_DOKUMENT",
+              "ENDELIG_JOURNALFØRING",
+              "IVERKSETTES",
+              "OVERLEVER_TIL_FAGSYSTEM",
+              "SETT_FAGSAK",
+              "START_BEHANDLING",
+              "UDEFINERT",
+              "VIDERESEND"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "avklaringsbehov",
+          "stegType"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.flyt.JournalpostDto": {
+        "nullable": false,
+        "properties": {
+          "referanse": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "referanse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.flyt.LøsAvklaringsbehovPåBehandling": {
+        "nullable": false,
+        "properties": {
+          "behandlingVersjon": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          },
+          "behov": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.avklaringsbehov.løsning.AvklaringsbehovLøsning"
+          },
+          "ingenEndringIGruppe": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "referanse": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.journalpostogbehandling.behandling.Behandlingsreferanse"
+          }
+        },
+        "required": [
+          "behandlingVersjon",
+          "behov",
+          "referanse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.flyt.Prosessering": {
+        "nullable": false,
+        "properties": {
+          "status": {
+            "enum": [
+              "FEILET",
+              "FERDIG",
+              "JOBBER"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "ventendeOppgaver": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "status",
+          "ventendeOppgaver"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.flyt.SettPåVentRequest": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "behandlingVersjon": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          },
+          "frist": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "grunn": {
+            "enum": [
+              "VENTER_PÅ_BEHANDLING_I_GOSYS",
+              "VENTER_PÅ_MEDISINSKE_OPPLYSNINGER",
+              "VENTER_PÅ_OPPLYSNINGER",
+              "VENTER_PÅ_OPPLYSNINGER_FRA_UTENLANDSKE_MYNDIGHETER",
+              "VENTER_PÅ_SVAR_FRA_BRUKER",
+              "VENTER_PÅ_VURDERING_AV_ROL"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "begrunnelse",
+          "behandlingVersjon",
+          "grunn"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.flyt.Venteinformasjon": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "frist": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "grunn": {
+            "enum": [
+              "VENTER_PÅ_BEHANDLING_I_GOSYS",
+              "VENTER_PÅ_MEDISINSKE_OPPLYSNINGER",
+              "VENTER_PÅ_OPPLYSNINGER",
+              "VENTER_PÅ_OPPLYSNINGER_FRA_UTENLANDSKE_MYNDIGHETER",
+              "VENTER_PÅ_SVAR_FRA_BRUKER",
+              "VENTER_PÅ_VURDERING_AV_ROL"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "begrunnelse",
+          "frist",
+          "grunn"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.test.BehandlingsListe": {
+        "nullable": false,
+        "properties": {
+          "id": {
+            "nullable": false,
+            "type": "string"
+          },
+          "journalpostId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettet": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "status": {
+            "nullable": false,
+            "type": "string"
+          },
+          "steg": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "journalpostId",
+          "opprettet",
+          "status",
+          "steg"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.avklaringsbehov.løsning.AvklarFordelingLøsning": {
+        "nullable": false,
+        "properties": {
+          "behovstype": {
+            "nullable": false,
+            "type": "string"
+          },
+          "kommentar": {
+            "nullable": true,
+            "type": "string"
+          },
+          "valgtSystem": {
+            "enum": [
+              "ARENA",
+              "BEGGE",
+              "KELVIN"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behovstype",
+          "valgtSystem"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.avklaringsbehov.løsning.AvklarOverleveringLøsning": {
+        "nullable": false,
+        "properties": {
+          "behovstype": {
+            "nullable": false,
+            "type": "string"
+          },
+          "skalOverleveres": {
+            "nullable": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "behovstype",
+          "skalOverleveres"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.avklaringsbehov.løsning.AvklarSaksnummerLøsning": {
+        "nullable": false,
+        "properties": {
+          "avsenderMottaker": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.gateway.AvsenderMottakerDto"
+          },
+          "behovstype": {
+            "nullable": false,
+            "type": "string"
+          },
+          "dokumenter": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.avklaringsbehov.løsning.ForenkletDokument"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "førPåGenerellSak": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "journalposttittel": {
+            "nullable": true,
+            "type": "string"
+          },
+          "opprettNySak": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "saksnummer": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behovstype",
+          "førPåGenerellSak",
+          "opprettNySak"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.avklaringsbehov.løsning.AvklarTemaLøsning": {
+        "nullable": false,
+        "properties": {
+          "behovstype": {
+            "nullable": false,
+            "type": "string"
+          },
+          "skalTilAap": {
+            "nullable": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "behovstype",
+          "skalTilAap"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.avklaringsbehov.løsning.AvklaringsbehovLøsning": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.avklaringsbehov.løsning.AvklarFordelingLøsning"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.avklaringsbehov.løsning.AvklarOverleveringLøsning"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.avklaringsbehov.løsning.AvklarSaksnummerLøsning"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.avklaringsbehov.løsning.AvklarTemaLøsning"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.avklaringsbehov.løsning.DigitaliserDokumentLøsning"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.avklaringsbehov.løsning.SattPåVentLøsning"
+          }
+        ]
+      },
+      "no.nav.aap.postmottak.avklaringsbehov.løsning.DigitaliserDokumentLøsning": {
+        "nullable": false,
+        "properties": {
+          "behovstype": {
+            "nullable": false,
+            "type": "string"
+          },
+          "kategori": {
+            "enum": [
+              "AKTIVITETSKORT",
+              "ANNET_RELEVANT_DOKUMENT",
+              "DIALOGMELDING",
+              "FAGSYSTEMINFO_BEHOV_HENDELSE",
+              "FORELDREPENGE_VEDTAK_HENDELSE",
+              "INSTITUSJONSOPPHOLD",
+              "KABAL_HENDELSE",
+              "KLAGE",
+              "LEGEERKLÆRING",
+              "LEGEERKLÆRING_AVVIST",
+              "MANUELL_REVURDERING",
+              "MELDEKORT",
+              "MIGRERING_FRA_ARENA",
+              "NY_ÅRSAK_TIL_BEHANDLING",
+              "OMGJØRING_KLAGE_REVURDERING",
+              "OPPFØLGINGSOPPGAVE",
+              "PDL_HENDELSE_DODSFALL_BARN",
+              "PDL_HENDELSE_DODSFALL_BRUKER",
+              "PDL_HENDELSE_FOLKEREGISTERIDENT",
+              "SYKEPENGE_VEDTAK_HENDELSE",
+              "SØKNAD",
+              "TILBAKEKREVING_HENDELSE",
+              "UFØRE_VEDTAK_HENDELSE"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "strukturertDokument": {
+            "nullable": true,
+            "type": "string"
+          },
+          "søknadsdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behovstype",
+          "kategori"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.avklaringsbehov.løsning.ForenkletDokument": {
+        "nullable": false,
+        "properties": {
+          "dokumentInfoId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tittel": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dokumentInfoId",
+          "tittel"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.avklaringsbehov.løsning.SattPåVentLøsning": {
+        "nullable": false,
+        "properties": {
+          "behovstype": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behovstype"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.flyt.flate.visning.Visning": {
+        "nullable": false,
+        "properties": {
+          "readOnly": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "typeBehandling": {
+            "enum": [
+              "DokumentHåndtering",
+              "Fordeling",
+              "Journalføring"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "visVentekort": {
+            "nullable": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "readOnly",
+          "typeBehandling",
+          "visVentekort"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.gateway.AvsenderMottakerDto": {
+        "nullable": false,
+        "properties": {
+          "id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "idType": {
+            "enum": [
+              "FNR",
+              "HPRNR",
+              "ORGNR",
+              "UTL_ORG"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "navn": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.gateway.Klagebehandling": {
+        "nullable": false,
+        "properties": {
+          "behandlingsReferanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettetDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behandlingsReferanse",
+          "opprettetDato"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.joarkavstemmer.UavstemtJournalpost": {
+        "nullable": false,
+        "properties": {
+          "behandlingReferanse": {
+            "format": "uuid",
+            "nullable": true,
+            "type": "string"
+          },
+          "datoOpprettet": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "journalpostId": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          },
+          "mottaksKanal": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "datoOpprettet",
+          "journalpostId"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.journalpostogbehandling.behandling.Behandlingsreferanse": {
+        "format": "uuid",
+        "nullable": false,
+        "type": "string"
+      },
+      "no.nav.aap.postmottak.journalpostogbehandling.behandling.BehandlingsreferansePathParam": {
+        "nullable": false,
+        "properties": {
+          "referanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "referanse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.journalpostogbehandling.journalpost.AvsenderMottaker": {
+        "nullable": false,
+        "properties": {
+          "id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "idType": {
+            "nullable": true,
+            "type": "string"
+          },
+          "navn": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.journalpostogbehandling.journalpost.Dokument": {
+        "nullable": false,
+        "properties": {
+          "brevkode": {
+            "nullable": false,
+            "type": "string"
+          },
+          "dokumentInfoId": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.journalpostogbehandling.journalpost.DokumentInfoId"
+          },
+          "tittel": {
+            "nullable": true,
+            "type": "string"
+          },
+          "varianter": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.journalpostogbehandling.journalpost.Variant"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "brevkode",
+          "dokumentInfoId",
+          "varianter"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.journalpostogbehandling.journalpost.DokumentInfoId": {
+        "nullable": false,
+        "properties": {
+          "dokumentInfoId": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dokumentInfoId"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.journalpostogbehandling.journalpost.Variant": {
+        "nullable": false,
+        "properties": {
+          "filtype": {
+            "enum": [
+              "AXML",
+              "DXML",
+              "JPEG",
+              "JSON",
+              "PDF",
+              "PNG",
+              "RTF",
+              "TIFF",
+              "XLSX",
+              "XML"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "variantformat": {
+            "enum": [
+              "ARKIV",
+              "FULLVERSJON",
+              "ORIGINAL",
+              "PRODUKSJON",
+              "PRODUKSJON_DLF",
+              "SLADDET"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "filtype",
+          "variantformat"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.kontrakt.avklaringsbehov.Definisjon": {
+        "nullable": false,
+        "properties": {
+          "kode": {
+            "enum": [
+              "1337",
+              "1338",
+              "1339",
+              "1340",
+              "1341",
+              "1342",
+              "1343",
+              "9001"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "kreverToTrinn": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "løsesAv": {
+            "items": {
+              "enum": [
+                "BESLUTTER",
+                "DRIFT",
+                "DRIFT_LES",
+                "KVALITETSSIKRER",
+                "LES",
+                "PRODUKSJONSSTYRING",
+                "SAKSBEHANDLER_NASJONAL",
+                "SAKSBEHANDLER_OPPFOLGING"
+              ],
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "løsesISteg": {
+            "enum": [
+              "AVKLAR_FORDELING",
+              "AVKLAR_FORDELING_VIDERESEND",
+              "AVKLAR_SAK",
+              "AVKLAR_TEMA",
+              "DIGITALISER_DOKUMENT",
+              "ENDELIG_JOURNALFØRING",
+              "IVERKSETTES",
+              "OVERLEVER_TIL_FAGSYSTEM",
+              "SETT_FAGSAK",
+              "START_BEHANDLING",
+              "UDEFINERT",
+              "VIDERESEND"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "MANUELT_FRIVILLIG",
+              "MANUELT_PÅKREVD",
+              "VENTEPUNKT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "name": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kode",
+          "kreverToTrinn",
+          "løsesAv",
+          "løsesISteg",
+          "type",
+          "name"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.kontrakt.journalpost.JournalpostId": {
+        "format": "int64",
+        "nullable": false,
+        "type": "integer"
+      }
+    },
+    "securitySchemes": {
+      "jwtAuth": {
+        "bearerFormat": "JWT",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "title": "AAP - Postmottak",
+    "version": "0.0.1"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/behandling/{referanse}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.flyt.DetaljertBehandlingDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/behandling/{referanse}/forbered": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.flyt.DetaljertBehandlingDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/behandling": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.postmottak.api.flyt.JournalpostDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.journalpostogbehandling.behandling.BehandlingsreferansePathParam"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/behandling/{referanse}/flyt": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.flyt.BehandlingFlytOgTilstandDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/behandling/{referanse}/resultat": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.flyt.BehandlingResultatDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/behandling/{referanse}/sett-på-vent": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.postmottak.api.flyt.SettPåVentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.flyt.BehandlingResultatDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/behandling/{referanse}/vente-informasjon": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.flyt.Venteinformasjon"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/behandling/løs-behov": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.postmottak.api.flyt.LøsAvklaringsbehovPåBehandling"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.flyt.LøsAvklaringsbehovPåBehandling"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/dokumenter/{journalpostId}/{dokumentinfoId}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "Journalpost-ID",
+            "explode": false,
+            "in": "path",
+            "name": "journalpostId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          },
+          {
+            "deprecated": false,
+            "description": "Dokumentinfo-ID",
+            "explode": false,
+            "in": "path",
+            "name": "dokumentinfoId",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "format": "binary",
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/dokumenter/{referanse}/info": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.dokument.DokumentInfoResponsDTO"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/dokumenter/finn-ubehandlede": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.postmottak.joarkavstemmer.UavstemtJournalpost"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/behandling/{referanse}/grunnlag/avklarTemaVurdering": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.tema.AvklarTemaGrunnlagDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/behandling/{referanse}/grunnlag/finnSak": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.sak.AvklarSakGrunnlagDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/alle-behandlinger": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.sak.IdentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.sak.FinnBehandlingerResponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/behandling/{referanse}/grunnlag/digitalisering": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.strukturering.DigitaliseringGrunnlagDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/behandling/{referanse}/grunnlag/overlevering": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.faktagrunnlag.overlevering.OverleveringGrunnlagDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/drift/api/jobb/feilende": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/feilende/antall": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "format": "int32",
+                  "nullable": false,
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/planlagte-jobber": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/{jobbId}/kjor": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/{jobbId}/leggTilKommentar": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.motor.api.`MotorApiKt$motorApi$1$5$LeggTilKommentarRequest`"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.motor.Kommentar"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/rekjor/{jobbId}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/avbryt/{jobbId}": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/avbrytAlleFeilede": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/rekjorAlleFeilede": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/sisteKjørte": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/test/hentAlleBehandlinger": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.postmottak.api.test.BehandlingsListe"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/test/finnEnhetMedOppfolgingskontor/{ident}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ident",
+            "explode": false,
+            "in": "path",
+            "name": "ident",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.fordeler.EnhetMedOppfølgingsKontor"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/journalpost/{referanse}/auditlog": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/drift/behandling/{referanse}/prosesser": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/drift/person/journalposter/søk": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.IdentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.PersonSøkDriftsinfoDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/drift/journalpost/{referanse}/info": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.JournalpostDriftsinfoDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "Dette endepunktet er tilgangkontrollert.",
+      "name": "Tilgangkontrollert"
+    },
+    {
+      "description": "Disse endepunktene er drift-endepunkter for motoren.",
+      "name": "MotorAPI"
+    }
+  ]
+}
