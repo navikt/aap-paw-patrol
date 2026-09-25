@@ -154,6 +154,13 @@ export function hentJournalpostInfo(journalpostId: string) {
   return fetch(`/api/drift/postmottak/${journalpostId}/info`, { method: 'GET' });
 }
 
+export function kopierJournalpost(journalpostId: string) {
+  return fetch(`/api/drift/postmottak/${journalpostId}/kopier-journalpost`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+
 export function hentJournalposterForPerson(ident: string) {
   return fetch(`/api/drift/person/journalposter`, {
     method: 'POST',

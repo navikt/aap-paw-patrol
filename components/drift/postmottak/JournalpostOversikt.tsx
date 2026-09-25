@@ -33,6 +33,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { AvklaringsbehovInfo } from 'components/drift/sakogbehandling/avklaringsbehov/AvklaringsbehovInfo';
 import { Oppgaver } from 'components/drift/sakogbehandling/oppgave/Oppgaver';
+import { KopierJournalpost } from 'components/drift/postmottak/KopierJournalpost.tsx';
 
 function mapTilForenkletAvklaringsbehov(behov: PostmottakAvklaringsbehov): ForenkletAvklaringsbehov {
   return {
@@ -388,6 +389,7 @@ export const JournalpostOversikt = ({ journalpostId }: { journalpostId: string }
                   <BodyShort textColor="subtle">Ikke tildelt</BodyShort>
                 )}
               </div>
+              <KopierJournalpost journalpostId={journalpostId} />
             </VStack>
           </Box>
 

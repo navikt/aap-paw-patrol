@@ -280,6 +280,12 @@ export const triggProsesserBehandlingIPostmottak = async (referanse: string) => 
   return await fetchProxy<undefined>(url, scope, 'POST', {});
 };
 
+export const kopierJournalpostIPostmottak = async (referanse: string) => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('postmottak');
+  const url = `${baseUrl}/api/drift/behandling/${referanse}/kopier-journalpost`;
+  return await fetchProxy<string>(url, scope, 'POST', {});
+};
+
 export const hentJournalpostInfo = async (journalpostId: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('postmottak');
   const url = `${baseUrl}/api/drift/journalpost/${journalpostId}/info`;
