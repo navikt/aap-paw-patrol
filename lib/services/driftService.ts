@@ -1,16 +1,16 @@
 import { fetchProxy } from 'lib/services/fetchProxy';
 import { isDev, isLocal } from '@navikt/aap-felles-utils';
-import {
-  MigreringsresultatDto,
-  MigreringsStatusDto,
-  UtbetalingStatusDto,
-  UtbetalingstidslinjeDto,
-} from 'lib/types/utbetaling';
-import { PersonSøkJournalposterDto } from 'lib/types/postmottak';
 import { components as PostmottakComponents } from 'lib/types/generated/postmottak';
+import { components as UtbetalComponents } from 'lib/types/generated/utbetal';
 
 type JournalpostDriftsinfoDto =
   PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.JournalpostDriftsinfoDto'];
+type PersonSøkJournalposterDto =
+  PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.PersonSøkDriftsinfoDto'];
+type UtbetalingStatusDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingStatusDto'];
+type MigreringsStatusDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingMigreringStatusDto'];
+type UtbetalingstidslinjeDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingstidslinjeDto'];
+type MigreringsresultatDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.migrering.MigreringsresultatDto'];
 
 export type AppNavn =
   | 'behandlingsflyt'

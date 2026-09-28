@@ -11,7 +11,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ slu
 
     const url = `${baseUrl}/drift/api/${slug.join('/')}`;
 
-    return NextResponse.json(await fetchProxy<any>(url, scope, 'POST', body));
+    return NextResponse.json(await fetchProxy<Record<string, unknown> | string | null | undefined>(url, scope, 'POST', body));
   } catch (err: any) {
     return new Response(err?.message, { status: 500 });
   }
