@@ -9212,6 +9212,37 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.behandlingsflyt.behandling.behandlerdialog.KommendeMeldingDto": {
+        "nullable": false,
+        "properties": {
+          "behandlerNavn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "bestillingId": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "påminnelseDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "påminnelseErAvbrutt": {
+            "nullable": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "behandlerNavn",
+          "bestillingId",
+          "påminnelseDato",
+          "påminnelseErAvbrutt"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.behandlingsflyt.behandling.behandlerdialog.ManueltOppgittBehandlerDto": {
         "nullable": false,
         "properties": {
@@ -9245,6 +9276,11 @@
       "no.nav.aap.behandlingsflyt.behandling.behandlerdialog.MeldingDto": {
         "nullable": false,
         "properties": {
+          "dialogmeldingId": {
+            "format": "uuid",
+            "nullable": true,
+            "type": "string"
+          },
           "dokumentasjonsType": {
             "enum": [
               "L120",
@@ -9288,6 +9324,10 @@
             "nullable": false,
             "type": "string"
           },
+          "påminnelseAvbrutt": {
+            "nullable": true,
+            "type": "boolean"
+          },
           "tekst": {
             "nullable": true,
             "type": "string"
@@ -9316,6 +9356,30 @@
         "required": [
           "dokumentIdListe",
           "melding"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.behandling.behandlerdialog.MeldingerResponse": {
+        "nullable": false,
+        "properties": {
+          "kommendeMeldinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.behandlerdialog.KommendeMeldingDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "meldinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.behandlerdialog.MeldingMedDokumenterDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "kommendeMeldinger",
+          "meldinger"
         ],
         "type": "object"
       },
@@ -10444,8 +10508,6 @@
             "type": "string"
           },
           "harNedsattArbeidsevne": {
-            "deprecated": true,
-            "description": "Bruk fom",
             "enum": [
               "JA",
               "JA_FORBIGÅENDE_PROBLEMER",
@@ -10468,12 +10530,6 @@
             "type": "string"
           },
           "tom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          },
-          "vurderingenGjelderFra": {
             "example": "2025-04-01",
             "format": "date",
             "nullable": true,
@@ -11538,8 +11594,7 @@
           },
           "vilkårsavslag": {
             "items": {
-              "nullable": false,
-              "type": "string"
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.foreslåvedtak.VilkårsavslagDto"
             },
             "nullable": false,
             "type": "array"
@@ -11764,6 +11819,55 @@
         "required": [
           "periode",
           "utfall"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.behandling.foreslåvedtak.VilkårsavslagDto": {
+        "nullable": false,
+        "properties": {
+          "avslagsårsak": {
+            "enum": [
+              "ANNEN_FULL_YTELSE",
+              "ANNEN_FULL_YTELSE_AVSLAG",
+              "BRUDD_PÅ_AKTIVITETSPLIKT_OPPHØR",
+              "BRUDD_PÅ_AKTIVITETSPLIKT_STANS",
+              "BRUDD_PÅ_OPPHOLDSKRAV_OPPHØR",
+              "BRUDD_PÅ_OPPHOLDSKRAV_STANS",
+              "BRUKER_OVER_67",
+              "BRUKER_UNDER_18",
+              "HAR_RETT_TIL_FULLT_UTTAK_ALDERSPENSJON",
+              "IKKE_BEHOV_FOR_OPPFOLGING",
+              "IKKE_MEDLEM",
+              "IKKE_MEDLEM_FORUTGÅENDE",
+              "IKKE_NOK_REDUSERT_ARBEIDSEVNE",
+              "IKKE_OPPFYLT_OPPHOLDSKRAV_EØS",
+              "IKKE_RETT_PA_AAP_I_PERIODE_SOM_ARBEIDSSOKER",
+              "IKKE_RETT_PA_AAP_UNDER_BEHANDLING_AV_UFORE",
+              "IKKE_RETT_PA_STUDENT",
+              "IKKE_RETT_PA_SYKEPENGEERSTATNING",
+              "IKKE_RETT_UNDER_STRAFFEGJENNOMFØRING",
+              "IKKE_SYKDOM_AV_VISS_VARIGHET",
+              "IKKE_SYKDOM_SKADE_LYTE",
+              "IKKE_SYKDOM_SKADE_LYTE_VESENTLIGDEL",
+              "INNTEKTSTAP_DEKKES_ETTER_ANNEN_LOVGIVNING",
+              "MANGLENDE_DOKUMENTASJON",
+              "NORGE_IKKE_KOMPETENT_STAT",
+              "ORDINÆRKVOTE_BRUKT_OPP",
+              "SYKEPENGEERSTATNINGKVOTE_BRUKT_OPP",
+              "VARIGHET_OVERSKREDET_ARBEIDSSØKER",
+              "VARIGHET_OVERSKREDET_OVERGANG_UFORE",
+              "VARIGHET_OVERSKREDET_STUDENT"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "vilkår": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "vilkår"
         ],
         "type": "object"
       },
@@ -12971,12 +13075,22 @@
             "nullable": false,
             "type": "boolean"
           },
+          "påklagetVedtakType": {
+            "enum": [
+              "ARENA_VEDTAK",
+              "KELVIN_BEHANDLING",
+              "TILBAKEKREVING"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
           "vurdering": {
             "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.klage.klagebehandling.KlagevurderingKontorDto"
           }
         },
         "required": [
-          "harTilgangTilÅSaksbehandle"
+          "harTilgangTilÅSaksbehandle",
+          "påklagetVedtakType"
         ],
         "type": "object"
       },
@@ -12987,12 +13101,22 @@
             "nullable": false,
             "type": "boolean"
           },
+          "påklagetVedtakType": {
+            "enum": [
+              "ARENA_VEDTAK",
+              "KELVIN_BEHANDLING",
+              "TILBAKEKREVING"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
           "vurdering": {
             "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.klage.klagebehandling.KlagevurderingNayDto"
           }
         },
         "required": [
-          "harTilgangTilÅSaksbehandle"
+          "harTilgangTilÅSaksbehandle",
+          "påklagetVedtakType"
         ],
         "type": "object"
       },
@@ -13258,6 +13382,56 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.behandlingsflyt.behandling.klage.påklagetbehandling.AvsluttaTilbakekrevingsbehandlingDto": {
+        "nullable": false,
+        "properties": {
+          "eksternSaksbehandlingUrl": {
+            "nullable": true,
+            "type": "string"
+          },
+          "opprettetTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "referanse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          },
+          "typeBehandling": {
+            "enum": [
+              "Aktivitetsplikt",
+              "Aktivitetsplikt11_9",
+              "Førstegangsbehandling",
+              "Klage",
+              "OppfølgingsBehandling",
+              "Revurdering",
+              "SvarFraAndreinstans",
+              "Tilbakekreving"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "vedtaksdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "opprettetTidspunkt",
+          "referanse",
+          "saksnummer",
+          "typeBehandling"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.behandlingsflyt.behandling.klage.påklagetbehandling.BehandlingMedVedtakDto": {
         "nullable": false,
         "properties": {
@@ -13406,6 +13580,7 @@
               "G_REGULERING",
               "HELSEOPPLYSNINGER",
               "KLAGE",
+              "KORRIGER_SØKNADSDATO",
               "MANUELL_OPPRETTELSE",
               "MELDEKORT",
               "MIGRERING_FRA_ARENA",
@@ -13464,6 +13639,13 @@
       "no.nav.aap.behandlingsflyt.behandling.klage.påklagetbehandling.PåklagetBehandlingGrunnlagDto": {
         "nullable": false,
         "properties": {
+          "avsluttaTilbakekrevingsbehandlinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.klage.påklagetbehandling.AvsluttaTilbakekrevingsbehandlingDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
           "behandlinger": {
             "items": {
               "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.klage.påklagetbehandling.BehandlingMedVedtakDto"
@@ -13490,6 +13672,7 @@
           }
         },
         "required": [
+          "avsluttaTilbakekrevingsbehandlinger",
           "behandlinger",
           "harTilgangTilÅSaksbehandle",
           "vedtatteKlagebehandlinger",
@@ -13508,7 +13691,8 @@
           "påklagetVedtakType": {
             "enum": [
               "ARENA_VEDTAK",
-              "KELVIN_BEHANDLING"
+              "KELVIN_BEHANDLING",
+              "TILBAKEKREVING"
             ],
             "nullable": false,
             "type": "string"
@@ -17185,6 +17369,7 @@
               "G_REGULERING",
               "HELSEOPPLYSNINGER",
               "KLAGE",
+              "KORRIGER_SØKNADSDATO",
               "MANUELL_OPPRETTELSE",
               "MELDEKORT",
               "MIGRERING_FRA_ARENA",
@@ -17510,6 +17695,7 @@
               "INSTITUSJONSOPPHOLD",
               "KABAL_HENDELSE",
               "KLAGE",
+              "KORRIGER_SØKNADSDATO",
               "LEGEERKLÆRING",
               "LEGEERKLÆRING_AVVIST",
               "MANUELL_REVURDERING",
@@ -18831,7 +19017,8 @@
           "påklagetVedtakType": {
             "enum": [
               "ARENA_VEDTAK",
-              "KELVIN_BEHANDLING"
+              "KELVIN_BEHANDLING",
+              "TILBAKEKREVING"
             ],
             "nullable": false,
             "type": "string"
@@ -21783,9 +21970,6 @@
             "nullable": false,
             "type": "string"
           },
-          "arenaStatus": {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.flyt.ArenaStatusDTO"
-          },
           "avklaringsbehov": {
             "items": {
               "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.flyt.AvklaringsbehovDTO"
@@ -23520,6 +23704,7 @@
               "INSTITUSJONSOPPHOLD",
               "KABAL_HENDELSE",
               "KLAGE",
+              "KORRIGER_SØKNADSDATO",
               "LEGEERKLÆRING",
               "LEGEERKLÆRING_AVVIST",
               "MANUELL_REVURDERING",
@@ -23737,6 +23922,43 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KorrigerSøknadsdato": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KorrigerSøknadsdatoV0"
+          }
+        ]
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KorrigerSøknadsdatoV0": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "begrunnelse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Legeerklæring": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.LegeerklæringV0"
+          }
+        ]
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.LegeerklæringV0": {
+        "nullable": false,
+        "properties": {
+          "beskrivelse": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.ManuellRevurdering": {
         "oneOf": [
           {
@@ -23926,6 +24148,12 @@
           },
           {
             "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Klage"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KorrigerSøknadsdato"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Legeerklæring"
           },
           {
             "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.ManuellRevurdering"
@@ -24445,6 +24673,7 @@
               "INSTITUSJONSOPPHOLD",
               "KABAL_HENDELSE",
               "KLAGE",
+              "KORRIGER_SØKNADSDATO",
               "LEGEERKLÆRING",
               "LEGEERKLÆRING_AVVIST",
               "MANUELL_REVURDERING",
@@ -24744,6 +24973,12 @@
             "type": "number"
           },
           "varselSendt": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "vedtaksdato": {
             "example": "2025-04-01",
             "format": "date",
             "nullable": true,
@@ -25091,6 +25326,7 @@
               "G_REGULERING",
               "HELSEOPPLYSNINGER",
               "KLAGE",
+              "KORRIGER_SØKNADSDATO",
               "MANUELL_OPPRETTELSE",
               "MELDEKORT",
               "MIGRERING_FRA_ARENA",
@@ -25318,6 +25554,10 @@
             "nullable": true,
             "type": "string"
           },
+          "erGjeldende": {
+            "nullable": false,
+            "type": "boolean"
+          },
           "opprettet": {
             "example": "2025-04-01T12:30:00",
             "format": "date-time",
@@ -25446,6 +25686,7 @@
               "G_REGULERING",
               "HELSEOPPLYSNINGER",
               "KLAGE",
+              "KORRIGER_SØKNADSDATO",
               "MANUELL_OPPRETTELSE",
               "MELDEKORT",
               "MIGRERING_FRA_ARENA",
@@ -25465,6 +25706,7 @@
           }
         },
         "required": [
+          "erGjeldende",
           "opprettet",
           "referanse",
           "status",
@@ -27273,7 +27515,7 @@
   "info": {
     "description": "For å teste API i dev, besøk\n<a href=\"https://azure-token-generator.intern.dev.nav.no/api/m2m?aud=dev-gcp:aap:behandlingsflyt\">Token Generator</a> for å få token.",
     "title": "AAP - Behandlingsflyt",
-    "version": "98507b995ce2bc17511e5ca24835cd1b9460d739"
+    "version": "ba1d2202655e9f572dbe1c263d7fe7ce4466029e"
   },
   "openapi": "3.0.0",
   "paths": {
@@ -27846,6 +28088,48 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.sakogbehandling.sak.flate.SakPersoninfoDTO"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Sak",
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/sak/{saksnummer}/arena-status": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "saksnummer",
+            "explode": false,
+            "in": "path",
+            "name": "saksnummer",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.flyt.ArenaStatusDTO"
                 }
               }
             },
@@ -32402,42 +32686,6 @@
         ]
       }
     },
-    "/api/dokumentinnhenting/syfo/purring": {
-      "post": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.behandlerdialog.PurringLegeerklæringRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "nullable": false,
-                  "type": "string"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "jwtAuth": [
-              "BEHANDLINGSFLYT"
-            ]
-          }
-        ],
-        "tags": [
-          "Tilgangkontrollert"
-        ]
-      }
-    },
     "/api/dokumentinnhenting/syfo/dialogmeldinger/{saksnummer}": {
       "get": {
         "parameters": [
@@ -32465,6 +32713,47 @@
                   },
                   "nullable": false,
                   "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/dokumentinnhenting/syfo/dialogmeldinger/{saksnummer}/v2": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "saksnummer",
+            "explode": false,
+            "in": "path",
+            "name": "saksnummer",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.behandlerdialog.MeldingerResponse"
                 }
               }
             },
@@ -34062,6 +34351,48 @@
                   },
                   "nullable": false,
                   "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/behandling/{referanse}/utbetaling/simulering/v2": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.utbetal.simulering.SimuleringDto"
                 }
               }
             },

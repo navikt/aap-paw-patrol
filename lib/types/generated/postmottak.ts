@@ -1193,6 +1193,44 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/drift/journalpost/{referanse}/kopier-journalpost": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description referanse */
+                    referanse: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["no.nav.aap.postmottak.kontrakt.journalpost.JournalpostId"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/drift/journalpost/{referanse}/info": {
         parameters: {
             query?: never;
@@ -1393,6 +1431,7 @@ export interface components {
             vurdering?: components["schemas"]["no.nav.aap.postmottak.api.faktagrunnlag.overlevering.OverleveringVurderingDto"];
         };
         "no.nav.aap.postmottak.api.faktagrunnlag.overlevering.OverleveringVurderingDto": {
+            begrunnelse?: string | null;
             skalOverleveres: boolean;
         };
         "no.nav.aap.postmottak.api.faktagrunnlag.sak.AvklarSakGrunnlagDto": {
@@ -1442,7 +1481,7 @@ export interface components {
         };
         "no.nav.aap.postmottak.api.faktagrunnlag.strukturering.DigitaliseringvurderingDto": {
             /** @enum {string} */
-            kategori: "AKTIVITETSKORT" | "ANNET_RELEVANT_DOKUMENT" | "DIALOGMELDING" | "FAGSYSTEMINFO_BEHOV_HENDELSE" | "FORELDREPENGE_VEDTAK_HENDELSE" | "INSTITUSJONSOPPHOLD" | "KABAL_HENDELSE" | "KLAGE" | "LEGEERKLÆRING" | "LEGEERKLÆRING_AVVIST" | "MANUELL_REVURDERING" | "MELDEKORT" | "MIGRERING_FRA_ARENA" | "NY_ÅRSAK_TIL_BEHANDLING" | "OMGJØRING_KLAGE_REVURDERING" | "OPPFØLGINGSOPPGAVE" | "PDL_HENDELSE_DODSFALL_BARN" | "PDL_HENDELSE_DODSFALL_BRUKER" | "PDL_HENDELSE_FOLKEREGISTERIDENT" | "SYKEPENGE_VEDTAK_HENDELSE" | "SØKNAD" | "TILBAKEKREVING_HENDELSE" | "UFØRE_VEDTAK_HENDELSE";
+            kategori: "AKTIVITETSKORT" | "ANNET_RELEVANT_DOKUMENT" | "DIALOGMELDING" | "FAGSYSTEMINFO_BEHOV_HENDELSE" | "FORELDREPENGE_VEDTAK_HENDELSE" | "INSTITUSJONSOPPHOLD" | "KABAL_HENDELSE" | "KLAGE" | "KORRIGER_SØKNADSDATO" | "LEGEERKLÆRING" | "LEGEERKLÆRING_AVVIST" | "MANUELL_REVURDERING" | "MELDEKORT" | "MIGRERING_FRA_ARENA" | "NY_ÅRSAK_TIL_BEHANDLING" | "OMGJØRING_KLAGE_REVURDERING" | "OPPFØLGINGSOPPGAVE" | "PDL_HENDELSE_DODSFALL_BARN" | "PDL_HENDELSE_DODSFALL_BRUKER" | "PDL_HENDELSE_FOLKEREGISTERIDENT" | "SYKEPENGE_VEDTAK_HENDELSE" | "SØKNAD" | "TILBAKEKREVING_HENDELSE" | "UFØRE_VEDTAK_HENDELSE";
             strukturertDokumentJson?: string | null;
             /**
              * Format: date
@@ -1578,6 +1617,7 @@ export interface components {
             valgtSystem: "ARENA" | "BEGGE" | "KELVIN";
         };
         "no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklarOverleveringL\u00F8sning": {
+            begrunnelse?: string | null;
             behovstype: string;
             skalOverleveres: boolean;
         };
@@ -1598,7 +1638,7 @@ export interface components {
         "no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.DigitaliserDokumentL\u00F8sning": {
             behovstype: string;
             /** @enum {string} */
-            kategori: "AKTIVITETSKORT" | "ANNET_RELEVANT_DOKUMENT" | "DIALOGMELDING" | "FAGSYSTEMINFO_BEHOV_HENDELSE" | "FORELDREPENGE_VEDTAK_HENDELSE" | "INSTITUSJONSOPPHOLD" | "KABAL_HENDELSE" | "KLAGE" | "LEGEERKLÆRING" | "LEGEERKLÆRING_AVVIST" | "MANUELL_REVURDERING" | "MELDEKORT" | "MIGRERING_FRA_ARENA" | "NY_ÅRSAK_TIL_BEHANDLING" | "OMGJØRING_KLAGE_REVURDERING" | "OPPFØLGINGSOPPGAVE" | "PDL_HENDELSE_DODSFALL_BARN" | "PDL_HENDELSE_DODSFALL_BRUKER" | "PDL_HENDELSE_FOLKEREGISTERIDENT" | "SYKEPENGE_VEDTAK_HENDELSE" | "SØKNAD" | "TILBAKEKREVING_HENDELSE" | "UFØRE_VEDTAK_HENDELSE";
+            kategori: "AKTIVITETSKORT" | "ANNET_RELEVANT_DOKUMENT" | "DIALOGMELDING" | "FAGSYSTEMINFO_BEHOV_HENDELSE" | "FORELDREPENGE_VEDTAK_HENDELSE" | "INSTITUSJONSOPPHOLD" | "KABAL_HENDELSE" | "KLAGE" | "KORRIGER_SØKNADSDATO" | "LEGEERKLÆRING" | "LEGEERKLÆRING_AVVIST" | "MANUELL_REVURDERING" | "MELDEKORT" | "MIGRERING_FRA_ARENA" | "NY_ÅRSAK_TIL_BEHANDLING" | "OMGJØRING_KLAGE_REVURDERING" | "OPPFØLGINGSOPPGAVE" | "PDL_HENDELSE_DODSFALL_BARN" | "PDL_HENDELSE_DODSFALL_BRUKER" | "PDL_HENDELSE_FOLKEREGISTERIDENT" | "SYKEPENGE_VEDTAK_HENDELSE" | "SØKNAD" | "TILBAKEKREVING_HENDELSE" | "UFØRE_VEDTAK_HENDELSE";
             strukturertDokument?: string | null;
             /**
              * Format: date

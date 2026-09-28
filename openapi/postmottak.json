@@ -561,6 +561,10 @@
       "no.nav.aap.postmottak.api.faktagrunnlag.overlevering.OverleveringVurderingDto": {
         "nullable": false,
         "properties": {
+          "begrunnelse": {
+            "nullable": true,
+            "type": "string"
+          },
           "skalOverleveres": {
             "nullable": false,
             "type": "boolean"
@@ -782,6 +786,7 @@
               "INSTITUSJONSOPPHOLD",
               "KABAL_HENDELSE",
               "KLAGE",
+              "KORRIGER_SØKNADSDATO",
               "LEGEERKLÆRING",
               "LEGEERKLÆRING_AVVIST",
               "MANUELL_REVURDERING",
@@ -1366,6 +1371,10 @@
       "no.nav.aap.postmottak.avklaringsbehov.løsning.AvklarOverleveringLøsning": {
         "nullable": false,
         "properties": {
+          "begrunnelse": {
+            "nullable": true,
+            "type": "string"
+          },
           "behovstype": {
             "nullable": false,
             "type": "string"
@@ -1479,6 +1488,7 @@
               "INSTITUSJONSOPPHOLD",
               "KABAL_HENDELSE",
               "KLAGE",
+              "KORRIGER_SØKNADSDATO",
               "LEGEERKLÆRING",
               "LEGEERKLÆRING_AVVIST",
               "MANUELL_REVURDERING",
@@ -3078,6 +3088,48 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.PersonSøkDriftsinfoDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/drift/journalpost/{referanse}/kopier-journalpost": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.kontrakt.journalpost.JournalpostId"
                 }
               }
             },

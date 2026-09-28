@@ -25,6 +25,10 @@
             "nullable": false,
             "type": "integer"
           },
+          "journalpostId": {
+            "nullable": true,
+            "type": "string"
+          },
           "oppdatert": {
             "example": "2025-04-01T12:30:00",
             "format": "date-time",
@@ -204,6 +208,13 @@
             "nullable": false,
             "type": "string"
           },
+          "signaturer": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.SignaturGrunnlag"
+            },
+            "nullable": false,
+            "type": "array"
+          },
           "sprak": {
             "enum": [
               "EN",
@@ -233,6 +244,7 @@
           "faktagrunnlag",
           "ferdigstillAutomatisk",
           "saksnummer",
+          "signaturer",
           "sprak",
           "unikReferanse",
           "vedlegg"

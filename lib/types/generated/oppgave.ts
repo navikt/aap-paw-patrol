@@ -1771,6 +1771,14 @@ export interface components {
             saksnummer?: string | null;
             tilbakekrevingUrl?: string | null;
         };
+        "no.nav.aap.oppgave.Foresp\u00F8rselSendtTilBehandlerDto": {
+            /**
+             * Format: date-time
+             * @example 2025-04-01T12:30:00
+             */
+            "p\u00E5minnelseDato"?: string | null;
+            "p\u00E5minnelseStatus"?: string | null;
+        };
         "no.nav.aap.oppgave.ForrigeKvalitetssikrerDto": {
             forrigeKvalitetssikrerIdent: string;
             forrigeKvalitetssikrerNavn?: string | null;
@@ -1976,6 +1984,7 @@ export interface components {
             versjon: number;
         };
         "no.nav.aap.oppgave.hent.OppgaveVisningsinformasjonResponse": {
+            "foresp\u00F8rselSendtTilBehandler"?: components["schemas"]["no.nav.aap.oppgave.Foresp\u00F8rselSendtTilBehandlerDto"];
             harUlesteDokumenter: boolean;
             /** Format: int64 */
             id: number;
@@ -2070,7 +2079,7 @@ export interface components {
             sattFilterBehandlingstyper?: ("AKTIVITETSPLIKT" | "AKTIVITETSPLIKT_11_9" | "DOKUMENT_HÅNDTERING" | "FORDELING" | "FØRSTEGANGSBEHANDLING" | "JOURNALFØRING" | "KLAGE" | "OPPFØLGINGSBEHANDLING" | "REVURDERING" | "SVAR_FRA_ANDREINSTANS" | "TILBAKEKREVING")[] | null;
         };
         "no.nav.aap.oppgave.liste.OppgavelisteTagsResponse": {
-            "foresp\u00F8rselSendtTilBehandler"?: boolean | null;
+            "foresp\u00F8rselSendtTilBehandler"?: components["schemas"]["no.nav.aap.oppgave.Foresp\u00F8rselSendtTilBehandlerDto"];
             forrigeKvalitetssikrerInfo?: components["schemas"]["no.nav.aap.oppgave.ForrigeKvalitetssikrerDto"];
             "forrigeP\u00E5VentInfo"?: components["schemas"]["no.nav.aap.oppgave.hent.VenteInformasjonResponse"];
             harUlesteDokumenter?: boolean | null;
