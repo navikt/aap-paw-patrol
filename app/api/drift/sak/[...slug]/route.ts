@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getBaseUrlAndScopeForApp } from 'lib/services/driftService';
 import { fetchProxy } from 'lib/services/fetchProxy';
-import { components } from 'lib/types/generated/behandlingsflyt';
 
 type DriftSakResult = Record<string, unknown> | string | null | undefined;
 
