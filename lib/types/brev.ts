@@ -14,6 +14,7 @@ export type BrevProsesseringStatus =
 export interface BrevbestillingDriftsinfoDto {
   id: number;
   bestillingReferanse: string;
+  journalpostId?: string;
   opprettet: string;
   oppdatert: string;
   behandlingReferanse: string;

@@ -77,6 +77,7 @@ const BrevBestillingTabell = ({ bestillinger }: { bestillinger: BrevbestillingDr
           <Table.Row>
             <Table.HeaderCell>Brevtype</Table.HeaderCell>
             <Table.HeaderCell>Behandlingreferanse</Table.HeaderCell>
+            <Table.HeaderCell>JournalpostID</Table.HeaderCell>
             <Table.HeaderCell>Språk</Table.HeaderCell>
             <Table.HeaderCell>Status</Table.HeaderCell>
             <Table.HeaderCell>Prosesseringsstatus</Table.HeaderCell>
@@ -89,6 +90,7 @@ const BrevBestillingTabell = ({ bestillinger }: { bestillinger: BrevbestillingDr
             <Table.Row key={brev.id}>
               <Table.DataCell>{brev.brevtype}</Table.DataCell>
               <Table.DataCell>{brev.behandlingReferanse}</Table.DataCell>
+              <Table.DataCell>{brev.journalpostId}</Table.DataCell>
               <Table.DataCell>{brev.språk}</Table.DataCell>
               <Table.DataCell>
                 {brev.status && (
