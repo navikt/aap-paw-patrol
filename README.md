@@ -91,7 +91,7 @@ portene (f.eks. `http://localhost:8080` for behandlingsflyt) med falske, men str
 data generert fra OpenAPI-spesifikasjoner med
 [msw-auto-mock](https://github.com/zoubingwu/msw-auto-mock)/[MSW](https://mswjs.io).
 
-```
+```shell
 yarn dev:mock
 ```
 
