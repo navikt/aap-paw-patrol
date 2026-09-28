@@ -45,7 +45,7 @@ export const KopierJournalpost = ({ journalpostId }: { journalpostId: string }) 
           å opprette noe på en ny sak.
         </HelpText>
       </div>
-      <Button onClick={onClickKopierJournalpost} loading={isSubmitting} disabled={nyJournalpost !== undefined}>
+      <Button size="small" onClick={onClickKopierJournalpost} loading={isSubmitting} disabled={nyJournalpost !== undefined}>
         Kopier journalpost
       </Button>
       {nyJournalpost && <Alert variant="info">Har opprettet ny journalpost - ny id er {nyJournalpost}</Alert>}
