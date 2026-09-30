@@ -8,7 +8,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { MOCK_SPECS } from '../mocks/mock-specs.mjs';
+import { getMockBasePath, getMockName, MOCK_SPECS } from '../mocks/mock-specs.mjs';
 
 const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const openApiDir = path.join(rootDir, 'openapi');
@@ -24,10 +24,7 @@ function loadEnvLocal() {
     if (eq === -1) continue;
     const key = trimmed.slice(0, eq).trim();
     let value = trimmed.slice(eq + 1).trim();
-    if (
-      (value.startsWith('"') && value.endsWith('"')) ||
-      (value.startsWith("'") && value.endsWith("'"))
-    ) {
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
       value = value.slice(1, -1);
     }
     if (process.env[key] === undefined) {
@@ -80,25 +77,31 @@ function postProcessHandlers(target) {
 
 let hadError = false;
 
-for (const { spec, envVar, outDir } of MOCK_SPECS) {
+for (const { spec } of MOCK_SPECS) {
   const specPath = path.join(openApiDir, spec);
   if (!existsSync(specPath)) {
     console.warn(`[mock:generate] Skipping ${spec}: not found in ${openApiDir}`);
     continue;
   }
 
-  const rawBaseUrl = process.env[envVar];
-  if (!rawBaseUrl) {
-    console.warn(`[mock:generate] Skipping ${spec}: ${envVar} is not set (copy .env-template to .env.local).`);
-    continue;
-  }
-  const baseUrl = rawBaseUrl.replace(/\/+$/, '');
-  const target = path.join(outputDir, outDir);
+  const mockBaseUrl = (process.env.MOCK_API_BASE_URL ?? 'http://localhost:8080').replace(/\/+$/, '');
+  const baseUrl = `${mockBaseUrl}${getMockBasePath(spec)}`;
+  const target = path.join(outputDir, getMockName(spec));
   mkdirSync(target, { recursive: true });
 
   console.log(`[mock:generate] Generating mocks for ${spec} -> ${path.relative(rootDir, target)} (baseUrl=${baseUrl})`);
 
-  const cliArgs = ['msw-auto-mock', specPath, '-o', target, '--typescript', '--base-url', baseUrl, '-m', maxArrayLength];
+  const cliArgs = [
+    'msw-auto-mock',
+    specPath,
+    '-o',
+    target,
+    '--typescript',
+    '--base-url',
+    baseUrl,
+    '-m',
+    maxArrayLength,
+  ];
   if (useStaticMocks) {
     cliArgs.push('--static');
   }

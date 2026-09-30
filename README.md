@@ -86,9 +86,9 @@ håndskrevne typer (f.eks. i `lib/types/`) fortsatt stemmer overens med de gener
 
 Appen kaller flere backend-tjenester (behandlingsflyt, oppgave, meldekort, m.fl.) via URL-er
 konfigurert i `.env.local`. For å kjøre lokalt uten at disse tjenestene faktisk kjører, kan du
-bruke `yarn dev:mock`, som starter små lokale "fake"-backend-servere som svarer på de vanlige
-portene (f.eks. `http://localhost:8080` for behandlingsflyt) med falske, men strukturelt riktige
-data generert fra OpenAPI-spesifikasjoner med
+bruke `yarn dev:mock`, som starter én lokal fake-server på `MOCK_API_BASE_URL` (standard:
+`http://localhost:8080`). Serveren svarer med falske, men strukturelt riktige data generert fra
+OpenAPI-spesifikasjoner med
 [msw-auto-mock](https://github.com/zoubingwu/msw-auto-mock)/[MSW](https://mswjs.io).
 
 ```shell
@@ -99,23 +99,19 @@ Dette:
 
 - Genererer mock-handlere fra spesifikasjonene i `openapi/` (`yarn mock:generate`, kjøres
   automatisk av `dev:mock`).
-- Starter én ekte, liten HTTP-server per mocket backend (se `mocks/run.ts` og
-  `mocks/standaloneServer.ts`) som lytter på samme port som `_API_BASE_URL` i `.env.local` peker
-  til, og svarer med falske data for behandlingsflyt, oppgave, utbetal, meldekort, brev,
-  postmottak, dokumentinnhenting, statistikk og api-intern.
+- Starter én HTTP-server for alle mockede backendene på `MOCK_API_BASE_URL` (standard:
+  `http://localhost:8080`). Hver backend får sin egen URL-prefiks for å skille like endepunkter.
 - Lar `fakedings`-kallet for lokal token (`lib/services/localTokenService.ts`) være uendret/ekte —
   dette er ikke mocket, så du trenger fortsatt normal nettverkstilgang for det.
 - `innsending` mockes ikke ennå. Kall til denne backenden går fortsatt reelt og vil feile/henge
   uten at den faktiske tjenesten kjører.
-- Krever at portene til de mockede backendene (f.eks. 8080, 8084) er ledige lokalt — ikke kjør ekte
-  backends på samme port samtidig som `yarn dev:mock`.
+- Krever at porten til `MOCK_API_BASE_URL` er ledig — ikke kjør en annen tjeneste der samtidig.
 
 For å legge til en ny backend, legg først backendens OpenAPI-URL til i
 `scripts/update-openapi-specs.mjs`, og kjør `yarn openapi:update`. Da lastes spesifikasjonen ned til
 `openapi/` og TypeScript-typene regenereres. For å mocke backenden lokalt må du deretter legge til
-én oppføring i `MOCK_SPECS` i `mocks/mock-specs.mjs`, med spesifikasjonsfil, riktig `*_API_BASE_URL`
-og output-katalog. Både `yarn mock:generate` (`scripts/generate-mocks.mjs`) og de kjørende
-fake-serverne (`mocks/run.ts`) leser fra denne lista.
+én oppføring i `MOCK_SPECS` i `mocks/mock-specs.mjs` med spesifikasjonsfil og riktig
+`*_API_BASE_URL`.
 
 #### Justere hvor "ekte"/omfattende de genererte dataene ser ut
 
