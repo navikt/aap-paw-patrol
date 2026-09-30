@@ -1,0 +1,2891 @@
+{
+  "components": {
+    "schemas": {
+      "no.nav.aap.behandlingsflyt.kontrakt.avklaringsbehov.Definisjon": {
+        "nullable": false,
+        "properties": {
+          "kode": {
+            "enum": [
+              "4101",
+              "4102",
+              "4201",
+              "4301",
+              "5001",
+              "5002",
+              "5003",
+              "5004",
+              "5005",
+              "5006",
+              "5007",
+              "5008",
+              "5009",
+              "5010",
+              "5011",
+              "5012",
+              "5013",
+              "5014",
+              "5015",
+              "5016",
+              "5017",
+              "5018",
+              "5019",
+              "5020",
+              "5021",
+              "5022",
+              "5023",
+              "5024",
+              "5025",
+              "5026",
+              "5027",
+              "5028",
+              "5029",
+              "5030",
+              "5031",
+              "5032",
+              "5033",
+              "5034",
+              "5035",
+              "5036",
+              "5037",
+              "5038",
+              "5039",
+              "5040",
+              "5041",
+              "5042",
+              "5050",
+              "5051",
+              "5052",
+              "5053",
+              "5054",
+              "5056",
+              "5057",
+              "5058",
+              "5059",
+              "5060",
+              "5096",
+              "5097",
+              "5098",
+              "5099",
+              "5999",
+              "6000",
+              "6001",
+              "6002",
+              "6003",
+              "6004",
+              "6005",
+              "6006",
+              "6007",
+              "6008",
+              "6009",
+              "6010",
+              "7001",
+              "8001",
+              "8002",
+              "8003",
+              "8004",
+              "9001",
+              "9002",
+              "9003",
+              "9004",
+              "9082",
+              "9083"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "kreverToTrinn": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "kvalitetssikres": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "løsesAv": {
+            "items": {
+              "enum": [
+                "BESLUTTER",
+                "DRIFT",
+                "DRIFT_LES",
+                "KVALITETSSIKRER",
+                "LES",
+                "PRODUKSJONSSTYRING",
+                "SAKSBEHANDLER_NASJONAL",
+                "SAKSBEHANDLER_OPPFOLGING"
+              ],
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "løsesISteg": {
+            "enum": [
+              "ARBEIDSOPPTRAPPING",
+              "AVBRYT_AKTIVITETSPLIKTBEHANDLING",
+              "AVBRYT_REVURDERING",
+              "AVKLAR_MIGRERINGSDATO",
+              "AVKLAR_OPPFØLGING",
+              "AVKLAR_STUDENT",
+              "AVKLAR_STUDENT_V2",
+              "AVKLAR_STØNADSPERIODE",
+              "AVKLAR_SYKDOM",
+              "BARNETILLEGG",
+              "BEHANDLENDE_ENHET",
+              "BEKREFT_VURDERINGER_OPPFØLGING",
+              "BEREGN_TILKJENT_YTELSE",
+              "BREV",
+              "DU_ER_ET_ANNET_STED",
+              "EFFEKTUER_11_7",
+              "ETABLERING_EGEN_VIRKSOMHET",
+              "FASTSETT_ARBEIDSEVNE",
+              "FASTSETT_BEREGNINGSTIDSPUNKT",
+              "FASTSETT_GRUNNLAG",
+              "FASTSETT_MELDEPERIODER",
+              "FASTSETT_RETTIGHETSTYPE",
+              "FASTSETT_SYKDOMSVILKÅRET",
+              "FASTSETT_UTTAK",
+              "FASTSETT_VEDTAKSLENGDE",
+              "FATTE_VEDTAK",
+              "FORESLÅ_VEDTAK",
+              "FORESLÅ_VEDTAK_VEDTAKSLENGDE",
+              "FORMKRAV",
+              "FRITAK_MELDEPLIKT",
+              "FULLMEKTIG",
+              "IKKE_OPPFYLT_MELDEPLIKT",
+              "IVERKSETT_BRUDD",
+              "IVERKSETT_KONSEKVENS",
+              "IVERKSETT_VEDTAK",
+              "KLAGEBEHANDLING_KONTOR",
+              "KLAGEBEHANDLING_NAY",
+              "KLAGEBEHANDLING_OPPSUMMERING",
+              "KRAV",
+              "KVALITETSSIKRING",
+              "MANGLENDE_LIGNING",
+              "OMGJØRING",
+              "OPPRETTHOLDELSE",
+              "OPPRETT_REVURDERING",
+              "OVERGANG_ARBEID",
+              "OVERGANG_UFORE",
+              "PÅKLAGET_BEHANDLING",
+              "REFUSJON_KRAV",
+              "SAMORDNING_ANDRE_STATLIGE_YTELSER",
+              "SAMORDNING_ARBEIDSGIVER",
+              "SAMORDNING_AVSLAG",
+              "SAMORDNING_BARNEPENSJON",
+              "SAMORDNING_GRADERING",
+              "SAMORDNING_SYKESTIPEND",
+              "SAMORDNING_TJENESTEPENSJON_REFUSJONSKRAV",
+              "SAMORDNING_UFØRE",
+              "SEND_FORVALTNINGSMELDING",
+              "SIMULERING",
+              "START_BEHANDLING",
+              "START_OPPFØLGINGSBEHANDLING",
+              "SVAR_FRA_ANDREINSTANS",
+              "SYKDOMSVURDERING_BREV",
+              "SØKNAD",
+              "TREKK_KLAGE",
+              "UDEFINERT",
+              "VIS_GRUNNLAG",
+              "VURDER_AKTIVITETSPLIKT_11_7",
+              "VURDER_AKTIVITETSPLIKT_11_9",
+              "VURDER_ALDER",
+              "VURDER_AVSLAG_11_27",
+              "VURDER_BISTANDSBEHOV",
+              "VURDER_INNTEKTSBORTFALL",
+              "VURDER_LOVVALG",
+              "VURDER_MEDLEMSKAP",
+              "VURDER_OPPHOLDSKRAV",
+              "VURDER_RETTIGHETSPERIODE",
+              "VURDER_SYKEPENGEERSTATNING",
+              "VURDER_YRKESSKADE"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "måRevurderesEtterOpphør": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "type": {
+            "enum": [
+              "BREV",
+              "BREV_VENTEPUNKT",
+              "MANUELT_FRIVILLIG",
+              "MANUELT_PÅKREVD",
+              "OVERSTYR",
+              "VENTEPUNKT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "vurdererVilkår": {
+            "enum": [
+              "AKTIVITETSPLIKT",
+              "ALDERSVILKÅRET",
+              "BISTANDSVILKÅRET",
+              "GRUNNLAGET",
+              "INNTEKTSBORTFALL",
+              "LOVVALG",
+              "MEDLEMSKAP",
+              "OPPHOLDSKRAV",
+              "ORDINÆR_KVOTE",
+              "OVERGANGARBEIDVILKÅRET",
+              "OVERGANGUFØREVILKÅRET",
+              "SAMORDNING",
+              "SAMORDNING_ANNEN_LOVGIVNING",
+              "STRAFFEGJENNOMFØRING",
+              "STUDENT",
+              "SYKDOMSVILKÅRET",
+              "SYKEPENGEERSTATNING",
+              "SYKEPENGEERSTATNING_KVOTE"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kode",
+          "kreverToTrinn",
+          "kvalitetssikres",
+          "løsesAv",
+          "løsesISteg",
+          "måRevurderesEtterOpphør",
+          "type",
+          "name"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.behandling.BehandlingReferanse": {
+        "format": "uuid",
+        "nullable": false,
+        "type": "string"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.hendelse.AvklaringsbehovHendelseDto": {
+        "nullable": false,
+        "properties": {
+          "avklaringsbehovDefinisjon": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.avklaringsbehov.Definisjon"
+          },
+          "endringer": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.EndringDTO"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "id": {
+            "format": "int64",
+            "nullable": true,
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "AVBRUTT",
+              "AVSLUTTET",
+              "KVALITETSSIKRET",
+              "OPPRETTET",
+              "SENDT_TILBAKE_FRA_BESLUTTER",
+              "SENDT_TILBAKE_FRA_KVALITETSSIKRER",
+              "TOTRINNS_VURDERT"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "avklaringsbehovDefinisjon",
+          "endringer",
+          "status"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.hendelse.EndringDTO": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": true,
+            "type": "string"
+          },
+          "endretAv": {
+            "nullable": false,
+            "type": "string"
+          },
+          "frist": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "AVBRUTT",
+              "AVSLUTTET",
+              "KVALITETSSIKRET",
+              "OPPRETTET",
+              "SENDT_TILBAKE_FRA_BESLUTTER",
+              "SENDT_TILBAKE_FRA_KVALITETSSIKRER",
+              "TOTRINNS_VURDERT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "tidsstempel": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "årsakTilRetur": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.ÅrsakTilRetur"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "årsakTilSattPåVent": {
+            "enum": [
+              "VENTER_PÅ_FUNKSJONALITET",
+              "VENTER_PÅ_FUNKSJONALITET_AVSLAG_11_27",
+              "VENTER_PÅ_KLAGE_IMPLEMENTASJON",
+              "VENTER_PÅ_MASKINELL_AVKLARING",
+              "VENTER_PÅ_MEDISINSKE_OPPLYSNINGER",
+              "VENTER_PÅ_OPPLYSNINGER",
+              "VENTER_PÅ_OPPLYSNINGER_FRA_UTENLANDSKE_MYNDIGHETER",
+              "VENTER_PÅ_SVAR_FRA_BRUKER",
+              "VENTER_PÅ_SVAR_PÅ_FORHÅNDSVARSEL",
+              "VENTER_PÅ_UTENLANDSK_VIDEREFORING_AVKLARING",
+              "VENTER_PÅ_VURDERING_AV_ROL"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "endretAv",
+          "status",
+          "tidsstempel",
+          "årsakTilRetur"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.hendelse.TilbakekrevingsbehandlingOppdatertHendelse": {
+        "nullable": false,
+        "properties": {
+          "behandlingStatus": {
+            "enum": [
+              "AVSLUTTET",
+              "OPPRETTET",
+              "RETUR_FRA_BESLUTTER",
+              "TIL_BEHANDLING",
+              "TIL_BESLUTTER",
+              "TIL_FORHÅNDSVARSEL",
+              "TIL_GODKJENNING"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "behandlingref": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.behandling.BehandlingReferanse"
+          },
+          "gjenopptas": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "personIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "sakOpprettet": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "saksbehandlingURL": {
+            "nullable": false,
+            "type": "string"
+          },
+          "saksnummer": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.sak.Saksnummer"
+          },
+          "totaltFeilutbetaltBeløp": {
+            "nullable": false,
+            "type": "number"
+          },
+          "venteGrunn": {
+            "enum": [
+              "AVVENTER_BRUKERUTTALELSE"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behandlingStatus",
+          "behandlingref",
+          "personIdent",
+          "sakOpprettet",
+          "saksbehandlingURL",
+          "saksnummer",
+          "totaltFeilutbetaltBeløp"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.hendelse.ÅrsakTilRetur": {
+        "nullable": false,
+        "properties": {
+          "årsak": {
+            "enum": [
+              "ANNET",
+              "FEIL_LOVANVENDELSE",
+              "FOR_DETALJERT",
+              "IKKE_INDIVIDUELL_OG_KONKRET",
+              "MANGELFULL_BEGRUNNELSE",
+              "MANGLENDE_JOURNALFØRING",
+              "MANGLENDE_KILDEHENVISNING",
+              "MANGLENDE_UTREDNING",
+              "SKRIVEFEIL"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "årsak"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.sak.Saksnummer": {
+        "nullable": false,
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.ArbeidIPeriode": {
+        "nullable": false,
+        "properties": {
+          "periodeFom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "periodeTom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "timerArbeidet": {
+            "nullable": false,
+            "type": "number"
+          }
+        },
+        "required": [
+          "periodeFom",
+          "periodeTom",
+          "timerArbeidet"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.AvsluttetBehandlingDTO": {
+        "nullable": false,
+        "properties": {
+          "beregningsGrunnlag": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.BeregningsgrunnlagDTO"
+          },
+          "diagnoser": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.Diagnoser"
+          },
+          "diagnoserPeriodisert": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.DiagnoserMedPeriode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "fritaksvurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.Fritakvurdering"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "institusjonsopphold": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.PeriodeDTO"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "perioderMedArbeidsopptrapping": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.PeriodeDTO"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "resultat": {
+            "enum": [
+              "AVBRUTT",
+              "AVSLAG",
+              "INNVILGET",
+              "KLAGE_AVSLÅTT",
+              "KLAGE_DELVIS_OMGJØRES",
+              "KLAGE_OMGJØRES",
+              "KLAGE_OPPRETTHOLDES",
+              "KLAGE_TRUKKET",
+              "TRUKKET"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "rettighetstypePerioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.RettighetstypePeriode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "samordning": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.SamordningDTO"
+          },
+          "tilkjentYtelse": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.TilkjentYtelseDTO"
+          },
+          "vedtakstidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "vedtattStansOpphør": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.StansEllerOpphør"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "vilkårsResultat": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.VilkårsResultatDTO"
+          }
+        },
+        "required": [
+          "diagnoserPeriodisert",
+          "institusjonsopphold",
+          "perioderMedArbeidsopptrapping",
+          "rettighetstypePerioder",
+          "samordning",
+          "tilkjentYtelse",
+          "vedtattStansOpphør",
+          "vilkårsResultat"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.BeregningsgrunnlagDTO": {
+        "nullable": false,
+        "properties": {
+          "grunnlag11_19dto": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.Grunnlag11_19DTO"
+          },
+          "grunnlagUføre": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.GrunnlagUføreDTO"
+          },
+          "grunnlagYrkesskade": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.GrunnlagYrkesskadeDTO"
+          },
+          "nedsattArbeidsevneEllerStudieevneDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "ytterligereNedsattArbeidsevneDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "nedsattArbeidsevneEllerStudieevneDato"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.Diagnoser": {
+        "nullable": false,
+        "properties": {
+          "bidiagnoser": {
+            "items": {
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "diagnosekode": {
+            "nullable": false,
+            "type": "string"
+          },
+          "kodeverk": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "bidiagnoser",
+          "diagnosekode",
+          "kodeverk"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.DiagnoserMedPeriode": {
+        "nullable": false,
+        "properties": {
+          "bidiagnoser": {
+            "items": {
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "diagnosekode": {
+            "nullable": false,
+            "type": "string"
+          },
+          "kodeverk": {
+            "nullable": false,
+            "type": "string"
+          },
+          "periodeDTO": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.PeriodeDTO"
+          }
+        },
+        "required": [
+          "bidiagnoser",
+          "diagnosekode",
+          "kodeverk",
+          "periodeDTO"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.Fritakvurdering": {
+        "nullable": false,
+        "properties": {
+          "fraDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "harFritak": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "tilDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fraDato",
+          "harFritak"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.Grunnlag11_19DTO": {
+        "nullable": false,
+        "properties": {
+          "er6GBegrenset": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "erGjennomsnitt": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "grunnlaget": {
+            "format": "double",
+            "nullable": false,
+            "type": "number"
+          },
+          "inntekter": {
+            "additionalProperties": {
+              "format": "double",
+              "nullable": false,
+              "type": "number"
+            },
+            "description": "Key type: kotlin.String",
+            "nullable": false,
+            "type": "object"
+          }
+        },
+        "required": [
+          "er6GBegrenset",
+          "erGjennomsnitt",
+          "grunnlaget",
+          "inntekter"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.GrunnlagUføreDTO": {
+        "nullable": false,
+        "properties": {
+          "grunnlag": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.Grunnlag11_19DTO"
+          },
+          "grunnlagYtterligereNedsatt": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.Grunnlag11_19DTO"
+          },
+          "grunnlaget": {
+            "nullable": false,
+            "type": "number"
+          },
+          "type": {
+            "enum": [
+              "STANDARD",
+              "YTTERLIGERE_NEDSATT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "uføreInntekterFraForegåendeÅr": {
+            "additionalProperties": {
+              "format": "double",
+              "nullable": false,
+              "type": "number"
+            },
+            "description": "Key type: kotlin.String",
+            "nullable": false,
+            "type": "object"
+          },
+          "uføreYtterligereNedsattArbeidsevneÅr": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "uføregrad": {
+            "deprecated": true,
+            "description": "Bruk uføregrader.",
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "uføregrader": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.Uføre"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "grunnlag",
+          "grunnlagYtterligereNedsatt",
+          "grunnlaget",
+          "type",
+          "uføreInntekterFraForegåendeÅr",
+          "uføreYtterligereNedsattArbeidsevneÅr",
+          "uføregrad",
+          "uføregrader"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.GrunnlagYrkesskadeDTO": {
+        "nullable": false,
+        "properties": {
+          "andelSomIkkeSkyldesYrkesskade": {
+            "nullable": false,
+            "type": "number"
+          },
+          "andelSomSkyldesYrkesskade": {
+            "nullable": false,
+            "type": "number"
+          },
+          "andelYrkesskade": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "antattÅrligInntektYrkesskadeTidspunktet": {
+            "nullable": false,
+            "type": "number"
+          },
+          "benyttetAndelForYrkesskade": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "beregningsgrunnlag": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.BeregningsgrunnlagDTO"
+          },
+          "grunnlagEtterYrkesskadeFordel": {
+            "nullable": false,
+            "type": "number"
+          },
+          "grunnlagForBeregningAvYrkesskadeandel": {
+            "nullable": false,
+            "type": "number"
+          },
+          "grunnlaget": {
+            "nullable": false,
+            "type": "number"
+          },
+          "inkludererUføre": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "terskelverdiForYrkesskade": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "yrkesskadeTidspunkt": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "yrkesskadeinntektIG": {
+            "nullable": false,
+            "type": "number"
+          }
+        },
+        "required": [
+          "andelSomIkkeSkyldesYrkesskade",
+          "andelSomSkyldesYrkesskade",
+          "andelYrkesskade",
+          "antattÅrligInntektYrkesskadeTidspunktet",
+          "benyttetAndelForYrkesskade",
+          "beregningsgrunnlag",
+          "grunnlagEtterYrkesskadeFordel",
+          "grunnlagForBeregningAvYrkesskadeandel",
+          "grunnlaget",
+          "inkludererUføre",
+          "terskelverdiForYrkesskade",
+          "yrkesskadeTidspunkt",
+          "yrkesskadeinntektIG"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.MeldekortDTO": {
+        "nullable": false,
+        "properties": {
+          "arbeidIPeriode": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.ArbeidIPeriode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "journalpostId": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "arbeidIPeriode",
+          "journalpostId"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.PeriodeDTO": {
+        "nullable": false,
+        "properties": {
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fom",
+          "tom"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.RettighetstypePeriode": {
+        "nullable": false,
+        "properties": {
+          "fraDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "rettighetstype": {
+            "enum": [
+              "ARBEIDSSØKER",
+              "BISTANDSBEHOV",
+              "STUDENT",
+              "SYKEPENGEERSTATNING",
+              "VURDERES_FOR_UFØRETRYGD"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "tilDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fraDato",
+          "rettighetstype",
+          "tilDato"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.SamordningDTO": {
+        "nullable": false,
+        "properties": {
+          "arbeidsgiver": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.SamordningDTO.Arbeidsgiver"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "avregningAndreYtelser": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.SamordningDTO.AvregningAndreYtelser"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "statligeYtelser": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.SamordningDTO.StatligeYtelser"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "uføre": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.SamordningDTO.UførePerioder"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "arbeidsgiver",
+          "avregningAndreYtelser",
+          "statligeYtelser",
+          "uføre"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.SamordningDTO.Arbeidsgiver": {
+        "nullable": false,
+        "properties": {
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fom",
+          "tom"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.SamordningDTO.AvregningAndreYtelser": {
+        "nullable": false,
+        "properties": {
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "ytelse": {
+            "enum": [
+              "BARNEPENSJON",
+              "DAGPENGER",
+              "FORELDREPENGER",
+              "GJENLEVENDEPENSJON",
+              "OMSTILLINGSSTØNAD",
+              "OVERGANGSSTØNAD",
+              "SYKEPENGER",
+              "TILTAKSPENGER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fom",
+          "tom",
+          "ytelse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.SamordningDTO.StatligeYtelser": {
+        "nullable": false,
+        "properties": {
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "prosent": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "ytelse": {
+            "enum": [
+              "FERIE_I_SYKEPENGEPERIODE",
+              "FORELDREPENGER",
+              "OMSORGSPENGER",
+              "OPPLÆRINGSPENGER",
+              "PLEIEPENGER",
+              "SVANGERSKAPSPENGER",
+              "SYKEPENGER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fom",
+          "prosent",
+          "tom",
+          "ytelse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.SamordningDTO.UførePerioder": {
+        "nullable": false,
+        "properties": {
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "grad": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fom",
+          "grad",
+          "tom"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.StansEllerOpphør": {
+        "nullable": false,
+        "properties": {
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "OPPHØR",
+              "STANS"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "årsaker": {
+            "items": {
+              "enum": [
+                "ANNEN_FULL_YTELSE",
+                "ANNEN_FULL_YTELSE_AVSLAG",
+                "BRUDD_PÅ_AKTIVITETSPLIKT_OPPHØR",
+                "BRUDD_PÅ_AKTIVITETSPLIKT_STANS",
+                "BRUDD_PÅ_OPPHOLDSKRAV_OPPHØR",
+                "BRUDD_PÅ_OPPHOLDSKRAV_STANS",
+                "BRUKER_OVER_67",
+                "BRUKER_UNDER_18",
+                "HAR_RETT_TIL_FULLT_UTTAK_ALDERSPENSJON",
+                "IKKE_BEHOV_FOR_OPPFOLGING",
+                "IKKE_MEDLEM",
+                "IKKE_MEDLEM_FORUTGÅENDE",
+                "IKKE_NOK_REDUSERT_ARBEIDSEVNE",
+                "IKKE_OPPFYLT_OPPHOLDSKRAV_EØS",
+                "IKKE_RETT_PA_AAP_I_PERIODE_SOM_ARBEIDSSOKER",
+                "IKKE_RETT_PA_AAP_UNDER_BEHANDLING_AV_UFORE",
+                "IKKE_RETT_PA_STUDENT",
+                "IKKE_RETT_PA_SYKEPENGEERSTATNING",
+                "IKKE_RETT_UNDER_STRAFFEGJENNOMFØRING",
+                "IKKE_SYKDOM_AV_VISS_VARIGHET",
+                "IKKE_SYKDOM_SKADE_LYTE",
+                "IKKE_SYKDOM_SKADE_LYTE_VESENTLIGDEL",
+                "INNTEKTSTAP_DEKKES_ETTER_ANNEN_LOVGIVNING",
+                "MANGLENDE_DOKUMENTASJON",
+                "NORGE_IKKE_KOMPETENT_STAT",
+                "ORDINÆRKVOTE_BRUKT_OPP",
+                "SYKEPENGEERSTATNINGKVOTE_BRUKT_OPP",
+                "VARIGHET_OVERSKREDET_ARBEIDSSØKER",
+                "VARIGHET_OVERSKREDET_OVERGANG_UFORE",
+                "VARIGHET_OVERSKREDET_STUDENT"
+              ],
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "fom",
+          "type",
+          "årsaker"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.StoppetBehandling": {
+        "nullable": false,
+        "properties": {
+          "avklaringsbehov": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.AvklaringsbehovHendelseDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "avsluttetBehandling": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.AvsluttetBehandlingDTO"
+          },
+          "behandlingOpprettetTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "behandlingReferanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "behandlingStatus": {
+            "enum": [
+              "AVSLUTTET",
+              "IVERKSETTES",
+              "OPPRETTET",
+              "UTREDES"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "behandlingType": {
+            "enum": [
+              "Aktivitetsplikt",
+              "Aktivitetsplikt11_9",
+              "Førstegangsbehandling",
+              "Klage",
+              "OppfølgingsBehandling",
+              "Revurdering",
+              "SvarFraAndreinstans",
+              "Tilbakekreving"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "hendelsesTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "ident": {
+            "nullable": false,
+            "type": "string"
+          },
+          "identerForSak": {
+            "items": {
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "mottattTid": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "nyeMeldekort": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.MeldekortDTO"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "opprettetAv": {
+            "nullable": true,
+            "type": "string"
+          },
+          "relatertBehandling": {
+            "format": "uuid",
+            "nullable": true,
+            "type": "string"
+          },
+          "relatertFagsystem": {
+            "nullable": true,
+            "type": "string"
+          },
+          "sakStatus": {
+            "enum": [
+              "AVSLUTTET",
+              "LØPENDE",
+              "OPPRETTET",
+              "UTREDES"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          },
+          "soknadsFormat": {
+            "enum": [
+              "DIGITAL",
+              "PAPIR"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "søknadIder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.verdityper.dokument.JournalpostId"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "tidspunktSisteEndring": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "versjon": {
+            "nullable": false,
+            "type": "string"
+          },
+          "vurderingsbehov": {
+            "items": {
+              "enum": [
+                "AKTIVITETSMELDING",
+                "AKTIVITETSPLIKTBEHANDLING_AVBRUTT",
+                "AKTIVITETSPLIKT_11_7",
+                "AKTIVITETSPLIKT_11_9",
+                "AVVIST_LEGEERKLÆRING",
+                "AVVIST_SOKNAD_OM_AAP_UNDER_OPPHOLD_I_UTLANDET",
+                "BARNETILLEGG",
+                "BARNETILLEGG_SATS_REGULERING",
+                "BRUKER_TILBAKE_I_ARBEID",
+                "DIALOGMELDING",
+                "DØDSFALL_BARN",
+                "DØDSFALL_BRUKER",
+                "EFFEKTUER_AKTIVITETSPLIKT",
+                "EFFEKTUER_AKTIVITETSPLIKT_11_9",
+                "ETABLERING_EGEN_VIRKSOMHET",
+                "FASTSETT_ARBEIDSEVNE",
+                "FERIE_I_SYKEPENGEPERIODE",
+                "FORUTGAENDE_MEDLEMSKAP",
+                "FRITAK_MELDEPLIKT",
+                "G_REGULERING",
+                "HELHETLIG_VURDERING",
+                "INSTITUSJONSOPPHOLD",
+                "INSTITUSJONSOPPHOLD_HELSEINSTITUSJON",
+                "INSTITUSJONSOPPHOLD_SONING",
+                "KLAGE",
+                "KLAGE_TRUKKET",
+                "LEGEERKLÆRING",
+                "LOVVALG_OG_MEDLEMSKAP",
+                "MELDEKORT",
+                "MIGRERING_FRA_ARENA",
+                "MIGRER_RETTIGHETSPERIODE",
+                "MOTTATT_KABAL_HENDELSE",
+                "OPPFØLGINGSOPPGAVE",
+                "OPPHOLDSKRAV",
+                "OVERGANG_ARBEID",
+                "OVERGANG_UFORE",
+                "OVERGANG_UFORE_AUTOMATISK_STANS",
+                "REFUSJONSKRAV",
+                "REVURDERING_AVBRUTT",
+                "REVURDER_BEREGNING",
+                "REVURDER_INNTEKTSBORTFALL",
+                "REVURDER_LOVVALG",
+                "REVURDER_MANUELL_INNTEKT",
+                "REVURDER_MEDLEMSKAP",
+                "REVURDER_MELDEPLIKT_RIMELIG_GRUNN",
+                "REVURDER_SAMORDNING",
+                "REVURDER_SAMORDNING_ANDRE_FOLKETRYGDYTELSER",
+                "REVURDER_SAMORDNING_ANDRE_STATLIGE_YTELSER",
+                "REVURDER_SAMORDNING_ARBEIDSGIVER",
+                "REVURDER_SAMORDNING_BARNEPENSJON",
+                "REVURDER_SAMORDNING_TJENESTEPENSJON",
+                "REVURDER_SAMORDNING_UFØRE",
+                "REVURDER_STUDENT",
+                "REVURDER_SYKEPENGEERSTATNING",
+                "REVURDER_SYKESTIPEND",
+                "REVURDER_YRKESSKADE",
+                "SAMORDNING_OG_AVREGNING",
+                "SYKDOM_ARBEVNE_BEHOV_FOR_BISTAND",
+                "SØKNAD",
+                "SØKNAD_TRUKKET",
+                "UTENLANDSOPPHOLD_FOR_SOKNADSTIDSPUNKT",
+                "UTVID_VEDTAKSLENGDE",
+                "VEDTAKSLENGDE_MANUELT",
+                "VURDER_ARBEIDSOPPTRAPPING",
+                "VURDER_AVSLAG_11_27",
+                "VURDER_FRITAK_MELDEPLIKT",
+                "VURDER_KRAV",
+                "VURDER_RETTIGHETSPERIODE"
+              ],
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "årsakTilOpprettelse": {
+            "enum": [
+              "AKTIVITETSMELDING",
+              "AKTIVITETSPLIKT",
+              "AKTIVITETSPLIKT_11_9",
+              "ANNET_RELEVANT_DOKUMENT",
+              "BARNETILLEGG_SATSENDRING",
+              "ENDRING_I_REGISTERDATA",
+              "FAGSYSTEMINFO_BEHOV_HENDELSE",
+              "FASTSATT_PERIODE_PASSERT",
+              "FRITAK_MELDEPLIKT",
+              "G_REGULERING",
+              "HELSEOPPLYSNINGER",
+              "KLAGE",
+              "MANUELL_OPPRETTELSE",
+              "MELDEKORT",
+              "MIGRERING_FRA_ARENA",
+              "MIGRER_RETTIGHETSPERIODE",
+              "OMGJØRING_ETTER_KLAGE",
+              "OMGJØRING_ETTER_SVAR_FRA_KLAGEINSTANS",
+              "OPPFØLGINGSOPPGAVE",
+              "OPPFØLGINGSOPPGAVE_SAMORDNING_GRADERING",
+              "SVAR_FRA_KLAGEINSTANS",
+              "SØKNAD",
+              "TILBAKEKREVING_HENDELSE",
+              "UDEFINERT",
+              "UFØRE_VEDTAK_HENDELSE",
+              "UTVID_VEDTAKSLENGDE"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "avklaringsbehov",
+          "behandlingOpprettetTidspunkt",
+          "behandlingReferanse",
+          "behandlingStatus",
+          "behandlingType",
+          "hendelsesTidspunkt",
+          "ident",
+          "identerForSak",
+          "mottattTid",
+          "nyeMeldekort",
+          "sakStatus",
+          "saksnummer",
+          "soknadsFormat",
+          "søknadIder",
+          "versjon",
+          "vurderingsbehov",
+          "årsakTilOpprettelse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.TilkjentYtelseDTO": {
+        "nullable": false,
+        "properties": {
+          "perioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.TilkjentYtelsePeriodeDTO"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "perioder"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.TilkjentYtelsePeriodeDTO": {
+        "nullable": false,
+        "properties": {
+          "antallBarn": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "arbeidGradering": {
+            "format": "double",
+            "nullable": false,
+            "type": "number"
+          },
+          "barnepensjonDagsats": {
+            "format": "double",
+            "nullable": false,
+            "type": "number"
+          },
+          "barnetillegg": {
+            "format": "double",
+            "nullable": false,
+            "type": "number"
+          },
+          "barnetilleggSats": {
+            "format": "double",
+            "nullable": false,
+            "type": "number"
+          },
+          "dagsats": {
+            "format": "double",
+            "nullable": false,
+            "type": "number"
+          },
+          "fraDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "gradering": {
+            "format": "double",
+            "nullable": false,
+            "type": "number"
+          },
+          "institusjonGradering": {
+            "format": "double",
+            "nullable": false,
+            "type": "number"
+          },
+          "meldepliktGradering": {
+            "format": "double",
+            "nullable": false,
+            "type": "number"
+          },
+          "minsteSats": {
+            "enum": [
+              "IKKE_MINSTESATS",
+              "MINSTESATS_OVER_25",
+              "MINSTESATS_UNDER_25"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "redusertDagsats": {
+            "format": "double",
+            "nullable": false,
+            "type": "number"
+          },
+          "samordningArbeidsgiverGradering": {
+            "format": "double",
+            "nullable": false,
+            "type": "number"
+          },
+          "samordningGradering": {
+            "format": "double",
+            "nullable": false,
+            "type": "number"
+          },
+          "samordningUføregradering": {
+            "format": "double",
+            "nullable": false,
+            "type": "number"
+          },
+          "tilDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "utbetalingsdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "antallBarn",
+          "arbeidGradering",
+          "barnepensjonDagsats",
+          "barnetillegg",
+          "barnetilleggSats",
+          "dagsats",
+          "fraDato",
+          "gradering",
+          "institusjonGradering",
+          "meldepliktGradering",
+          "minsteSats",
+          "redusertDagsats",
+          "samordningArbeidsgiverGradering",
+          "samordningGradering",
+          "samordningUføregradering",
+          "tilDato",
+          "utbetalingsdato"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.Uføre": {
+        "nullable": false,
+        "properties": {
+          "grad": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "virkningstidspunkt": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "grad",
+          "virkningstidspunkt"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.VilkårDTO": {
+        "nullable": false,
+        "properties": {
+          "perioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.VilkårsPeriodeDTO"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "vilkårType": {
+            "enum": [
+              "AKTIVITETSPLIKT",
+              "ALDERSVILKÅRET",
+              "BISTANDSVILKÅRET",
+              "GRUNNLAGET",
+              "INNTEKTSBORTFALL",
+              "LOVVALG",
+              "MEDLEMSKAP",
+              "OPPHOLDSKRAV",
+              "ORDINÆR_KVOTE",
+              "OVERGANGARBEIDVILKÅRET",
+              "OVERGANGUFØREVILKÅRET",
+              "SAMORDNING",
+              "SAMORDNING_ANNEN_LOVGIVNING",
+              "STRAFFEGJENNOMFØRING",
+              "STUDENT",
+              "SYKDOMSVILKÅRET",
+              "SYKEPENGEERSTATNING",
+              "SYKEPENGEERSTATNING_KVOTE"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "perioder",
+          "vilkårType"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.VilkårsPeriodeDTO": {
+        "nullable": false,
+        "properties": {
+          "avslagsårsak": {
+            "nullable": true,
+            "type": "string"
+          },
+          "fraDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "innvilgelsesårsak": {
+            "nullable": true,
+            "type": "string"
+          },
+          "manuellVurdering": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "tilDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "utfall": {
+            "enum": [
+              "IKKE_OPPFYLT",
+              "IKKE_RELEVANT",
+              "IKKE_VURDERT",
+              "OPPFYLT"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fraDato",
+          "manuellVurdering",
+          "tilDato",
+          "utfall"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.statistikk.VilkårsResultatDTO": {
+        "nullable": false,
+        "properties": {
+          "typeBehandling": {
+            "enum": [
+              "Aktivitetsplikt",
+              "Aktivitetsplikt11_9",
+              "Førstegangsbehandling",
+              "Klage",
+              "OppfølgingsBehandling",
+              "Revurdering",
+              "SvarFraAndreinstans",
+              "Tilbakekreving"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "vilkår": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.VilkårDTO"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "typeBehandling",
+          "vilkår"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.JobbTilleggsinfo": {
+        "nullable": false,
+        "properties": {
+          "kommentarer": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.motor.Kommentar"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "kommentarer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.Kommentar": {
+        "nullable": false,
+        "properties": {
+          "skrevetAv": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tekst": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "skrevetAv",
+          "tekst",
+          "tidspunkt"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.JobbInfoDto": {
+        "nullable": false,
+        "properties": {
+          "antallFeilendeForsøk": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "beskrivelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "feilmelding": {
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          },
+          "metadata": {
+            "additionalProperties": {
+              "nullable": false,
+              "type": "string"
+            },
+            "description": "Key type: kotlin.String",
+            "nullable": false,
+            "type": "object"
+          },
+          "navn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettetTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "planlagtKjøretidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "prioritet": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "AVBRUTT",
+              "FEILET",
+              "FERDIG",
+              "KLAR",
+              "PLUKKET"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "tilleggsinfo": {
+            "$ref": "#/components/schemas/no.nav.aap.motor.JobbTilleggsinfo"
+          },
+          "type": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "antallFeilendeForsøk",
+          "beskrivelse",
+          "id",
+          "metadata",
+          "navn",
+          "planlagtKjøretidspunkt",
+          "status",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$5$LeggTilKommentarRequest`": {
+        "nullable": false,
+        "properties": {
+          "kommentar": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kommentar"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "begrunnelse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.oppgave.statistikk.OppgaveHendelse": {
+        "nullable": false,
+        "properties": {
+          "hendelse": {
+            "enum": [
+              "AVRESERVERT",
+              "LUKKET",
+              "OPPDATERT",
+              "OPPRETTET",
+              "RESERVERT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "oppgaveTilStatistikkDto": {
+            "$ref": "#/components/schemas/no.nav.aap.oppgave.statistikk.OppgaveTilStatistikkDto"
+          },
+          "sendtTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "hendelse",
+          "oppgaveTilStatistikkDto",
+          "sendtTidspunkt"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.oppgave.statistikk.OppgaveTilStatistikkDto": {
+        "nullable": false,
+        "properties": {
+          "avklaringsbehovKode": {
+            "nullable": false,
+            "type": "string"
+          },
+          "behandlingRef": {
+            "format": "uuid",
+            "nullable": true,
+            "type": "string"
+          },
+          "behandlingstype": {
+            "enum": [
+              "AKTIVITETSPLIKT",
+              "AKTIVITETSPLIKT_11_9",
+              "DOKUMENT_HÅNDTERING",
+              "FORDELING",
+              "FØRSTEGANGSBEHANDLING",
+              "JOURNALFØRING",
+              "KLAGE",
+              "OPPFØLGINGSBEHANDLING",
+              "REVURDERING",
+              "SVAR_FRA_ANDREINSTANS",
+              "TILBAKEKREVING"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "endretAv": {
+            "nullable": true,
+            "type": "string"
+          },
+          "endretTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "enhet": {
+            "nullable": false,
+            "type": "string"
+          },
+          "harAvslagSykdomMarkering": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "harHasteMarkering": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "id": {
+            "format": "int64",
+            "nullable": true,
+            "type": "integer"
+          },
+          "journalpostId": {
+            "format": "int64",
+            "nullable": true,
+            "type": "integer"
+          },
+          "opprettetAv": {
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettetTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "personIdent": {
+            "nullable": true,
+            "type": "string"
+          },
+          "reservertAv": {
+            "nullable": true,
+            "type": "string"
+          },
+          "reservertTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "AVSLUTTET",
+              "OPPRETTET"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "versjon": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "avklaringsbehovKode",
+          "behandlingstype",
+          "enhet",
+          "opprettetAv",
+          "opprettetTidspunkt",
+          "status",
+          "versjon"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.kontrakt.avklaringsbehov.Definisjon": {
+        "nullable": false,
+        "properties": {
+          "kode": {
+            "enum": [
+              "1337",
+              "1338",
+              "1339",
+              "1340",
+              "1341",
+              "1342",
+              "1343",
+              "9001"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "kreverToTrinn": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "løsesAv": {
+            "items": {
+              "enum": [
+                "BESLUTTER",
+                "DRIFT",
+                "DRIFT_LES",
+                "KVALITETSSIKRER",
+                "LES",
+                "PRODUKSJONSSTYRING",
+                "SAKSBEHANDLER_NASJONAL",
+                "SAKSBEHANDLER_OPPFOLGING"
+              ],
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "løsesISteg": {
+            "enum": [
+              "AVKLAR_FORDELING",
+              "AVKLAR_FORDELING_VIDERESEND",
+              "AVKLAR_SAK",
+              "AVKLAR_TEMA",
+              "DIGITALISER_DOKUMENT",
+              "ENDELIG_JOURNALFØRING",
+              "IVERKSETTES",
+              "OVERLEVER_TIL_FAGSYSTEM",
+              "SETT_FAGSAK",
+              "START_BEHANDLING",
+              "UDEFINERT",
+              "VIDERESEND"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "MANUELT_FRIVILLIG",
+              "MANUELT_PÅKREVD",
+              "VENTEPUNKT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "name": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kode",
+          "kreverToTrinn",
+          "løsesAv",
+          "løsesISteg",
+          "type",
+          "name"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.kontrakt.hendelse.AvklaringsbehovHendelseDto": {
+        "nullable": false,
+        "properties": {
+          "avklaringsbehovDefinisjon": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.kontrakt.avklaringsbehov.Definisjon"
+          },
+          "endringer": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.kontrakt.hendelse.EndringDTO"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "AVBRUTT",
+              "AVSLUTTET",
+              "OPPRETTET",
+              "SENDT_TILBAKE_FRA_BESLUTTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "avklaringsbehovDefinisjon",
+          "endringer",
+          "status"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.kontrakt.hendelse.DokumentflytStoppetHendelse": {
+        "nullable": false,
+        "properties": {
+          "avklaringsbehov": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.kontrakt.hendelse.AvklaringsbehovHendelseDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "behandlingType": {
+            "enum": [
+              "DokumentHåndtering",
+              "Fordeling",
+              "Journalføring"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "hendelsesTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "ident": {
+            "nullable": false,
+            "type": "string"
+          },
+          "journalpostId": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.kontrakt.journalpost.JournalpostId"
+          },
+          "opprettetTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "referanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "AVSLUTTET",
+              "IVERKSETTES",
+              "OPPRETTET",
+              "UTREDES"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "avklaringsbehov",
+          "behandlingType",
+          "hendelsesTidspunkt",
+          "ident",
+          "journalpostId",
+          "opprettetTidspunkt",
+          "referanse",
+          "status"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.kontrakt.hendelse.EndringDTO": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": true,
+            "type": "string"
+          },
+          "endretAv": {
+            "nullable": false,
+            "type": "string"
+          },
+          "frist": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "AVBRUTT",
+              "AVSLUTTET",
+              "OPPRETTET",
+              "SENDT_TILBAKE_FRA_BESLUTTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "tidsstempel": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "årsakTilSattPåVent": {
+            "enum": [
+              "VENTER_PÅ_BEHANDLING_I_GOSYS",
+              "VENTER_PÅ_MEDISINSKE_OPPLYSNINGER",
+              "VENTER_PÅ_OPPLYSNINGER",
+              "VENTER_PÅ_OPPLYSNINGER_FRA_UTENLANDSKE_MYNDIGHETER",
+              "VENTER_PÅ_SVAR_FRA_BRUKER",
+              "VENTER_PÅ_VURDERING_AV_ROL"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "endretAv",
+          "status",
+          "tidsstempel"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.kontrakt.journalpost.JournalpostId": {
+        "format": "int64",
+        "nullable": false,
+        "type": "integer"
+      },
+      "no.nav.aap.verdityper.dokument.JournalpostId": {
+        "nullable": false,
+        "properties": {
+          "identifikator": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "identifikator"
+        ],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "jwtAuth": {
+        "bearerFormat": "JWT",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Slack: #po_aap_dvh"
+    },
+    "description": "App med ansvar for å overlevere data for stønadstatistikk og saksstatistikk. For å teste API i dev, besøk\n<a href=\"https://azure-token-generator.intern.dev.nav.no/api/m2m?aud=dev-gcp:aap:statistikk\">Token Generator</a> for å få token.",
+    "title": "AAP - Statistikk",
+    "version": "0.0.1"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/stoppetBehandling": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.StoppetBehandling"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Accepted"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert",
+          "MottaStatistikk"
+        ]
+      }
+    },
+    "/oppdatertBehandling": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.statistikk.StoppetBehandling"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Accepted"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert",
+          "MottaStatistikk"
+        ]
+      }
+    },
+    "/oppgave": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.oppgave.statistikk.OppgaveHendelse"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Accepted"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "summary": "OppgaveHendelse",
+        "tags": [
+          "Tilgangkontrollert",
+          "MottaStatistikk"
+        ]
+      }
+    },
+    "/postmottak": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.postmottak.kontrakt.hendelse.DokumentflytStoppetHendelse"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Accepted"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "summary": "DokumentflytStoppetHendelse",
+        "tags": [
+          "Tilgangkontrollert",
+          "MottaStatistikk"
+        ]
+      }
+    },
+    "/tilbakekrevingshendelse": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.TilbakekrevingsbehandlingOppdatertHendelse"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Accepted"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert",
+          "MottaStatistikk"
+        ]
+      }
+    },
+    "/drift/api/jobb/feilende": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/feilende/antall": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "format": "int32",
+                  "nullable": false,
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/planlagte-jobber": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/{jobbId}/kjor": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/{jobbId}/leggTilKommentar": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.motor.api.`MotorApiKt$motorApi$1$5$LeggTilKommentarRequest`"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.motor.Kommentar"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/rekjor/{jobbId}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/avbryt/{jobbId}": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/avbrytAlleFeilede": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/rekjorAlleFeilede": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/sisteKjørte": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "Dette endepunktet er tilgangkontrollert.",
+      "name": "Tilgangkontrollert"
+    },
+    {
+      "description": "Dette endepunktet brukes for å motta statistikk ved stopp i behandlingen.",
+      "name": "MottaStatistikk"
+    },
+    {
+      "description": "Disse endepunktene er drift-endepunkter for motoren.",
+      "name": "MotorAPI"
+    }
+  ]
+}

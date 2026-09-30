@@ -1060,6 +1060,22 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.oppgave.ForespørselSendtTilBehandlerDto": {
+        "nullable": false,
+        "properties": {
+          "påminnelseDato": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "påminnelseStatus": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "no.nav.aap.oppgave.ForrigeKvalitetssikrerDto": {
         "nullable": false,
         "properties": {
@@ -1918,6 +1934,9 @@
       "no.nav.aap.oppgave.hent.OppgaveVisningsinformasjonResponse": {
         "nullable": false,
         "properties": {
+          "forespørselSendtTilBehandler": {
+            "$ref": "#/components/schemas/no.nav.aap.oppgave.ForespørselSendtTilBehandlerDto"
+          },
           "harUlesteDokumenter": {
             "nullable": false,
             "type": "boolean"
@@ -2289,8 +2308,7 @@
         "nullable": false,
         "properties": {
           "forespørselSendtTilBehandler": {
-            "nullable": true,
-            "type": "boolean"
+            "$ref": "#/components/schemas/no.nav.aap.oppgave.ForespørselSendtTilBehandlerDto"
           },
           "forrigeKvalitetssikrerInfo": {
             "$ref": "#/components/schemas/no.nav.aap.oppgave.ForrigeKvalitetssikrerDto"

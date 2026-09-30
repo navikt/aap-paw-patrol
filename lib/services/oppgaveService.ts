@@ -1,11 +1,16 @@
 import { fetchProxy } from 'lib/services/fetchProxy';
 import { getBaseUrlAndScopeForApp } from 'lib/services/driftService';
-import { FilterDriftRequest, FilterDriftsinfoDTO, FilterOversiktDTO } from 'lib/types/oppgave';
+import { components } from 'lib/types/generated/oppgave';
+
+type FilterDriftRequest = components['schemas']['no.nav.aap.oppgave.drift.FilterDriftRequest'];
+type FilterDriftsinfoDTO = components['schemas']['no.nav.aap.oppgave.drift.FilterDriftResponse'];
+type FilterOversiktDTO = components['schemas']['no.nav.aap.oppgave.drift.DriftFilterResponsDTO'];
+type OppgaveDriftsinfoDTO = components['schemas']['no.nav.aap.oppgave.drift.OppgaveDriftsinfoDTO'];
 
 export const hentOppgaver = async (behandlingsreferanse: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('oppgave');
   const url = `${baseUrl}/api/drift/oppgave/behandling/${behandlingsreferanse}`;
-  return await fetchProxy<any>(url, scope, 'POST');
+  return await fetchProxy<OppgaveDriftsinfoDTO[]>(url, scope, 'POST');
 };
 
 export const hentOppgavefiltre = async (): Promise<FilterOversiktDTO> => {

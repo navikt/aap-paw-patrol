@@ -6,10 +6,9 @@
  * here: Next.js's dev server (both Turbopack and webpack) periodically resets
  * `globalThis.fetch` back to the native implementation on every module recompile
  * (see `resetFetch` in next/dist/server/lib/router-server.js), which silently discards
- * any in-process fetch patch installed via instrumentation.ts. Running a real server on
- * the actual mocked backend's port sidesteps that problem entirely: from Next.js's
- * point of view this is just a normal backend responding on http://localhost:<port>,
- * exactly like the real service would.
+ * any in-process fetch patch installed via instrumentation.ts. Running one real server
+ * at the shared mock API origin sidesteps that problem entirely: from Next.js's point of
+ * view this is just a normal backend responding on http://localhost:<port>.
  */
 import http from 'node:http';
 import { Readable } from 'node:stream';

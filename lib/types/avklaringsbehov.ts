@@ -35,7 +35,7 @@ export enum AvklaringsbehovStatus {
 export interface SakDriftsinfoDTO {
   saksnummer: string;
   person: {
-    personId: string;
+    personId: number;
     antallIdenter: number;
   };
   status: SakStatus;

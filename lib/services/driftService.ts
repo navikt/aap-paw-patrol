@@ -1,7 +1,19 @@
 import { fetchProxy } from 'lib/services/fetchProxy';
 import { isDev, isLocal } from '@navikt/aap-felles-utils';
-import { MigreringsresultatDto, MigreringsStatusDto, UtbetalingStatusDto, UtbetalingstidslinjeDto } from 'lib/types/utbetaling';
-import { PersonSøkJournalposterDto } from 'lib/types/postmottak';
+import { components as PostmottakComponents } from 'lib/types/generated/postmottak';
+import { components as UtbetalComponents } from 'lib/types/generated/utbetal';
+import { components as BehandlingsflytComponents } from 'lib/types/generated/behandlingsflyt';
+
+type JournalpostDriftsinfoDto =
+  PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.JournalpostDriftsinfoDto'];
+type PersonSøkJournalposterDto =
+  PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.PersonSøkDriftsinfoDto'];
+type UtbetalingStatusDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingStatusDto'];
+type MigreringsStatusDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingMigreringStatusDto'];
+type UtbetalingstidslinjeDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingstidslinjeDto'];
+type MigreringsresultatDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.migrering.MigreringsresultatDto'];
+export type JobbInfo = BehandlingsflytComponents['schemas']['no.nav.aap.motor.api.JobbInfoDto'];
+export type JobbKommentar = BehandlingsflytComponents['schemas']['no.nav.aap.motor.Kommentar'];
 
 export type AppNavn =
   | 'behandlingsflyt'
@@ -54,41 +66,6 @@ export const appInfo: AppInfo[] = [
 interface BaseUrlAndScope {
   baseUrl: string;
   scope: string;
-}
-
-export interface JobbKommentar {
-  skrevetAv: string;
-  tekst: string;
-  tidspunkt: string;
-}
-
-export interface JobbTilleggsinfo {
-  kommentarer: JobbKommentar[];
-}
-
-// TODO: Importere fra swaggerdoc
-export interface JobbInfo {
-  /** Format: int32 */
-  'antallFeilendeFors\u00F8k': number;
-  beskrivelse: string;
-  feilmelding?: string | null;
-  /** Format: int64 */
-  id: number;
-  /** @description Key type: kotlin.String */
-  metadata: {
-    [key: string]: string;
-  };
-  navn: string;
-  /**
-   * Format: date-time
-   * @example 2024-10-29T12:55:06.233587
-   */
-  'planlagtKj\u00F8retidspunkt': string;
-  /** @enum {string} */
-  status: 'KLAR' | 'PLUKKET' | 'FERDIG' | 'FEILET' | 'AVBRUTT';
-  type: string;
-  opprettetTidspunkt?: string | null;
-  tilleggsinfo?: JobbTilleggsinfo | null;
 }
 
 export const getBaseUrlAndScopeForApp = async (appNavn: AppNavn): Promise<BaseUrlAndScope> => {
@@ -289,7 +266,7 @@ export const kopierJournalpostIPostmottak = async (referanse: string) => {
 export const hentJournalpostInfo = async (journalpostId: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('postmottak');
   const url = `${baseUrl}/api/drift/journalpost/${journalpostId}/info`;
-  return await fetchProxy<unknown>(url, scope, 'GET');
+  return await fetchProxy<JournalpostDriftsinfoDto>(url, scope, 'GET');
 };
 
 export const hentJournalposterForPerson = async (ident: string) => {

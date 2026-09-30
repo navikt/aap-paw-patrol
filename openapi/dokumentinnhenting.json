@@ -1,0 +1,2658 @@
+{
+  "components": {
+    "schemas": {
+      "dokumentinnhenting.api.DialogmeldingDriftinfoDTO": {
+        "nullable": false,
+        "properties": {
+          "behandlerHprNr": {
+            "nullable": false,
+            "type": "string"
+          },
+          "behandlerRef": {
+            "nullable": false,
+            "type": "string"
+          },
+          "behandlingsReferanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "bestillerNavIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "dialogmeldingUuid": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "dokumentId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "dokumentasjonType": {
+            "enum": [
+              "L120",
+              "L40",
+              "L8",
+              "MELDING_FRA_NAV",
+              "PURRING",
+              "RETUR_LEGEERKLÆRING"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "flytStatus": {
+            "enum": [
+              "FERDIG",
+              "JOURNALFØRT",
+              "SENDT_TIL_SYFO",
+              "STARTET"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "journalpostId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "opprettet": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "AVVIST",
+              "BESTILT",
+              "MOTTATT",
+              "OK",
+              "SENDT"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "statusTekst": {
+            "nullable": true,
+            "type": "string"
+          },
+          "tidligereBestillingReferanse": {
+            "format": "uuid",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behandlerHprNr",
+          "behandlerRef",
+          "behandlingsReferanse",
+          "bestillerNavIdent",
+          "dialogmeldingUuid",
+          "dokumentasjonType",
+          "opprettet"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.api.DialogmeldingEksistererDto": {
+        "nullable": false,
+        "properties": {
+          "eksisterer": {
+            "nullable": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "eksisterer"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.api.HentDokumentoversiktBrukerRequest": {
+        "nullable": false,
+        "properties": {
+          "personIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": true,
+            "type": "string"
+          },
+          "statuser": {
+            "items": {
+              "enum": [
+                "AVBRUTT",
+                "EKSPEDERT",
+                "FEILREGISTRERT",
+                "FERDIGSTILT",
+                "JOURNALFOERT",
+                "MOTTATT",
+                "OPPLASTING_DOKUMENT",
+                "RESERVERT",
+                "UKJENT",
+                "UKJENT_BRUKER",
+                "UNDER_ARBEID",
+                "UTGAAR"
+              ],
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "tema": {
+            "items": {
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "typer": {
+            "items": {
+              "enum": [
+                "I",
+                "N",
+                "U"
+              ],
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "personIdent",
+          "statuser",
+          "tema",
+          "typer"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.api.HentDokumentoversiktJournalpostListeParams": {
+        "nullable": false,
+        "properties": {
+          "journalpostIdListe": {
+            "items": {
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "journalpostIdListe"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.api.TaAvVentRequest": {
+        "nullable": false,
+        "properties": {
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "saksnummer"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.api.TestRequest": {
+        "nullable": false,
+        "properties": {
+          "dialogid": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dialogid"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.integrasjoner.dokarkiv.KnyttTilAnnenSakRequest": {
+        "nullable": false,
+        "properties": {
+          "bruker": {
+            "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.dokarkiv.OpprettJournalpostRequest.Bruker"
+          },
+          "fagsakId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "fagsaksystem": {
+            "nullable": false,
+            "type": "string"
+          },
+          "journalfoerendeEnhet": {
+            "nullable": false,
+            "type": "string"
+          },
+          "sakstype": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tema": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "bruker",
+          "fagsakId",
+          "fagsaksystem",
+          "journalfoerendeEnhet",
+          "sakstype",
+          "tema"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.integrasjoner.dokarkiv.KnyttTilAnnenSakResponse": {
+        "nullable": false,
+        "properties": {
+          "nyJournalpostId": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "nyJournalpostId"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.integrasjoner.dokarkiv.OpprettJournalpostRequest.Bruker": {
+        "nullable": false,
+        "properties": {
+          "id": {
+            "nullable": false,
+            "type": "string"
+          },
+          "idType": {
+            "enum": [
+              "AKTOERID",
+              "FNR",
+              "ORGNR"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "idType"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.integrasjoner.saf.AvsenderMottaker": {
+        "nullable": false,
+        "properties": {
+          "id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "navn": {
+            "nullable": true,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "FNR",
+              "HPRNR",
+              "NULL",
+              "ORGNR",
+              "UKJENT",
+              "UTL_ORG"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "dokumentinnhenting.integrasjoner.saf.Doc": {
+        "nullable": false,
+        "properties": {
+          "brevkode": {
+            "nullable": true,
+            "type": "string"
+          },
+          "datoOpprettet": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "dokumentInfoId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "erUtgående": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "journalpostId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tema": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tittel": {
+            "nullable": false,
+            "type": "string"
+          },
+          "variantformat": {
+            "enum": [
+              "ARKIV",
+              "FULLVERSJON",
+              "ORIGINAL",
+              "PRODUKSJON",
+              "PRODUKSJON_DLF",
+              "SLADDET"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "datoOpprettet",
+          "dokumentInfoId",
+          "erUtgående",
+          "journalpostId",
+          "tema",
+          "tittel",
+          "variantformat"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.integrasjoner.saf.DokumentInfo": {
+        "nullable": false,
+        "properties": {
+          "brevkode": {
+            "nullable": true,
+            "type": "string"
+          },
+          "dokumentInfoId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "dokumentvarianter": {
+            "items": {
+              "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.saf.Dokumentvariant"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "tittel": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dokumentInfoId",
+          "dokumentvarianter"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.integrasjoner.saf.Dokumentvariant": {
+        "nullable": false,
+        "properties": {
+          "saksbehandlerHarTilgang": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "variantformat": {
+            "enum": [
+              "ARKIV",
+              "FULLVERSJON",
+              "ORIGINAL",
+              "PRODUKSJON",
+              "PRODUKSJON_DLF",
+              "SLADDET"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "saksbehandlerHarTilgang",
+          "variantformat"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.integrasjoner.saf.Journalpost": {
+        "nullable": false,
+        "properties": {
+          "avsenderMottaker": {
+            "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.saf.AvsenderMottaker"
+          },
+          "behandlingstema": {
+            "nullable": true,
+            "type": "string"
+          },
+          "behandlingstemanavn": {
+            "nullable": true,
+            "type": "string"
+          },
+          "datoOpprettet": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "dokumenter": {
+            "items": {
+              "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.saf.DokumentInfo"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "journalpostId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "journalposttype": {
+            "enum": [
+              "I",
+              "N",
+              "U"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "journalstatus": {
+            "enum": [
+              "AVBRUTT",
+              "EKSPEDERT",
+              "FEILREGISTRERT",
+              "FERDIGSTILT",
+              "JOURNALFOERT",
+              "MOTTATT",
+              "OPPLASTING_DOKUMENT",
+              "RESERVERT",
+              "UKJENT",
+              "UKJENT_BRUKER",
+              "UNDER_ARBEID",
+              "UTGAAR"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "relevanteDatoer": {
+            "items": {
+              "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.saf.RelevantDato"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "sak": {
+            "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.saf.JournalpostSak"
+          },
+          "tema": {
+            "nullable": true,
+            "type": "string"
+          },
+          "temanavn": {
+            "nullable": true,
+            "type": "string"
+          },
+          "tittel": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dokumenter",
+          "journalpostId",
+          "journalposttype",
+          "journalstatus"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.integrasjoner.saf.JournalpostSak": {
+        "nullable": false,
+        "properties": {
+          "fagsakId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "fagsaksystem": {
+            "nullable": true,
+            "type": "string"
+          },
+          "sakstype": {
+            "enum": [
+              "FAGSAK",
+              "GENERELL_SAK"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "tema": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "sakstype"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.integrasjoner.saf.RelevantDato": {
+        "nullable": false,
+        "properties": {
+          "dato": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "datotype": {
+            "enum": [
+              "DATO_AVS_RETUR",
+              "DATO_DOKUMENT",
+              "DATO_EKSPEDERT",
+              "DATO_JOURNALFOERT",
+              "DATO_LEST",
+              "DATO_REGISTRERT",
+              "DATO_SENDT_PRINT"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dato",
+          "datotype"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.integrasjoner.syfo.oppslag.FritekstRequest": {
+        "nullable": false,
+        "properties": {
+          "fritekst": {
+            "nullable": false,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fritekst",
+          "saksnummer"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.integrasjoner.syfo.oppslag.HentFastlegeDtoSaksreferanse": {
+        "nullable": false,
+        "properties": {
+          "personIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "personIdent",
+          "saksnummer"
+        ],
+        "type": "object"
+      },
+      "io.ktor.http.HttpStatusCode": {
+        "nullable": false,
+        "properties": {
+          "description": {
+            "nullable": false,
+            "type": "string"
+          },
+          "value": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "description",
+          "value"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.dokumentinnhenting.kontrakt.AvsenderMottakerDto": {
+        "nullable": false,
+        "properties": {
+          "id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "navn": {
+            "nullable": true,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "FNR",
+              "HPRNR",
+              "NULL",
+              "ORGNR",
+              "UKJENT",
+              "UTL_ORG"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "no.nav.aap.dokumentinnhenting.kontrakt.BegrensetDokumentInfoDto": {
+        "nullable": false,
+        "properties": {
+          "dokumentInfoId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tittel": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dokumentInfoId"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.dokumentinnhenting.kontrakt.BegrensetJournalpostDto": {
+        "nullable": false,
+        "properties": {
+          "avsenderMottakerDto": {
+            "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.AvsenderMottakerDto"
+          },
+          "dokumenter": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.BegrensetDokumentInfoDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "journalpostId": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dokumenter"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.dokumentinnhenting.kontrakt.BehandlerDto": {
+        "nullable": false,
+        "properties": {
+          "adresse": {
+            "nullable": true,
+            "type": "string"
+          },
+          "behandlerRef": {
+            "nullable": false,
+            "type": "string"
+          },
+          "etternavn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "fornavn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "hprId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "kontor": {
+            "nullable": true,
+            "type": "string"
+          },
+          "mellomnavn": {
+            "nullable": true,
+            "type": "string"
+          },
+          "postnummer": {
+            "nullable": true,
+            "type": "string"
+          },
+          "poststed": {
+            "nullable": true,
+            "type": "string"
+          },
+          "telefon": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behandlerRef",
+          "etternavn",
+          "fornavn"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.dokumentinnhenting.kontrakt.BehandlingsflytToDokumentInnhentingBestillingDto": {
+        "nullable": false,
+        "properties": {
+          "behandlerHprNr": {
+            "nullable": false,
+            "type": "string"
+          },
+          "behandlerNavn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "behandlerRef": {
+            "nullable": false,
+            "type": "string"
+          },
+          "behandlingsReferanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "bestillerNavIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "dialogmeldingTekst": {
+            "nullable": false,
+            "type": "string"
+          },
+          "dokumentasjonType": {
+            "enum": [
+              "L120",
+              "L40",
+              "L8",
+              "MELDING_FRA_NAV",
+              "PURRING",
+              "RETUR_LEGEERKLÆRING"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "personIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "personNavn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tidligereBestillingReferanse": {
+            "format": "uuid",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behandlerHprNr",
+          "behandlerNavn",
+          "behandlerRef",
+          "behandlingsReferanse",
+          "bestillerNavIdent",
+          "dialogmeldingTekst",
+          "dokumentasjonType",
+          "personIdent",
+          "personNavn",
+          "saksnummer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.dokumentinnhenting.kontrakt.DialogmeldingForhåndsvisningDto": {
+        "nullable": false,
+        "properties": {
+          "konstruertBrev": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "konstruertBrev"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.dokumentinnhenting.kontrakt.DialogmeldingStatusTilBehandslingsflytDto": {
+        "nullable": false,
+        "properties": {
+          "behandlerNavn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "behandlerRef": {
+            "nullable": false,
+            "type": "string"
+          },
+          "behandlingsReferanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "dialogmeldingUuid": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "fritekst": {
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettet": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "personId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "AVVIST",
+              "BESTILT",
+              "MOTTATT",
+              "OK",
+              "SENDT"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "statusTekst": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behandlerNavn",
+          "behandlerRef",
+          "behandlingsReferanse",
+          "dialogmeldingUuid",
+          "fritekst",
+          "opprettet",
+          "personId",
+          "saksnummer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.dokumentinnhenting.kontrakt.FastlegeDto": {
+        "nullable": false,
+        "properties": {
+          "fastlege": {
+            "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.BehandlerDto"
+          }
+        },
+        "type": "object"
+      },
+      "no.nav.aap.dokumentinnhenting.kontrakt.FellesDialogmeldingDto": {
+        "nullable": false,
+        "properties": {
+          "automatiskPåminnelse": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "dialogmeldingReferanse": {
+            "format": "uuid",
+            "nullable": true,
+            "type": "string"
+          },
+          "dokumentasjonsType": {
+            "enum": [
+              "L120",
+              "L40",
+              "L8",
+              "MELDING_FRA_NAV",
+              "PURRING",
+              "RETUR_LEGEERKLÆRING"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "innkommendeUtgående": {
+            "enum": [
+              "INNKOMMENDE",
+              "UTGÅENDE"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "journalpostId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "meldingFraNavn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "meldingStatus": {
+            "enum": [
+              "FEILET",
+              "LEVERT",
+              "SENDT"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "opprettetTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "tekst": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "innkommendeUtgående",
+          "meldingFraNavn",
+          "opprettetTidspunkt"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.dokumentinnhenting.kontrakt.ForhåndsvisDialogmeldingDto": {
+        "nullable": false,
+        "properties": {
+          "bestillerNavIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "dialogmeldingTekst": {
+            "nullable": false,
+            "type": "string"
+          },
+          "dokumentasjonType": {
+            "enum": [
+              "L120",
+              "L40",
+              "L8",
+              "MELDING_FRA_NAV",
+              "PURRING",
+              "RETUR_LEGEERKLÆRING"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "personIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "personNavn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tidligereBestillingReferanse": {
+            "format": "uuid",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "bestillerNavIdent",
+          "dialogmeldingTekst",
+          "dokumentasjonType",
+          "personIdent",
+          "personNavn"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.dokumentinnhenting.kontrakt.HentDokumentoversiktJournalpostListeResponse": {
+        "nullable": false,
+        "properties": {
+          "journalposter": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.BegrensetJournalpostDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "journalposter"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.dokumentinnhenting.kontrakt.HentDokumentoversiktJournalpostResponse": {
+        "nullable": false,
+        "properties": {
+          "journalpost": {
+            "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.BegrensetJournalpostDto"
+          }
+        },
+        "type": "object"
+      },
+      "no.nav.aap.dokumentinnhenting.kontrakt.LegeerklæringPurringDto": {
+        "nullable": false,
+        "properties": {
+          "dialogmeldingUuid": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dialogmeldingUuid"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.dokumentinnhenting.kontrakt.PåminnelseDto": {
+        "nullable": false,
+        "properties": {
+          "dialogmeldingUuid": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dialogmeldingUuid"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.JobbTilleggsinfo": {
+        "nullable": false,
+        "properties": {
+          "kommentarer": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.motor.Kommentar"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "kommentarer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.Kommentar": {
+        "nullable": false,
+        "properties": {
+          "skrevetAv": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tekst": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "skrevetAv",
+          "tekst",
+          "tidspunkt"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.JobbInfoDto": {
+        "nullable": false,
+        "properties": {
+          "antallFeilendeForsøk": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "beskrivelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "feilmelding": {
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          },
+          "metadata": {
+            "additionalProperties": {
+              "nullable": false,
+              "type": "string"
+            },
+            "description": "Key type: kotlin.String",
+            "nullable": false,
+            "type": "object"
+          },
+          "navn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettetTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "planlagtKjøretidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "prioritet": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "AVBRUTT",
+              "FEILET",
+              "FERDIG",
+              "KLAR",
+              "PLUKKET"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "tilleggsinfo": {
+            "$ref": "#/components/schemas/no.nav.aap.motor.JobbTilleggsinfo"
+          },
+          "type": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "antallFeilendeForsøk",
+          "beskrivelse",
+          "id",
+          "metadata",
+          "navn",
+          "planlagtKjøretidspunkt",
+          "status",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$5$LeggTilKommentarRequest`": {
+        "nullable": false,
+        "properties": {
+          "kommentar": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kommentar"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "begrunnelse"
+        ],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "jwtAuth": {
+        "bearerFormat": "JWT",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "title": "AAP - Dokumentinnhenting",
+    "version": "0.0.1"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/drift/api/jobb/feilende": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/feilende/antall": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "format": "int32",
+                  "nullable": false,
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/planlagte-jobber": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/{jobbId}/kjor": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/{jobbId}/leggTilKommentar": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.motor.api.`MotorApiKt$motorApi$1$5$LeggTilKommentarRequest`"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.motor.Kommentar"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/rekjor/{jobbId}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/avbryt/{jobbId}": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "ID",
+            "explode": false,
+            "in": "path",
+            "name": "jobbId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/avbrytAlleFeilede": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/rekjorAlleFeilede": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/drift/api/jobb/sisteKjørte": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.motor.api.JobbInfoDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "MotorAPI"
+        ]
+      }
+    },
+    "/syfo/dialogmeldingbestilling": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.BehandlingsflytToDokumentInnhentingBestillingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "format": "uuid",
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/syfo/purring": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.LegeerklæringPurringDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "format": "uuid",
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/syfo/status/{saksnummer}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "saksnummer",
+            "explode": false,
+            "in": "path",
+            "name": "saksnummer",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.DialogmeldingStatusTilBehandslingsflytDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/syfo/behandleroppslag/fastlege": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.syfo.oppslag.HentFastlegeDtoSaksreferanse"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.FastlegeDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/syfo/behandleroppslag/search": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.syfo.oppslag.FritekstRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.BehandlerDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/syfo/brevpreview": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.ForhåndsvisDialogmeldingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.DialogmeldingForhåndsvisningDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/dokumenter/bruker": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dokumentinnhenting.api.HentDokumentoversiktBrukerRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.saf.Journalpost"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Dokumenter"
+        ]
+      }
+    },
+    "/api/dokumenter/bruker/helsedokumenter": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dokumentinnhenting.api.HentDokumentoversiktBrukerRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.saf.Doc"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Dokumenter"
+        ]
+      }
+    },
+    "/api/dokumenter/sak/{saksnummer}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "Saksnummer",
+            "explode": false,
+            "in": "path",
+            "name": "saksnummer",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.saf.Journalpost"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Dokumenter"
+        ]
+      }
+    },
+    "/api/dokumenter/dokumentliste": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dokumentinnhenting.api.HentDokumentoversiktJournalpostListeParams"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.HentDokumentoversiktJournalpostListeResponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Dokumenter"
+        ]
+      }
+    },
+    "/api/dokumenter/{journalpostId}/dokumentliste": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "Journalpost-ID",
+            "explode": false,
+            "in": "path",
+            "name": "journalpostId",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.HentDokumentoversiktJournalpostResponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Dokumenter"
+        ]
+      }
+    },
+    "/api/dokumenter/{journalpostId}/{dokumentinfoId}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "Journalpost-ID",
+            "explode": false,
+            "in": "path",
+            "name": "journalpostId",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "deprecated": false,
+            "description": "Dokumentinfo-ID",
+            "explode": false,
+            "in": "path",
+            "name": "dokumentinfoId",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "format": "binary",
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Dokumenter"
+        ]
+      }
+    },
+    "/api/dokumenter/{journalpostId}/knyttTilAnnenSak": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "Journalpost-ID",
+            "explode": false,
+            "in": "path",
+            "name": "journalpostId",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.dokarkiv.KnyttTilAnnenSakRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.dokarkiv.KnyttTilAnnenSakResponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Dokumenter"
+        ]
+      }
+    },
+    "/api/dokumenter/{journalpostId}/feilregistrer/feilregistrerSakstilknytning": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "Journalpost-ID",
+            "explode": false,
+            "in": "path",
+            "name": "journalpostId",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Dokumenter"
+        ]
+      }
+    },
+    "/api/dokumenter/{journalpostId}/feilregistrer/opphevFeilregistrertSakstilknytning": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "Journalpost-ID",
+            "explode": false,
+            "in": "path",
+            "name": "journalpostId",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Dokumenter"
+        ]
+      }
+    },
+    "/dialogmelding/{dialogmeldingId}/eksisterer": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "dialogmeldingId",
+            "explode": false,
+            "in": "path",
+            "name": "dialogmeldingId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dokumentinnhenting.api.DialogmeldingEksistererDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/dialogmelding/{saksnummer}/dialogmeldinger": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "Saksnummer",
+            "explode": false,
+            "in": "path",
+            "name": "saksnummer",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.FellesDialogmeldingDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/dialogmelding/paaminnelse/send": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.PåminnelseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "format": "uuid",
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/dialogmelding/paaminnelse/avbryt-automatisk-paaminnelse": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.PåminnelseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/io.ktor.http.HttpStatusCode"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/dialogmelding/paaminnelse/gjenoppta-automatisk-paaminnelse": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.PåminnelseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/io.ktor.http.HttpStatusCode"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/drift/api/syfo/behandleroppslag/search": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.syfo.oppslag.FritekstRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.BehandlerDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/drift/api/sak/{saksnummer}/dialogmelding": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "saksnummer",
+            "explode": false,
+            "in": "path",
+            "name": "saksnummer",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/dokumentinnhenting.api.DialogmeldingDriftinfoDTO"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/test/avvist": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dokumentinnhenting.api.TaAvVentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/test/ekspeder": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dokumentinnhenting.api.TestRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/test/varselbrev": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dokumentinnhenting.api.TestRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "Disse endepunktene er drift-endepunkter for motoren.",
+      "name": "MotorAPI"
+    },
+    {
+      "description": "Dette endepunktet er tilgangkontrollert.",
+      "name": "Tilgangkontrollert"
+    },
+    {
+      "description": "Endepunkter for uthenting og behandling av dokumenter i SAF / Dokarkiv",
+      "name": "Dokumenter"
+    }
+  ]
+}

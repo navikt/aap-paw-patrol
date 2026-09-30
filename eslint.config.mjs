@@ -8,6 +8,10 @@ const compat = new FlatCompat({
 });
 
 export default [
+  {
+    // Auto-generated from openapi/*.json by scripts/generate-openapi-types.mjs — do not lint/edit by hand.
+    ignores: ['lib/types/generated/**'],
+  },
   ...compat.extends('@navikt/eslint-config-aap').map((config) => ({
     files: ['**/*.{js,cjs,mjs,jsx,ts,tsx}'],
     ...config,

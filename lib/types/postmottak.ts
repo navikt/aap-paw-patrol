@@ -3,7 +3,7 @@ export interface PersonSøkJournalposterDto {
 }
 
 export interface InnkommendeJournalpostDto {
-  journalpostId: string;
+  journalpostId: number;
   brevkode: string | null;
   behandlingstema: string | null;
   status: InnkommendeJournalpostStatus;
@@ -13,17 +13,14 @@ export interface InnkommendeJournalpostDto {
 }
 
 export type InnkommendeJournalpostStatus =
-  | 'EVALUERT'
-  | 'VIDERSENDT_TIL_KELVIN'
-  | 'VIDERESENDT_TIL_ARENA'
-  | 'GOSYS_JFR'
-  | 'GOSYS_FDR'
-  | 'IGNORERT';
+  'EVALUERT' | 'VIDERSENDT_TIL_KELVIN' | 'VIDERESENDT_TIL_ARENA' | 'GOSYS_JFR' | 'GOSYS_FDR' | 'IGNORERT';
 
 export type ÅrsakTilStatus = 'MANGLER_IDENT' | 'ORGNR' | 'ALLEREDE_JOURNALFØRT' | 'UTGÅTT';
 
 export interface RegelresultatDto {
-  systemNavn: string;
+  systemNavn: string | null;
+  forJournalpost: number;
+  regelMap: Record<string, boolean>;
 }
 
 export interface JournalpostInfoDTO {
@@ -41,7 +38,7 @@ export interface JournalpostInfoDTO {
 export interface Fordelingsresultat {
   regelMap: Record<string, boolean>;
   forJournalpost: number;
-  systemNavn: string;
+  systemNavn: string | null;
 }
 
 export interface PostmottakBehandling {
