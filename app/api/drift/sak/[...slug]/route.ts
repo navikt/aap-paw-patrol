@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getBaseUrlAndScopeForApp } from 'lib/services/driftService';
 import { fetchProxy } from 'lib/services/fetchProxy';
 
-type DriftSakResult = Record<string, unknown> | string | null | undefined;
+type DriftSakResult = Record<string, unknown> | unknown[] | string | null | undefined;
 
 export async function POST(_: NextRequest, { params }: { params: Promise<{ slug: string[] }> }) {
   const { slug } = await params;
