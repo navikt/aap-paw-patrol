@@ -21498,6 +21498,14 @@
             "nullable": false,
             "type": "array"
           },
+          "gradBehov": {
+            "enum": [
+              "FRIVILLIG",
+              "PÅKREVD"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
           "perioder": {
             "items": {
               "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.flyt.AvklaringsbehovPeriodeDTO"
@@ -27515,7 +27523,7 @@
   "info": {
     "description": "For å teste API i dev, besøk\n<a href=\"https://azure-token-generator.intern.dev.nav.no/api/m2m?aud=dev-gcp:aap:behandlingsflyt\">Token Generator</a> for å få token.",
     "title": "AAP - Behandlingsflyt",
-    "version": "ba1d2202655e9f572dbe1c263d7fe7ce4466029e"
+    "version": "edaa97304d054cbf277939e7215b7b7249c0642a"
   },
   "openapi": "3.0.0",
   "paths": {

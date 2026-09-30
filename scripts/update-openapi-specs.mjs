@@ -21,6 +21,9 @@ const SPECS = [
     url: 'https://aap-meldekort-backend.intern.dev.nav.no/openapi.json',
   },
   { app: 'postmottak', url: 'https://aap-postmottak-backend.intern.dev.nav.no/openapi.json' },
+  { app: 'dokumentinnhenting', url: 'https://aap-dokumentinnhenting.intern.dev.nav.no/openapi.json' },
+  { app: 'statistikk', url: 'https://aap-statistikk.intern.dev.nav.no/openapi.json' },
+  { app: 'api-intern', url: 'https://aap-api.intern.dev.nav.no/openapi.json' },
 ];
 
 async function downloadSpec({ app, url }) {

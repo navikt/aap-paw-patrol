@@ -15,4 +15,7 @@ export const MOCK_SPECS = [
   { spec: 'meldekort-backend.json', envVar: 'MELDEKORT_API_BASE_URL', outDir: 'meldekort-backend' },
   { spec: 'brev.json', envVar: 'BREV_API_BASE_URL', outDir: 'brev' },
   { spec: 'postmottak.json', envVar: 'POSTMOTTAK_API_BASE_URL', outDir: 'postmottak' },
+  { spec: 'dokumentinnhenting.json', envVar: 'DOKUMENTINNHENTING_API_BASE_URL', outDir: 'dokumentinnhenting' },
+  { spec: 'statistikk.json', envVar: 'STATISTIKK_API_BASE_URL', outDir: 'statistikk' },
+  { spec: 'api-intern.json', envVar: 'API_INTERN_BASE_URL', outDir: 'api-intern' },
 ];

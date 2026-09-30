@@ -9755,6 +9755,8 @@ export interface components {
         "no.nav.aap.behandlingsflyt.flyt.AvklaringsbehovDTO": {
             definisjon: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.avklaringsbehov.Definisjon"];
             endringer: components["schemas"]["no.nav.aap.behandlingsflyt.flyt.EndringDTO"][];
+            /** @enum {string|null} */
+            gradBehov?: "FRIVILLIG" | "PÅKREVD" | null;
             perioder?: components["schemas"]["no.nav.aap.behandlingsflyt.flyt.AvklaringsbehovPeriodeDTO"][] | null;
             /** @enum {string} */
             status: "AVBRUTT" | "AVSLUTTET" | "KVALITETSSIKRET" | "OPPRETTET" | "SENDT_TILBAKE_FRA_BESLUTTER" | "SENDT_TILBAKE_FRA_KVALITETSSIKRER" | "TOTRINNS_VURDERT";
