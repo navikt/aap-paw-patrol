@@ -4,7 +4,10 @@ import { useEffect, useState } from 'react';
 import { hentKravOgStønadsperiode } from 'lib/clientApi';
 import { capitalize } from 'lib/utils/formatting';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
-import { KravDto, KravOgStønadsperiodeDto } from 'lib/types/kravOgStonadsperiode';
+import { components } from 'lib/types/generated/behandlingsflyt';
+
+type KravDto = components['schemas']['no.nav.aap.behandlingsflyt.drift.KravDto'];
+type KravOgStønadsperiodeDto = components['schemas']['no.nav.aap.behandlingsflyt.drift.KravOgStønadsperiodeDto'];
 
 const kortReferanse = (referanse: string) => referanse.slice(0, 8);
 
@@ -71,7 +74,12 @@ export const KravOgStønadsperiode = ({ behandlingsreferanse }: { behandlingsref
               {krav.map((k) => (
                 <Table.Row key={k.referanse}>
                   <Table.DataCell>
-                    <CopyButton size="xsmall" iconPosition="right" copyText={k.referanse} text={kortReferanse(k.referanse)} />
+                    <CopyButton
+                      size="xsmall"
+                      iconPosition="right"
+                      copyText={k.referanse}
+                      text={kortReferanse(k.referanse)}
+                    />
                   </Table.DataCell>
                   <Table.DataCell>{formaterKravType(k.type)}</Table.DataCell>
                   <Table.DataCell>

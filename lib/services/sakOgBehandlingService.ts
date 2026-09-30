@@ -1,6 +1,5 @@
 import { fetchProxy } from 'lib/services/fetchProxy';
 import { getBaseUrlAndScopeForApp } from 'lib/services/driftService';
-import { KravOgStønadsperiodeDto } from 'lib/types/kravOgStonadsperiode';
 import { components } from 'lib/types/generated/behandlingsflyt';
 
 type VilkårDriftsinfoDTO = components['schemas']['no.nav.aap.behandlingsflyt.drift.VilkårDriftsinfoDTO'];
@@ -13,6 +12,7 @@ type DriftRettighetsinfoDto =
   components['schemas']['no.nav.aap.behandlingsflyt.drift.`DriftApiKt$driftApi$1$DriftRettighetsinfoDto`'];
 type TidligereVurderingerDto =
   components['schemas']['no.nav.aap.behandlingsflyt.behandling.tidligerevurderinger.TidligereVurderingerDto'];
+type KravOgStønadsperiodeDto = components['schemas']['no.nav.aap.behandlingsflyt.drift.KravOgStønadsperiodeDto'];
 
 export const hentVilkår = async (behandlingsreferanse: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
