@@ -176,7 +176,11 @@ export const BehandlingOversikt = ({
                       />
                     </Table.DataCell>
                     <Table.DataCell>
-                      <Tag variant="info" size="small">
+                      <Tag
+                        variant="info"
+                        size="small"
+                        data-color={behandling.status === 'UTREDES' ? 'success' : undefined}
+                      >
                         {capitalize(behandling.status)}
                       </Tag>
                     </Table.DataCell>
