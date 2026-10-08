@@ -177,6 +177,7 @@
               "VEDTAK_11_7",
               "VEDTAK_11_9",
               "VEDTAK_ENDRING",
+              "VEDTAK_ENDRING_DODSFALL",
               "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_12",
               "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_26",
               "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_27",
@@ -443,6 +444,7 @@
               "VEDTAK_11_7",
               "VEDTAK_11_9",
               "VEDTAK_ENDRING",
+              "VEDTAK_ENDRING_DODSFALL",
               "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_12",
               "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_26",
               "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_27",
@@ -504,6 +506,21 @@
       "no.nav.aap.brev.kontrakt.BrevdataDto": {
         "nullable": false,
         "properties": {
+          "automatiskValgteDelmalIder": {
+            "items": {
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "automatiskValgteValg": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BrevdataDto.Valg"
+            },
+            "nullable": false,
+            "type": "array"
+          },
           "betingetTekst": {
             "items": {
               "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BrevdataDto.BetingetTekst"
@@ -534,6 +551,8 @@
           }
         },
         "required": [
+          "automatiskValgteDelmalIder",
+          "automatiskValgteValg",
           "betingetTekst",
           "delmaler",
           "fritekster",
@@ -636,6 +655,9 @@
             "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.DatoAvklartForJobbsøk"
           },
           {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.Dødsfall"
+          },
+          {
             "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser"
           },
           {
@@ -690,6 +712,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -747,6 +770,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -786,6 +810,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -847,6 +872,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -872,6 +898,51 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.Dødsfall": {
+        "nullable": false,
+        "properties": {
+          "dødsdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "navn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "AAP_FOM_DATO",
+              "BARN_UTEN_BARNETILLEGG",
+              "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
+              "FORHOLD_TIL_ANDRE_YTELSER",
+              "FRIST_DATO_11_7",
+              "FRITAK_MELDEPLIKT",
+              "GRUNNLAG_ANDRE_YTELSER",
+              "GRUNNLAG_BEREGNING",
+              "INNVILGET_UFORETRYGD",
+              "KRAVDATO_UFORETRYGD",
+              "SISTE_DAG_MED_YTELSE",
+              "SYKDOMSVURDERING",
+              "TIDSPUNKT_VURDERING",
+              "TILKJENT_YTELSE",
+              "UTVIDET_AAP_FOM_DATO",
+              "YRKESSKADE_BEREGNING",
+              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dødsdato",
+          "navn",
+          "type"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser": {
         "nullable": false,
         "properties": {
@@ -888,6 +959,9 @@
             },
             "nullable": false,
             "type": "array"
+          },
+          "refusjonskravSosialkontor": {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.RefusjonskravSosialkontor"
           },
           "refusjonskravTjenestepensjon": {
             "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.RefusjonskravTjenestepensjon"
@@ -925,6 +999,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -1001,6 +1076,31 @@
         "required": [
           "fraOgMed",
           "tilOgMed"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.RefusjonskravSosialkontor": {
+        "nullable": false,
+        "properties": {
+          "fraOgMed": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "skalEtterbetalingHoldesIgjen": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "tilOgMed": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "skalEtterbetalingHoldesIgjen"
         ],
         "type": "object"
       },
@@ -1145,6 +1245,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -1185,6 +1286,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -1258,6 +1360,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -1321,6 +1424,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -1377,6 +1481,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -1416,6 +1521,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -1455,6 +1561,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -1492,6 +1599,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -1566,6 +1674,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -1604,6 +1713,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -1649,6 +1759,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -1713,6 +1824,7 @@
               "AAP_FOM_DATO",
               "BARN_UTEN_BARNETILLEGG",
               "DATO_AVKLART_FOR_JOBBSOK",
+              "DODSFALL",
               "FORHOLD_TIL_ANDRE_YTELSER",
               "FRIST_DATO_11_7",
               "FRITAK_MELDEPLIKT",
@@ -1844,6 +1956,7 @@
               "VEDTAK_11_7",
               "VEDTAK_11_9",
               "VEDTAK_ENDRING",
+              "VEDTAK_ENDRING_DODSFALL",
               "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_12",
               "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_26",
               "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_27",

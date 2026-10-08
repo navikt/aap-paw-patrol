@@ -321,6 +321,14 @@
             "nullable": true,
             "type": "string"
           },
+          "gradBehov": {
+            "enum": [
+              "FRIVILLIG",
+              "PÅKREVD"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
           "status": {
             "enum": [
               "AVBRUTT",
@@ -1410,6 +1418,7 @@
               "G_REGULERING",
               "HELSEOPPLYSNINGER",
               "KLAGE",
+              "KORRIGER_SØKNADSDATO",
               "MANUELL_OPPRETTELSE",
               "MELDEKORT",
               "MIGRERING_FRA_ARENA",

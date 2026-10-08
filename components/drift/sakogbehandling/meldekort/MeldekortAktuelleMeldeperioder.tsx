@@ -1,5 +1,5 @@
 import { Alert, Box, Button, Heading, HStack, Table } from '@navikt/ds-react';
-import { AktuelleMeldeperioderDriftsinfo } from 'lib/types/meldekort';
+import type { AktuelleMeldeperioderDriftsinfo } from 'lib/types/meldekort';
 import { formaterPeriodeV2 } from 'lib/utils/date';
 import { oppdaterMeldeperioder } from 'lib/clientApi';
 import { useState } from 'react';
@@ -71,7 +71,7 @@ export const MeldekortAktuelleMeldeperioder = ({
               <Table.Row
                 key={idx}
                 style={{
-                  backgroundColor: rad.nesteMeldeperiode?.meldevindu?.fom ? 'var(--ax-bg-neutral-soft)' : 'inherit',
+                  backgroundColor: rad.nesteMeldeperiode?.meldevindu?.[0] ? 'var(--ax-bg-neutral-soft)' : 'inherit',
                 }}
               >
                 <Table.DataCell>{rad.antallUbesvarteMeldeperioder}</Table.DataCell>

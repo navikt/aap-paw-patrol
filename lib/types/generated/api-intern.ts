@@ -897,7 +897,7 @@ export interface paths {
                          *         {
                          *           "status": "LØPENDE",
                          *           "saksnummer": "4MGL8LS",
-                         *           "vedtaksdato": "2026-09-29",
+                         *           "vedtaksdato": "2026-10-08",
                          *           "periode": {
                          *             "fraOgMedDato": "2021-01-01",
                          *             "tilOgMedDato": "2021-01-31"
@@ -1687,6 +1687,41 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/mine-aap/saker-med-behandlinger": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["kotlin.Unit"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1694,6 +1729,7 @@ export interface components {
         "behandlingsflyt.DialogmeldingEksistererDto": {
             eksisterer: boolean;
         };
+        "kotlin.Unit": Record<string, never>;
         "no.nav.aap.api.SakerRequest": {
             /** @description Liste med personidentifikatorer. Må svare til samme person. */
             personidentifikatorer: string[];
@@ -1843,7 +1879,7 @@ export interface components {
             perioder: components["schemas"]["no.nav.aap.api.intern.Periode"][];
             sakId: string;
             /** @enum {string} */
-            statuskode: "AVSLUTTET" | "FERDIGBEHANDLET" | "LØPENDE" | "OPPRETTET" | "REVURDERING_UNDER_BEHANDLING" | "SOKNAD_UNDER_BEHANDLING" | "UTREDES";
+            statuskode: "FERDIGBEHANDLET" | "REVURDERING_UNDER_BEHANDLING" | "SOKNAD_UNDER_BEHANDLING";
             /** @enum {string} */
             ytelsesstatus: "AVSLUTTET" | "FOR_VEDTAK" | "LOPENDE";
         };
@@ -2188,7 +2224,7 @@ export interface components {
              */
             maksdato?: string | null;
             /** @enum {string} */
-            sakstatus: "AVSLUTTET" | "FERDIGBEHANDLET" | "LØPENDE" | "OPPRETTET" | "REVURDERING_UNDER_BEHANDLING" | "SOKNAD_UNDER_BEHANDLING" | "UTREDES";
+            sakstatus: "FERDIGBEHANDLET" | "REVURDERING_UNDER_BEHANDLING" | "SOKNAD_UNDER_BEHANDLING";
             vedtak: components["schemas"]["no.nav.aap.api.intern.VedtakTeamObo"][];
         };
         "no.nav.aap.api.intern.SakStatus": components["schemas"]["no.nav.aap.api.intern.SakStatus.Arena"] | components["schemas"]["no.nav.aap.api.intern.SakStatus.Kelvin"];
@@ -2221,7 +2257,7 @@ export interface components {
             /** @description Dato for alle søknader på saken. Sortert i stigende rekkefølge. */
             soknadsdatoer: string[];
             /** @enum {string} */
-            statusKode: "AVSLUTTET" | "FERDIGBEHANDLET" | "LØPENDE" | "OPPRETTET" | "REVURDERING_UNDER_BEHANDLING" | "SOKNAD_UNDER_BEHANDLING" | "UTREDES";
+            statusKode: "FERDIGBEHANDLET" | "REVURDERING_UNDER_BEHANDLING" | "SOKNAD_UNDER_BEHANDLING";
             /** @enum {string} */
             ytelsestatus: "AVSLUTTET" | "FOR_VEDTAK" | "LOPENDE";
         };
@@ -2259,7 +2295,7 @@ export interface components {
              * @description Ikke i bruk av konsument.
              * @enum {string}
              */
-            statusKode: "AVSLUTTET" | "FERDIGBEHANDLET" | "LØPENDE" | "OPPRETTET" | "REVURDERING_UNDER_BEHANDLING" | "SOKNAD_UNDER_BEHANDLING" | "UTREDES";
+            statusKode: "FERDIGBEHANDLET" | "REVURDERING_UNDER_BEHANDLING" | "SOKNAD_UNDER_BEHANDLING";
         };
         "no.nav.aap.api.intern.SamordningIdOgTpNummer": {
             samordningId: string;
@@ -2281,7 +2317,7 @@ export interface components {
             /** @description Dato for alle søknader på saken. Sortert i stigende rekkefølge. */
             soknadsdatoer: string[];
             /** @enum {string} */
-            statuskode: "AVSLUTTET" | "FERDIGBEHANDLET" | "LØPENDE" | "OPPRETTET" | "REVURDERING_UNDER_BEHANDLING" | "SOKNAD_UNDER_BEHANDLING" | "UTREDES";
+            statuskode: "FERDIGBEHANDLET" | "REVURDERING_UNDER_BEHANDLING" | "SOKNAD_UNDER_BEHANDLING";
             /** @description Inneholder alltid nøyaktig ett vedtak, som er sakens nyeste vedtak. Per 24/8 lagres ikke alle vedtaksdatoer ned i api-et. */
             vedtak: components["schemas"]["no.nav.aap.api.intern.SyfoVedtak"][];
         };
@@ -2354,7 +2390,7 @@ export interface components {
              * @description Erstatt med samordningOgTpnr.
              */
             samordningsId?: string | null;
-            /** @description Status på et vedtak. Mulige verdier fra Kelvin er LØPENDE, AVSLUTTET, UTREDES. Fra Kelvin per i dag konstant lik LØPENDE. */
+            /** @description Status på et vedtak. Mulige verdier fra Kelvin er LØPENDE. Fra Kelvin per i dag konstant lik LØPENDE. */
             status: string;
             /** @description Liste med dagsats (og andre satser/reduksjon) over tid. Til-fra-periodene svarer ikke til _når_ utbetalingen skjedde, men svarer til en periode med samme dagsats. */
             utbetaling: components["schemas"]["no.nav.aap.api.intern.UtbetalingMedMer"][];
@@ -2440,7 +2476,7 @@ export interface components {
             periode: components["schemas"]["no.nav.aap.api.intern.behandlingsflyt.Periode"];
             sakId: string;
             /** @enum {string} */
-            statusKode: "FERDIGBEHANDLET" | "REVURDERING_UNDER_BEHANDLING" | "SOKNAD_UNDER_BEHANDLING" | "UTREDES";
+            statusKode: "FERDIGBEHANDLET" | "REVURDERING_UNDER_BEHANDLING" | "SOKNAD_UNDER_BEHANDLING";
             "s\u00F8knadsdatoer"?: string[] | null;
         };
         "no.nav.aap.api.intern.behandlingsflyt.SakStatusKelvin": {

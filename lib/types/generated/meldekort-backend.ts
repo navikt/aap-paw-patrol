@@ -498,7 +498,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["kotlin.Any"];
+                        "application/json": components["schemas"]["no.nav.aap.meldekort.drift.MeldekortDriftsinfoDto"];
                     };
                 };
             };
@@ -1018,7 +1018,13 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        "kotlin.Any": Record<string, never>;
+        "no.nav.aap.kelvin.KelvinSak": {
+            referanse: components["schemas"]["no.nav.aap.sak.FagsakReferanse"];
+            rettighetsperiode: string[];
+            saksnummer: components["schemas"]["no.nav.aap.sak.Fagsaknummer"];
+            /** @enum {string|null} */
+            status?: "AVSLUTTET" | "LØPENDE" | "UTREDES" | null;
+        };
         "no.nav.aap.meldekort.DagSvarDto": {
             /**
              * Format: date
@@ -1160,6 +1166,70 @@ export interface components {
             aktivtSteg: "BEKREFT" | "FRAVÆR_SPØRSMÅL" | "FRAVÆR_UTFYLLING" | "INTRODUKSJON" | "KVITTERING" | "SPØRSMÅL" | "UTFYLLING";
             svar: components["schemas"]["no.nav.aap.meldekort.SvarDto"];
         };
+        "no.nav.aap.meldekort.drift.AktuelleMeldeperioderDriftsinfo": {
+            /** Format: int32 */
+            antallUbesvarteMeldeperioder: number;
+            manglerOpplysninger?: string[] | null;
+            nesteMeldeperiode?: components["schemas"]["no.nav.aap.meldeperiode.Meldeperiode"];
+        };
+        "no.nav.aap.meldekort.drift.HistoriskeMeldeperioderDriftsinfo": {
+            meldeperiode: components["schemas"]["no.nav.aap.meldeperiode.Meldeperiode"];
+            /** Format: double */
+            totaltAntallTimerIPerioden: number;
+        };
+        "no.nav.aap.meldekort.drift.MeldekortDriftsinfoDto": {
+            aktuelleMeldeperioder: components["schemas"]["no.nav.aap.meldekort.drift.AktuelleMeldeperioderDriftsinfo"][];
+            historiskeMeldeperioder: components["schemas"]["no.nav.aap.meldekort.drift.HistoriskeMeldeperioderDriftsinfo"][];
+            sak: components["schemas"]["no.nav.aap.kelvin.KelvinSak"];
+            utfyllinger: components["schemas"]["no.nav.aap.meldekort.drift.UtfyllingDriftsinfo"][];
+            varsler: components["schemas"]["no.nav.aap.meldekort.drift.VarselDriftsinfo"][];
+        };
+        "no.nav.aap.meldekort.drift.UtfyllingDriftsinfo": {
+            /** @enum {string} */
+            aktivtSteg: "BEKREFT" | "BESTILL_JOURNALFØRING" | "FRAVÆR_SPØRSMÅL" | "FRAVÆR_UTFYLLING" | "INAKTIVER_VARSEL" | "INTRODUKSJON" | "KVITTERING" | "PERSISTER_OPPLYSNINGER" | "SPØRSMÅL" | "UTFYLLING";
+            erDigitalisert?: boolean | null;
+            fagsak: components["schemas"]["no.nav.aap.sak.FagsakReferanse"];
+            /** @enum {string} */
+            flyt: "AAP_FLYT" | "AAP_FLYT_V2" | "AAP_KORRIGERING_FLYT" | "AAP_KORRIGERING_FLYT_V2";
+            /**
+             * Format: date-time
+             * @example 2025-04-01T10:30:00Z
+             */
+            opprettet: string;
+            periode: string[];
+            /** Format: uuid */
+            referanse: string;
+            /**
+             * Format: date-time
+             * @example 2025-04-01T10:30:00Z
+             */
+            sistEndret: string;
+            svar: components["schemas"]["no.nav.aap.utfylling.Svar"];
+        };
+        "no.nav.aap.meldekort.drift.VarselDriftsinfo": {
+            forPeriode: string[];
+            /**
+             * Format: date-time
+             * @example 2025-04-01T10:30:00Z
+             */
+            opprettet: string;
+            saksnummer: string;
+            /**
+             * Format: date-time
+             * @example 2025-04-01T10:30:00Z
+             */
+            sendingstidspunkt: string;
+            /**
+             * Format: date-time
+             * @example 2025-04-01T10:30:00Z
+             */
+            sistEndret: string;
+            status: string;
+            typeVarsel: string;
+            typeVarselOm: string;
+            /** Format: uuid */
+            varselId: string;
+        };
         "no.nav.aap.meldekort.kontrakt.Periode": {
             /**
              * Format: date
@@ -1209,6 +1279,10 @@ export interface components {
             /** Format: double */
             timerArbeidet: number;
         };
+        "no.nav.aap.meldeperiode.Meldeperiode": {
+            meldeperioden: string[];
+            meldevindu: string[];
+        };
         "no.nav.aap.motor.JobbTilleggsinfo": {
             kommentarer: components["schemas"]["no.nav.aap.motor.Kommentar"][];
         };
@@ -1255,6 +1329,33 @@ export interface components {
         };
         "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`": {
             begrunnelse: string;
+        };
+        "no.nav.aap.sak.FagsakReferanse": {
+            nummer: components["schemas"]["no.nav.aap.sak.Fagsaknummer"];
+            /** @enum {string} */
+            system: "ARENA" | "KELVIN";
+        };
+        "no.nav.aap.sak.Fagsaknummer": {
+            asString: string;
+        };
+        "no.nav.aap.utfylling.AktivitetsInformasjon": {
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            dato: string;
+            /** @enum {string|null} */
+            "frav\u00E6r"?: "ANNEN" | "OMSORG_ANNEN_STERK_GRUNN" | "OMSORG_DØDSFALL_I_FAMILIE_ELLER_VENNEKRETS" | "OMSORG_FØRSTE_SKOLEDAG_TILVENNING_ELLER_ANNEN_OPPFØLGING_BARN" | "OMSORG_PLEIE_I_HJEMMET_AV_NÆR_PÅRØRENDE" | "SYKDOM_ELLER_SKADE" | null;
+            /** Format: double */
+            timer?: number | null;
+        };
+        "no.nav.aap.utfylling.Svar": {
+            aktivitetsInformasjon: components["schemas"]["no.nav.aap.utfylling.AktivitetsInformasjon"][];
+            harDuHattAvtalteAktiviteter?: boolean | null;
+            "harDuHattFrav\u00E6r"?: boolean | null;
+            harDuJobbet?: boolean | null;
+            stemmerOpplysningene?: boolean | null;
+            svarerDuSant?: boolean | null;
         };
     };
     responses: never;

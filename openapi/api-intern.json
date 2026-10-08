@@ -14,6 +14,10 @@
         ],
         "type": "object"
       },
+      "kotlin.Unit": {
+        "nullable": false,
+        "type": "object"
+      },
       "no.nav.aap.api.SakerRequest": {
         "nullable": false,
         "properties": {
@@ -519,13 +523,9 @@
           },
           "statuskode": {
             "enum": [
-              "AVSLUTTET",
               "FERDIGBEHANDLET",
-              "LØPENDE",
-              "OPPRETTET",
               "REVURDERING_UNDER_BEHANDLING",
-              "SOKNAD_UNDER_BEHANDLING",
-              "UTREDES"
+              "SOKNAD_UNDER_BEHANDLING"
             ],
             "nullable": false,
             "type": "string"
@@ -1428,13 +1428,9 @@
           },
           "sakstatus": {
             "enum": [
-              "AVSLUTTET",
               "FERDIGBEHANDLET",
-              "LØPENDE",
-              "OPPRETTET",
               "REVURDERING_UNDER_BEHANDLING",
-              "SOKNAD_UNDER_BEHANDLING",
-              "UTREDES"
+              "SOKNAD_UNDER_BEHANDLING"
             ],
             "nullable": false,
             "type": "string"
@@ -1555,13 +1551,9 @@
           },
           "statusKode": {
             "enum": [
-              "AVSLUTTET",
               "FERDIGBEHANDLET",
-              "LØPENDE",
-              "OPPRETTET",
               "REVURDERING_UNDER_BEHANDLING",
-              "SOKNAD_UNDER_BEHANDLING",
-              "UTREDES"
+              "SOKNAD_UNDER_BEHANDLING"
             ],
             "nullable": false,
             "type": "string"
@@ -1650,13 +1642,9 @@
             "deprecated": true,
             "description": "Ikke i bruk av konsument.",
             "enum": [
-              "AVSLUTTET",
               "FERDIGBEHANDLET",
-              "LØPENDE",
-              "OPPRETTET",
               "REVURDERING_UNDER_BEHANDLING",
-              "SOKNAD_UNDER_BEHANDLING",
-              "UTREDES"
+              "SOKNAD_UNDER_BEHANDLING"
             ],
             "nullable": false,
             "type": "string"
@@ -1773,13 +1761,9 @@
           },
           "statuskode": {
             "enum": [
-              "AVSLUTTET",
               "FERDIGBEHANDLET",
-              "LØPENDE",
-              "OPPRETTET",
               "REVURDERING_UNDER_BEHANDLING",
-              "SOKNAD_UNDER_BEHANDLING",
-              "UTREDES"
+              "SOKNAD_UNDER_BEHANDLING"
             ],
             "nullable": false,
             "type": "string"
@@ -1976,7 +1960,7 @@
             "type": "string"
           },
           "status": {
-            "description": "Status på et vedtak. Mulige verdier fra Kelvin er LØPENDE, AVSLUTTET, UTREDES. Fra Kelvin per i dag konstant lik LØPENDE.",
+            "description": "Status på et vedtak. Mulige verdier fra Kelvin er LØPENDE. Fra Kelvin per i dag konstant lik LØPENDE.",
             "nullable": false,
             "type": "string"
           },
@@ -2237,8 +2221,7 @@
             "enum": [
               "FERDIGBEHANDLET",
               "REVURDERING_UNDER_BEHANDLING",
-              "SOKNAD_UNDER_BEHANDLING",
-              "UTREDES"
+              "SOKNAD_UNDER_BEHANDLING"
             ],
             "nullable": false,
             "type": "string"
@@ -4583,7 +4566,7 @@
                     {
                       "status": "LØPENDE",
                       "saksnummer": "4MGL8LS",
-                      "vedtaksdato": "2026-09-29",
+                      "vedtaksdato": "2026-10-08",
                       "periode": {
                         "fraOgMedDato": "2021-01-01",
                         "tilOgMedDato": "2021-01-31"
@@ -5399,6 +5382,33 @@
         ],
         "tags": [
           "MotorAPI"
+        ]
+      }
+    },
+    "/mine-aap/saker-med-behandlinger": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/kotlin.Unit"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
         ]
       }
     }

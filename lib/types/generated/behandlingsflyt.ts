@@ -1038,7 +1038,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.bistand.BistandGrunnlagResponse"];
+                        "application/json": components["schemas"]["no.nav.aap.bistandsbehov.BistandGrunnlagResponse"];
                     };
                 };
             };
@@ -1076,7 +1076,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.fritakmeldeplikt.FritakMeldepliktGrunnlagResponse"];
+                        "application/json": components["schemas"]["no.nav.aap.meldeplikt.FritakMeldepliktGrunnlagResponse"];
                     };
                 };
             };
@@ -1114,7 +1114,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.underveis.MeldepliktOverstyringGrunnlagResponse"];
+                        "application/json": components["schemas"]["no.nav.aap.meldeplikt.MeldepliktOverstyringGrunnlagResponse"];
                     };
                 };
             };
@@ -3911,6 +3911,48 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/meldekort/{saksnummer}/registrer-meldedato": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description saksnummer */
+                    saksnummer: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.meldekort.RegistrerMeldedatoRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.meldekort.OppdaterMeldekortResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/meldekort/{saksnummer}/har-registrert-timer": {
         parameters: {
             query?: never;
@@ -5954,7 +5996,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.overgangarbeid.OvergangArbeidGrunnlagResponse"];
+                        "application/json": components["schemas"]["no.nav.aap.overgangarbeid.OvergangArbeidGrunnlagResponse"];
                     };
                 };
             };
@@ -6324,7 +6366,7 @@ export interface components {
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarBistandsbehovL\u00F8sning": {
             /** @enum {string} */
             behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
-            "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.bistand.flate.BistandL\u00F8sningDto"][];
+            "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.bistandsbehov.BistandL\u00F8sningDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarHelseinstitusjonL\u00F8sning": {
             /** @enum {string} */
@@ -6525,7 +6567,7 @@ export interface components {
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.OverstyrIkkeOppfyltMeldepliktL\u00F8sning": {
             /** @enum {string} */
             behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
-            meldepliktOverstyringVurdering: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.meldeplikt.flate.MeldepliktOverstyringL\u00F8sningDto"];
+            meldepliktOverstyringVurdering: components["schemas"]["no.nav.aap.meldeplikt.MeldepliktOverstyringL\u00F8sningDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.PeriodisertAvklarSykepengerErstatningL\u00F8sning": {
             /** @enum {string} */
@@ -6541,7 +6583,7 @@ export interface components {
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.PeriodisertFritakMeldepliktL\u00F8sning": {
             /** @enum {string} */
             behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
-            "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.meldeplikt.flate.PeriodisertFritaksvurderingDto"][];
+            "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.meldeplikt.PeriodisertFritaksvurderingDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.RefusjonkravL\u00F8sning": {
             /** @enum {string} */
@@ -6979,29 +7021,6 @@ export interface components {
              */
             vurdertDato?: string | null;
         };
-        "no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.fritakmeldeplikt.FritakMeldepliktGrunnlagResponse": {
-            "beh\u00F8verVurderinger": components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
-            "harTilgangTil\u00C5Saksbehandle": boolean;
-            ikkeRelevantePerioder: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
-            kanVurderes: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
-            nyeVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.fritakmeldeplikt.PeriodisertFritakMeldepliktVurderingResponse"][];
-            sisteVedtatteVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.fritakmeldeplikt.PeriodisertFritakMeldepliktVurderingResponse"][];
-        };
-        "no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.fritakmeldeplikt.PeriodisertFritakMeldepliktVurderingResponse": {
-            begrunnelse: string;
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            fom: string;
-            harFritak: boolean;
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            tom?: string | null;
-            vurderingerMeta: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"];
-        };
         "no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.refusjon.NavEnheterRequest": {
             navn: string;
         };
@@ -7028,57 +7047,6 @@ export interface components {
             fom?: string | null;
             harKrav: boolean;
             navKontor?: string | null;
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            tom?: string | null;
-            vurderingerMeta: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"];
-        };
-        "no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.bistand.BistandGrunnlagResponse": {
-            "beh\u00F8verVurderinger": components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
-            "harTilgangTil\u00C5Saksbehandle": boolean;
-            ikkeRelevantePerioder: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
-            kanVurderes: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
-            nyeVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.bistand.BistandVurderingResponse"][];
-            sisteVedtatteVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.bistand.BistandVurderingResponse"][];
-        };
-        "no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.bistand.BistandVurderingResponse": {
-            begrunnelse: string;
-            erBehovForAktivBehandling: boolean;
-            "erBehovForAnnenOppf\u00F8lging"?: boolean | null;
-            erBehovForArbeidsrettetTiltak: boolean;
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            fom: string;
-            overgangBegrunnelse?: string | null;
-            skalVurdereAapIOvergangTilArbeid?: boolean | null;
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            tom?: string | null;
-            vurderingerMeta: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"];
-        };
-        "no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.overgangarbeid.OvergangArbeidGrunnlagResponse": {
-            "beh\u00F8verVurderinger": components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
-            gjeldendeSykdsomsvurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.sykdom.SykdomsvurderingResponse"][];
-            "harTilgangTil\u00C5Saksbehandle": boolean;
-            ikkeRelevantePerioder: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
-            kanVurderes: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
-            nyeVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.overgangarbeid.OvergangArbeidVurderingResponse"][];
-            sisteVedtatteVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.overgangarbeid.OvergangArbeidVurderingResponse"][];
-        };
-        "no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.overgangarbeid.OvergangArbeidVurderingResponse": {
-            begrunnelse: string;
-            "brukerRettP\u00E5AAP": boolean;
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            fom: string;
             /**
              * Format: date
              * @example 2025-04-01
@@ -7338,7 +7306,7 @@ export interface components {
             brevdata?: components["schemas"]["no.nav.aap.brev.kontrakt.BrevdataDto"];
             brevmal?: string | null;
             /** @enum {string} */
-            brevtype: "AVSLAG" | "AVSLAG_11_27" | "AVSLAG_11_5" | "AVSLAG_UNDER_17_AAR_9_MAANEDER" | "BARNETILLEGG_SATS_REGULERING" | "FORHÅNDSVARSEL_BRUDD_AKTIVITETSPLIKT" | "FORHÅNDSVARSEL_KLAGE_FORMKRAV" | "FORVALTNINGSMELDING" | "INNVILGELSE" | "KLAGE_AVVIST" | "KLAGE_MOTTATT" | "KLAGE_OPPRETTHOLDELSE" | "KLAGE_TRUKKET" | "OMGJØRING_VEDTAK_11_9" | "STANS_AV_YTELSE" | "VARSEL_OM_BESTILLING" | "VEDTAK_11_17" | "VEDTAK_11_18" | "VEDTAK_11_18_OPPHØR_DELVIS_UFØR" | "VEDTAK_11_18_OPPHØR_FULL_UFØR" | "VEDTAK_11_23_SJETTE_LEDD" | "VEDTAK_11_7" | "VEDTAK_11_9" | "VEDTAK_ENDRING" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_12" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_26" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_27" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_3" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_4" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_MEDLEMSKAP" | "VEDTAK_UTVID_VEDTAKSLENGDE";
+            brevtype: "AVSLAG" | "AVSLAG_11_27" | "AVSLAG_11_5" | "AVSLAG_UNDER_17_AAR_9_MAANEDER" | "BARNETILLEGG_SATS_REGULERING" | "FORHÅNDSVARSEL_BRUDD_AKTIVITETSPLIKT" | "FORHÅNDSVARSEL_KLAGE_FORMKRAV" | "FORVALTNINGSMELDING" | "INNVILGELSE" | "KLAGE_AVVIST" | "KLAGE_MOTTATT" | "KLAGE_OPPRETTHOLDELSE" | "KLAGE_TRUKKET" | "OMGJØRING_VEDTAK_11_9" | "STANS_AV_YTELSE" | "VARSEL_OM_BESTILLING" | "VEDTAK_11_17" | "VEDTAK_11_18" | "VEDTAK_11_18_OPPHØR_DELVIS_UFØR" | "VEDTAK_11_18_OPPHØR_FULL_UFØR" | "VEDTAK_11_23_SJETTE_LEDD" | "VEDTAK_11_7" | "VEDTAK_11_9" | "VEDTAK_ENDRING" | "VEDTAK_ENDRING_DODSFALL" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_12" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_26" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_27" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_3" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_4" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_MEDLEMSKAP" | "VEDTAK_UTVID_VEDTAKSLENGDE";
             "harTilgangTil\u00C5SendeBrev": boolean;
             mottaker: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.brev.BrevGrunnlag.Brev.Mottaker"];
             /**
@@ -7686,11 +7654,25 @@ export interface components {
             vurderingerMeta: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"];
         };
         "no.nav.aap.behandlingsflyt.behandling.institusjonsopphold.HelseoppholdDto": {
+            delperioder: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.institusjonsopphold.InstitusjonsoppholdDelperiodeDto"][];
             oppholdId?: string | null;
             periode: components["schemas"]["no.nav.aap.komponenter.type.Periode"];
             /** @enum {string} */
             status: "AVSLÅTT" | "GODKJENT" | "UAVKLART";
             vurderinger?: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.institusjonsopphold.HelseinstitusjonVurderingDto"][] | null;
+        };
+        "no.nav.aap.behandlingsflyt.behandling.institusjonsopphold.InstitusjonsoppholdDelperiodeDto": {
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            fom: string;
+            institusjonsnavn: string;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            tom: string;
         };
         "no.nav.aap.behandlingsflyt.behandling.institusjonsopphold.InstitusjonsoppholdDto": {
             /**
@@ -7698,6 +7680,7 @@ export interface components {
              * @example 2025-04-01
              */
             avsluttetDato: string;
+            delperioder: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.institusjonsopphold.InstitusjonsoppholdDelperiodeDto"][];
             institusjonstype: string;
             kildeinstitusjon: string;
             /**
@@ -8134,6 +8117,14 @@ export interface components {
         "no.nav.aap.behandlingsflyt.behandling.meldekort.OppdaterMeldekortResponse": {
             journalpostId: string;
         };
+        "no.nav.aap.behandlingsflyt.behandling.meldekort.RegistrerMeldedatoRequest": {
+            begrunnelse: string;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            meldeDato: string;
+        };
         "no.nav.aap.behandlingsflyt.behandling.mellomlagring.MellomlagretVurdering": {
             /** @enum {string} */
             avklaringsbehovKode: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
@@ -8487,34 +8478,6 @@ export interface components {
              */
             grenseverdi: number;
         };
-        "no.nav.aap.behandlingsflyt.behandling.underveis.MeldepliktOverstyringGrunnlagResponse": {
-            gjeldendeVedtatteOversyringsvurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.underveis.MeldepliktOverstyringVurderingResponse"][];
-            "harTilgangTil\u00C5Saksbehandle": boolean;
-            overstyringsvurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.underveis.MeldepliktOverstyringVurderingResponse"][];
-            perioderIkkeMeldt: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
-        };
-        "no.nav.aap.behandlingsflyt.behandling.underveis.MeldepliktOverstyringVurderingResponse": {
-            begrunnelse: string;
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            fraDato: string;
-            /** @enum {string} */
-            meldepliktOverstyringStatus: "HAR_MELDT_SEG" | "IKKE_MELDT_SEG" | "RIMELIG_GRUNN";
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            tilDato: string;
-            vurderingerMeta: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"];
-            /**
-             * Format: date-time
-             * @example 2025-04-01T12:30:00
-             */
-            vurderingsTidspunkt: string;
-            vurdertIBehandling: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.behandling.BehandlingReferanse"];
-        };
         "no.nav.aap.behandlingsflyt.behandling.underveis.RettighetsTypeDto": {
             hjemmel: string;
             /** @enum {string} */
@@ -8749,6 +8712,8 @@ export interface components {
             enhetsnavn?: string | null;
             erRetur?: boolean | null;
             ident: string;
+            /** @enum {string} */
+            kilde: "AUTOMATISK" | "MIGRERT_FRA_ARENA" | "SAKSBEHANDLER";
         };
         "no.nav.aap.behandlingsflyt.drift.BehandlingDriftsinfo": {
             avklaringsbehov: components["schemas"]["no.nav.aap.behandlingsflyt.drift.ForenkletAvklaringsbehov"][];
@@ -9338,24 +9303,6 @@ export interface components {
             /** Format: int32 */
             "\u00E5r": number;
         };
-        "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.bistand.flate.BistandL\u00F8sningDto": {
-            begrunnelse: string;
-            erBehovForAktivBehandling: boolean;
-            "erBehovForAnnenOppf\u00F8lging"?: boolean | null;
-            erBehovForArbeidsrettetTiltak: boolean;
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            fom: string;
-            overgangBegrunnelse?: string | null;
-            skalVurdereAapIOvergangTilArbeid?: boolean | null;
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            tom?: string | null;
-        };
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.etableringegenvirksomhet.EtableringEgenVirksomhetL\u00F8sningDto": {
             begrunnelse: string;
             /** @enum {string|null} */
@@ -9480,38 +9427,6 @@ export interface components {
             referanse?: string | null;
             /** @enum {string} */
             kravType: "KLAGE" | "MIGRERT_KRAV" | "RELEVANT_KRAV" | "TILLEGGSOPPLYSNING" | "TRUKKET_SØKNAD";
-        };
-        "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.meldeplikt.OverstyringMeldepliktVurderingPeriode": {
-            begrunnelse: string;
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            fom: string;
-            /** @enum {string} */
-            meldepliktOverstyringStatus: "HAR_MELDT_SEG" | "IKKE_MELDT_SEG" | "RIMELIG_GRUNN";
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            tom: string;
-        };
-        "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.meldeplikt.flate.MeldepliktOverstyringL\u00F8sningDto": {
-            perioder: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.meldeplikt.OverstyringMeldepliktVurderingPeriode"][];
-        };
-        "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.meldeplikt.flate.PeriodisertFritaksvurderingDto": {
-            begrunnelse: string;
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            fom: string;
-            harFritak: boolean;
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            tom?: string | null;
         };
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.overgangarbeid.flate.OvergangArbeidVurderingL\u00F8sningDto": {
             begrunnelse: string;
@@ -10616,6 +10531,11 @@ export interface components {
             /** @enum {string} */
             status: "AVSLUTTET" | "LØPENDE" | "OPPRETTET" | "UTREDES";
             "s\u00F8knadErTrukket"?: boolean | null;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            virkningstidspunkt?: string | null;
         };
         "no.nav.aap.behandlingsflyt.test.AndreUtbetalingerApiDto": {
             afp?: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.AfpDto"];
@@ -10757,6 +10677,51 @@ export interface components {
              */
             tom: string;
         };
+        "no.nav.aap.bistandsbehov.BistandGrunnlagResponse": {
+            "beh\u00F8verVurderinger": components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+            "harTilgangTil\u00C5Saksbehandle": boolean;
+            ikkeRelevantePerioder: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+            kanVurderes: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+            nyeVurderinger: components["schemas"]["no.nav.aap.bistandsbehov.BistandVurderingResponse"][];
+            sisteVedtatteVurderinger: components["schemas"]["no.nav.aap.bistandsbehov.BistandVurderingResponse"][];
+        };
+        "no.nav.aap.bistandsbehov.BistandL\u00F8sningDto": {
+            begrunnelse: string;
+            erBehovForAktivBehandling: boolean;
+            "erBehovForAnnenOppf\u00F8lging"?: boolean | null;
+            erBehovForArbeidsrettetTiltak: boolean;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            fom: string;
+            overgangBegrunnelse?: string | null;
+            skalVurdereAapIOvergangTilArbeid?: boolean | null;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            tom?: string | null;
+        };
+        "no.nav.aap.bistandsbehov.BistandVurderingResponse": {
+            begrunnelse: string;
+            erBehovForAktivBehandling: boolean;
+            "erBehovForAnnenOppf\u00F8lging"?: boolean | null;
+            erBehovForArbeidsrettetTiltak: boolean;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            fom: string;
+            overgangBegrunnelse?: string | null;
+            skalVurdereAapIOvergangTilArbeid?: boolean | null;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            tom?: string | null;
+            vurderingerMeta: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"];
+        };
         "no.nav.aap.brev.kontrakt.Adresse": {
             adresselinje1: string;
             adresselinje2?: string | null;
@@ -10797,6 +10762,8 @@ export interface components {
             tekstbolker: components["schemas"]["no.nav.aap.brev.kontrakt.Tekstbolk"][];
         };
         "no.nav.aap.brev.kontrakt.BrevdataDto": {
+            automatiskValgteDelmalIder: string[];
+            automatiskValgteValg: components["schemas"]["no.nav.aap.brev.kontrakt.BrevdataDto.Valg"][];
             betingetTekst: components["schemas"]["no.nav.aap.brev.kontrakt.BrevdataDto.BetingetTekst"][];
             delmaler: components["schemas"]["no.nav.aap.brev.kontrakt.BrevdataDto.Delmal"][];
             fritekster: components["schemas"]["no.nav.aap.brev.kontrakt.BrevdataDto.Fritekst"][];
@@ -10902,6 +10869,89 @@ export interface components {
             /** Format: int32 */
             antall: number;
         };
+        "no.nav.aap.meldeplikt.FritakMeldepliktGrunnlagResponse": {
+            "beh\u00F8verVurderinger": components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+            "harTilgangTil\u00C5Saksbehandle": boolean;
+            ikkeRelevantePerioder: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+            kanVurderes: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+            nyeVurderinger: components["schemas"]["no.nav.aap.meldeplikt.PeriodisertFritakMeldepliktVurderingResponse"][];
+            sisteVedtatteVurderinger: components["schemas"]["no.nav.aap.meldeplikt.PeriodisertFritakMeldepliktVurderingResponse"][];
+        };
+        "no.nav.aap.meldeplikt.MeldepliktOverstyringGrunnlagResponse": {
+            gjeldendeVedtatteOversyringsvurderinger: components["schemas"]["no.nav.aap.meldeplikt.MeldepliktOverstyringVurderingResponse"][];
+            "harTilgangTil\u00C5Saksbehandle": boolean;
+            overstyringsvurderinger: components["schemas"]["no.nav.aap.meldeplikt.MeldepliktOverstyringVurderingResponse"][];
+            perioderIkkeMeldt: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+        };
+        "no.nav.aap.meldeplikt.MeldepliktOverstyringL\u00F8sningDto": {
+            perioder: components["schemas"]["no.nav.aap.meldeplikt.OverstyringMeldepliktVurderingPeriode"][];
+        };
+        "no.nav.aap.meldeplikt.MeldepliktOverstyringVurderingResponse": {
+            begrunnelse: string;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            fraDato: string;
+            /** @enum {string} */
+            meldepliktOverstyringStatus: "HAR_MELDT_SEG" | "IKKE_MELDT_SEG" | "RIMELIG_GRUNN";
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            tilDato: string;
+            vurderingerMeta: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"];
+            /**
+             * Format: date-time
+             * @example 2025-04-01T12:30:00
+             */
+            vurderingsTidspunkt: string;
+            vurdertIBehandling: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.behandling.BehandlingReferanse"];
+        };
+        "no.nav.aap.meldeplikt.OverstyringMeldepliktVurderingPeriode": {
+            begrunnelse: string;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            fom: string;
+            /** @enum {string} */
+            meldepliktOverstyringStatus: "HAR_MELDT_SEG" | "IKKE_MELDT_SEG" | "RIMELIG_GRUNN";
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            tom: string;
+        };
+        "no.nav.aap.meldeplikt.PeriodisertFritakMeldepliktVurderingResponse": {
+            begrunnelse: string;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            fom: string;
+            harFritak: boolean;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            tom?: string | null;
+            vurderingerMeta: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"];
+        };
+        "no.nav.aap.meldeplikt.PeriodisertFritaksvurderingDto": {
+            begrunnelse: string;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            fom: string;
+            harFritak: boolean;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            tom?: string | null;
+        };
         "no.nav.aap.motor.JobbTilleggsinfo": {
             kommentarer: components["schemas"]["no.nav.aap.motor.Kommentar"][];
         };
@@ -10948,6 +10998,30 @@ export interface components {
         };
         "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`": {
             begrunnelse: string;
+        };
+        "no.nav.aap.overgangarbeid.OvergangArbeidGrunnlagResponse": {
+            "beh\u00F8verVurderinger": components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+            gjeldendeSykdsomsvurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.sykdom.SykdomsvurderingResponse"][];
+            "harTilgangTil\u00C5Saksbehandle": boolean;
+            ikkeRelevantePerioder: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+            kanVurderes: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+            nyeVurderinger: components["schemas"]["no.nav.aap.overgangarbeid.OvergangArbeidVurderingResponse"][];
+            sisteVedtatteVurderinger: components["schemas"]["no.nav.aap.overgangarbeid.OvergangArbeidVurderingResponse"][];
+        };
+        "no.nav.aap.overgangarbeid.OvergangArbeidVurderingResponse": {
+            begrunnelse: string;
+            "brukerRettP\u00E5AAP": boolean;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            fom: string;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            tom?: string | null;
+            vurderingerMeta: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"];
         };
         "no.nav.aap.utbetal.simulering.SimuleringDto": {
             perioder: components["schemas"]["no.nav.aap.utbetal.simulering.SimuleringsperiodeDto"][];

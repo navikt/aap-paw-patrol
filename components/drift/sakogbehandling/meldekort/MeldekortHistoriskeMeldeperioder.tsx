@@ -1,5 +1,5 @@
 import { Alert, BodyShort, Box, Heading, Table } from '@navikt/ds-react';
-import { HistoriskeMeldeperioderDriftsinfo } from 'lib/types/meldekort';
+import type { HistoriskeMeldeperioderDriftsinfo } from 'lib/types/meldekort';
 import { formaterPeriodeV2 } from 'lib/utils/date';
 
 export const MeldekortHistoriskeMeldeperioder = ({

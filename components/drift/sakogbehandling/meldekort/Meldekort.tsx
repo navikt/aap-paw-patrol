@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { hentMeldekortDriftsinfo } from 'lib/clientApi';
-import { MeldekortDriftsinfoDto } from 'lib/types/meldekort';
+import type { MeldekortDriftsinfoDto } from 'lib/types/meldekort';
 import { Alert, BodyShort, Box, HStack, Label, Loader } from '@navikt/ds-react';
 import { MeldekortVarsler } from 'components/drift/sakogbehandling/meldekort/MeldekortVarsler';
 import { MeldekortUtfyllinger } from 'components/drift/sakogbehandling/meldekort/MeldekortUtfyllinger';
 import { MeldekortAktuelleMeldeperioder } from 'components/drift/sakogbehandling/meldekort/MeldekortAktuelleMeldeperioder';
 import { MeldekortHistoriskeMeldeperioder } from 'components/drift/sakogbehandling/meldekort/MeldekortHistoriskeMeldeperioder';
 import { formaterPeriodeV2, perioderErLike } from 'lib/utils/date';
-import { Periode } from 'lib/types/felles';
+import type { Periode } from 'lib/types/felles';
 
 export const Meldekort = ({
   saksnummer,
