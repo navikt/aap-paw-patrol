@@ -1,94 +1,17 @@
-import { Periode } from 'lib/types/felles';
+import type { components } from 'lib/types/generated/meldekort-backend';
 
-export interface MeldekortDriftsinfoDto {
-  sak: KelvinSak;
-  aktuelleMeldeperioder: AktuelleMeldeperioderDriftsinfo[];
-  historiskeMeldeperioder: HistoriskeMeldeperioderDriftsinfo[];
-  utfyllinger: UtfyllingDriftsinfo[];
-  varsler: Varsel[];
-}
+type Schemas = components['schemas'];
 
-export interface KelvinSak {
-  status?: string;
-  rettighetsperiode: Periode;
-}
-
-export interface Meldeperiode {
-  meldeperioden: Periode;
-  meldevindu: Periode;
-}
-
-export interface AktuelleMeldeperioderDriftsinfo {
-  antallUbesvarteMeldeperioder: number;
-  manglerOpplysninger: Periode | null;
-  nesteMeldeperiode: Meldeperiode | null;
-}
-
-export interface HistoriskeMeldeperioderDriftsinfo {
-  meldeperiode: Meldeperiode;
-  totaltAntallTimerIPerioden: number;
-}
-
-export interface UtfyllingDriftsinfo {
-  referanse: string;
-  fagsak: FagsakReferanse;
-  periode: Periode;
-  flyt: UtfyllingFlytNavn;
-  aktivtSteg: UtfyllingStegNavn;
-  svar: Svar;
-  opprettet: string;
-  sistEndret: string;
-  erDigitalisert: boolean | null;
-}
-
-export interface FagsakReferanse {
-  system: FagsystemNavn;
-  nummer: Fagsaknummer;
-}
-
-export type FagsystemNavn = 'ARENA' | 'KELVIN';
-
-export interface Fagsaknummer {
-  asString: string;
-}
-
-export type UtfyllingFlytNavn = 'AAP_FLYT' | 'AAP_FLYT_V2' | 'AAP_KORRIGERING_FLYT' | 'AAP_KORRIGERING_FLYT_V2';
-
-export type UtfyllingStegNavn =
-  | 'INTRODUKSJON'
-  | 'SPØRSMÅL'
-  | 'UTFYLLING'
-  | 'FRAVÆR_SPØRSMÅL'
-  | 'FRAVÆR_UTFYLLING'
-  | 'BEKREFT'
-  | 'PERSISTER_OPPLYSNINGER'
-  | 'BESTILL_JOURNALFØRING'
-  | 'INAKTIVER_VARSEL'
-  | 'KVITTERING';
-
-export interface Svar {
-  svarerDuSant: boolean | null;
-  harDuJobbet: boolean | null;
-  aktivitetsInformasjon: AktivitetsInformasjon[];
-  stemmerOpplysningene: boolean | null;
-  harDuHattAvtalteAktiviteter: boolean | null;
-  harDuHattFravær: boolean | null;
-}
-
-export interface AktivitetsInformasjon {
-  dato: string;
-  timer: number | null;
-  fravær: string | null;
-}
-
-export interface Varsel {
-  varselId: string;
-  typeVarsel: string;
-  typeVarselOm: string;
-  saksnummer: Fagsaknummer;
-  sendingstidspunkt: string;
-  status: string;
-  forPeriode: Periode;
-  opprettet: string;
-  sistEndret: string;
-}
+export type MeldekortDriftsinfoDto = Schemas['no.nav.aap.meldekort.drift.MeldekortDriftsinfoDto'];
+export type KelvinSak = Schemas['no.nav.aap.kelvin.KelvinSak'];
+export type Meldeperiode = Schemas['no.nav.aap.meldeperiode.Meldeperiode'];
+export type AktuelleMeldeperioderDriftsinfo = Schemas['no.nav.aap.meldekort.drift.AktuelleMeldeperioderDriftsinfo'];
+export type HistoriskeMeldeperioderDriftsinfo = Schemas['no.nav.aap.meldekort.drift.HistoriskeMeldeperioderDriftsinfo'];
+export type UtfyllingDriftsinfo = Schemas['no.nav.aap.meldekort.drift.UtfyllingDriftsinfo'];
+export type Varsel = Schemas['no.nav.aap.meldekort.drift.VarselDriftsinfo'];
+export type FagsakReferanse = Schemas['no.nav.aap.sak.FagsakReferanse'];
+export type Fagsaknummer = Schemas['no.nav.aap.sak.Fagsaknummer'];
+export type Svar = Schemas['no.nav.aap.utfylling.Svar'];
+export type AktivitetsInformasjon = Schemas['no.nav.aap.utfylling.AktivitetsInformasjon'];
+export type UtfyllingFlytNavn = UtfyllingDriftsinfo['flyt'];
+export type UtfyllingStegNavn = UtfyllingDriftsinfo['aktivtSteg'];

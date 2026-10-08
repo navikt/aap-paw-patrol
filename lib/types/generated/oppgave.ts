@@ -1630,7 +1630,7 @@ export interface components {
             versjon: string;
             vurderingsbehov: string[];
             /** @enum {string} */
-            "\u00E5rsakTilOpprettelse": "AKTIVITETSMELDING" | "AKTIVITETSPLIKT" | "AKTIVITETSPLIKT_11_9" | "ANNET_RELEVANT_DOKUMENT" | "BARNETILLEGG_SATSENDRING" | "ENDRING_I_REGISTERDATA" | "FAGSYSTEMINFO_BEHOV_HENDELSE" | "FASTSATT_PERIODE_PASSERT" | "FRITAK_MELDEPLIKT" | "G_REGULERING" | "HELSEOPPLYSNINGER" | "KLAGE" | "MANUELL_OPPRETTELSE" | "MELDEKORT" | "MIGRERING_FRA_ARENA" | "MIGRER_RETTIGHETSPERIODE" | "OMGJØRING_ETTER_KLAGE" | "OMGJØRING_ETTER_SVAR_FRA_KLAGEINSTANS" | "OPPFØLGINGSOPPGAVE" | "OPPFØLGINGSOPPGAVE_SAMORDNING_GRADERING" | "SVAR_FRA_KLAGEINSTANS" | "SØKNAD" | "TILBAKEKREVING_HENDELSE" | "UDEFINERT" | "UFØRE_VEDTAK_HENDELSE" | "UTVID_VEDTAKSLENGDE";
+            "\u00E5rsakTilOpprettelse": "AKTIVITETSMELDING" | "AKTIVITETSPLIKT" | "AKTIVITETSPLIKT_11_9" | "ANNET_RELEVANT_DOKUMENT" | "BARNETILLEGG_SATSENDRING" | "ENDRING_I_REGISTERDATA" | "FAGSYSTEMINFO_BEHOV_HENDELSE" | "FASTSATT_PERIODE_PASSERT" | "FRITAK_MELDEPLIKT" | "G_REGULERING" | "HELSEOPPLYSNINGER" | "KLAGE" | "KORRIGER_SØKNADSDATO" | "MANUELL_OPPRETTELSE" | "MELDEKORT" | "MIGRERING_FRA_ARENA" | "MIGRER_RETTIGHETSPERIODE" | "OMGJØRING_ETTER_KLAGE" | "OMGJØRING_ETTER_SVAR_FRA_KLAGEINSTANS" | "OPPFØLGINGSOPPGAVE" | "OPPFØLGINGSOPPGAVE_SAMORDNING_GRADERING" | "SVAR_FRA_KLAGEINSTANS" | "SØKNAD" | "TILBAKEKREVING_HENDELSE" | "UDEFINERT" | "UFØRE_VEDTAK_HENDELSE" | "UTVID_VEDTAKSLENGDE";
             /**
              * @deprecated
              * @description Kan fjernes når oppgave har byttet til å bruke vurderingsbehov
@@ -1645,6 +1645,8 @@ export interface components {
              * @example 2025-04-01
              */
             frist?: string | null;
+            /** @enum {string|null} */
+            gradBehov?: "FRIVILLIG" | "PÅKREVD" | null;
             /** @enum {string} */
             status: "AVBRUTT" | "AVSLUTTET" | "KVALITETSSIKRET" | "OPPRETTET" | "SENDT_TILBAKE_FRA_BESLUTTER" | "SENDT_TILBAKE_FRA_KVALITETSSIKRER" | "TOTRINNS_VURDERT";
             /**
@@ -1677,7 +1679,7 @@ export interface components {
             mottattTidspunkt: string;
             referanse: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.InnsendingReferanse"];
             /** @enum {string} */
-            type: "AKTIVITETSKORT" | "ANNET_RELEVANT_DOKUMENT" | "DIALOGMELDING" | "FAGSYSTEMINFO_BEHOV_HENDELSE" | "FORELDREPENGE_VEDTAK_HENDELSE" | "INSTITUSJONSOPPHOLD" | "KABAL_HENDELSE" | "KLAGE" | "LEGEERKLÆRING" | "LEGEERKLÆRING_AVVIST" | "MANUELL_REVURDERING" | "MELDEKORT" | "MIGRERING_FRA_ARENA" | "NY_ÅRSAK_TIL_BEHANDLING" | "OMGJØRING_KLAGE_REVURDERING" | "OPPFØLGINGSOPPGAVE" | "PDL_HENDELSE_DODSFALL_BARN" | "PDL_HENDELSE_DODSFALL_BRUKER" | "PDL_HENDELSE_FOLKEREGISTERIDENT" | "SYKEPENGE_VEDTAK_HENDELSE" | "SØKNAD" | "TILBAKEKREVING_HENDELSE" | "UFØRE_VEDTAK_HENDELSE";
+            type: "AKTIVITETSKORT" | "ANNET_RELEVANT_DOKUMENT" | "DIALOGMELDING" | "FAGSYSTEMINFO_BEHOV_HENDELSE" | "FORELDREPENGE_VEDTAK_HENDELSE" | "INSTITUSJONSOPPHOLD" | "KABAL_HENDELSE" | "KLAGE" | "KORRIGER_SØKNADSDATO" | "LEGEERKLÆRING" | "LEGEERKLÆRING_AVVIST" | "MANUELL_REVURDERING" | "MELDEKORT" | "MIGRERING_FRA_ARENA" | "NY_ÅRSAK_TIL_BEHANDLING" | "OMGJØRING_KLAGE_REVURDERING" | "OPPFØLGINGSOPPGAVE" | "PDL_HENDELSE_DODSFALL_BARN" | "PDL_HENDELSE_DODSFALL_BRUKER" | "PDL_HENDELSE_FOLKEREGISTERIDENT" | "SYKEPENGE_VEDTAK_HENDELSE" | "SØKNAD" | "TILBAKEKREVING_HENDELSE" | "UFØRE_VEDTAK_HENDELSE";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.TilbakekrevingsbehandlingOppdatertHendelse": {
             /** @enum {string} */
@@ -1782,6 +1784,10 @@ export interface components {
         "no.nav.aap.oppgave.ForrigeKvalitetssikrerDto": {
             forrigeKvalitetssikrerIdent: string;
             forrigeKvalitetssikrerNavn?: string | null;
+        };
+        "no.nav.aap.oppgave.HarMottattDokument": {
+            /** @enum {string} */
+            dokumentType: "DIALOGMELDING" | "LEGEERKLÆRING";
         };
         "no.nav.aap.oppgave.OppgaveId": {
             /** Format: int64 */
@@ -1985,8 +1991,17 @@ export interface components {
         };
         "no.nav.aap.oppgave.hent.OppgaveVisningsinformasjonResponse": {
             "foresp\u00F8rselSendtTilBehandler"?: components["schemas"]["no.nav.aap.oppgave.Foresp\u00F8rselSendtTilBehandlerDto"];
+            harMottattDokument?: components["schemas"]["no.nav.aap.oppgave.HarMottattDokument"];
+            /**
+             * @deprecated
+             * @description Bruk harMottattDokument når denne er implementert i frontend
+             */
             harUlesteDokumenter: boolean;
-            /** Format: int64 */
+            /**
+             * Format: int64
+             * @deprecated
+             * @description Brukes ikke av frontend
+             */
             id: number;
             markeringer: components["schemas"]["no.nav.aap.oppgave.markering.MarkeringDto"][];
             "p\u00E5VentInfo"?: components["schemas"]["no.nav.aap.oppgave.hent.VenteInformasjonResponse"];
@@ -1998,7 +2013,11 @@ export interface components {
             "tilh\u00F8rerUtlandEnhet": boolean;
             "uf\u00F8revedtakinfo"?: components["schemas"]["no.nav.aap.oppgave.Uf\u00F8revedtakRespons"];
             "utl\u00F8ptVenteInfo"?: components["schemas"]["no.nav.aap.oppgave.hent.VenteInformasjonResponse"];
-            /** Format: int64 */
+            /**
+             * Format: int64
+             * @deprecated
+             * @description Brukes ikke av frontend
+             */
             versjon: number;
         };
         "no.nav.aap.oppgave.hent.OppgaverP\u00E5SakResponse": {
@@ -2082,6 +2101,11 @@ export interface components {
             "foresp\u00F8rselSendtTilBehandler"?: components["schemas"]["no.nav.aap.oppgave.Foresp\u00F8rselSendtTilBehandlerDto"];
             forrigeKvalitetssikrerInfo?: components["schemas"]["no.nav.aap.oppgave.ForrigeKvalitetssikrerDto"];
             "forrigeP\u00E5VentInfo"?: components["schemas"]["no.nav.aap.oppgave.hent.VenteInformasjonResponse"];
+            harMottattDokument?: components["schemas"]["no.nav.aap.oppgave.HarMottattDokument"];
+            /**
+             * @deprecated
+             * @description Bruk harMottattDokument når denne er implementert i frontend
+             */
             harUlesteDokumenter?: boolean | null;
             markeringer: components["schemas"]["no.nav.aap.oppgave.markering.MarkeringDto"][];
             "p\u00E5VentInfo"?: components["schemas"]["no.nav.aap.oppgave.hent.VenteInformasjonResponse"];

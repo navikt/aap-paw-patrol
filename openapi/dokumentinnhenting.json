@@ -2341,6 +2341,52 @@
         ]
       }
     },
+    "/dialogmelding/{behandlingsReferanse}/legeerklaeringer": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "BehandlingsReferanse",
+            "explode": false,
+            "in": "path",
+            "name": "behandlingsReferanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.FellesDialogmeldingDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
     "/dialogmelding/paaminnelse/send": {
       "post": {
         "requestBody": {

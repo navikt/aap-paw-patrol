@@ -519,6 +519,7 @@
               "G_REGULERING",
               "HELSEOPPLYSNINGER",
               "KLAGE",
+              "KORRIGER_SØKNADSDATO",
               "MANUELL_OPPRETTELSE",
               "MELDEKORT",
               "MIGRERING_FRA_ARENA",
@@ -581,6 +582,14 @@
           "frist": {
             "example": "2025-04-01",
             "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "gradBehov": {
+            "enum": [
+              "FRIVILLIG",
+              "PÅKREVD"
+            ],
             "nullable": true,
             "type": "string"
           },
@@ -720,6 +729,7 @@
               "INSTITUSJONSOPPHOLD",
               "KABAL_HENDELSE",
               "KLAGE",
+              "KORRIGER_SØKNADSDATO",
               "LEGEERKLÆRING",
               "LEGEERKLÆRING_AVVIST",
               "MANUELL_REVURDERING",
@@ -1090,6 +1100,23 @@
         },
         "required": [
           "forrigeKvalitetssikrerIdent"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.oppgave.HarMottattDokument": {
+        "nullable": false,
+        "properties": {
+          "dokumentType": {
+            "enum": [
+              "DIALOGMELDING",
+              "LEGEERKLÆRING"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dokumentType"
         ],
         "type": "object"
       },
@@ -1937,11 +1964,18 @@
           "forespørselSendtTilBehandler": {
             "$ref": "#/components/schemas/no.nav.aap.oppgave.ForespørselSendtTilBehandlerDto"
           },
+          "harMottattDokument": {
+            "$ref": "#/components/schemas/no.nav.aap.oppgave.HarMottattDokument"
+          },
           "harUlesteDokumenter": {
+            "deprecated": true,
+            "description": "Bruk harMottattDokument når denne er implementert i frontend",
             "nullable": false,
             "type": "boolean"
           },
           "id": {
+            "deprecated": true,
+            "description": "Brukes ikke av frontend",
             "format": "int64",
             "nullable": false,
             "type": "integer"
@@ -1985,6 +2019,8 @@
             "$ref": "#/components/schemas/no.nav.aap.oppgave.hent.VenteInformasjonResponse"
           },
           "versjon": {
+            "deprecated": true,
+            "description": "Brukes ikke av frontend",
             "format": "int64",
             "nullable": false,
             "type": "integer"
@@ -2316,7 +2352,12 @@
           "forrigePåVentInfo": {
             "$ref": "#/components/schemas/no.nav.aap.oppgave.hent.VenteInformasjonResponse"
           },
+          "harMottattDokument": {
+            "$ref": "#/components/schemas/no.nav.aap.oppgave.HarMottattDokument"
+          },
           "harUlesteDokumenter": {
+            "deprecated": true,
+            "description": "Bruk harMottattDokument når denne er implementert i frontend",
             "nullable": true,
             "type": "boolean"
           },

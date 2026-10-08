@@ -1,8 +1,40 @@
 {
   "components": {
     "schemas": {
-      "kotlin.Any": {
+      "no.nav.aap.kelvin.KelvinSak": {
         "nullable": false,
+        "properties": {
+          "referanse": {
+            "$ref": "#/components/schemas/no.nav.aap.sak.FagsakReferanse"
+          },
+          "rettighetsperiode": {
+            "items": {
+              "example": "2025-04-01",
+              "format": "date",
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "saksnummer": {
+            "$ref": "#/components/schemas/no.nav.aap.sak.Fagsaknummer"
+          },
+          "status": {
+            "enum": [
+              "AVSLUTTET",
+              "LØPENDE",
+              "UTREDES"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "referanse",
+          "rettighetsperiode",
+          "saksnummer"
+        ],
         "type": "object"
       },
       "no.nav.aap.meldekort.DagSvarDto": {
@@ -421,6 +453,240 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.meldekort.drift.AktuelleMeldeperioderDriftsinfo": {
+        "nullable": false,
+        "properties": {
+          "antallUbesvarteMeldeperioder": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "manglerOpplysninger": {
+            "items": {
+              "example": "2025-04-01",
+              "format": "date",
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "nesteMeldeperiode": {
+            "$ref": "#/components/schemas/no.nav.aap.meldeperiode.Meldeperiode"
+          }
+        },
+        "required": [
+          "antallUbesvarteMeldeperioder"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.drift.HistoriskeMeldeperioderDriftsinfo": {
+        "nullable": false,
+        "properties": {
+          "meldeperiode": {
+            "$ref": "#/components/schemas/no.nav.aap.meldeperiode.Meldeperiode"
+          },
+          "totaltAntallTimerIPerioden": {
+            "format": "double",
+            "nullable": false,
+            "type": "number"
+          }
+        },
+        "required": [
+          "meldeperiode",
+          "totaltAntallTimerIPerioden"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.drift.MeldekortDriftsinfoDto": {
+        "nullable": false,
+        "properties": {
+          "aktuelleMeldeperioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldekort.drift.AktuelleMeldeperioderDriftsinfo"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "historiskeMeldeperioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldekort.drift.HistoriskeMeldeperioderDriftsinfo"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "sak": {
+            "$ref": "#/components/schemas/no.nav.aap.kelvin.KelvinSak"
+          },
+          "utfyllinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldekort.drift.UtfyllingDriftsinfo"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "varsler": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldekort.drift.VarselDriftsinfo"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "aktuelleMeldeperioder",
+          "historiskeMeldeperioder",
+          "sak",
+          "utfyllinger",
+          "varsler"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.drift.UtfyllingDriftsinfo": {
+        "nullable": false,
+        "properties": {
+          "aktivtSteg": {
+            "enum": [
+              "BEKREFT",
+              "BESTILL_JOURNALFØRING",
+              "FRAVÆR_SPØRSMÅL",
+              "FRAVÆR_UTFYLLING",
+              "INAKTIVER_VARSEL",
+              "INTRODUKSJON",
+              "KVITTERING",
+              "PERSISTER_OPPLYSNINGER",
+              "SPØRSMÅL",
+              "UTFYLLING"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "erDigitalisert": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "fagsak": {
+            "$ref": "#/components/schemas/no.nav.aap.sak.FagsakReferanse"
+          },
+          "flyt": {
+            "enum": [
+              "AAP_FLYT",
+              "AAP_FLYT_V2",
+              "AAP_KORRIGERING_FLYT",
+              "AAP_KORRIGERING_FLYT_V2"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettet": {
+            "example": "2025-04-01T10:30:00Z",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "periode": {
+            "items": {
+              "example": "2025-04-01",
+              "format": "date",
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "referanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "sistEndret": {
+            "example": "2025-04-01T10:30:00Z",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "svar": {
+            "$ref": "#/components/schemas/no.nav.aap.utfylling.Svar"
+          }
+        },
+        "required": [
+          "aktivtSteg",
+          "fagsak",
+          "flyt",
+          "opprettet",
+          "periode",
+          "referanse",
+          "sistEndret",
+          "svar"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.drift.VarselDriftsinfo": {
+        "nullable": false,
+        "properties": {
+          "forPeriode": {
+            "items": {
+              "example": "2025-04-01",
+              "format": "date",
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "opprettet": {
+            "example": "2025-04-01T10:30:00Z",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          },
+          "sendingstidspunkt": {
+            "example": "2025-04-01T10:30:00Z",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "sistEndret": {
+            "example": "2025-04-01T10:30:00Z",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "status": {
+            "nullable": false,
+            "type": "string"
+          },
+          "typeVarsel": {
+            "nullable": false,
+            "type": "string"
+          },
+          "typeVarselOm": {
+            "nullable": false,
+            "type": "string"
+          },
+          "varselId": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "forPeriode",
+          "opprettet",
+          "saksnummer",
+          "sendingstidspunkt",
+          "sistEndret",
+          "status",
+          "typeVarsel",
+          "typeVarselOm",
+          "varselId"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.meldekort.kontrakt.Periode": {
         "nullable": false,
         "properties": {
@@ -608,6 +874,36 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.meldeperiode.Meldeperiode": {
+        "nullable": false,
+        "properties": {
+          "meldeperioden": {
+            "items": {
+              "example": "2025-04-01",
+              "format": "date",
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "meldevindu": {
+            "items": {
+              "example": "2025-04-01",
+              "format": "date",
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "meldeperioden",
+          "meldevindu"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.motor.JobbTilleggsinfo": {
         "nullable": false,
         "properties": {
@@ -756,6 +1052,108 @@
           "begrunnelse"
         ],
         "type": "object"
+      },
+      "no.nav.aap.sak.FagsakReferanse": {
+        "nullable": false,
+        "properties": {
+          "nummer": {
+            "$ref": "#/components/schemas/no.nav.aap.sak.Fagsaknummer"
+          },
+          "system": {
+            "enum": [
+              "ARENA",
+              "KELVIN"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "nummer",
+          "system"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.sak.Fagsaknummer": {
+        "nullable": false,
+        "properties": {
+          "asString": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "asString"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utfylling.AktivitetsInformasjon": {
+        "nullable": false,
+        "properties": {
+          "dato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "fravær": {
+            "enum": [
+              "ANNEN",
+              "OMSORG_ANNEN_STERK_GRUNN",
+              "OMSORG_DØDSFALL_I_FAMILIE_ELLER_VENNEKRETS",
+              "OMSORG_FØRSTE_SKOLEDAG_TILVENNING_ELLER_ANNEN_OPPFØLGING_BARN",
+              "OMSORG_PLEIE_I_HJEMMET_AV_NÆR_PÅRØRENDE",
+              "SYKDOM_ELLER_SKADE"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "timer": {
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          }
+        },
+        "required": [
+          "dato"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utfylling.Svar": {
+        "nullable": false,
+        "properties": {
+          "aktivitetsInformasjon": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.utfylling.AktivitetsInformasjon"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "harDuHattAvtalteAktiviteter": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "harDuHattFravær": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "harDuJobbet": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "stemmerOpplysningene": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "svarerDuSant": {
+            "nullable": true,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "aktivitetsInformasjon"
+        ],
+        "type": "object"
       }
     },
     "securitySchemes": {
@@ -769,7 +1167,7 @@
   "info": {
     "description": "For å teste API i dev, besøk\n<a href=\"https://tokenx-token-generator.intern.dev.nav.no/api/obo?aud=dev-gcp:aap:meldekort-backend\">Token Generator</a> for å få token.",
     "title": "AAP - Meldekort",
-    "version": "7cc5800c4c6e494e6692b3ba35e72f4a332b3194"
+    "version": "6e8be8bb9e221695afeafc31771cc54d7fee6624"
   },
   "openapi": "3.0.0",
   "paths": {
@@ -1208,7 +1606,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/kotlin.Any"
+                  "$ref": "#/components/schemas/no.nav.aap.meldekort.drift.MeldekortDriftsinfoDto"
                 }
               }
             },

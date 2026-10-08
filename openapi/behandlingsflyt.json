@@ -1334,7 +1334,7 @@
           },
           "løsningerForPerioder": {
             "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.bistand.flate.BistandLøsningDto"
+              "$ref": "#/components/schemas/no.nav.aap.bistandsbehov.BistandLøsningDto"
             },
             "nullable": false,
             "type": "array"
@@ -5615,7 +5615,7 @@
             "type": "string"
           },
           "meldepliktOverstyringVurdering": {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.meldeplikt.flate.MeldepliktOverstyringLøsningDto"
+            "$ref": "#/components/schemas/no.nav.aap.meldeplikt.MeldepliktOverstyringLøsningDto"
           }
         },
         "required": [
@@ -5982,7 +5982,7 @@
           },
           "løsningerForPerioder": {
             "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.meldeplikt.flate.PeriodisertFritaksvurderingDto"
+              "$ref": "#/components/schemas/no.nav.aap.meldeplikt.PeriodisertFritaksvurderingDto"
             },
             "nullable": false,
             "type": "array"
@@ -9869,94 +9869,6 @@
         ],
         "type": "object"
       },
-      "no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.fritakmeldeplikt.FritakMeldepliktGrunnlagResponse": {
-        "nullable": false,
-        "properties": {
-          "behøverVurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "harTilgangTilÅSaksbehandle": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "ikkeRelevantePerioder": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "kanVurderes": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "nyeVurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.fritakmeldeplikt.PeriodisertFritakMeldepliktVurderingResponse"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "sisteVedtatteVurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.fritakmeldeplikt.PeriodisertFritakMeldepliktVurderingResponse"
-            },
-            "nullable": false,
-            "type": "array"
-          }
-        },
-        "required": [
-          "behøverVurderinger",
-          "harTilgangTilÅSaksbehandle",
-          "ikkeRelevantePerioder",
-          "kanVurderes",
-          "nyeVurderinger",
-          "sisteVedtatteVurderinger"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.fritakmeldeplikt.PeriodisertFritakMeldepliktVurderingResponse": {
-        "nullable": false,
-        "properties": {
-          "begrunnelse": {
-            "nullable": false,
-            "type": "string"
-          },
-          "fom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": false,
-            "type": "string"
-          },
-          "harFritak": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "tom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          },
-          "vurderingerMeta": {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"
-          }
-        },
-        "required": [
-          "begrunnelse",
-          "fom",
-          "harFritak",
-          "vurderingerMeta"
-        ],
-        "type": "object"
-      },
       "no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.refusjon.NavEnheterRequest": {
         "nullable": false,
         "properties": {
@@ -10054,207 +9966,6 @@
         },
         "required": [
           "harKrav",
-          "vurderingerMeta"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.bistand.BistandGrunnlagResponse": {
-        "nullable": false,
-        "properties": {
-          "behøverVurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "harTilgangTilÅSaksbehandle": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "ikkeRelevantePerioder": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "kanVurderes": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "nyeVurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.bistand.BistandVurderingResponse"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "sisteVedtatteVurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.bistand.BistandVurderingResponse"
-            },
-            "nullable": false,
-            "type": "array"
-          }
-        },
-        "required": [
-          "behøverVurderinger",
-          "harTilgangTilÅSaksbehandle",
-          "ikkeRelevantePerioder",
-          "kanVurderes",
-          "nyeVurderinger",
-          "sisteVedtatteVurderinger"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.bistand.BistandVurderingResponse": {
-        "nullable": false,
-        "properties": {
-          "begrunnelse": {
-            "nullable": false,
-            "type": "string"
-          },
-          "erBehovForAktivBehandling": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "erBehovForAnnenOppfølging": {
-            "nullable": true,
-            "type": "boolean"
-          },
-          "erBehovForArbeidsrettetTiltak": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "fom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": false,
-            "type": "string"
-          },
-          "overgangBegrunnelse": {
-            "nullable": true,
-            "type": "string"
-          },
-          "skalVurdereAapIOvergangTilArbeid": {
-            "nullable": true,
-            "type": "boolean"
-          },
-          "tom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          },
-          "vurderingerMeta": {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"
-          }
-        },
-        "required": [
-          "begrunnelse",
-          "erBehovForAktivBehandling",
-          "erBehovForArbeidsrettetTiltak",
-          "fom",
-          "vurderingerMeta"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.overgangarbeid.OvergangArbeidGrunnlagResponse": {
-        "nullable": false,
-        "properties": {
-          "behøverVurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "gjeldendeSykdsomsvurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.sykdom.SykdomsvurderingResponse"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "harTilgangTilÅSaksbehandle": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "ikkeRelevantePerioder": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "kanVurderes": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "nyeVurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.overgangarbeid.OvergangArbeidVurderingResponse"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "sisteVedtatteVurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.overgangarbeid.OvergangArbeidVurderingResponse"
-            },
-            "nullable": false,
-            "type": "array"
-          }
-        },
-        "required": [
-          "behøverVurderinger",
-          "gjeldendeSykdsomsvurderinger",
-          "harTilgangTilÅSaksbehandle",
-          "ikkeRelevantePerioder",
-          "kanVurderes",
-          "nyeVurderinger",
-          "sisteVedtatteVurderinger"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.overgangarbeid.OvergangArbeidVurderingResponse": {
-        "nullable": false,
-        "properties": {
-          "begrunnelse": {
-            "nullable": false,
-            "type": "string"
-          },
-          "brukerRettPåAAP": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "fom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": false,
-            "type": "string"
-          },
-          "tom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          },
-          "vurderingerMeta": {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"
-          }
-        },
-        "required": [
-          "begrunnelse",
-          "brukerRettPåAAP",
-          "fom",
           "vurderingerMeta"
         ],
         "type": "object"
@@ -11273,6 +10984,7 @@
               "VEDTAK_11_7",
               "VEDTAK_11_9",
               "VEDTAK_ENDRING",
+              "VEDTAK_ENDRING_DODSFALL",
               "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_12",
               "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_26",
               "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_27",
@@ -12755,6 +12467,13 @@
       "no.nav.aap.behandlingsflyt.behandling.institusjonsopphold.HelseoppholdDto": {
         "nullable": false,
         "properties": {
+          "delperioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.institusjonsopphold.InstitusjonsoppholdDelperiodeDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
           "oppholdId": {
             "nullable": true,
             "type": "string"
@@ -12780,8 +12499,36 @@
           }
         },
         "required": [
+          "delperioder",
           "periode",
           "status"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.behandling.institusjonsopphold.InstitusjonsoppholdDelperiodeDto": {
+        "nullable": false,
+        "properties": {
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "institusjonsnavn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fom",
+          "institusjonsnavn",
+          "tom"
         ],
         "type": "object"
       },
@@ -12793,6 +12540,13 @@
             "format": "date",
             "nullable": false,
             "type": "string"
+          },
+          "delperioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.institusjonsopphold.InstitusjonsoppholdDelperiodeDto"
+            },
+            "nullable": false,
+            "type": "array"
           },
           "institusjonstype": {
             "nullable": false,
@@ -12829,6 +12583,7 @@
         },
         "required": [
           "avsluttetDato",
+          "delperioder",
           "institusjonstype",
           "kildeinstitusjon",
           "oppholdFra",
@@ -14667,6 +14422,26 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.behandlingsflyt.behandling.meldekort.RegistrerMeldedatoRequest": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "meldeDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "begrunnelse",
+          "meldeDato"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.behandlingsflyt.behandling.mellomlagring.MellomlagretVurdering": {
         "nullable": false,
         "properties": {
@@ -16321,95 +16096,6 @@
         ],
         "type": "object"
       },
-      "no.nav.aap.behandlingsflyt.behandling.underveis.MeldepliktOverstyringGrunnlagResponse": {
-        "nullable": false,
-        "properties": {
-          "gjeldendeVedtatteOversyringsvurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.underveis.MeldepliktOverstyringVurderingResponse"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "harTilgangTilÅSaksbehandle": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "overstyringsvurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.underveis.MeldepliktOverstyringVurderingResponse"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "perioderIkkeMeldt": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-            },
-            "nullable": false,
-            "type": "array"
-          }
-        },
-        "required": [
-          "gjeldendeVedtatteOversyringsvurderinger",
-          "harTilgangTilÅSaksbehandle",
-          "overstyringsvurderinger",
-          "perioderIkkeMeldt"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.behandling.underveis.MeldepliktOverstyringVurderingResponse": {
-        "nullable": false,
-        "properties": {
-          "begrunnelse": {
-            "nullable": false,
-            "type": "string"
-          },
-          "fraDato": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": false,
-            "type": "string"
-          },
-          "meldepliktOverstyringStatus": {
-            "enum": [
-              "HAR_MELDT_SEG",
-              "IKKE_MELDT_SEG",
-              "RIMELIG_GRUNN"
-            ],
-            "nullable": false,
-            "type": "string"
-          },
-          "tilDato": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": false,
-            "type": "string"
-          },
-          "vurderingerMeta": {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"
-          },
-          "vurderingsTidspunkt": {
-            "example": "2025-04-01T12:30:00",
-            "format": "date-time",
-            "nullable": false,
-            "type": "string"
-          },
-          "vurdertIBehandling": {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.behandling.BehandlingReferanse"
-          }
-        },
-        "required": [
-          "begrunnelse",
-          "fraDato",
-          "meldepliktOverstyringStatus",
-          "tilDato",
-          "vurderingerMeta",
-          "vurderingsTidspunkt",
-          "vurdertIBehandling"
-        ],
-        "type": "object"
-      },
       "no.nav.aap.behandlingsflyt.behandling.underveis.RettighetsTypeDto": {
         "nullable": false,
         "properties": {
@@ -17227,11 +16913,21 @@
           "ident": {
             "nullable": false,
             "type": "string"
+          },
+          "kilde": {
+            "enum": [
+              "AUTOMATISK",
+              "MIGRERT_FRA_ARENA",
+              "SAKSBEHANDLER"
+            ],
+            "nullable": false,
+            "type": "string"
           }
         },
         "required": [
           "dato",
-          "ident"
+          "ident",
+          "kilde"
         ],
         "type": "object"
       },
@@ -20035,54 +19731,6 @@
         ],
         "type": "object"
       },
-      "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.bistand.flate.BistandLøsningDto": {
-        "nullable": false,
-        "properties": {
-          "begrunnelse": {
-            "nullable": false,
-            "type": "string"
-          },
-          "erBehovForAktivBehandling": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "erBehovForAnnenOppfølging": {
-            "nullable": true,
-            "type": "boolean"
-          },
-          "erBehovForArbeidsrettetTiltak": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "fom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": false,
-            "type": "string"
-          },
-          "overgangBegrunnelse": {
-            "nullable": true,
-            "type": "string"
-          },
-          "skalVurdereAapIOvergangTilArbeid": {
-            "nullable": true,
-            "type": "boolean"
-          },
-          "tom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "required": [
-          "begrunnelse",
-          "erBehovForAktivBehandling",
-          "erBehovForArbeidsrettetTiltak",
-          "fom"
-        ],
-        "type": "object"
-      },
       "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.etableringegenvirksomhet.EtableringEgenVirksomhetLøsningDto": {
         "nullable": false,
         "properties": {
@@ -20542,90 +20190,6 @@
           "begrunnelse",
           "journalpostId",
           "kravType"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.meldeplikt.OverstyringMeldepliktVurderingPeriode": {
-        "nullable": false,
-        "properties": {
-          "begrunnelse": {
-            "nullable": false,
-            "type": "string"
-          },
-          "fom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": false,
-            "type": "string"
-          },
-          "meldepliktOverstyringStatus": {
-            "enum": [
-              "HAR_MELDT_SEG",
-              "IKKE_MELDT_SEG",
-              "RIMELIG_GRUNN"
-            ],
-            "nullable": false,
-            "type": "string"
-          },
-          "tom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": false,
-            "type": "string"
-          }
-        },
-        "required": [
-          "begrunnelse",
-          "fom",
-          "meldepliktOverstyringStatus",
-          "tom"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.meldeplikt.flate.MeldepliktOverstyringLøsningDto": {
-        "nullable": false,
-        "properties": {
-          "perioder": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.meldeplikt.OverstyringMeldepliktVurderingPeriode"
-            },
-            "nullable": false,
-            "type": "array"
-          }
-        },
-        "required": [
-          "perioder"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.meldeplikt.flate.PeriodisertFritaksvurderingDto": {
-        "nullable": false,
-        "properties": {
-          "begrunnelse": {
-            "nullable": false,
-            "type": "string"
-          },
-          "fom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": false,
-            "type": "string"
-          },
-          "harFritak": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "tom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "required": [
-          "begrunnelse",
-          "fom",
-          "harFritak"
         ],
         "type": "object"
       },
@@ -26067,6 +25631,12 @@
           "søknadErTrukket": {
             "nullable": true,
             "type": "boolean"
+          },
+          "virkningstidspunkt": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
           }
         },
         "required": [
@@ -26539,6 +26109,159 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.bistandsbehov.BistandGrunnlagResponse": {
+        "nullable": false,
+        "properties": {
+          "behøverVurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "harTilgangTilÅSaksbehandle": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "ikkeRelevantePerioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "kanVurderes": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "nyeVurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.bistandsbehov.BistandVurderingResponse"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "sisteVedtatteVurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.bistandsbehov.BistandVurderingResponse"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "behøverVurderinger",
+          "harTilgangTilÅSaksbehandle",
+          "ikkeRelevantePerioder",
+          "kanVurderes",
+          "nyeVurderinger",
+          "sisteVedtatteVurderinger"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.bistandsbehov.BistandLøsningDto": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "erBehovForAktivBehandling": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "erBehovForAnnenOppfølging": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "erBehovForArbeidsrettetTiltak": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "overgangBegrunnelse": {
+            "nullable": true,
+            "type": "string"
+          },
+          "skalVurdereAapIOvergangTilArbeid": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "begrunnelse",
+          "erBehovForAktivBehandling",
+          "erBehovForArbeidsrettetTiltak",
+          "fom"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.bistandsbehov.BistandVurderingResponse": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "erBehovForAktivBehandling": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "erBehovForAnnenOppfølging": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "erBehovForArbeidsrettetTiltak": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "overgangBegrunnelse": {
+            "nullable": true,
+            "type": "string"
+          },
+          "skalVurdereAapIOvergangTilArbeid": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "vurderingerMeta": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"
+          }
+        },
+        "required": [
+          "begrunnelse",
+          "erBehovForAktivBehandling",
+          "erBehovForArbeidsrettetTiltak",
+          "fom",
+          "vurderingerMeta"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.brev.kontrakt.Adresse": {
         "nullable": false,
         "properties": {
@@ -26724,6 +26447,21 @@
       "no.nav.aap.brev.kontrakt.BrevdataDto": {
         "nullable": false,
         "properties": {
+          "automatiskValgteDelmalIder": {
+            "items": {
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "automatiskValgteValg": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BrevdataDto.Valg"
+            },
+            "nullable": false,
+            "type": "array"
+          },
           "betingetTekst": {
             "items": {
               "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BrevdataDto.BetingetTekst"
@@ -26754,6 +26492,8 @@
           }
         },
         "required": [
+          "automatiskValgteDelmalIder",
+          "automatiskValgteValg",
           "betingetTekst",
           "delmaler",
           "fritekster",
@@ -27155,6 +26895,267 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.meldeplikt.FritakMeldepliktGrunnlagResponse": {
+        "nullable": false,
+        "properties": {
+          "behøverVurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "harTilgangTilÅSaksbehandle": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "ikkeRelevantePerioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "kanVurderes": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "nyeVurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldeplikt.PeriodisertFritakMeldepliktVurderingResponse"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "sisteVedtatteVurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldeplikt.PeriodisertFritakMeldepliktVurderingResponse"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "behøverVurderinger",
+          "harTilgangTilÅSaksbehandle",
+          "ikkeRelevantePerioder",
+          "kanVurderes",
+          "nyeVurderinger",
+          "sisteVedtatteVurderinger"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldeplikt.MeldepliktOverstyringGrunnlagResponse": {
+        "nullable": false,
+        "properties": {
+          "gjeldendeVedtatteOversyringsvurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldeplikt.MeldepliktOverstyringVurderingResponse"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "harTilgangTilÅSaksbehandle": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "overstyringsvurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldeplikt.MeldepliktOverstyringVurderingResponse"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "perioderIkkeMeldt": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "gjeldendeVedtatteOversyringsvurderinger",
+          "harTilgangTilÅSaksbehandle",
+          "overstyringsvurderinger",
+          "perioderIkkeMeldt"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldeplikt.MeldepliktOverstyringLøsningDto": {
+        "nullable": false,
+        "properties": {
+          "perioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldeplikt.OverstyringMeldepliktVurderingPeriode"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "perioder"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldeplikt.MeldepliktOverstyringVurderingResponse": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "fraDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "meldepliktOverstyringStatus": {
+            "enum": [
+              "HAR_MELDT_SEG",
+              "IKKE_MELDT_SEG",
+              "RIMELIG_GRUNN"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "tilDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "vurderingerMeta": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"
+          },
+          "vurderingsTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "vurdertIBehandling": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.behandling.BehandlingReferanse"
+          }
+        },
+        "required": [
+          "begrunnelse",
+          "fraDato",
+          "meldepliktOverstyringStatus",
+          "tilDato",
+          "vurderingerMeta",
+          "vurderingsTidspunkt",
+          "vurdertIBehandling"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldeplikt.OverstyringMeldepliktVurderingPeriode": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "meldepliktOverstyringStatus": {
+            "enum": [
+              "HAR_MELDT_SEG",
+              "IKKE_MELDT_SEG",
+              "RIMELIG_GRUNN"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "begrunnelse",
+          "fom",
+          "meldepliktOverstyringStatus",
+          "tom"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldeplikt.PeriodisertFritakMeldepliktVurderingResponse": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "harFritak": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "vurderingerMeta": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"
+          }
+        },
+        "required": [
+          "begrunnelse",
+          "fom",
+          "harFritak",
+          "vurderingerMeta"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldeplikt.PeriodisertFritaksvurderingDto": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "harFritak": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "begrunnelse",
+          "fom",
+          "harFritak"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.motor.JobbTilleggsinfo": {
         "nullable": false,
         "properties": {
@@ -27301,6 +27302,102 @@
         },
         "required": [
           "begrunnelse"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.overgangarbeid.OvergangArbeidGrunnlagResponse": {
+        "nullable": false,
+        "properties": {
+          "behøverVurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "gjeldendeSykdsomsvurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.sykdom.SykdomsvurderingResponse"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "harTilgangTilÅSaksbehandle": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "ikkeRelevantePerioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "kanVurderes": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "nyeVurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.overgangarbeid.OvergangArbeidVurderingResponse"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "sisteVedtatteVurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.overgangarbeid.OvergangArbeidVurderingResponse"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "behøverVurderinger",
+          "gjeldendeSykdsomsvurderinger",
+          "harTilgangTilÅSaksbehandle",
+          "ikkeRelevantePerioder",
+          "kanVurderes",
+          "nyeVurderinger",
+          "sisteVedtatteVurderinger"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.overgangarbeid.OvergangArbeidVurderingResponse": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "brukerRettPåAAP": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "vurderingerMeta": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"
+          }
+        },
+        "required": [
+          "begrunnelse",
+          "brukerRettPåAAP",
+          "fom",
+          "vurderingerMeta"
         ],
         "type": "object"
       },
@@ -27523,7 +27620,7 @@
   "info": {
     "description": "For å teste API i dev, besøk\n<a href=\"https://azure-token-generator.intern.dev.nav.no/api/m2m?aud=dev-gcp:aap:behandlingsflyt\">Token Generator</a> for å få token.",
     "title": "AAP - Behandlingsflyt",
-    "version": "edaa97304d054cbf277939e7215b7b7249c0642a"
+    "version": "c5ed471fe9e42acfd288aac187b9a0268851d587"
   },
   "openapi": "3.0.0",
   "paths": {
@@ -28663,7 +28760,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.bistand.BistandGrunnlagResponse"
+                  "$ref": "#/components/schemas/no.nav.aap.bistandsbehov.BistandGrunnlagResponse"
                 }
               }
             },
@@ -28705,7 +28802,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.fritakmeldeplikt.FritakMeldepliktGrunnlagResponse"
+                  "$ref": "#/components/schemas/no.nav.aap.meldeplikt.FritakMeldepliktGrunnlagResponse"
                 }
               }
             },
@@ -28747,7 +28844,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.underveis.MeldepliktOverstyringGrunnlagResponse"
+                  "$ref": "#/components/schemas/no.nav.aap.meldeplikt.MeldepliktOverstyringGrunnlagResponse"
                 }
               }
             },
@@ -32017,6 +32114,57 @@
         ]
       }
     },
+    "/api/meldekort/{saksnummer}/registrer-meldedato": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "saksnummer",
+            "explode": false,
+            "in": "path",
+            "name": "saksnummer",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.meldekort.RegistrerMeldedatoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.meldekort.OppdaterMeldekortResponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert",
+          "Sak"
+        ]
+      }
+    },
     "/api/meldekort/{saksnummer}/har-registrert-timer": {
       "get": {
         "parameters": [
@@ -34442,7 +34590,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.beregning.grunnlag.sykdom.overgangarbeid.OvergangArbeidGrunnlagResponse"
+                  "$ref": "#/components/schemas/no.nav.aap.overgangarbeid.OvergangArbeidGrunnlagResponse"
                 }
               }
             },

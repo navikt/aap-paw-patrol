@@ -1,5 +1,5 @@
 import { Alert, Box, Heading, Table } from '@navikt/ds-react';
-import { Varsel } from 'lib/types/meldekort';
+import type { Varsel } from 'lib/types/meldekort';
 import { formaterDatoMedTidspunktSekunderForFrontend, formaterPeriodeV2 } from 'lib/utils/date';
 
 export const MeldekortVarsler = ({ varsler }: { varsler: Varsel[] }) => {
