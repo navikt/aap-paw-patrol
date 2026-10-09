@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { nb } from 'date-fns/locale';
-import { Periode } from 'lib/types/felles';
+import type { Periode } from 'lib/types/felles';
 
 export const DATO_FORMATER = {
   ddMMyyyy: 'dd.MM.yyyy',
@@ -17,36 +17,15 @@ export function formaterDatoForFrontend(dato: Date | string): string {
   return format(dato, DATO_FORMATER.ddMMyyyy, { locale: nb });
 }
 
-type PeriodeLike = Periode | readonly string[];
-
-function erPeriodeDatoArray(periode: PeriodeLike): periode is readonly string[] {
-  return Array.isArray(periode);
+export function perioderErLike(p1: Periode, p2: Periode): boolean {
+  return p1.fom === p2.fom && p1.tom === p2.tom;
 }
 
-function hentPeriodedatoer(periode: PeriodeLike): [string | undefined, string | undefined] {
-  if (erPeriodeDatoArray(periode)) {
-    return [periode[0], periode[1]];
-  }
-
-  return [periode.fom, periode.tom];
-}
-
-export function formaterPeriodeV2(periode: PeriodeLike): string {
-  const [fom, tom] = hentPeriodedatoer(periode);
-  return formaterPeriode(fom, tom);
-}
-
-export function perioderErLike(p1: PeriodeLike, p2: PeriodeLike): boolean {
-  const [fom1, tom1] = hentPeriodedatoer(p1);
-  const [fom2, tom2] = hentPeriodedatoer(p2);
-  return fom1 === fom2 && tom1 === tom2;
-}
-
-export function formaterPeriode(dato1?: string | null, dato2?: string | null): string {
-  if (dato1 && !dato2) {
-    return `${formaterDatoForFrontend(dato1)} - `;
-  } else if (dato1 && dato2) {
-    return `${formaterDatoForFrontend(dato1)} - ${formaterDatoForFrontend(dato2)}`;
+export function formaterPeriode(periode: Periode): string {
+  if (periode.fom && !periode.tom) {
+    return `${formaterDatoForFrontend(periode.fom)} - `;
+  } else if (periode.fom && periode.tom) {
+    return `${formaterDatoForFrontend(periode.fom)} - ${formaterDatoForFrontend(periode.tom)}`;
   } else {
     return '';
   }

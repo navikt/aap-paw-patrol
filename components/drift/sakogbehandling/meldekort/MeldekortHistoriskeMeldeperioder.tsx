@@ -1,6 +1,6 @@
 import { Alert, BodyShort, Box, Heading, Table } from '@navikt/ds-react';
 import type { HistoriskeMeldeperioderDriftsinfo } from 'lib/types/meldekort';
-import { formaterPeriodeV2 } from 'lib/utils/date';
+import { formaterPeriode } from 'lib/utils/date';
 
 export const MeldekortHistoriskeMeldeperioder = ({
   historiskeMeldeperioder,
@@ -37,8 +37,8 @@ export const MeldekortHistoriskeMeldeperioder = ({
         <Table.Body>
           {historiskeMeldeperioder.map((rad, idx) => (
             <Table.Row key={idx}>
-              <Table.DataCell>{formaterPeriodeV2(rad.meldeperiode.meldeperioden)}</Table.DataCell>
-              <Table.DataCell>{formaterPeriodeV2(rad.meldeperiode.meldevindu)}</Table.DataCell>
+              <Table.DataCell>{formaterPeriode(rad.meldeperiode.meldeperioden)}</Table.DataCell>
+              <Table.DataCell>{formaterPeriode(rad.meldeperiode.meldevindu)}</Table.DataCell>
               <Table.DataCell>{rad.totaltAntallTimerIPerioden}</Table.DataCell>
             </Table.Row>
           ))}

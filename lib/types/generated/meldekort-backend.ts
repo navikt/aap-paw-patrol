@@ -1018,9 +1018,21 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        "no.nav.aap.Periode": {
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            fom: string;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            tom: string;
+        };
         "no.nav.aap.kelvin.KelvinSak": {
             referanse: components["schemas"]["no.nav.aap.sak.FagsakReferanse"];
-            rettighetsperiode: string[];
+            rettighetsperiode: components["schemas"]["no.nav.aap.Periode"];
             saksnummer: components["schemas"]["no.nav.aap.sak.Fagsaknummer"];
             /** @enum {string|null} */
             status?: "AVSLUTTET" | "LØPENDE" | "UTREDES" | null;
@@ -1169,7 +1181,7 @@ export interface components {
         "no.nav.aap.meldekort.drift.AktuelleMeldeperioderDriftsinfo": {
             /** Format: int32 */
             antallUbesvarteMeldeperioder: number;
-            manglerOpplysninger?: string[] | null;
+            manglerOpplysninger?: components["schemas"]["no.nav.aap.Periode"];
             nesteMeldeperiode?: components["schemas"]["no.nav.aap.meldeperiode.Meldeperiode"];
         };
         "no.nav.aap.meldekort.drift.HistoriskeMeldeperioderDriftsinfo": {
@@ -1196,7 +1208,7 @@ export interface components {
              * @example 2025-04-01T10:30:00Z
              */
             opprettet: string;
-            periode: string[];
+            periode: components["schemas"]["no.nav.aap.Periode"];
             /** Format: uuid */
             referanse: string;
             /**
@@ -1207,7 +1219,7 @@ export interface components {
             svar: components["schemas"]["no.nav.aap.utfylling.Svar"];
         };
         "no.nav.aap.meldekort.drift.VarselDriftsinfo": {
-            forPeriode: string[];
+            forPeriode: components["schemas"]["no.nav.aap.Periode"];
             /**
              * Format: date-time
              * @example 2025-04-01T10:30:00Z
@@ -1280,8 +1292,8 @@ export interface components {
             timerArbeidet: number;
         };
         "no.nav.aap.meldeperiode.Meldeperiode": {
-            meldeperioden: string[];
-            meldevindu: string[];
+            meldeperioden: components["schemas"]["no.nav.aap.Periode"];
+            meldevindu: components["schemas"]["no.nav.aap.Periode"];
         };
         "no.nav.aap.motor.JobbTilleggsinfo": {
             kommentarer: components["schemas"]["no.nav.aap.motor.Kommentar"][];

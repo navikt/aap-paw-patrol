@@ -1336,7 +1336,7 @@ export interface components {
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser": {
             fradragAndreYtelser: components["schemas"]["no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.FradragYtelse"][];
             reduksjonArbeidsgiver: components["schemas"]["no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.ReduksjonArbeidsgiver"][];
-            refusjonskravSosialkontor?: components["schemas"]["no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.RefusjonskravSosialkontor"];
+            refusjonskravNavkontor?: components["schemas"]["no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.RefusjonskravNavkontor"];
             refusjonskravTjenestepensjon?: components["schemas"]["no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.RefusjonskravTjenestepensjon"];
             samordningAndreYtelser: components["schemas"]["no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.SamordningYtelse"][];
             samordningBarnepensjon: components["schemas"]["no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.SamordningBarnepensjon"][];
@@ -1370,13 +1370,12 @@ export interface components {
              */
             tilOgMed: string;
         };
-        "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.RefusjonskravSosialkontor": {
+        "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.RefusjonskravNavkontor": {
             /**
              * Format: date
              * @example 2025-04-01
              */
             fraOgMed?: string | null;
-            skalEtterbetalingHoldesIgjen: boolean;
             /**
              * Format: date
              * @example 2025-04-01

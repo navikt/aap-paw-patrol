@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Alert, Box, Heading, Table } from '@navikt/ds-react';
 import type { SortState } from '@navikt/ds-react';
 import type { UtfyllingDriftsinfo } from 'lib/types/meldekort';
-import { formaterDatoMedTidspunktSekunderForFrontend, formaterPeriodeV2 } from 'lib/utils/date';
+import { formaterDatoMedTidspunktSekunderForFrontend, formaterPeriode } from 'lib/utils/date';
 
 export const MeldekortUtfyllinger = ({ utfyllinger }: { utfyllinger: UtfyllingDriftsinfo[] }) => {
   const [sort, setSort] = useState<SortState | undefined>({ orderBy: 'sistEndret', direction: 'descending' });
@@ -57,7 +57,7 @@ export const MeldekortUtfyllinger = ({ utfyllinger }: { utfyllinger: UtfyllingDr
                 <Table.DataCell>{utfylling.referanse}</Table.DataCell>
                 <Table.DataCell>{utfylling.fagsak.system}</Table.DataCell>
                 <Table.DataCell>{utfylling.fagsak.nummer.asString}</Table.DataCell>
-                <Table.DataCell>{formaterPeriodeV2(utfylling.periode)}</Table.DataCell>
+                <Table.DataCell>{formaterPeriode(utfylling.periode)}</Table.DataCell>
                 <Table.DataCell>{utfylling.flyt}</Table.DataCell>
                 <Table.DataCell>{utfylling.aktivtSteg}</Table.DataCell>
                 <Table.DataCell>

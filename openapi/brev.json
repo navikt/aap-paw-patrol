@@ -960,8 +960,8 @@
             "nullable": false,
             "type": "array"
           },
-          "refusjonskravSosialkontor": {
-            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.RefusjonskravSosialkontor"
+          "refusjonskravNavkontor": {
+            "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.RefusjonskravNavkontor"
           },
           "refusjonskravTjenestepensjon": {
             "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.RefusjonskravTjenestepensjon"
@@ -1079,7 +1079,7 @@
         ],
         "type": "object"
       },
-      "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.RefusjonskravSosialkontor": {
+      "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.RefusjonskravNavkontor": {
         "nullable": false,
         "properties": {
           "fraOgMed": {
@@ -1088,10 +1088,6 @@
             "nullable": true,
             "type": "string"
           },
-          "skalEtterbetalingHoldesIgjen": {
-            "nullable": false,
-            "type": "boolean"
-          },
           "tilOgMed": {
             "example": "2025-04-01",
             "format": "date",
@@ -1099,9 +1095,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "skalEtterbetalingHoldesIgjen"
-        ],
         "type": "object"
       },
       "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.RefusjonskravTjenestepensjon": {

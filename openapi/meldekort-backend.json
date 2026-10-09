@@ -1,6 +1,28 @@
 {
   "components": {
     "schemas": {
+      "no.nav.aap.Periode": {
+        "nullable": false,
+        "properties": {
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fom",
+          "tom"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.kelvin.KelvinSak": {
         "nullable": false,
         "properties": {
@@ -8,14 +30,7 @@
             "$ref": "#/components/schemas/no.nav.aap.sak.FagsakReferanse"
           },
           "rettighetsperiode": {
-            "items": {
-              "example": "2025-04-01",
-              "format": "date",
-              "nullable": false,
-              "type": "string"
-            },
-            "nullable": false,
-            "type": "array"
+            "$ref": "#/components/schemas/no.nav.aap.Periode"
           },
           "saksnummer": {
             "$ref": "#/components/schemas/no.nav.aap.sak.Fagsaknummer"
@@ -462,14 +477,7 @@
             "type": "integer"
           },
           "manglerOpplysninger": {
-            "items": {
-              "example": "2025-04-01",
-              "format": "date",
-              "nullable": false,
-              "type": "string"
-            },
-            "nullable": true,
-            "type": "array"
+            "$ref": "#/components/schemas/no.nav.aap.Periode"
           },
           "nesteMeldeperiode": {
             "$ref": "#/components/schemas/no.nav.aap.meldeperiode.Meldeperiode"
@@ -585,14 +593,7 @@
             "type": "string"
           },
           "periode": {
-            "items": {
-              "example": "2025-04-01",
-              "format": "date",
-              "nullable": false,
-              "type": "string"
-            },
-            "nullable": false,
-            "type": "array"
+            "$ref": "#/components/schemas/no.nav.aap.Periode"
           },
           "referanse": {
             "format": "uuid",
@@ -625,14 +626,7 @@
         "nullable": false,
         "properties": {
           "forPeriode": {
-            "items": {
-              "example": "2025-04-01",
-              "format": "date",
-              "nullable": false,
-              "type": "string"
-            },
-            "nullable": false,
-            "type": "array"
+            "$ref": "#/components/schemas/no.nav.aap.Periode"
           },
           "opprettet": {
             "example": "2025-04-01T10:30:00Z",
@@ -878,24 +872,10 @@
         "nullable": false,
         "properties": {
           "meldeperioden": {
-            "items": {
-              "example": "2025-04-01",
-              "format": "date",
-              "nullable": false,
-              "type": "string"
-            },
-            "nullable": false,
-            "type": "array"
+            "$ref": "#/components/schemas/no.nav.aap.Periode"
           },
           "meldevindu": {
-            "items": {
-              "example": "2025-04-01",
-              "format": "date",
-              "nullable": false,
-              "type": "string"
-            },
-            "nullable": false,
-            "type": "array"
+            "$ref": "#/components/schemas/no.nav.aap.Periode"
           }
         },
         "required": [
@@ -1167,7 +1147,7 @@
   "info": {
     "description": "For å teste API i dev, besøk\n<a href=\"https://tokenx-token-generator.intern.dev.nav.no/api/obo?aud=dev-gcp:aap:meldekort-backend\">Token Generator</a> for å få token.",
     "title": "AAP - Meldekort",
-    "version": "6e8be8bb9e221695afeafc31771cc54d7fee6624"
+    "version": "8fbc34b750d167576b475f7efd8f260d56bfe36f"
   },
   "openapi": "3.0.0",
   "paths": {

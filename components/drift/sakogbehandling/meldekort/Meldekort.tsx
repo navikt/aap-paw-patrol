@@ -6,7 +6,7 @@ import { MeldekortVarsler } from 'components/drift/sakogbehandling/meldekort/Mel
 import { MeldekortUtfyllinger } from 'components/drift/sakogbehandling/meldekort/MeldekortUtfyllinger';
 import { MeldekortAktuelleMeldeperioder } from 'components/drift/sakogbehandling/meldekort/MeldekortAktuelleMeldeperioder';
 import { MeldekortHistoriskeMeldeperioder } from 'components/drift/sakogbehandling/meldekort/MeldekortHistoriskeMeldeperioder';
-import { formaterPeriodeV2, perioderErLike } from 'lib/utils/date';
+import { formaterPeriode, perioderErLike } from 'lib/utils/date';
 import type { Periode } from 'lib/types/felles';
 
 export const Meldekort = ({
@@ -62,7 +62,9 @@ export const Meldekort = ({
           </div>
           <div>
             <Label>Rettighetsperiode</Label>
-            <BodyShort>{data?.sak?.rettighetsperiode && formaterPeriodeV2(data.sak?.rettighetsperiode)}</BodyShort>
+            <BodyShort>
+              {data?.sak?.rettighetsperiode && formaterPeriode(data.sak.rettighetsperiode)}
+            </BodyShort>
           </div>
           {data && data.sak && !perioderErLike(data.sak?.rettighetsperiode, sakRettighetsperiode) && (
             <Alert variant="warning">
