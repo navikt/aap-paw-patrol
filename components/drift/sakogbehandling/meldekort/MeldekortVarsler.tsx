@@ -1,6 +1,6 @@
 import { Alert, Box, Heading, Table } from '@navikt/ds-react';
 import type { Varsel } from 'lib/types/meldekort';
-import { formaterDatoMedTidspunktSekunderForFrontend, formaterPeriodeV2 } from 'lib/utils/date';
+import { formaterDatoMedTidspunktSekunderForFrontend, formaterPeriode } from 'lib/utils/date';
 
 export const MeldekortVarsler = ({ varsler }: { varsler: Varsel[] }) => {
   let sorterteVarlser = [...varsler].sort((a, b) => a.sendingstidspunkt.localeCompare(b.sendingstidspunkt));
@@ -39,7 +39,7 @@ export const MeldekortVarsler = ({ varsler }: { varsler: Varsel[] }) => {
                 <Table.DataCell>{varsel.varselId}</Table.DataCell>
                 <Table.DataCell>{varsel.typeVarsel}</Table.DataCell>
                 <Table.DataCell>{varsel.typeVarselOm}</Table.DataCell>
-                <Table.DataCell>{formaterPeriodeV2(varsel.forPeriode)}</Table.DataCell>
+                <Table.DataCell>{formaterPeriode(varsel.forPeriode)}</Table.DataCell>
                 <Table.DataCell>{varsel.status}</Table.DataCell>
                 <Table.DataCell>{formaterDatoMedTidspunktSekunderForFrontend(varsel.sendingstidspunkt)}</Table.DataCell>
                 <Table.DataCell>{formaterDatoMedTidspunktSekunderForFrontend(varsel.opprettet)}</Table.DataCell>

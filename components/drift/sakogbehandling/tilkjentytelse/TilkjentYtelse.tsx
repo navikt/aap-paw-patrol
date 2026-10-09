@@ -65,10 +65,11 @@ export const TilkjentYtelse = ({ behandlingsreferanse }: { behandlingsreferanse:
             return periode.vurdertePerioder.map((vurdertPeriode, vurdertPeriodeIndex) => (
               <Table.Row key={crypto.randomUUID()}>
                 <Table.DataCell textSize="small">
-                  {vurdertPeriodeIndex === 0 && formaterPeriode(periode.meldeperiode.fom, periode.meldeperiode.tom)}
+                  {vurdertPeriodeIndex === 0 &&
+                    formaterPeriode({ fom: periode.meldeperiode.fom, tom: periode.meldeperiode.tom })}
                 </Table.DataCell>
                 <Table.DataCell textSize="small">
-                  {formaterPeriode(vurdertPeriode.periode.fom, vurdertPeriode.periode.tom)}
+                  {formaterPeriode({ fom: vurdertPeriode.periode.fom, tom: vurdertPeriode.periode.tom })}
                 </Table.DataCell>
                 <Table.DataCell textSize="small">{formaterTilNok(vurdertPeriode.felter.dagsats)}</Table.DataCell>
                 <Table.DataCell textSize="small">{formaterTilNok(vurdertPeriode.felter.barnetillegg)}</Table.DataCell>

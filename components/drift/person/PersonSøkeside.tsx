@@ -4,7 +4,7 @@ import { Alert, Box, Button, Heading, Link, Table, TextField, VStack } from '@na
 import { useCallback, useEffect, useState } from 'react';
 import { MagnifyingGlassIcon } from '@navikt/aksel-icons';
 import { Periode } from 'lib/types/felles';
-import { formaterPeriodeV2 } from 'lib/utils/date';
+import { formaterPeriode } from 'lib/utils/date';
 import { StorageKey } from 'lib/keys';
 import { hentJournalposterForPerson } from 'lib/clientApi';
 import { InnkommendeJournalpostDto } from 'lib/types/postmottak';
@@ -145,7 +145,7 @@ export const PersonSøkeside = () => {
                     <Table.DataCell>
                       <Link href={`/drift/sak/${sak.saksnummer}`}>{sak.saksnummer}</Link>
                     </Table.DataCell>
-                    <Table.DataCell>{formaterPeriodeV2(sak.rettighetsperiode)}</Table.DataCell>
+                    <Table.DataCell>{formaterPeriode(sak.rettighetsperiode)}</Table.DataCell>
                   </Table.Row>
                 ))}
               </Table.Body>

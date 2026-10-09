@@ -1670,6 +1670,7 @@
           }
         ],
         "tags": [
+          "Syfo",
           "Tilgangkontrollert"
         ]
       }
@@ -1707,6 +1708,7 @@
           }
         ],
         "tags": [
+          "Syfo",
           "Tilgangkontrollert"
         ]
       }
@@ -1752,6 +1754,7 @@
           }
         ],
         "tags": [
+          "Syfo",
           "Tilgangkontrollert"
         ]
       }
@@ -1787,6 +1790,7 @@
           }
         ],
         "tags": [
+          "Syfo",
           "Tilgangkontrollert"
         ]
       }
@@ -1826,6 +1830,7 @@
           }
         ],
         "tags": [
+          "Syfo",
           "Tilgangkontrollert"
         ]
       }
@@ -1861,6 +1866,7 @@
           }
         ],
         "tags": [
+          "Syfo",
           "Tilgangkontrollert"
         ]
       }
@@ -2292,6 +2298,7 @@
           }
         ],
         "tags": [
+          "Dialogmelding",
           "Tilgangkontrollert"
         ]
       }
@@ -2337,6 +2344,7 @@
           }
         ],
         "tags": [
+          "Dialogmelding",
           "Tilgangkontrollert"
         ]
       }
@@ -2383,6 +2391,7 @@
           }
         ],
         "tags": [
+          "Dialogmelding",
           "Tilgangkontrollert"
         ]
       }
@@ -2420,6 +2429,7 @@
           }
         ],
         "tags": [
+          "Påminnelse",
           "Tilgangkontrollert"
         ]
       }
@@ -2455,6 +2465,7 @@
           }
         ],
         "tags": [
+          "Påminnelse",
           "Tilgangkontrollert"
         ]
       }
@@ -2490,6 +2501,7 @@
           }
         ],
         "tags": [
+          "Påminnelse",
           "Tilgangkontrollert"
         ]
       }
@@ -2610,6 +2622,7 @@
           }
         ],
         "tags": [
+          "Test",
           "Tilgangkontrollert"
         ]
       }
@@ -2646,6 +2659,7 @@
           }
         ],
         "tags": [
+          "Test",
           "Tilgangkontrollert"
         ]
       }
@@ -2682,6 +2696,7 @@
           }
         ],
         "tags": [
+          "Test",
           "Tilgangkontrollert"
         ]
       }
@@ -2693,12 +2708,28 @@
       "name": "MotorAPI"
     },
     {
+      "description": "",
+      "name": "Syfo"
+    },
+    {
       "description": "Dette endepunktet er tilgangkontrollert.",
       "name": "Tilgangkontrollert"
     },
     {
       "description": "Endepunkter for uthenting og behandling av dokumenter i SAF / Dokarkiv",
       "name": "Dokumenter"
+    },
+    {
+      "description": "Endepunkter relatert til dialogmelding.",
+      "name": "Dialogmelding"
+    },
+    {
+      "description": "Endepunkter relatert til påminnelser.",
+      "name": "Påminnelse"
+    },
+    {
+      "description": "Endepunkter som kun skal være tilgjengelig i test.",
+      "name": "Test"
     }
   ]
 }

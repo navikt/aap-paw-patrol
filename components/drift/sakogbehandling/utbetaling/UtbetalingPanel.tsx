@@ -70,7 +70,9 @@ export const UtbetalingPanel = ({ saksnummer }: { saksnummer: string }) => {
         <Table.Body>
           {resultat.utbetalinger.map((utbetaling) => (
             <Table.Row key={utbetaling.utbetalingRef}>
-              <Table.DataCell textSize="small">{formaterPeriode(utbetaling.fom, utbetaling.tom)}</Table.DataCell>
+              <Table.DataCell textSize="small">
+                {formaterPeriode({ fom: utbetaling.fom, tom: utbetaling.tom })}
+              </Table.DataCell>
               <Table.DataCell textSize="small">{formaterDatoForFrontend(utbetaling.utbetalingsdato)}</Table.DataCell>
               <Table.DataCell textSize="small">{formaterTilNok(utbetaling.fastsattDagsats)}</Table.DataCell>
               <Table.DataCell textSize="small">{formaterTilNok(utbetaling.beløp)}</Table.DataCell>
