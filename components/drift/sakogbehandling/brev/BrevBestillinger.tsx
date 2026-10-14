@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Alert, Box, Heading, Loader, Table, Tag } from '@navikt/ds-react';
+import { Alert, BodyShort, Box, Button, Dialog, Heading, HStack, Loader, Table, Tag } from '@navikt/ds-react';
 import { hentBrevbestillingerForBehandling, hentBrevbestillingerForSak } from 'lib/clientApi';
 import { BrevbestillingDriftsinfoDto } from 'lib/types/brev';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
+import { EyeIcon } from '@navikt/aksel-icons';
 
 const statusVariant = (status: string | null): 'success' | 'warning' | 'error' | 'neutral' => {
   switch (status) {
@@ -81,6 +82,7 @@ const BrevBestillingTabell = ({ bestillinger }: { bestillinger: BrevbestillingDr
             <Table.HeaderCell>Språk</Table.HeaderCell>
             <Table.HeaderCell>Status</Table.HeaderCell>
             <Table.HeaderCell>Prosesseringsstatus</Table.HeaderCell>
+            <Table.HeaderCell>Signaturer</Table.HeaderCell>
             <Table.HeaderCell>Opprettet</Table.HeaderCell>
             <Table.HeaderCell>Oppdatert</Table.HeaderCell>
           </Table.Row>
@@ -104,6 +106,44 @@ const BrevBestillingTabell = ({ bestillinger }: { bestillinger: BrevbestillingDr
                   <Tag variant={statusVariant(brev.prosesseringStatus)} size="small">
                     {brev.prosesseringStatus}
                   </Tag>
+                )}
+              </Table.DataCell>
+              <Table.DataCell>
+                {brev.signaturer.length ? (
+                  <HStack gap="space-16">
+                    <BodyShort>{brev.signaturer.length}</BodyShort>
+                    <Dialog>
+                      <Dialog.Trigger>
+                        <Button size="xsmall" variant="secondary" icon={<EyeIcon />}>
+                          Vis
+                        </Button>
+                      </Dialog.Trigger>
+                      <Dialog.Popup>
+                        <Dialog.Body>
+                          <Table size="small">
+                            <Table.Header>
+                              <Table.Row>
+                                <Table.HeaderCell>NavIdent</Table.HeaderCell>
+                                <Table.HeaderCell>Rolle</Table.HeaderCell>
+                                <Table.HeaderCell>Enhet</Table.HeaderCell>
+                              </Table.Row>
+                            </Table.Header>
+                            <Table.Body>
+                              {brev.signaturer.map((signatur) => (
+                                <Table.Row key={signatur.navIdent}>
+                                  <Table.DataCell>{signatur.navIdent}</Table.DataCell>
+                                  <Table.DataCell>{signatur.rolle || '-'}</Table.DataCell>
+                                  <Table.DataCell>{signatur.enhet || '-'}</Table.DataCell>
+                                </Table.Row>
+                              ))}
+                            </Table.Body>
+                          </Table>
+                        </Dialog.Body>
+                      </Dialog.Popup>
+                    </Dialog>
+                  </HStack>
+                ) : (
+                  'Ingen'
                 )}
               </Table.DataCell>
               <Table.DataCell>{formaterDatoMedTidspunktSekunderForFrontend(brev.opprettet)}</Table.DataCell>

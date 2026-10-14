@@ -22,4 +22,10 @@ export interface BrevbestillingDriftsinfoDto {
   språk: string;
   status: BrevStatus | null;
   prosesseringStatus: BrevProsesseringStatus | null;
+  signaturer: {
+    navIdent: string;
+    sorteringsnøkkel: number;
+    rolle?: string;
+    enhet?: string;
+  }[];
 }
