@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { MagnifyingGlassIcon } from '@navikt/aksel-icons';
 import { useRouter } from 'next/navigation';
 import { erFødselsnummer, erSaksnummer } from 'lib/utils/validering.ts';
+import { normaliserSaksnummer } from 'lib/utils/formatting.ts';
 
 export const SakSøkeside = () => {
   const [saksnummer, setSaksnummer] = useState('');
@@ -18,7 +19,7 @@ export const SakSøkeside = () => {
         e.preventDefault();
 
         if (erSaksnummer(saksnummer)) {
-          router.replace(`/drift/sak/${saksnummer}`);
+          router.replace(`/drift/sak/${normaliserSaksnummer(saksnummer)}`);
           setError(undefined);
         } else if (erFødselsnummer(saksnummer)) {
           setError(
