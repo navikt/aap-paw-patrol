@@ -2,6 +2,7 @@ import { Alert, Heading } from '@navikt/ds-react';
 import { Page, PageBlock } from '@navikt/ds-react/Page';
 import { redirect } from 'next/navigation';
 import { erFødselsnummer, erSaksnummer } from 'lib/utils/validering.ts';
+import { normaliserSaksnummer } from 'lib/utils/formatting.ts';
 
 interface Props {
   searchParams: Promise<{ q?: string }>;
@@ -36,7 +37,7 @@ export default async function SøkPage({ searchParams }: Props) {
   }
 
   if (erSaksnummer(søkeord)) {
-    redirect(`/drift/sak/${søkeord}`);
+    redirect(`/drift/sak/${normaliserSaksnummer(søkeord)}`);
   }
 
   return (

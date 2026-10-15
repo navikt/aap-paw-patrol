@@ -34,3 +34,10 @@ export function formaterTilProsent(sum?: number | null): string {
   }
   return `${sum} %`;
 }
+
+/**
+ * Sikrer at saksnummer har gyldig format
+ **/
+export const normaliserSaksnummer = (saksnummer: string) => {
+  return saksnummer.toUpperCase().replaceAll('O', 'o').replaceAll('I', 'i');
+};

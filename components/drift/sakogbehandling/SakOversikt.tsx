@@ -5,7 +5,7 @@ import { Alert, BodyShort, Box, Heading, HGrid, HStack, Loader, Tabs, Tag, VStac
 import { hentSakDriftsinfo } from 'lib/clientApi';
 import { SakDriftsinfoDTO } from 'lib/types/avklaringsbehov';
 import { SakInfoPanel } from 'components/drift/sakogbehandling/SakInfoPanel';
-import { capitalize } from 'lib/utils/formatting';
+import { capitalize, normaliserSaksnummer } from 'lib/utils/formatting';
 import { BehandlingOversikt } from 'components/drift/sakogbehandling/BehandlingOversikt';
 import { MottatteDokumenter } from 'components/drift/sakogbehandling/dokumenter/MottatteDokumenter';
 import { Dialogmeldinger } from 'components/drift/sakogbehandling/dialogmeldinger/Dialogmeldinger';
@@ -22,13 +22,7 @@ enum Tab {
   UTBETALING = 'UTBETALING',
 }
 
-export const SakOversikt = ({
-  saksnummer,
-  harDriftTilgang,
-}: {
-  saksnummer: string;
-  harDriftTilgang: boolean;
-}) => {
+export const SakOversikt = ({ saksnummer, harDriftTilgang }: { saksnummer: string; harDriftTilgang: boolean }) => {
   const [error, setError] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [sak, setSak] = useState<SakDriftsinfoDTO>();
@@ -39,7 +33,7 @@ export const SakOversikt = ({
     setError(undefined);
 
     try {
-      await hentSakDriftsinfo(saksnummer.trim())
+      await hentSakDriftsinfo(normaliserSaksnummer(saksnummer.trim()))
         .then(async (res) => {
           if (res.ok) return await res.json();
           else throw Error(await res.text());
