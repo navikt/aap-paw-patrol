@@ -309,6 +309,37 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.utbetal.migrering.ErMigrertRequestDto": {
+        "nullable": false,
+        "properties": {
+          "personIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "personIdent",
+          "saksnummer"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.migrering.ErMigrertResponseDto": {
+        "nullable": false,
+        "properties": {
+          "migrert": {
+            "nullable": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "migrert"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.utbetal.migrering.MigrerSakDto": {
         "nullable": false,
         "properties": {
@@ -471,6 +502,177 @@
         "required": [
           "simuleringDto",
           "utbetalingDto"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.simuleringv2.InfoDto": {
+        "nullable": false,
+        "properties": {
+          "fagsystem": {
+            "nullable": false,
+            "type": "string"
+          },
+          "message": {
+            "nullable": false,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "FEILET",
+              "OK_UTEN_ENDRING",
+              "UGYLDIG_REQUEST",
+              "UTILGJENGELIG"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fagsystem",
+          "message",
+          "status"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.simuleringv2.PosteringDto": {
+        "nullable": false,
+        "properties": {
+          "beløp": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "klassekode": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "type": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "beløp",
+          "fom",
+          "klassekode",
+          "tom",
+          "type"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.simuleringv2.SimuleringDto": {
+        "nullable": false,
+        "properties": {
+          "perioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.utbetal.simuleringv2.SimuleringsperiodeDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "perioder"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.simuleringv2.SimuleringsperiodeDto": {
+        "nullable": false,
+        "properties": {
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "utbetalinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.utbetal.simuleringv2.SimulertUtbetalingDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "fom",
+          "tom",
+          "utbetalinger"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.simuleringv2.SimuleringsresponseDto": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/no.nav.aap.utbetal.simuleringv2.InfoDto"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.utbetal.simuleringv2.SimuleringDto"
+          }
+        ]
+      },
+      "no.nav.aap.utbetal.simuleringv2.SimulertUtbetalingDto": {
+        "nullable": false,
+        "properties": {
+          "fagsystem": {
+            "nullable": false,
+            "type": "string"
+          },
+          "nyttBeløp": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "posteringer": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.utbetal.simuleringv2.PosteringDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "sakId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "stønadstype": {
+            "nullable": false,
+            "type": "string"
+          },
+          "tidligereUtbetalt": {
+            "format": "int32",
+            "nullable": false,
+            "type": "integer"
+          },
+          "utbetalesTil": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fagsystem",
+          "nyttBeløp",
+          "posteringer",
+          "sakId",
+          "stønadstype",
+          "tidligereUtbetalt",
+          "utbetalesTil"
         ],
         "type": "object"
       },
@@ -1625,7 +1827,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/no.nav.aap.utbetal.simulering.SimuleringDto"
+                  "$ref": "#/components/schemas/no.nav.aap.utbetal.simuleringv2.SimuleringsresponseDto"
                 }
               }
             },
@@ -1696,6 +1898,41 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/no.nav.aap.utbetal.migrering.MigreringsresultatDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/migrert/sak": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.utbetal.migrering.ErMigrertRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.utbetal.migrering.ErMigrertResponseDto"
                 }
               }
             },

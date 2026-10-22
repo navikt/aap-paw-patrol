@@ -686,7 +686,7 @@ export interface paths {
             };
             requestBody?: {
                 content: {
-                    "application/json": components["schemas"]["dokumentinnhenting.api.HentDokumentoversiktBrukerRequest"];
+                    "application/json": components["schemas"]["dokumentinnhenting.api.`DokumentApiKt$dokumentApi$1$HelsedokumenterRequest`"];
                 };
             };
             responses: {
@@ -1439,7 +1439,6 @@ export interface components {
         };
         "dokumentinnhenting.api.HentDokumentoversiktBrukerRequest": {
             personIdent: string;
-            saksnummer?: string | null;
             statuser: ("AVBRUTT" | "EKSPEDERT" | "FEILREGISTRERT" | "FERDIGSTILT" | "JOURNALFOERT" | "MOTTATT" | "OPPLASTING_DOKUMENT" | "RESERVERT" | "UKJENT" | "UKJENT_BRUKER" | "UNDER_ARBEID" | "UTGAAR")[];
             tema: string[];
             typer: ("I" | "N" | "U")[];
@@ -1453,6 +1452,10 @@ export interface components {
         "dokumentinnhenting.api.TestRequest": {
             /** Format: uuid */
             dialogid: string;
+        };
+        "dokumentinnhenting.api.`DokumentApiKt$dokumentApi$1$HelsedokumenterRequest`": {
+            personIdent: string;
+            saksnummer: string;
         };
         "dokumentinnhenting.integrasjoner.dokarkiv.KnyttTilAnnenSakRequest": {
             bruker: components["schemas"]["dokumentinnhenting.integrasjoner.dokarkiv.OpprettJournalpostRequest.Bruker"];

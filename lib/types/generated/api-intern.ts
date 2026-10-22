@@ -897,7 +897,7 @@ export interface paths {
                          *         {
                          *           "status": "LØPENDE",
                          *           "saksnummer": "4MGL8LS",
-                         *           "vedtaksdato": "2026-10-09",
+                         *           "vedtaksdato": "2026-10-20",
                          *           "periode": {
                          *             "fraOgMedDato": "2021-01-01",
                          *             "tilOgMedDato": "2021-01-31"
@@ -1277,6 +1277,44 @@ export interface paths {
             requestBody?: {
                 content: {
                     "application/json": components["schemas"]["no.nav.aap.api.intern.behandlingsflyt.NyS\u00F8knadDto"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/insert/behandling-visning": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Behandling-visning for bruk i innbygger-eksponerte konsumenter */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingVisningRequest"];
                 };
             };
             responses: {
@@ -1866,16 +1904,22 @@ export interface components {
         };
         "no.nav.aap.api.intern.DabSak": components["schemas"]["no.nav.aap.api.intern.DabSak.Arena"] | components["schemas"]["no.nav.aap.api.intern.DabSak.Kelvin"];
         "no.nav.aap.api.intern.DabSak.Arena": {
-            /** @enum {string} */
-            kilde: "ARENA" | "KELVIN";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            kilde: "ARENA";
             periode: components["schemas"]["no.nav.aap.api.intern.Periode"];
             sakId: string;
             /** @enum {string} */
             statusKode: "AVSLU" | "FORDE" | "GODKJ" | "INNST" | "IVERK" | "KONT" | "MOTAT" | "OPPRE" | "REGIS" | "UKJENT";
         };
         "no.nav.aap.api.intern.DabSak.Kelvin": {
-            /** @enum {string} */
-            kilde: "ARENA" | "KELVIN";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            kilde: "KELVIN";
             perioder: components["schemas"]["no.nav.aap.api.intern.Periode"][];
             sakId: string;
             /** @enum {string} */
@@ -2230,10 +2274,10 @@ export interface components {
         "no.nav.aap.api.intern.SakStatus": components["schemas"]["no.nav.aap.api.intern.SakStatus.Arena"] | components["schemas"]["no.nav.aap.api.intern.SakStatus.Kelvin"];
         "no.nav.aap.api.intern.SakStatus.Arena": {
             /**
-             * @example ARENA
+             * @description discriminator enum property added by openapi-typescript
              * @enum {string}
              */
-            kilde: "ARENA" | "KELVIN";
+            kilde: "ARENA";
             periode: components["schemas"]["no.nav.aap.api.intern.Periode"];
             sakId: string;
             /** @enum {string} */
@@ -2247,10 +2291,10 @@ export interface components {
              */
             forelopigMaksdato?: string | null;
             /**
-             * @example KELVIN
+             * @description discriminator enum property added by openapi-typescript
              * @enum {string}
              */
-            kilde: "ARENA" | "KELVIN";
+            kilde: "KELVIN";
             periode: components["schemas"]["no.nav.aap.api.intern.Periode"];
             perioder: components["schemas"]["no.nav.aap.api.intern.Periode"][];
             sakId: string;
@@ -2303,16 +2347,22 @@ export interface components {
         };
         "no.nav.aap.api.intern.SyfoSak": components["schemas"]["no.nav.aap.api.intern.SyfoSak.Arena"] | components["schemas"]["no.nav.aap.api.intern.SyfoSak.Kelvin"];
         "no.nav.aap.api.intern.SyfoSak.Arena": {
-            /** @enum {string} */
-            kilde: "ARENA" | "KELVIN";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            kilde: "ARENA";
             sakid: string;
             /** @enum {string} */
             statuskode: "AVSLU" | "FORDE" | "GODKJ" | "INNST" | "IVERK" | "KONT" | "MOTAT" | "OPPRE" | "REGIS" | "UKJENT";
             vedtak: components["schemas"]["no.nav.aap.api.intern.SyfoVedtak"][];
         };
         "no.nav.aap.api.intern.SyfoSak.Kelvin": {
-            /** @enum {string} */
-            kilde: "ARENA" | "KELVIN";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            kilde: "KELVIN";
             sakid: string;
             /** @description Dato for alle søknader på saken. Sortert i stigende rekkefølge. */
             soknadsdatoer: string[];
@@ -2553,6 +2603,8 @@ export interface components {
             sisteVedtak?: components["schemas"]["no.nav.aap.arenaoppslag.kontrakt.apiv1.VedtakMedMaksdato"];
             under52Uker?: boolean | null;
         };
+        /** Format: uuid */
+        "no.nav.aap.behandlingsflyt.kontrakt.behandling.BehandlingReferanse": string;
         "no.nav.aap.behandlingsflyt.kontrakt.datadeling.ArbeidIPeriodeDTO": {
             /**
              * Format: date
@@ -2585,6 +2637,29 @@ export interface components {
         "no.nav.aap.behandlingsflyt.kontrakt.datadeling.BarnMedBarnetilleggDTO": {
             ident?: string | null;
             perioderMedBarnetillegg: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.datadeling.PeriodeMedBel\u00F8pDTO"][];
+        };
+        "no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelseDto": {
+            /** @enum {string} */
+            navn: "FERDIG_BEHANDLET" | "SØKNAD_MOTTATT" | "SØKNAD_TRUKKET" | "UNDER_BEHANDLING" | "VENTER_PÅ_MEDISINSKE_OPPLYSNINGER" | "VENTER_PÅ_OPPLYSNINGER" | "VENTER_PÅ_OPPLYSNINGER_FRA_UTENLANDSKE_MYNDIGHETER" | "VENTER_PÅ_SVAR_FRA_BRUKER" | "VENTER_PÅ_SVAR_PÅ_FORHÅNDSVARSEL";
+            /** @enum {string} */
+            status: "AKTIV" | "FULLFØRT" | "IKKE_PÅBEGYNT";
+            /**
+             * Format: date-time
+             * @example 2025-04-01T12:30:00
+             */
+            tidsstempel: string;
+        };
+        "no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingVisningDto": {
+            avsluttet: boolean;
+            behandlingReferanse: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.behandling.BehandlingReferanse"];
+            /** @enum {string} */
+            behandlingType: "KLAGE" | "SØKNAD";
+            hendelser: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelseDto"][];
+        };
+        "no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingVisningRequest": {
+            behandling: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingVisningDto"];
+            ident: string;
+            saksnummer: string;
         };
         "no.nav.aap.behandlingsflyt.kontrakt.datadeling.DatadelingDTO": {
             arenavedtak: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.datadeling.ArenavedtakDTO"][];

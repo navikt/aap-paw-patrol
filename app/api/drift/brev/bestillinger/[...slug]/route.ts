@@ -3,7 +3,7 @@ import { getBaseUrlAndScopeForApp } from 'lib/services/driftService';
 import { fetchProxy } from 'lib/services/fetchProxy';
 import { components } from 'lib/types/generated/brev';
 
-type BrevbestillingDriftsinfoDto = components['schemas']['no.nav.aap.brev.api.BrevbestillingDriftsinfoDto'];
+type BrevbestillingDriftsinfoDto = components['schemas']['no.nav.aap.brev.drift.BrevbestillingDriftsinfoDto'];
 
 export async function GET(_: NextRequest, { params }: { params: Promise<{ slug: string[] }> }) {
   const { slug } = await params;
