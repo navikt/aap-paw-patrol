@@ -312,6 +312,9 @@
       "no.nav.aap.behandlingsflyt.kontrakt.hendelse.BehandlingFlytStoppetHendelse": {
         "nullable": false,
         "properties": {
+          "aktivtAvklaringsbehov": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.avklaringsbehov.Definisjon"
+          },
           "aktivtSteg": {
             "enum": [
               "ARBEIDSOPPTRAPPING",
@@ -1073,13 +1076,13 @@
       "no.nav.aap.oppgave.ForespørselSendtTilBehandlerDto": {
         "nullable": false,
         "properties": {
-          "påminnelseDato": {
-            "example": "2025-04-01T12:30:00",
-            "format": "date-time",
+          "påminnelseAvbrutt": {
             "nullable": true,
-            "type": "string"
+            "type": "boolean"
           },
-          "påminnelseStatus": {
+          "påminnelseDato": {
+            "example": "2025-04-01",
+            "format": "date",
             "nullable": true,
             "type": "string"
           }
@@ -1117,6 +1120,30 @@
         },
         "required": [
           "dokumentType"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.oppgave.OppdaterPåminnelseRequest": {
+        "nullable": false,
+        "properties": {
+          "påminnelseAvbrutt": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "påminnelseDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "referanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "referanse"
         ],
         "type": "object"
       },
@@ -3096,6 +3123,9 @@
       "no.nav.aap.postmottak.kontrakt.hendelse.DokumentflytStoppetHendelse": {
         "nullable": false,
         "properties": {
+          "aktivtAvklaringsbehov": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.kontrakt.avklaringsbehov.Definisjon"
+          },
           "avklaringsbehov": {
             "items": {
               "$ref": "#/components/schemas/no.nav.aap.postmottak.kontrakt.hendelse.AvklaringsbehovHendelseDto"
@@ -3309,6 +3339,34 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.TilbakekrevingsbehandlingOppdatertHendelse"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/oppdater-paaminnelse": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.oppgave.OppdaterPåminnelseRequest"
               }
             }
           }

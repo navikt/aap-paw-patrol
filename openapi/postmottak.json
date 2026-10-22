@@ -852,6 +852,10 @@
           "skalTilAap": {
             "nullable": false,
             "type": "boolean"
+          },
+          "tema": {
+            "nullable": true,
+            "type": "string"
           }
         },
         "required": [
@@ -1441,6 +1445,40 @@
           "skalTilAap": {
             "nullable": false,
             "type": "boolean"
+          },
+          "tema": {
+            "enum": [
+              "AAP",
+              "BAR",
+              "BID",
+              "DAG",
+              "ENF",
+              "ERS",
+              "EYB",
+              "EYO",
+              "FEI",
+              "FOR",
+              "FUL",
+              "GEN",
+              "GRU",
+              "IND",
+              "INN",
+              "KOM",
+              "OMS",
+              "OPP",
+              "PEN",
+              "SAK",
+              "SER",
+              "SYK",
+              "TIL",
+              "TRK",
+              "TSO",
+              "UFO",
+              "UKJENT",
+              "YRK"
+            ],
+            "nullable": true,
+            "type": "string"
           }
         },
         "required": [

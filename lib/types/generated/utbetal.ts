@@ -723,7 +723,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["no.nav.aap.utbetal.simulering.SimuleringDto"];
+                        "application/json": components["schemas"]["no.nav.aap.utbetal.simuleringv2.SimuleringsresponseDto"];
                     };
                 };
             };
@@ -802,6 +802,45 @@ export interface paths {
                     };
                     content: {
                         "application/json": components["schemas"]["no.nav.aap.utbetal.migrering.MigreringsresultatDto"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/migrert/sak": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["no.nav.aap.utbetal.migrering.ErMigrertRequestDto"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["no.nav.aap.utbetal.migrering.ErMigrertResponseDto"];
                     };
                 };
             };
@@ -916,6 +955,13 @@ export interface components {
         "no.nav.aap.utbetal.admin.UtbetalingstidslinjeDto": {
             utbetalinger: components["schemas"]["no.nav.aap.utbetal.admin.UtbetalingDto"][];
         };
+        "no.nav.aap.utbetal.migrering.ErMigrertRequestDto": {
+            personIdent: string;
+            saksnummer: string;
+        };
+        "no.nav.aap.utbetal.migrering.ErMigrertResponseDto": {
+            migrert: boolean;
+        };
         "no.nav.aap.utbetal.migrering.MigrerSakDto": {
             dryRun: boolean;
             saksnummer: string;
@@ -958,6 +1004,56 @@ export interface components {
         "no.nav.aap.utbetal.simulering.UtbetalingOgSimuleringDto": {
             simuleringDto: components["schemas"]["no.nav.aap.utbetal.simulering.SimuleringDto"];
             utbetalingDto: components["schemas"]["no.nav.aap.utbetaling.UtbetalingDto"];
+        };
+        "no.nav.aap.utbetal.simuleringv2.InfoDto": {
+            fagsystem: string;
+            message: string;
+            /** @enum {string} */
+            status: "FEILET" | "OK_UTEN_ENDRING" | "UGYLDIG_REQUEST" | "UTILGJENGELIG";
+        };
+        "no.nav.aap.utbetal.simuleringv2.PosteringDto": {
+            /** Format: int32 */
+            "bel\u00F8p": number;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            fom: string;
+            klassekode: string;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            tom: string;
+            type: string;
+        };
+        "no.nav.aap.utbetal.simuleringv2.SimuleringDto": {
+            perioder: components["schemas"]["no.nav.aap.utbetal.simuleringv2.SimuleringsperiodeDto"][];
+        };
+        "no.nav.aap.utbetal.simuleringv2.SimuleringsperiodeDto": {
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            fom: string;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            tom: string;
+            utbetalinger: components["schemas"]["no.nav.aap.utbetal.simuleringv2.SimulertUtbetalingDto"][];
+        };
+        "no.nav.aap.utbetal.simuleringv2.SimuleringsresponseDto": components["schemas"]["no.nav.aap.utbetal.simuleringv2.InfoDto"] | components["schemas"]["no.nav.aap.utbetal.simuleringv2.SimuleringDto"];
+        "no.nav.aap.utbetal.simuleringv2.SimulertUtbetalingDto": {
+            fagsystem: string;
+            /** Format: int32 */
+            "nyttBel\u00F8p": number;
+            posteringer: components["schemas"]["no.nav.aap.utbetal.simuleringv2.PosteringDto"][];
+            sakId: string;
+            "st\u00F8nadstype": string;
+            /** Format: int32 */
+            tidligereUtbetalt: number;
+            utbetalesTil: string;
         };
         "no.nav.aap.utbetal.tilkjentytelse.MeldeperiodeDto": {
             /**

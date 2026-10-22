@@ -4153,6 +4153,48 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/brev/{brevbestillingReferanse}/oppdater-mottakere": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description brevbestillingReferanse */
+                    brevbestillingReferanse: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["no.nav.aap.brev.kontrakt.OppdaterMottakereRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": string;
+                    };
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/brev/{brevbestillingReferanse}/oppdater-brevdata": {
         parameters: {
             query?: never;
@@ -4389,6 +4431,48 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/{brevbestillingReferanse}/v2/kan-distribuere-brev": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description brevbestillingReferanse */
+                    brevbestillingReferanse: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["no.nav.aap.brev.kontrakt.KanDistribuereBrevV2Request"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": boolean;
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/dokumentinnhenting/syfo/fastlege/{saksnummer}": {
         parameters: {
             query?: never;
@@ -4607,6 +4691,44 @@ export interface paths {
                     };
                     content: {
                         "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.behandlerdialog.MeldingerResponse"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/dokumentinnhenting/syfo/dialogmeldinger/legeerklaering/{behandlingsReferanse}/ubesvarte-foresporsler": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description behandlingsReferanse */
+                    behandlingsReferanse: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.behandlerdialog.UbesvarteForesp\u00F8rslerLegeerkl\u00E6ringResponse"];
                     };
                 };
             };
@@ -6332,7 +6454,7 @@ export interface components {
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.flate.L\u00F8sPeriodisertAvklaringsbehovP\u00E5Behandling": {
             /** Format: int64 */
             behandlingVersjon: number;
-            behov: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.PeriodisertAvklaringsbehovL\u00F8sning<*>"];
+            behov: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.PeriodisertAvklaringsbehovL\u00F8sning"];
             /** Format: uuid */
             referanse: string;
         };
@@ -6344,200 +6466,320 @@ export interface components {
             grunner?: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.\u00C5rsakTilRetur"][] | null;
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.ArbeidsopptrappingL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5057";
             "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.arbeidsopptrapping.ArbeidsopptrappingL\u00F8sningDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvbrytAktivitetspliktbehandlingL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "4301";
             vurdering: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.aktivitetsplikt.avbrytaktivitetspliktbehandling.AvbrytAktivitetspliktbehandlingL\u00F8sningDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvbrytRevurderingL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5033";
             vurdering: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avbrytrevurdering.flate.AvbrytRevurderingVurderingDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarBarnetilleggL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5009";
             vurderingerForBarnetillegg: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.barn.VurderingerForBarnetillegg"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarBistandsbehovL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5006";
             "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.bistandsbehov.BistandL\u00F8sningDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarHelseinstitusjonL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5011";
             helseinstitusjonVurdering: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.institusjon.flate.HelseinstitusjonVurderingerDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarManuellInntektVurderingL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "7001";
             manuellVurderingForManglendeInntekt: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.beregning.ManuellInntektVurderingDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarOppf\u00F8lgingLokalkontorL\u00F8sning": {
             "avklarOppf\u00F8lgingsbehovVurdering": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.oppf\u00F8lgingsbehandling.Oppf\u00F8lgingsoppgaveGrunnlagDto"];
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "8001";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarOppf\u00F8lgingNAYL\u00F8sning": {
             "avklarOppf\u00F8lgingsbehovVurdering": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.oppf\u00F8lgingsbehandling.Oppf\u00F8lgingsoppgaveGrunnlagDto"];
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "8002";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarOppholdskravL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5035";
             "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.oppholdskrav.AvklarOppholdkravL\u00F8sningForPeriodeDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarOvergangArbeidL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5032";
             "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.overgangarbeid.flate.OvergangArbeidVurderingL\u00F8sningDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarOvergangUf\u00F8reL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5031";
             "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.overgangufore.flate.OvergangUf\u00F8reL\u00F8sningDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarPeriodisertForutg\u00E5endeMedlemskapL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5020";
             "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.lovvalgmedlemskap.PeriodisertManuellVurderingForForutg\u00E5endeMedlemskapDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarPeriodisertLovvalgMedlemskapL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5017";
             "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.lovvalgmedlemskap.PeriodisertManuellVurderingForLovvalgMedlemskapDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarPeriodisertOverstyrtForutg\u00E5endeMedlemskapL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5022";
             "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.lovvalgmedlemskap.PeriodisertManuellVurderingForForutg\u00E5endeMedlemskapDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarPeriodisertOverstyrtLovvalgMedlemskapL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5021";
             "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.lovvalgmedlemskap.PeriodisertManuellVurderingForLovvalgMedlemskapDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSamordningAndreStatligeYtelserL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5027";
             samordningAndreStatligeYtelserVurdering: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.delvurdering.samordning.andrestatligeytelservurdering.SamordningAndreStatligeYtelserVurderingDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSamordningArbeidsgiverL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5030";
             samordningArbeidsgiverVurdering: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.delvurdering.samordning.arbeidsgiver.SamordningArbeidsgiverVurderingerDTO"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSamordningBarnepensjonL\u00F8sning": {
             barnepensjonVurdering: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.barnepensjon.BarnepensjonL\u00F8sningDto"];
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5036";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSamordningGraderingL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5012";
             vurderingerForSamordning: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.samordning.VurderingerForSamordning"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSamordningSykestipendL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5034";
             sykestipendVurdering: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.student.sykestipend.SamordningSykestipendVurderingDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSamordningUf\u00F8reL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5024";
             "samordningUf\u00F8reVurdering": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.delvurdering.samordning.uf\u00F8revurdering.SamordningUf\u00F8reVurderingDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSoningsforholdL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5010";
             soningsvurdering: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.institusjon.flate.SoningsvurderingerDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarStudentL\u00F8sningV2": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5037";
             "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.student.PeriodisertStudentDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSt\u00F8nadsperiodeL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5039";
             "st\u00F8nadsperiodeVurderinger": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.st\u00F8nadsperiode.St\u00F8nadsperiodeL\u00F8sningDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSykdomL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5003";
             "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.sykdom.flate.SykdomsvurderingL\u00F8sningDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarVedtakslengdeL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5059";
             "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.vedtakslengde.VedtakslengdeVurderingDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarYrkesskadeL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5013";
             yrkesskadesvurdering: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.YrkesskadevurderingDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.BekreftTotalvurderingKlageL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "6006";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.BekreftVurderingerOppf\u00F8lgingL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5054";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.EnkeltAvklaringsbehovL\u00F8sning": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvbrytAktivitetspliktbehandlingL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvbrytRevurderingL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarBarnetilleggL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarHelseinstitusjonL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarManuellInntektVurderingL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarOppf\u00F8lgingLokalkontorL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarOppf\u00F8lgingNAYL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSamordningAndreStatligeYtelserL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSamordningArbeidsgiverL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSamordningBarnepensjonL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSamordningGraderingL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSamordningSykestipendL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSamordningUf\u00F8reL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSoningsforholdL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSt\u00F8nadsperiodeL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarYrkesskadeL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.BekreftTotalvurderingKlageL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.BekreftVurderingerOppf\u00F8lgingL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.FastsettBehandlendeEnhetL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.FastsettBeregningstidspunktL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.FastsettFullmektigL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.FastsettP\u00E5klagetBehandlingL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.FastsettYrkesskadeInntektL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.FatteVedtakL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.Foresl\u00E5UttakL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.Foresl\u00E5VedtakL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.Foresl\u00E5VedtakVedtakslengdeL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.H\u00E5ndterSvarFraAndreinstansL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.KvalitetssikringL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.Legeerkl\u00E6ringBestillingL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.OverstyrIkkeOppfyltMeldepliktL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.RefusjonkravL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.SamordningVentPaVirkningstidspunktL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.SattP\u00E5VentL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.SkrivForh\u00E5ndsvarselBruddAktivitetspliktBrevL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.SkrivForh\u00E5ndsvarselKlageFormkravBrevL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.SkrivVedtaksbrevKlageL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.SkrivVedtaksbrevL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.SykdomsvurderingForBrevL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.TjenestepensjonRefusjonskravL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.TrekkKlageL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.TrekkS\u00F8knadL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.UtenlandskVideref\u00F8ringL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VentP\u00E5Oppf\u00F8lgingL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VentP\u00E5Oppf\u00F8lgingNyL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VenteP\u00E5FristForh\u00E5ndsvarselAktivitetsplikt11_7L\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VenteP\u00E5FristForh\u00E5ndsvarselKlageFormkravL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VenteP\u00E5KlageimplementasjonL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderAvslag11_27L\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderBrudd11_7L\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderBrudd11_9L\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderFormkravL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderInntektsbortfallL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderKlageKontorL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderKlageNayL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderKravL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderRettighetsperiodeL\u00F8sning"];
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.EtableringEgenVirksomhetL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5058";
             "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.etableringegenvirksomhet.EtableringEgenVirksomhetL\u00F8sningDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.FastsettBehandlendeEnhetL\u00F8sning": {
             behandlendeEnhetVurdering: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.klage.behandlendeenhet.BehandlendeEnhetL\u00F8sningDto"];
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "6001";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.FastsettBeregningstidspunktL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5008";
             beregningVurdering: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.beregning.BeregningstidspunktVurderingDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.FastsettFullmektigL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "6009";
             fullmektigVurdering: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.FullmektigL\u00F8sningDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.FastsettP\u00E5klagetBehandlingL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5999";
             "p\u00E5klagetBehandlingVurdering": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.klage.p\u00E5klagetbehandling.P\u00E5klagetBehandlingVurderingL\u00F8sningDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.FastsettYrkesskadeInntektL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5014";
             yrkesskadeInntektVurdering: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.beregning.BeregningYrkeskaderBel\u00F8pVurderingDTO"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.FatteVedtakL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5099";
             vurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8ser.vedtak.TotrinnsVurdering"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.Foresl\u00E5UttakL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5096";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.Foresl\u00E5VedtakL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5098";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.Foresl\u00E5VedtakVedtakslengdeL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5060";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.FullmektigL\u00F8sningDto": {
             fullmektigIdentMedType?: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.klage.fullmektig.IdentMedType"];
@@ -6545,8 +6787,11 @@ export interface components {
             harFullmektig: boolean;
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.H\u00E5ndterSvarFraAndreinstansL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "6008";
             svarFraAndreinstansVurdering: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.H\u00E5ndterSvarFraAndreinstansL\u00F8sningDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.H\u00E5ndterSvarFraAndreinstansL\u00F8sningDto": {
@@ -6556,51 +6801,81 @@ export interface components {
             "vilk\u00E5rSomOmgj\u00F8res": ("ANDRE_TRYGDEAVTALER" | "EOES_883_2004" | "FOLKETRYGDLOVEN_11_10_FRITAK" | "FOLKETRYGDLOVEN_11_10_MELDEPLIKT" | "FOLKETRYGDLOVEN_11_12" | "FOLKETRYGDLOVEN_11_13" | "FOLKETRYGDLOVEN_11_14" | "FOLKETRYGDLOVEN_11_15" | "FOLKETRYGDLOVEN_11_17" | "FOLKETRYGDLOVEN_11_18" | "FOLKETRYGDLOVEN_11_19" | "FOLKETRYGDLOVEN_11_2" | "FOLKETRYGDLOVEN_11_20" | "FOLKETRYGDLOVEN_11_22" | "FOLKETRYGDLOVEN_11_23_OVERGNG_ARB" | "FOLKETRYGDLOVEN_11_23_UUTNYTTET_ARB_EVNE" | "FOLKETRYGDLOVEN_11_24" | "FOLKETRYGDLOVEN_11_25" | "FOLKETRYGDLOVEN_11_26" | "FOLKETRYGDLOVEN_11_27" | "FOLKETRYGDLOVEN_11_28" | "FOLKETRYGDLOVEN_11_29_SYKESTIPEND" | "FOLKETRYGDLOVEN_11_3" | "FOLKETRYGDLOVEN_11_31" | "FOLKETRYGDLOVEN_11_4" | "FOLKETRYGDLOVEN_11_4_INNTEKTSBORTFALL" | "FOLKETRYGDLOVEN_11_5" | "FOLKETRYGDLOVEN_11_6" | "FOLKETRYGDLOVEN_11_7" | "FOLKETRYGDLOVEN_11_8" | "FOLKETRYGDLOVEN_11_9" | "FOLKETRYGDLOVEN_21_12" | "FOLKETRYGDLOVEN_21_3" | "FOLKETRYGDLOVEN_21_7" | "FOLKETRYGDLOVEN_22_13" | "FOLKETRYGDLOVEN_22_15" | "FOLKETRYGDLOVEN_22_17" | "FOLKETRYGDLOVEN_KAPITTEL_2" | "FVL_31")[];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.KvalitetssikringL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5097";
             vurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8ser.vedtak.TotrinnsVurdering"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.Legeerkl\u00E6ringBestillingL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "9003";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.OverstyrIkkeOppfyltMeldepliktL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5002";
             meldepliktOverstyringVurdering: components["schemas"]["no.nav.aap.meldeplikt.MeldepliktOverstyringL\u00F8sningDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.PeriodisertAvklarSykepengerErstatningL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5007";
             "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.sykdom.flate.PeriodisertSykepengerVurderingDto"][];
         };
-        "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.PeriodisertAvklaringsbehovL\u00F8sning<*>": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.ArbeidsopptrappingL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarBistandsbehovL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarOppholdskravL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarOvergangArbeidL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarOvergangUf\u00F8reL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarPeriodisertForutg\u00E5endeMedlemskapL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarPeriodisertLovvalgMedlemskapL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarPeriodisertOverstyrtForutg\u00E5endeMedlemskapL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarPeriodisertOverstyrtLovvalgMedlemskapL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarStudentL\u00F8sningV2"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSykdomL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarVedtakslengdeL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.EtableringEgenVirksomhetL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.PeriodisertAvklarSykepengerErstatningL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.PeriodisertFastsettArbeidsevneL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.PeriodisertFritakMeldepliktL\u00F8sning"];
+        "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.PeriodisertAvklaringsbehovL\u00F8sning": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.ArbeidsopptrappingL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarBistandsbehovL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarOppholdskravL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarOvergangArbeidL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarOvergangUf\u00F8reL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarPeriodisertForutg\u00E5endeMedlemskapL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarPeriodisertLovvalgMedlemskapL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarPeriodisertOverstyrtForutg\u00E5endeMedlemskapL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarPeriodisertOverstyrtLovvalgMedlemskapL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarStudentL\u00F8sningV2"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarSykdomL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.AvklarVedtakslengdeL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.EtableringEgenVirksomhetL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.PeriodisertAvklarSykepengerErstatningL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.PeriodisertFastsettArbeidsevneL\u00F8sning"] | components["schemas"]["no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.PeriodisertFritakMeldepliktL\u00F8sning"];
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.PeriodisertFastsettArbeidsevneL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5004";
             "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.arbeidsevne.flate.PeriodisertFastsettArbeidsevneDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.PeriodisertFritakMeldepliktL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5005";
             "l\u00F8sningerForPerioder": components["schemas"]["no.nav.aap.meldeplikt.PeriodisertFritaksvurderingDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.RefusjonkravL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5026";
             refusjonkravVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.refusjonkrav.RefusjonkravVurderingDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.SamordningVentPaVirkningstidspunktL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5025";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.SattP\u00E5VentL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "9001";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.SkrivForh\u00E5ndsvarselBruddAktivitetspliktBrevL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5052";
             /** Format: uuid */
             brevbestillingReferanse: string;
             /** @enum {string} */
@@ -6608,8 +6883,11 @@ export interface components {
             mottakere: components["schemas"]["no.nav.aap.brev.kontrakt.MottakerDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.SkrivForh\u00E5ndsvarselKlageFormkravBrevL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "6005";
             /** Format: uuid */
             brevbestillingReferanse: string;
             /** @enum {string} */
@@ -6618,8 +6896,11 @@ export interface components {
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.SkrivVedtaksbrevKlageL\u00F8sning": {
             begrunnelse?: string | null;
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5041";
             /** Format: uuid */
             brevbestillingReferanse: string;
             /** @enum {string} */
@@ -6628,8 +6909,11 @@ export interface components {
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.SkrivVedtaksbrevL\u00F8sning": {
             begrunnelse?: string | null;
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5051";
             /** Format: uuid */
             brevbestillingReferanse: string;
             /** @enum {string} */
@@ -6637,99 +6921,156 @@ export interface components {
             mottakere: components["schemas"]["no.nav.aap.brev.kontrakt.MottakerDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.SykdomsvurderingForBrevL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5053";
             vurdering?: string | null;
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.TjenestepensjonRefusjonskravL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5056";
             samordningRefusjonskrav: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.samordning.refusjonskrav.TjenestepensjonRefusjonskravVurdering"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.TrekkKlageL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "6010";
             vurdering: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.trekkklage.flate.TrekkKlageVurderingDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.TrekkS\u00F8knadL\u00F8sning": {
             /** @enum {string|null} */
             aarsak?: "ANNET" | "BRUKER_ONSKER_IKKE_SOKE_LENGER" | "BRUKER_SOKTE_FEIL_YTELSE" | "BRUKER_SOKTE_FOR_TIDLIG" | null;
             begrunnelse: string;
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5028";
             skalTrekkes: boolean;
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.UtenlandskVideref\u00F8ringL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5019";
         };
         /**
          * @deprecated
          * @description Erstattes av VentPåOppfølgingNyLøsning
          */
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VentP\u00E5Oppf\u00F8lgingL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "8003";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VentP\u00E5Oppf\u00F8lgingNyL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "8004";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VenteP\u00E5FristForh\u00E5ndsvarselAktivitetsplikt11_7L\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "4102";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VenteP\u00E5FristForh\u00E5ndsvarselKlageFormkravL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "6007";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VenteP\u00E5KlageimplementasjonL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5023";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderAvslag11_27L\u00F8sning": {
             avslag11_27Vurdering: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.avslag11_27.flate.Avslag11_27VurderingerDto"];
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5042";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderBrudd11_7L\u00F8sning": {
             aktivitetsplikt11_7Vurdering: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.aktivitetsplikt.Aktivitetsplikt11_7L\u00F8sningDto"];
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "4101";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderBrudd11_9L\u00F8sning": {
             aktivitetsplikt11_9Vurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.aktivitetsplikt.Aktivitetsplikt11_9L\u00F8sningDto"][];
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "4201";
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderFormkravL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "6000";
             formkravVurdering: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.klage.formkrav.FormkravVurderingL\u00F8sningDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderInntektsbortfallL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5040";
             vurdering: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.beregning.InntektsbortfallVurderingDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderKlageKontorL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "6002";
             klagevurderingKontor: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.klage.klagebehandling.kontor.KlagevurderingKontorL\u00F8sningDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderKlageNayL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "6003";
             klagevurderingNay: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.klage.klagebehandling.nay.KlagevurderingNayL\u00F8sningDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderKravL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5038";
             kravVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.krav.KravVurderingL\u00F8sningDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.VurderRettighetsperiodeL\u00F8sning": {
-            /** @enum {string} */
-            behovstype: "4101" | "4102" | "4201" | "4301" | "5001" | "5002" | "5003" | "5004" | "5005" | "5006" | "5007" | "5008" | "5009" | "5010" | "5011" | "5012" | "5013" | "5014" | "5015" | "5016" | "5017" | "5018" | "5019" | "5020" | "5021" | "5022" | "5023" | "5024" | "5025" | "5026" | "5027" | "5028" | "5029" | "5030" | "5031" | "5032" | "5033" | "5034" | "5035" | "5036" | "5037" | "5038" | "5039" | "5040" | "5041" | "5042" | "5050" | "5051" | "5052" | "5053" | "5054" | "5056" | "5057" | "5058" | "5059" | "5060" | "5096" | "5097" | "5098" | "5099" | "5999" | "6000" | "6001" | "6002" | "6003" | "6004" | "6005" | "6006" | "6007" | "6008" | "6009" | "6010" | "7001" | "8001" | "8002" | "8003" | "8004" | "9001" | "9002" | "9003" | "9004" | "9082" | "9083";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            behovstype: "5029";
             rettighetsperiodeVurdering: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.rettighetsperiode.RettighetsperiodeVurderingDTO"];
         };
         "no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.l\u00F8sning.YrkesskadeSakDto": {
@@ -6907,6 +7248,9 @@ export interface components {
             behandlingsReferanse: string;
             /** Format: uuid */
             dialogmeldingPurringUUID: string;
+        };
+        "no.nav.aap.behandlingsflyt.behandling.behandlerdialog.UbesvarteForesp\u00F8rslerLegeerkl\u00E6ringResponse": {
+            "foresp\u00F8rsler": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.behandlerdialog.MeldingDto"][];
         };
         "no.nav.aap.behandlingsflyt.behandling.bekreftvurderingeroppf\u00F8lging.BekreftVurderingerOppf\u00F8lgingDto": {
             mellomlagredeVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.mellomlagring.MellomlagretVurdering"][];
@@ -7307,7 +7651,9 @@ export interface components {
             brevmal?: string | null;
             /** @enum {string} */
             brevtype: "AVSLAG" | "AVSLAG_11_27" | "AVSLAG_11_5" | "AVSLAG_UNDER_17_AAR_9_MAANEDER" | "BARNETILLEGG_SATS_REGULERING" | "FORHÅNDSVARSEL_BRUDD_AKTIVITETSPLIKT" | "FORHÅNDSVARSEL_KLAGE_FORMKRAV" | "FORVALTNINGSMELDING" | "INNVILGELSE" | "KLAGE_AVVIST" | "KLAGE_MOTTATT" | "KLAGE_OPPRETTHOLDELSE" | "KLAGE_TRUKKET" | "OMGJØRING_VEDTAK_11_9" | "STANS_AV_YTELSE" | "VARSEL_OM_BESTILLING" | "VEDTAK_11_17" | "VEDTAK_11_18" | "VEDTAK_11_18_OPPHØR_DELVIS_UFØR" | "VEDTAK_11_18_OPPHØR_FULL_UFØR" | "VEDTAK_11_23_SJETTE_LEDD" | "VEDTAK_11_7" | "VEDTAK_11_9" | "VEDTAK_ENDRING" | "VEDTAK_ENDRING_DODSFALL" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_12" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_26" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_27" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_3" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_11_4" | "VEDTAK_FORLENGELSE_UNDER_ETT_ÅR_MEDLEMSKAP" | "VEDTAK_UTVID_VEDTAKSLENGDE";
+            bruker: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.brev.BrevGrunnlag.Brev.IdentOgNavn"];
             "harTilgangTil\u00C5SendeBrev": boolean;
+            kopimottaker?: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.brev.BrevGrunnlag.Brev.Mottaker"];
             mottaker: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.brev.BrevGrunnlag.Brev.Mottaker"];
             /**
              * Format: date-time
@@ -7325,9 +7671,16 @@ export interface components {
             /** @enum {string} */
             status: "AVBRUTT" | "FORHÅNDSVISNING_KLAR" | "FULLFØRT" | "SENDT";
         };
-        "no.nav.aap.behandlingsflyt.behandling.brev.BrevGrunnlag.Brev.Mottaker": {
+        "no.nav.aap.behandlingsflyt.behandling.brev.BrevGrunnlag.Brev.IdentOgNavn": {
             ident: string;
             navn: string;
+        };
+        "no.nav.aap.behandlingsflyt.behandling.brev.BrevGrunnlag.Brev.Mottaker": {
+            ident?: string | null;
+            /** @enum {string|null} */
+            identType?: "FNR" | "HPRNR" | "ORGNR" | "UTL_ORG" | null;
+            navn?: string | null;
+            navnOgAdresse?: components["schemas"]["no.nav.aap.brev.kontrakt.NavnOgAdresse"];
         };
         "no.nav.aap.behandlingsflyt.behandling.brev.SykdomsvurderingForBrevDto": {
             historiskeVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.brev.SykdomsvurderingForBrevVurderingDto"][];
@@ -7361,12 +7714,16 @@ export interface components {
             begrunnelse: string;
             /** @enum {string|null} */
             brukerEierVirksomheten?: "EIER_MINST_50_PROSENT" | "EIER_MINST_50_PROSENT_MED_FLER" | "NEI" | null;
+            "erRegistrertIN\u00F8dvendigeOffentligeRegister"?: boolean | null;
+            /** @enum {string|null} */
+            fase?: "OPPSTART" | "UTVIKLING" | null;
             /**
              * Format: date
              * @example 2025-04-01
              */
             fom: string;
             foreliggerFagligVurdering: boolean;
+            jobberBrukerAktivMedVirksomheten?: boolean | null;
             "kanF\u00F8reTilSelvfors\u00F8rget"?: boolean | null;
             oppfylt: boolean;
             oppstartsPeriode: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
@@ -7646,6 +8003,7 @@ export interface components {
         };
         "no.nav.aap.behandlingsflyt.behandling.institusjonsopphold.HelseinstitusjonVurderingDto": {
             begrunnelse: string;
+            erHistoriskUtenReduksjonsberegning: boolean;
             faarFriKostOgLosji: boolean;
             forsoergerEktefelle?: boolean | null;
             harFasteUtgifter?: boolean | null;
@@ -8498,6 +8856,10 @@ export interface components {
             /** @enum {string} */
             utfall: "IKKE_OPPFYLT" | "IKKE_RELEVANT" | "IKKE_VURDERT" | "OPPFYLT";
         };
+        "no.nav.aap.behandlingsflyt.behandling.vedtak.VedtakId": {
+            /** Format: int64 */
+            id: number;
+        };
         "no.nav.aap.behandlingsflyt.behandling.vedtakslengde.VedtakslengdeGrunnlagResponse": {
             "beh\u00F8verVurderinger": components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
             "harTilgangTil\u00C5Saksbehandle": boolean;
@@ -8727,6 +9089,7 @@ export interface components {
             /** @enum {string} */
             status: "AVSLUTTET" | "IVERKSETTES" | "OPPRETTET" | "UTREDES";
             type: string;
+            vedtakId?: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.vedtak.VedtakId"];
             /**
              * Format: date-time
              * @example 2025-04-01T12:30:00
@@ -8744,6 +9107,8 @@ export interface components {
              * @example 2025-04-01
              */
             "fristSettP\u00E5Vent"?: string | null;
+            /** @enum {string|null} */
+            gradBehov?: "FRIVILLIG" | "PÅKREVD" | null;
             perioderKreverVurdering?: components["schemas"]["no.nav.aap.komponenter.type.Periode"][] | null;
             perioderUgyldigVurdering?: components["schemas"]["no.nav.aap.komponenter.type.Periode"][] | null;
             /** @enum {string} */
@@ -9307,12 +9672,16 @@ export interface components {
             begrunnelse: string;
             /** @enum {string|null} */
             brukerEierVirksomheten?: "EIER_MINST_50_PROSENT" | "EIER_MINST_50_PROSENT_MED_FLER" | "NEI" | null;
+            "erRegistrertIN\u00F8dvendigeOffentligeRegister"?: boolean | null;
+            /** @enum {string|null} */
+            fase?: "OPPSTART" | "UTVIKLING" | null;
             /**
              * Format: date
              * @example 2025-04-01
              */
             fom: string;
             foreliggerFagligVurdering: boolean;
+            jobberBrukerAktivMedVirksomheten?: boolean | null;
             "kanF\u00F8reTilSelvfors\u00F8rget"?: boolean | null;
             oppstartsPerioder: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
             orgNr?: string | null;
@@ -9327,9 +9696,11 @@ export interface components {
         };
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.institusjon.flate.HelseinstitusjonVurderingDto": {
             begrunnelse: string;
+            erHistoriskUtenReduksjonsberegning: boolean;
             faarFriKostOgLosji: boolean;
             forsoergerEktefelle?: boolean | null;
             harFasteUtgifter?: boolean | null;
+            oppholdId?: string | null;
             periode: components["schemas"]["no.nav.aap.komponenter.type.Periode"];
         };
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.institusjon.flate.HelseinstitusjonVurderingerDto": {
@@ -9352,8 +9723,11 @@ export interface components {
             journalpostId: components["schemas"]["no.nav.aap.verdityper.dokument.JournalpostId"];
             /** Format: uuid */
             referanse?: string | null;
-            /** @enum {string} */
-            kravType: "KLAGE" | "MIGRERT_KRAV" | "RELEVANT_KRAV" | "TILLEGGSOPPLYSNING" | "TRUKKET_SØKNAD";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            kravType: "KLAGE";
         };
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.krav.KravVurderingL\u00F8sningDto": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.krav.KlageKravL\u00F8sningDto"] | components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.krav.MigrertKravL\u00F8sningDto"] | components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.krav.RelevantKravL\u00F8sningDto"] | components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.krav.TilleggsopplysningKravL\u00F8sningDto"] | components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.krav.TrukketS\u00F8knadKravL\u00F8sningDto"];
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.krav.Kravreferanse": {
@@ -9379,8 +9753,11 @@ export interface components {
              * @example 2025-04-01
              */
             virkningstidspunktArena: string;
-            /** @enum {string} */
-            kravType: "KLAGE" | "MIGRERT_KRAV" | "RELEVANT_KRAV" | "TILLEGGSOPPLYSNING" | "TRUKKET_SØKNAD";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            kravType: "MIGRERT_KRAV";
         };
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.krav.OverstyrMuligRettFra": {
             begrunnelse: string;
@@ -9399,8 +9776,11 @@ export interface components {
             /** Format: uuid */
             referanse?: string | null;
             "s\u00F8knadsdato": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.krav.S\u00F8knadsdato"];
-            /** @enum {string} */
-            kravType: "KLAGE" | "MIGRERT_KRAV" | "RELEVANT_KRAV" | "TILLEGGSOPPLYSNING" | "TRUKKET_SØKNAD";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            kravType: "RELEVANT_KRAV";
         };
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.krav.S\u00F8knadsdato": {
             begrunnelse: string;
@@ -9417,16 +9797,22 @@ export interface components {
             journalpostId: components["schemas"]["no.nav.aap.verdityper.dokument.JournalpostId"];
             /** Format: uuid */
             referanse?: string | null;
-            /** @enum {string} */
-            kravType: "KLAGE" | "MIGRERT_KRAV" | "RELEVANT_KRAV" | "TILLEGGSOPPLYSNING" | "TRUKKET_SØKNAD";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            kravType: "TILLEGGSOPPLYSNING";
         };
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.krav.TrukketS\u00F8knadKravL\u00F8sningDto": {
             begrunnelse: string;
             journalpostId: components["schemas"]["no.nav.aap.verdityper.dokument.JournalpostId"];
             /** Format: uuid */
             referanse?: string | null;
-            /** @enum {string} */
-            kravType: "KLAGE" | "MIGRERT_KRAV" | "RELEVANT_KRAV" | "TILLEGGSOPPLYSNING" | "TRUKKET_SØKNAD";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            kravType: "TRUKKET_SØKNAD";
         };
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.overgangarbeid.flate.OvergangArbeidVurderingL\u00F8sningDto": {
             begrunnelse: string;
@@ -9542,25 +9928,40 @@ export interface components {
         };
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.st\u00F8nadsperiode.RelevantKravType": components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.st\u00F8nadsperiode.RelevantKravType.AVSLAG"] | components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.st\u00F8nadsperiode.RelevantKravType.GJENINNTREDEN_ETTER_OPPH\u00D8R"] | components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.st\u00F8nadsperiode.RelevantKravType.GJENOPPTAK_ETTER_STANS"] | components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.st\u00F8nadsperiode.RelevantKravType.MIGRERT_ST\u00D8NADSPERIODE"] | components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.st\u00F8nadsperiode.RelevantKravType.NY_ST\u00D8NADSPERIODE"];
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.st\u00F8nadsperiode.RelevantKravType.AVSLAG": {
-            /** @enum {string} */
-            type: "AVSLAG" | "GJENINNTREDEN_ETTER_OPPHØR" | "GJENOPPTAK_ETTER_STANS" | "MIGRERT_STØNADSPERIODE" | "NY_STØNADSPERIODE";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "AVSLAG";
         };
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.st\u00F8nadsperiode.RelevantKravType.GJENINNTREDEN_ETTER_OPPH\u00D8R": {
-            /** @enum {string} */
-            type: "AVSLAG" | "GJENINNTREDEN_ETTER_OPPHØR" | "GJENOPPTAK_ETTER_STANS" | "MIGRERT_STØNADSPERIODE" | "NY_STØNADSPERIODE";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "GJENINNTREDEN_ETTER_OPPHØR";
         };
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.st\u00F8nadsperiode.RelevantKravType.GJENOPPTAK_ETTER_STANS": {
             gjennopptakEtter: ("ANNEN_FULL_YTELSE" | "ANNEN_FULL_YTELSE_AVSLAG" | "BRUDD_PÅ_AKTIVITETSPLIKT_OPPHØR" | "BRUDD_PÅ_AKTIVITETSPLIKT_STANS" | "BRUDD_PÅ_OPPHOLDSKRAV_OPPHØR" | "BRUDD_PÅ_OPPHOLDSKRAV_STANS" | "BRUKER_OVER_67" | "BRUKER_UNDER_18" | "HAR_RETT_TIL_FULLT_UTTAK_ALDERSPENSJON" | "IKKE_BEHOV_FOR_OPPFOLGING" | "IKKE_MEDLEM" | "IKKE_MEDLEM_FORUTGÅENDE" | "IKKE_NOK_REDUSERT_ARBEIDSEVNE" | "IKKE_OPPFYLT_OPPHOLDSKRAV_EØS" | "IKKE_RETT_PA_AAP_I_PERIODE_SOM_ARBEIDSSOKER" | "IKKE_RETT_PA_AAP_UNDER_BEHANDLING_AV_UFORE" | "IKKE_RETT_PA_STUDENT" | "IKKE_RETT_PA_SYKEPENGEERSTATNING" | "IKKE_RETT_UNDER_STRAFFEGJENNOMFØRING" | "IKKE_SYKDOM_AV_VISS_VARIGHET" | "IKKE_SYKDOM_SKADE_LYTE" | "IKKE_SYKDOM_SKADE_LYTE_VESENTLIGDEL" | "INNTEKTSTAP_DEKKES_ETTER_ANNEN_LOVGIVNING" | "MANGLENDE_DOKUMENTASJON" | "NORGE_IKKE_KOMPETENT_STAT" | "ORDINÆRKVOTE_BRUKT_OPP" | "SYKEPENGEERSTATNINGKVOTE_BRUKT_OPP" | "VARIGHET_OVERSKREDET_ARBEIDSSØKER" | "VARIGHET_OVERSKREDET_OVERGANG_UFORE" | "VARIGHET_OVERSKREDET_STUDENT")[];
-            /** @enum {string} */
-            type: "AVSLAG" | "GJENINNTREDEN_ETTER_OPPHØR" | "GJENOPPTAK_ETTER_STANS" | "MIGRERT_STØNADSPERIODE" | "NY_STØNADSPERIODE";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "GJENOPPTAK_ETTER_STANS";
         };
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.st\u00F8nadsperiode.RelevantKravType.MIGRERT_ST\u00D8NADSPERIODE": {
-            /** @enum {string} */
-            type: "AVSLAG" | "GJENINNTREDEN_ETTER_OPPHØR" | "GJENOPPTAK_ETTER_STANS" | "MIGRERT_STØNADSPERIODE" | "NY_STØNADSPERIODE";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "MIGRERT_STØNADSPERIODE";
         };
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.st\u00F8nadsperiode.RelevantKravType.NY_ST\u00D8NADSPERIODE": {
-            /** @enum {string} */
-            type: "AVSLAG" | "GJENINNTREDEN_ETTER_OPPHØR" | "GJENOPPTAK_ETTER_STANS" | "MIGRERT_STØNADSPERIODE" | "NY_STØNADSPERIODE";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "NY_STØNADSPERIODE";
         };
         "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.st\u00F8nadsperiode.StansEllerOpph\u00F8rDto": {
             /** @enum {string} */
@@ -9885,6 +10286,11 @@ export interface components {
              * @example 2025-04-01
              */
             tilOgMed: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "AktivitetskortV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.AndreUtbetalingerDto": {
             afp?: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.AfpDto"];
@@ -9924,12 +10330,22 @@ export interface components {
             /** @enum {string|null} */
             underkategori?: "ARBEIDSUTPROVING" | "BARNETILLEGG" | "BEHOLDE_AAP_I_UTLANDET" | "DOKUMENTASJON_TREKK_SOKNAD" | "ETABLERING" | "ETTERSENDELSE_TIL_FEILUTBETALING" | "ETTERSENDELSE_TIL_KLAGE" | "FENGSEL_VARETEKT" | "HELSEOPPLYSNINGER" | "INSTITUSJONSOPPHOLD" | "KARAKTERUTSKRIFTER_OG_CV" | "KLAGE" | "LAERLING" | "MEDLEMSKAP" | "MELDEKORT" | "PARTSINNSYN" | "REFUSJONSKRAV" | "SLUTTAVTALE" | "STUDENTBESTEMMELSEN" | "TILTAKSRAPPORT" | "YRKESSKADE" | null;
             "\u00E5rsakerTilBehandling": ("AKTIVITETSMELDING" | "AKTIVITETSPLIKTBEHANDLING_AVBRUTT" | "AKTIVITETSPLIKT_11_7" | "AKTIVITETSPLIKT_11_9" | "AVVIST_LEGEERKLÆRING" | "AVVIST_SOKNAD_OM_AAP_UNDER_OPPHOLD_I_UTLANDET" | "BARNETILLEGG" | "BARNETILLEGG_SATS_REGULERING" | "BRUKER_TILBAKE_I_ARBEID" | "DIALOGMELDING" | "DØDSFALL_BARN" | "DØDSFALL_BRUKER" | "EFFEKTUER_AKTIVITETSPLIKT" | "EFFEKTUER_AKTIVITETSPLIKT_11_9" | "ETABLERING_EGEN_VIRKSOMHET" | "FASTSETT_ARBEIDSEVNE" | "FERIE_I_SYKEPENGEPERIODE" | "FORUTGAENDE_MEDLEMSKAP" | "FRITAK_MELDEPLIKT" | "G_REGULERING" | "HELHETLIG_VURDERING" | "INSTITUSJONSOPPHOLD" | "INSTITUSJONSOPPHOLD_HELSEINSTITUSJON" | "INSTITUSJONSOPPHOLD_SONING" | "KLAGE" | "KLAGE_TRUKKET" | "LEGEERKLÆRING" | "LOVVALG_OG_MEDLEMSKAP" | "MELDEKORT" | "MIGRERING_FRA_ARENA" | "MIGRER_RETTIGHETSPERIODE" | "MOTTATT_KABAL_HENDELSE" | "OPPFØLGINGSOPPGAVE" | "OPPHOLDSKRAV" | "OVERGANG_ARBEID" | "OVERGANG_UFORE" | "OVERGANG_UFORE_AUTOMATISK_STANS" | "REFUSJONSKRAV" | "REVURDERING_AVBRUTT" | "REVURDER_BEREGNING" | "REVURDER_INNTEKTSBORTFALL" | "REVURDER_LOVVALG" | "REVURDER_MANUELL_INNTEKT" | "REVURDER_MEDLEMSKAP" | "REVURDER_MELDEPLIKT_RIMELIG_GRUNN" | "REVURDER_SAMORDNING" | "REVURDER_SAMORDNING_ANDRE_FOLKETRYGDYTELSER" | "REVURDER_SAMORDNING_ANDRE_STATLIGE_YTELSER" | "REVURDER_SAMORDNING_ARBEIDSGIVER" | "REVURDER_SAMORDNING_BARNEPENSJON" | "REVURDER_SAMORDNING_TJENESTEPENSJON" | "REVURDER_SAMORDNING_UFØRE" | "REVURDER_STUDENT" | "REVURDER_SYKEPENGEERSTATNING" | "REVURDER_SYKESTIPEND" | "REVURDER_YRKESSKADE" | "SAMORDNING_OG_AVREGNING" | "SYKDOM_ARBEVNE_BEHOV_FOR_BISTAND" | "SØKNAD" | "SØKNAD_TRUKKET" | "UTENLANDSOPPHOLD_FOR_SOKNADSTIDSPUNKT" | "UTVID_VEDTAKSLENGDE" | "VEDTAKSLENGDE_MANUELT" | "VURDER_ARBEIDSOPPTRAPPING" | "VURDER_AVSLAG_11_27" | "VURDER_FRITAK_MELDEPLIKT" | "VURDER_KRAV" | "VURDER_RETTIGHETSPERIODE")[];
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "AnnetRelevantDokumentV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.AnnetRelevantDokumentV1": {
             begrunnelse: string;
             /** @enum {string|null} */
             underkategori?: "ARBEIDSUTPROVING" | "BARNETILLEGG" | "BEHOLDE_AAP_I_UTLANDET" | "DOKUMENTASJON_TREKK_SOKNAD" | "ETABLERING" | "ETTERSENDELSE_TIL_FEILUTBETALING" | "ETTERSENDELSE_TIL_KLAGE" | "FENGSEL_VARETEKT" | "HELSEOPPLYSNINGER" | "INSTITUSJONSOPPHOLD" | "KARAKTERUTSKRIFTER_OG_CV" | "KLAGE" | "LAERLING" | "MEDLEMSKAP" | "MELDEKORT" | "PARTSINNSYN" | "REFUSJONSKRAV" | "SLUTTAVTALE" | "STUDENTBESTEMMELSEN" | "TILTAKSRAPPORT" | "YRKESSKADE" | null;
             "\u00E5rsakerTilBehandling": ("AKTIVITETSMELDING" | "AKTIVITETSPLIKTBEHANDLING_AVBRUTT" | "AKTIVITETSPLIKT_11_7" | "AKTIVITETSPLIKT_11_9" | "AVVIST_LEGEERKLÆRING" | "AVVIST_SOKNAD_OM_AAP_UNDER_OPPHOLD_I_UTLANDET" | "BARNETILLEGG" | "BARNETILLEGG_SATS_REGULERING" | "BRUKER_TILBAKE_I_ARBEID" | "DIALOGMELDING" | "DØDSFALL_BARN" | "DØDSFALL_BRUKER" | "EFFEKTUER_AKTIVITETSPLIKT" | "EFFEKTUER_AKTIVITETSPLIKT_11_9" | "ETABLERING_EGEN_VIRKSOMHET" | "FASTSETT_ARBEIDSEVNE" | "FERIE_I_SYKEPENGEPERIODE" | "FORUTGAENDE_MEDLEMSKAP" | "FRITAK_MELDEPLIKT" | "G_REGULERING" | "HELHETLIG_VURDERING" | "INSTITUSJONSOPPHOLD" | "INSTITUSJONSOPPHOLD_HELSEINSTITUSJON" | "INSTITUSJONSOPPHOLD_SONING" | "KLAGE" | "KLAGE_TRUKKET" | "LEGEERKLÆRING" | "LOVVALG_OG_MEDLEMSKAP" | "MELDEKORT" | "MIGRERING_FRA_ARENA" | "MIGRER_RETTIGHETSPERIODE" | "MOTTATT_KABAL_HENDELSE" | "OPPFØLGINGSOPPGAVE" | "OPPHOLDSKRAV" | "OVERGANG_ARBEID" | "OVERGANG_UFORE" | "OVERGANG_UFORE_AUTOMATISK_STANS" | "REFUSJONSKRAV" | "REVURDERING_AVBRUTT" | "REVURDER_BEREGNING" | "REVURDER_INNTEKTSBORTFALL" | "REVURDER_LOVVALG" | "REVURDER_MANUELL_INNTEKT" | "REVURDER_MEDLEMSKAP" | "REVURDER_MELDEPLIKT_RIMELIG_GRUNN" | "REVURDER_SAMORDNING" | "REVURDER_SAMORDNING_ANDRE_FOLKETRYGDYTELSER" | "REVURDER_SAMORDNING_ANDRE_STATLIGE_YTELSER" | "REVURDER_SAMORDNING_ARBEIDSGIVER" | "REVURDER_SAMORDNING_BARNEPENSJON" | "REVURDER_SAMORDNING_TJENESTEPENSJON" | "REVURDER_SAMORDNING_UFØRE" | "REVURDER_STUDENT" | "REVURDER_SYKEPENGEERSTATNING" | "REVURDER_SYKESTIPEND" | "REVURDER_YRKESSKADE" | "SAMORDNING_OG_AVREGNING" | "SYKDOM_ARBEVNE_BEHOV_FOR_BISTAND" | "SØKNAD" | "SØKNAD_TRUKKET" | "UTENLANDSOPPHOLD_FOR_SOKNADSTIDSPUNKT" | "UTVID_VEDTAKSLENGDE" | "VEDTAKSLENGDE_MANUELT" | "VURDER_ARBEIDSOPPTRAPPING" | "VURDER_AVSLAG_11_27" | "VURDER_FRITAK_MELDEPLIKT" | "VURDER_KRAV" | "VURDER_RETTIGHETSPERIODE")[];
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "AnnetRelevantDokumentV1";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.ArbeidIPeriodeV0": {
             /**
@@ -9996,6 +10412,11 @@ export interface components {
             kravgrunnlagReferanse: string;
             /** Format: int32 */
             versjon: number;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "FagsysteminfoBehovV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.FastlegeDto": {
             behandlerRef: string;
@@ -10020,6 +10441,11 @@ export interface components {
              * @example 2025-04-01T14:30:00+02:00
              */
             tidspunkt: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "ForeldrepengeVedtakV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Ident": {
             identifikator: string;
@@ -10059,6 +10485,11 @@ export interface components {
             hendelsesid: number;
             institusjonsOpphold?: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Inst2KafkaDto"];
             norskIdent: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "InstitusjonsOppholdHendelseV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KabalHendelse": components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KabalHendelseV0"];
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KabalHendelseV0": {
@@ -10070,6 +10501,11 @@ export interface components {
             kildeReferanse: string;
             /** @enum {string} */
             type: "ANKEBEHANDLING_AVSLUTTET" | "ANKEBEHANDLING_OPPRETTET" | "ANKE_I_TRYGDERETTENBEHANDLING_OPPRETTET" | "BEHANDLING_ETTER_TRYGDERETTEN_OPPHEVET_AVSLUTTET" | "BEHANDLING_FEILREGISTRERT" | "KLAGEBEHANDLING_AVSLUTTET" | "OMGJOERINGSKRAV" | "OMGJOERINGSKRAVBEHANDLING_AVSLUTTET";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "KabalHendelseV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Klage": components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KlageV0"];
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KlageV0": {
@@ -10085,6 +10521,11 @@ export interface components {
              * @description Skal bestemmes automatisk av systemet
              */
             skalOppretteNyBehandling?: boolean | null;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "KlageV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KlagebehandlingAvsluttetDetaljer": {
             /**
@@ -10099,16 +10540,31 @@ export interface components {
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KorrigerS\u00F8knadsdato": components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KorrigerS\u00F8knadsdatoV0"];
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KorrigerS\u00F8knadsdatoV0": {
             begrunnelse: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "KorrigerSøknadsdatoV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Legeerkl\u00E6ring": components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Legeerkl\u00E6ringV0"];
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Legeerkl\u00E6ringV0": {
             beskrivelse?: string | null;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "LegeerklæringV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.ManuellRevurdering": components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.ManuellRevurderingV0"];
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.ManuellRevurderingV0": {
             beskrivelse: string;
             opprettetAv?: string | null;
             "\u00E5rsakerTilBehandling": ("AKTIVITETSMELDING" | "AKTIVITETSPLIKTBEHANDLING_AVBRUTT" | "AKTIVITETSPLIKT_11_7" | "AKTIVITETSPLIKT_11_9" | "AVVIST_LEGEERKLÆRING" | "AVVIST_SOKNAD_OM_AAP_UNDER_OPPHOLD_I_UTLANDET" | "BARNETILLEGG" | "BARNETILLEGG_SATS_REGULERING" | "BRUKER_TILBAKE_I_ARBEID" | "DIALOGMELDING" | "DØDSFALL_BARN" | "DØDSFALL_BRUKER" | "EFFEKTUER_AKTIVITETSPLIKT" | "EFFEKTUER_AKTIVITETSPLIKT_11_9" | "ETABLERING_EGEN_VIRKSOMHET" | "FASTSETT_ARBEIDSEVNE" | "FERIE_I_SYKEPENGEPERIODE" | "FORUTGAENDE_MEDLEMSKAP" | "FRITAK_MELDEPLIKT" | "G_REGULERING" | "HELHETLIG_VURDERING" | "INSTITUSJONSOPPHOLD" | "INSTITUSJONSOPPHOLD_HELSEINSTITUSJON" | "INSTITUSJONSOPPHOLD_SONING" | "KLAGE" | "KLAGE_TRUKKET" | "LEGEERKLÆRING" | "LOVVALG_OG_MEDLEMSKAP" | "MELDEKORT" | "MIGRERING_FRA_ARENA" | "MIGRER_RETTIGHETSPERIODE" | "MOTTATT_KABAL_HENDELSE" | "OPPFØLGINGSOPPGAVE" | "OPPHOLDSKRAV" | "OVERGANG_ARBEID" | "OVERGANG_UFORE" | "OVERGANG_UFORE_AUTOMATISK_STANS" | "REFUSJONSKRAV" | "REVURDERING_AVBRUTT" | "REVURDER_BEREGNING" | "REVURDER_INNTEKTSBORTFALL" | "REVURDER_LOVVALG" | "REVURDER_MANUELL_INNTEKT" | "REVURDER_MEDLEMSKAP" | "REVURDER_MELDEPLIKT_RIMELIG_GRUNN" | "REVURDER_SAMORDNING" | "REVURDER_SAMORDNING_ANDRE_FOLKETRYGDYTELSER" | "REVURDER_SAMORDNING_ANDRE_STATLIGE_YTELSER" | "REVURDER_SAMORDNING_ARBEIDSGIVER" | "REVURDER_SAMORDNING_BARNEPENSJON" | "REVURDER_SAMORDNING_TJENESTEPENSJON" | "REVURDER_SAMORDNING_UFØRE" | "REVURDER_STUDENT" | "REVURDER_SYKEPENGEERSTATNING" | "REVURDER_SYKESTIPEND" | "REVURDER_YRKESSKADE" | "SAMORDNING_OG_AVREGNING" | "SYKDOM_ARBEVNE_BEHOV_FOR_BISTAND" | "SØKNAD" | "SØKNAD_TRUKKET" | "UTENLANDSOPPHOLD_FOR_SOKNADSTIDSPUNKT" | "UTVID_VEDTAKSLENGDE" | "VEDTAKSLENGDE_MANUELT" | "VURDER_ARBEIDSOPPTRAPPING" | "VURDER_AVSLAG_11_27" | "VURDER_FRITAK_MELDEPLIKT" | "VURDER_KRAV" | "VURDER_RETTIGHETSPERIODE")[];
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "ManuellRevurderingV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.ManueltOppgittBarn": {
             /**
@@ -10127,10 +10583,20 @@ export interface components {
             harDuArbeidet?: boolean | null;
             opprettetAv?: string | null;
             timerArbeidPerPeriode: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.ArbeidIPeriodeV0"][];
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "MeldekortV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Melding": components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Aktivitetskort"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.AnnetRelevantDokument"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.ForeldrepengeVedtak"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.InstitusjonsOppholdHendelse"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KabalHendelse"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Klage"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KorrigerS\u00F8knadsdato"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Legeerkl\u00E6ring"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.ManuellRevurdering"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Meldekort"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.MigreringFraArenaV0"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Ny\u00C5rsakTilBehandling"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Omgj\u00F8ringKlageRevurdering"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Oppf\u00F8lgingsoppgave"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.PdlHendelse"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.SykepengeSpleisVedtak"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.S\u00F8knad"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.TilbakekrevingHendelse"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Uf\u00F8revedtak"];
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.MigreringFraArenaV0": {
             beskrivelse: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "MigreringFraArenaV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Ny\u00C5rsakTilBehandling": components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Ny\u00C5rsakTilBehandlingV0"];
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Ny\u00C5rsakTilBehandlingV0": {
@@ -10138,6 +10604,11 @@ export interface components {
             beskrivelse?: string | null;
             reserverTilBruker?: string | null;
             "\u00E5rsakerTilBehandling": ("AKTIVITETSMELDING" | "AKTIVITETSPLIKTBEHANDLING_AVBRUTT" | "AKTIVITETSPLIKT_11_7" | "AKTIVITETSPLIKT_11_9" | "AVVIST_LEGEERKLÆRING" | "AVVIST_SOKNAD_OM_AAP_UNDER_OPPHOLD_I_UTLANDET" | "BARNETILLEGG" | "BARNETILLEGG_SATS_REGULERING" | "BRUKER_TILBAKE_I_ARBEID" | "DIALOGMELDING" | "DØDSFALL_BARN" | "DØDSFALL_BRUKER" | "EFFEKTUER_AKTIVITETSPLIKT" | "EFFEKTUER_AKTIVITETSPLIKT_11_9" | "ETABLERING_EGEN_VIRKSOMHET" | "FASTSETT_ARBEIDSEVNE" | "FERIE_I_SYKEPENGEPERIODE" | "FORUTGAENDE_MEDLEMSKAP" | "FRITAK_MELDEPLIKT" | "G_REGULERING" | "HELHETLIG_VURDERING" | "INSTITUSJONSOPPHOLD" | "INSTITUSJONSOPPHOLD_HELSEINSTITUSJON" | "INSTITUSJONSOPPHOLD_SONING" | "KLAGE" | "KLAGE_TRUKKET" | "LEGEERKLÆRING" | "LOVVALG_OG_MEDLEMSKAP" | "MELDEKORT" | "MIGRERING_FRA_ARENA" | "MIGRER_RETTIGHETSPERIODE" | "MOTTATT_KABAL_HENDELSE" | "OPPFØLGINGSOPPGAVE" | "OPPHOLDSKRAV" | "OVERGANG_ARBEID" | "OVERGANG_UFORE" | "OVERGANG_UFORE_AUTOMATISK_STANS" | "REFUSJONSKRAV" | "REVURDERING_AVBRUTT" | "REVURDER_BEREGNING" | "REVURDER_INNTEKTSBORTFALL" | "REVURDER_LOVVALG" | "REVURDER_MANUELL_INNTEKT" | "REVURDER_MEDLEMSKAP" | "REVURDER_MELDEPLIKT_RIMELIG_GRUNN" | "REVURDER_SAMORDNING" | "REVURDER_SAMORDNING_ANDRE_FOLKETRYGDYTELSER" | "REVURDER_SAMORDNING_ANDRE_STATLIGE_YTELSER" | "REVURDER_SAMORDNING_ARBEIDSGIVER" | "REVURDER_SAMORDNING_BARNEPENSJON" | "REVURDER_SAMORDNING_TJENESTEPENSJON" | "REVURDER_SAMORDNING_UFØRE" | "REVURDER_STUDENT" | "REVURDER_SYKEPENGEERSTATNING" | "REVURDER_SYKESTIPEND" | "REVURDER_YRKESSKADE" | "SAMORDNING_OG_AVREGNING" | "SYKDOM_ARBEVNE_BEHOV_FOR_BISTAND" | "SØKNAD" | "SØKNAD_TRUKKET" | "UTENLANDSOPPHOLD_FOR_SOKNADSTIDSPUNKT" | "UTVID_VEDTAKSLENGDE" | "VEDTAKSLENGDE_MANUELT" | "VURDER_ARBEIDSOPPTRAPPING" | "VURDER_AVSLAG_11_27" | "VURDER_FRITAK_MELDEPLIKT" | "VURDER_KRAV" | "VURDER_RETTIGHETSPERIODE")[];
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "NyÅrsakTilBehandlingV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.OmgjoeringskravbehandlingAvsluttetDetaljer": {
             /**
@@ -10155,6 +10626,11 @@ export interface components {
             /** @enum {string} */
             kilde: "KELVIN" | "KLAGEINSTANS";
             vurderingsbehov: ("AKTIVITETSMELDING" | "AKTIVITETSPLIKTBEHANDLING_AVBRUTT" | "AKTIVITETSPLIKT_11_7" | "AKTIVITETSPLIKT_11_9" | "AVVIST_LEGEERKLÆRING" | "AVVIST_SOKNAD_OM_AAP_UNDER_OPPHOLD_I_UTLANDET" | "BARNETILLEGG" | "BARNETILLEGG_SATS_REGULERING" | "BRUKER_TILBAKE_I_ARBEID" | "DIALOGMELDING" | "DØDSFALL_BARN" | "DØDSFALL_BRUKER" | "EFFEKTUER_AKTIVITETSPLIKT" | "EFFEKTUER_AKTIVITETSPLIKT_11_9" | "ETABLERING_EGEN_VIRKSOMHET" | "FASTSETT_ARBEIDSEVNE" | "FERIE_I_SYKEPENGEPERIODE" | "FORUTGAENDE_MEDLEMSKAP" | "FRITAK_MELDEPLIKT" | "G_REGULERING" | "HELHETLIG_VURDERING" | "INSTITUSJONSOPPHOLD" | "INSTITUSJONSOPPHOLD_HELSEINSTITUSJON" | "INSTITUSJONSOPPHOLD_SONING" | "KLAGE" | "KLAGE_TRUKKET" | "LEGEERKLÆRING" | "LOVVALG_OG_MEDLEMSKAP" | "MELDEKORT" | "MIGRERING_FRA_ARENA" | "MIGRER_RETTIGHETSPERIODE" | "MOTTATT_KABAL_HENDELSE" | "OPPFØLGINGSOPPGAVE" | "OPPHOLDSKRAV" | "OVERGANG_ARBEID" | "OVERGANG_UFORE" | "OVERGANG_UFORE_AUTOMATISK_STANS" | "REFUSJONSKRAV" | "REVURDERING_AVBRUTT" | "REVURDER_BEREGNING" | "REVURDER_INNTEKTSBORTFALL" | "REVURDER_LOVVALG" | "REVURDER_MANUELL_INNTEKT" | "REVURDER_MEDLEMSKAP" | "REVURDER_MELDEPLIKT_RIMELIG_GRUNN" | "REVURDER_SAMORDNING" | "REVURDER_SAMORDNING_ANDRE_FOLKETRYGDYTELSER" | "REVURDER_SAMORDNING_ANDRE_STATLIGE_YTELSER" | "REVURDER_SAMORDNING_ARBEIDSGIVER" | "REVURDER_SAMORDNING_BARNEPENSJON" | "REVURDER_SAMORDNING_TJENESTEPENSJON" | "REVURDER_SAMORDNING_UFØRE" | "REVURDER_STUDENT" | "REVURDER_SYKEPENGEERSTATNING" | "REVURDER_SYKESTIPEND" | "REVURDER_YRKESSKADE" | "SAMORDNING_OG_AVREGNING" | "SYKDOM_ARBEVNE_BEHOV_FOR_BISTAND" | "SØKNAD" | "SØKNAD_TRUKKET" | "UTENLANDSOPPHOLD_FOR_SOKNADSTIDSPUNKT" | "UTVID_VEDTAKSLENGDE" | "VEDTAKSLENGDE_MANUELT" | "VURDER_ARBEIDSOPPTRAPPING" | "VURDER_AVSLAG_11_27" | "VURDER_FRITAK_MELDEPLIKT" | "VURDER_KRAV" | "VURDER_RETTIGHETSPERIODE")[];
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "OmgjøringKlageRevurderingV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Omgj\u00F8ringKlageRevurderingV1": {
             beskrivelse: string;
@@ -10163,6 +10639,11 @@ export interface components {
             /** Format: uuid */
             kildeReferanse: string;
             vurderingsbehov: ("AKTIVITETSMELDING" | "AKTIVITETSPLIKTBEHANDLING_AVBRUTT" | "AKTIVITETSPLIKT_11_7" | "AKTIVITETSPLIKT_11_9" | "AVVIST_LEGEERKLÆRING" | "AVVIST_SOKNAD_OM_AAP_UNDER_OPPHOLD_I_UTLANDET" | "BARNETILLEGG" | "BARNETILLEGG_SATS_REGULERING" | "BRUKER_TILBAKE_I_ARBEID" | "DIALOGMELDING" | "DØDSFALL_BARN" | "DØDSFALL_BRUKER" | "EFFEKTUER_AKTIVITETSPLIKT" | "EFFEKTUER_AKTIVITETSPLIKT_11_9" | "ETABLERING_EGEN_VIRKSOMHET" | "FASTSETT_ARBEIDSEVNE" | "FERIE_I_SYKEPENGEPERIODE" | "FORUTGAENDE_MEDLEMSKAP" | "FRITAK_MELDEPLIKT" | "G_REGULERING" | "HELHETLIG_VURDERING" | "INSTITUSJONSOPPHOLD" | "INSTITUSJONSOPPHOLD_HELSEINSTITUSJON" | "INSTITUSJONSOPPHOLD_SONING" | "KLAGE" | "KLAGE_TRUKKET" | "LEGEERKLÆRING" | "LOVVALG_OG_MEDLEMSKAP" | "MELDEKORT" | "MIGRERING_FRA_ARENA" | "MIGRER_RETTIGHETSPERIODE" | "MOTTATT_KABAL_HENDELSE" | "OPPFØLGINGSOPPGAVE" | "OPPHOLDSKRAV" | "OVERGANG_ARBEID" | "OVERGANG_UFORE" | "OVERGANG_UFORE_AUTOMATISK_STANS" | "REFUSJONSKRAV" | "REVURDERING_AVBRUTT" | "REVURDER_BEREGNING" | "REVURDER_INNTEKTSBORTFALL" | "REVURDER_LOVVALG" | "REVURDER_MANUELL_INNTEKT" | "REVURDER_MEDLEMSKAP" | "REVURDER_MELDEPLIKT_RIMELIG_GRUNN" | "REVURDER_SAMORDNING" | "REVURDER_SAMORDNING_ANDRE_FOLKETRYGDYTELSER" | "REVURDER_SAMORDNING_ANDRE_STATLIGE_YTELSER" | "REVURDER_SAMORDNING_ARBEIDSGIVER" | "REVURDER_SAMORDNING_BARNEPENSJON" | "REVURDER_SAMORDNING_TJENESTEPENSJON" | "REVURDER_SAMORDNING_UFØRE" | "REVURDER_STUDENT" | "REVURDER_SYKEPENGEERSTATNING" | "REVURDER_SYKESTIPEND" | "REVURDER_YRKESSKADE" | "SAMORDNING_OG_AVREGNING" | "SYKDOM_ARBEVNE_BEHOV_FOR_BISTAND" | "SØKNAD" | "SØKNAD_TRUKKET" | "UTENLANDSOPPHOLD_FOR_SOKNADSTIDSPUNKT" | "UTVID_VEDTAKSLENGDE" | "VEDTAKSLENGDE_MANUELT" | "VURDER_ARBEIDSOPPTRAPPING" | "VURDER_AVSLAG_11_27" | "VURDER_FRITAK_MELDEPLIKT" | "VURDER_KRAV" | "VURDER_RETTIGHETSPERIODE")[];
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "OmgjøringKlageRevurderingV1";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Oppf\u00F8lgingsoppgave": components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Oppf\u00F8lgingsoppgaveV0"];
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Oppf\u00F8lgingsoppgaveV0": {
@@ -10177,6 +10658,11 @@ export interface components {
             opprettetAv?: string | null;
             opprinnelse?: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Opprinnelse"];
             reserverTilBruker?: string | null;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "OppfølgingsoppgaveV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.OppgitteBarn": {
             barn: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.ManueltOppgittBarn"][];
@@ -10195,6 +10681,11 @@ export interface components {
             beskrivelse?: string | null;
             /** @enum {string} */
             innsendingstype: "AKTIVITETSKORT" | "ANNET_RELEVANT_DOKUMENT" | "DIALOGMELDING" | "FAGSYSTEMINFO_BEHOV_HENDELSE" | "FORELDREPENGE_VEDTAK_HENDELSE" | "INSTITUSJONSOPPHOLD" | "KABAL_HENDELSE" | "KLAGE" | "KORRIGER_SØKNADSDATO" | "LEGEERKLÆRING" | "LEGEERKLÆRING_AVVIST" | "MANUELL_REVURDERING" | "MELDEKORT" | "MIGRERING_FRA_ARENA" | "NY_ÅRSAK_TIL_BEHANDLING" | "OMGJØRING_KLAGE_REVURDERING" | "OPPFØLGINGSOPPGAVE" | "PDL_HENDELSE_DODSFALL_BARN" | "PDL_HENDELSE_DODSFALL_BRUKER" | "PDL_HENDELSE_FOLKEREGISTERIDENT" | "SYKEPENGE_VEDTAK_HENDELSE" | "SØKNAD" | "TILBAKEKREVING_HENDELSE" | "UFØRE_VEDTAK_HENDELSE";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "PdlHendelseV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.SykepengeSpleisVedtak": components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.SykepengevedtakV0"];
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.SykepengevedtakV0": {
@@ -10206,6 +10697,11 @@ export interface components {
              * @example 2025-04-01T14:30:00+02:00
              */
             tidspunkt: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "SykepengevedtakV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.S\u00F8knad": components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.S\u00F8knadV0"];
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.S\u00F8knadFerieDto": {
@@ -10236,7 +10732,7 @@ export interface components {
             /** @enum {string} */
             erStudent: "Avbrutt" | "Ja" | "Nei";
             /** @enum {string|null} */
-            kommeTilbake?: "Ja" | "Nei" | "VetIkke" | null;
+            kommeTilbake?: "Ja" | "Nei" | "Vet ikke" | null;
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.S\u00F8knadV0": {
             andreBehandlere?: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.BehandlerDto"][] | null;
@@ -10249,6 +10745,11 @@ export interface components {
             /** @enum {string|null} */
             sykepenger?: "Ja" | "Nei" | null;
             yrkesskade: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "SøknadV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.TilbakekrevingHendelse": components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.FagsysteminfoBehovV0"] | components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.TilbakekrevingHendelseV0"];
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.TilbakekrevingHendelseV0": {
@@ -10263,6 +10764,11 @@ export interface components {
             tilbakekreving: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.TilbakekrevingKafkaDto"];
             /** Format: int32 */
             versjon: number;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "TilbakekrevingHendelseV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.TilbakekrevingKafkaDto": {
             /** Format: uuid */
@@ -10323,6 +10829,11 @@ export interface components {
              * @example 2025-04-01
              */
             virkningsdato: string;
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            meldingType: "UførevedtakV0";
         };
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.UtenlandsPeriodeDto": {
             /**
@@ -10503,6 +11014,8 @@ export interface components {
             /** @enum {string|null} */
             resultat?: "AVBRUTT" | "AVSLAG" | "INNVILGET" | "KLAGE_AVSLÅTT" | "KLAGE_DELVIS_OMGJØRES" | "KLAGE_OMGJØRES" | "KLAGE_OPPRETTHOLDES" | "KLAGE_TRUKKET" | "TRUKKET" | null;
             saksnummer: string;
+            /** Format: uuid */
+            sisteBehandlingReferanse?: string | null;
         };
         "no.nav.aap.behandlingsflyt.sakogbehandling.sak.flate.S\u00F8kDto": {
             "s\u00F8ketekst": string;
@@ -10605,28 +11118,68 @@ export interface components {
         "no.nav.aap.behandlingsflyt.utils.diff.Endret<no.nav.aap.behandlingsflyt.behandling.tilkjentytelse.TilkjentYtelsePeriode2Dto>": {
             fra: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.tilkjentytelse.TilkjentYtelsePeriode2Dto"];
             til: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.tilkjentytelse.TilkjentYtelsePeriode2Dto"];
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            diff: "Endret";
         };
         "no.nav.aap.behandlingsflyt.utils.diff.Endret<no.nav.aap.behandlingsflyt.behandling.underveis.UnderveisperiodeDto>": {
             fra: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.underveis.UnderveisperiodeDto"];
             til: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.underveis.UnderveisperiodeDto"];
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            diff: "Endret";
         };
         "no.nav.aap.behandlingsflyt.utils.diff.Fjernet<no.nav.aap.behandlingsflyt.behandling.tilkjentytelse.TilkjentYtelsePeriode2Dto>": {
             fjernet: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.tilkjentytelse.TilkjentYtelsePeriode2Dto"];
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            diff: "Fjernet";
         };
         "no.nav.aap.behandlingsflyt.utils.diff.Fjernet<no.nav.aap.behandlingsflyt.behandling.underveis.UnderveisperiodeDto>": {
             fjernet: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.underveis.UnderveisperiodeDto"];
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            diff: "Fjernet";
         };
         "no.nav.aap.behandlingsflyt.utils.diff.LagtTil<no.nav.aap.behandlingsflyt.behandling.tilkjentytelse.TilkjentYtelsePeriode2Dto>": {
             lagtTil: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.tilkjentytelse.TilkjentYtelsePeriode2Dto"];
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            diff: "LagtTil";
         };
         "no.nav.aap.behandlingsflyt.utils.diff.LagtTil<no.nav.aap.behandlingsflyt.behandling.underveis.UnderveisperiodeDto>": {
             lagtTil: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.underveis.UnderveisperiodeDto"];
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            diff: "LagtTil";
         };
         "no.nav.aap.behandlingsflyt.utils.diff.Uendret<no.nav.aap.behandlingsflyt.behandling.tilkjentytelse.TilkjentYtelsePeriode2Dto>": {
             uendret: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.tilkjentytelse.TilkjentYtelsePeriode2Dto"];
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            diff: "Uendret";
         };
         "no.nav.aap.behandlingsflyt.utils.diff.Uendret<no.nav.aap.behandlingsflyt.behandling.underveis.UnderveisperiodeDto>": {
             uendret: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.underveis.UnderveisperiodeDto"];
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            diff: "Uendret";
         };
         "no.nav.aap.behandlingsflyt.ytelseoppslag.ForeldrepengeperiodeDTO": {
             "bel\u00F8p"?: number | null;
@@ -10743,16 +11296,22 @@ export interface components {
             id: string;
             tekniskNavn: string;
             visningsnavn: string;
-            /** @enum {string} */
-            type: "FAKTAGRUNNLAG" | "TEKST";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "FAKTAGRUNNLAG";
         };
         "no.nav.aap.brev.kontrakt.BlokkInnhold.FormattertTekst": {
             formattering: ("FET" | "KURSIV" | "UNDERSTREK")[];
             /** Format: uuid */
             id: string;
             tekst: string;
-            /** @enum {string} */
-            type: "FAKTAGRUNNLAG" | "TEKST";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "TEKST";
         };
         "no.nav.aap.brev.kontrakt.Brev": {
             journalpostTittel?: string | null;
@@ -10799,6 +11358,9 @@ export interface components {
             brukerIdent: string;
             mottakerIdentListe: string[];
         };
+        "no.nav.aap.brev.kontrakt.KanDistribuereBrevV2Request": {
+            mottakerId: string;
+        };
         "no.nav.aap.brev.kontrakt.MottakerDistStatus": {
             kanDistribuere: boolean;
             mottakerIdent: string;
@@ -10812,6 +11374,10 @@ export interface components {
         "no.nav.aap.brev.kontrakt.NavnOgAdresse": {
             adresse: components["schemas"]["no.nav.aap.brev.kontrakt.Adresse"];
             navn: string;
+        };
+        "no.nav.aap.brev.kontrakt.OppdaterMottakereRequest": {
+            kopimottaker?: components["schemas"]["no.nav.aap.brev.kontrakt.MottakerDto"];
+            mottaker: components["schemas"]["no.nav.aap.brev.kontrakt.MottakerDto"];
         };
         "no.nav.aap.brev.kontrakt.Signatur": {
             enhet: string;

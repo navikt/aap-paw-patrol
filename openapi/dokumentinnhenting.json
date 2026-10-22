@@ -114,10 +114,6 @@
             "nullable": false,
             "type": "string"
           },
-          "saksnummer": {
-            "nullable": true,
-            "type": "string"
-          },
           "statuser": {
             "items": {
               "enum": [
@@ -211,6 +207,24 @@
         },
         "required": [
           "dialogid"
+        ],
+        "type": "object"
+      },
+      "dokumentinnhenting.api.`DokumentApiKt$dokumentApi$1$HelsedokumenterRequest`": {
+        "nullable": false,
+        "properties": {
+          "personIdent": {
+            "nullable": false,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "personIdent",
+          "saksnummer"
         ],
         "type": "object"
       },
@@ -1916,7 +1930,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/dokumentinnhenting.api.HentDokumentoversiktBrukerRequest"
+                "$ref": "#/components/schemas/dokumentinnhenting.api.`DokumentApiKt$dokumentApi$1$HelsedokumenterRequest`"
               }
             }
           }
