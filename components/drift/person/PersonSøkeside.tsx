@@ -6,8 +6,9 @@ import { MagnifyingGlassIcon } from '@navikt/aksel-icons';
 import { Periode } from 'lib/types/felles';
 import { formaterPeriode } from 'lib/utils/date';
 import { StorageKey } from 'lib/keys';
-import { hentJournalposterForPerson } from 'lib/clientApi';
-import { InnkommendeJournalpostDto } from 'lib/types/postmottak';
+import { FetchJsonBody, hentJournalposterForPerson } from 'lib/clientApi';
+
+type InnkommendeJournalpostDto = FetchJsonBody<ReturnType<typeof hentJournalposterForPerson>>['journalposter'][number];
 
 interface PersonSøkDriftsinfoDto {
   saker: {

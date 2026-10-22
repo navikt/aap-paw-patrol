@@ -1,15 +1,9 @@
 import { useEffect, useState } from 'react';
-import { hentYrkesskader } from 'lib/clientApi';
+import { FetchJsonItem, hentYrkesskader } from 'lib/clientApi';
 import { BodyShort, Box, HStack, Loader, Table } from '@navikt/ds-react';
 import { formaterDatoForFrontend } from 'lib/utils/date';
 
-interface YrkesskadeDriftsinfoDto {
-  ref: string;
-  saksnummer: number | null;
-  kildesystem: string;
-  skadedato: string | null;
-  vedtaksdato: string | null;
-}
+type YrkesskadeDriftsinfoDto = FetchJsonItem<ReturnType<typeof hentYrkesskader>>;
 
 export const Yrkesskader = ({ behandlingsreferanse }: { behandlingsreferanse: string }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);

@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
-import { hentRettighetsinfo, hentVilkår } from 'lib/clientApi';
+import { FetchJsonBody, FetchJsonItem, hentRettighetsinfo, hentVilkår } from 'lib/clientApi';
 import { CopyButton, ExpansionCard, HStack, Loader, Table, Tag, VStack } from '@navikt/ds-react';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
-import { VilkårDriftsinfoDTO } from 'lib/types/vilkår';
-import { DriftRettighetstypeDTO, StansOpphørDto } from 'lib/types/rettighetstype';
+import { StansOpphørDto } from 'lib/types/rettighetstype';
+
+type VilkårDriftsinfoDTO = FetchJsonItem<ReturnType<typeof hentVilkår>>;
+type DriftRettighetstypeDTO = FetchJsonBody<ReturnType<typeof hentRettighetsinfo>>;
 
 export const Vilkårsresultat = ({ behandlingsreferanse }: { behandlingsreferanse: string }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -29,8 +31,7 @@ export const Vilkårsresultat = ({ behandlingsreferanse }: { behandlingsreferans
               else throw Error(await res.text());
             })
             .then((rettighetsinfo: DriftRettighetstypeDTO) => setRettighetsinfo(rettighetsinfo)),
-        ])
-          .finally(() => setIsLoading(false));
+        ]).finally(() => setIsLoading(false));
       }
     }, 1000);
 
@@ -51,7 +52,9 @@ export const Vilkårsresultat = ({ behandlingsreferanse }: { behandlingsreferans
       <CopyButton copyText={vilkårCopyText} text="Kopier vilkår som CSV" activeText="Kopier vilkår som CSV" />
       {rettighetsinfo && <Rettighetsinfo rettighetsinfo={rettighetsinfo} />}
       {rettighetsinfo && <StansOpphør stansOpphør={rettighetsinfo?.stansOpphør} />}
-      {vilkår?.map((v, i) => <VilkårKort key={`${v.type}-${i}`} vilkår={v} />)}
+      {vilkår?.map((v, i) => (
+        <VilkårKort key={`${v.type}-${i}`} vilkår={v} />
+      ))}
     </VStack>
   );
 };
@@ -194,9 +197,11 @@ const vilkårTilCSV = (vilkårene: VilkårDriftsinfoDTO[] | undefined) => {
 
   for (const vilkår of vilkårene ?? []) {
     for (const periode of vilkår.perioder) {
-      lines.push(`${vilkår.type} ${periode.periode.fom} ${periode.periode.tom} ${periode.utfall} ${periode.innvilgelsesårsak || periode.avslagsårsak || ''}`)
+      lines.push(
+        `${vilkår.type} ${periode.periode.fom} ${periode.periode.tom} ${periode.utfall} ${periode.innvilgelsesårsak || periode.avslagsårsak || ''}`
+      );
     }
   }
 
-  return lines.join("\n")
+  return lines.join('\n');
 };

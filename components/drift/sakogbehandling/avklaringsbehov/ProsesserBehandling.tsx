@@ -1,7 +1,8 @@
 import { Alert, Button, Checkbox, Heading, InlineMessage, VStack } from '@navikt/ds-react';
 import { useState } from 'react';
-import { prosesserBehandling } from 'lib/clientApi';
-import { BehandlingDriftsinfo, BehandlingStatus } from 'lib/types/avklaringsbehov';
+import { FetchJsonBody, hentSakDriftsinfo, prosesserBehandling } from 'lib/clientApi';
+
+type BehandlingDriftsinfo = FetchJsonBody<ReturnType<typeof hentSakDriftsinfo>>['behandlinger'][number];
 
 export const ProsesserBehandling = ({ behandling }: { behandling: BehandlingDriftsinfo }) => {
   const behandlingsreferanse = behandling.referanse;
@@ -34,7 +35,7 @@ export const ProsesserBehandling = ({ behandling }: { behandling: BehandlingDrif
     setIsLoading(false);
   };
 
-  if ([BehandlingStatus.AVSLUTTET].includes(behandling.status)) {
+  if (behandling.status === 'AVSLUTTET') {
     return null;
   }
 
@@ -42,13 +43,13 @@ export const ProsesserBehandling = ({ behandling }: { behandling: BehandlingDrif
     <VStack gap="space-16" marginBlock="space-32">
       <Heading size="medium">Prosesser behandling</Heading>
       <Checkbox size="small" checked={skalForberede} onChange={(e) => setSkalForberede(e.target.checked)}>
-        Forbered behandling{' '}
+        Forbered behandling
       </Checkbox>
 
       {skalForberede && (
         <InlineMessage status="info">
-          Har ansvar for å sette behandlingen i en oppdatert tilstand i form av å innhente opplysninger for stegene
-          man allerede har prosessert og vurdere om man er nødt til å behandle steget på nytt hvis det er oppdaterte
+          Har ansvar for å sette behandlingen i en oppdatert tilstand i form av å innhente opplysninger for stegene man
+          allerede har prosessert og vurdere om man er nødt til å behandle steget på nytt hvis det er oppdaterte
           opplysninger.
         </InlineMessage>
       )}

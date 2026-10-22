@@ -1,8 +1,10 @@
 import { BodyShort, HStack, Label, List, VStack } from '@navikt/ds-react';
-import { SakDriftsinfoDTO } from 'lib/types/avklaringsbehov';
+import { FetchJsonBody, hentSakDriftsinfo } from 'lib/clientApi';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import Link from 'next/link';
 import { OppdaterIdenterModal } from 'components/drift/person-identer/OppdaterIdenterModal';
+
+type SakDriftsinfoDTO = FetchJsonBody<ReturnType<typeof hentSakDriftsinfo>>;
 
 export const SakInfoPanel = ({ sak }: { sak: SakDriftsinfoDTO }) => (
   <VStack gap="space-32" marginBlock="space-0 space-32">

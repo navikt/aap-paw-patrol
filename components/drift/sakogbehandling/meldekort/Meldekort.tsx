@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { hentMeldekortDriftsinfo } from 'lib/clientApi';
-import type { MeldekortDriftsinfoDto } from 'lib/types/meldekort';
+import { FetchJsonBody, hentMeldekortDriftsinfo } from 'lib/clientApi';
 import { Alert, BodyShort, Box, HStack, Label, Loader } from '@navikt/ds-react';
 import { MeldekortVarsler } from 'components/drift/sakogbehandling/meldekort/MeldekortVarsler';
 import { MeldekortUtfyllinger } from 'components/drift/sakogbehandling/meldekort/MeldekortUtfyllinger';
@@ -8,6 +7,8 @@ import { MeldekortAktuelleMeldeperioder } from 'components/drift/sakogbehandling
 import { MeldekortHistoriskeMeldeperioder } from 'components/drift/sakogbehandling/meldekort/MeldekortHistoriskeMeldeperioder';
 import { formaterPeriode, perioderErLike } from 'lib/utils/date';
 import type { Periode } from 'lib/types/felles';
+
+type MeldekortDriftsinfoDto = FetchJsonBody<ReturnType<typeof hentMeldekortDriftsinfo>>;
 
 export const Meldekort = ({
   saksnummer,
@@ -62,9 +63,7 @@ export const Meldekort = ({
           </div>
           <div>
             <Label>Rettighetsperiode</Label>
-            <BodyShort>
-              {data?.sak?.rettighetsperiode && formaterPeriode(data.sak.rettighetsperiode)}
-            </BodyShort>
+            <BodyShort>{data?.sak?.rettighetsperiode && formaterPeriode(data.sak.rettighetsperiode)}</BodyShort>
           </div>
           {data && data.sak && !perioderErLike(data.sak?.rettighetsperiode, sakRettighetsperiode) && (
             <Alert variant="warning">

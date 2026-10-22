@@ -19,7 +19,7 @@ import { SettAktivtStegV2 } from 'components/drift/sakogbehandling/avklaringsbeh
 import { Vilkårsresultat } from 'components/drift/sakogbehandling/vilkårsresultat/Vilkårsresultat';
 import { Oppgaver } from 'components/drift/sakogbehandling/oppgave/Oppgaver';
 import { useCallback, useEffect, useState } from 'react';
-import { BehandlingDriftsinfo } from 'lib/types/avklaringsbehov';
+import { FetchJsonBody, hentSakDriftsinfo } from 'lib/clientApi';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { TilkjentYtelse } from 'components/drift/sakogbehandling/tilkjentytelse/TilkjentYtelse';
 import { TidligereVurderinger } from 'components/drift/sakogbehandling/tidligereVurderinger/TidligereVurderinger';
@@ -27,6 +27,8 @@ import { ProsesserBehandling } from './avklaringsbehov/ProsesserBehandling';
 import { BrevBestillinger } from 'components/drift/sakogbehandling/brev/BrevBestillinger';
 import { Yrkesskader } from 'components/drift/sakogbehandling/yrkesskade/Yrkesskader';
 import { KravOgStønadsperiode } from 'components/drift/sakogbehandling/kravogstonadsperiode/KravOgStonadsperiode';
+
+type BehandlingDriftsinfo = FetchJsonBody<ReturnType<typeof hentSakDriftsinfo>>['behandlinger'][number];
 
 enum Tab {
   AVKLARINGSBEHOV = 'AVKLARINGSBEHOV',
@@ -212,8 +214,8 @@ export const BehandlingOversikt = ({
                         }
                       >
                         {behandling.vedtatt && formaterDatoForFrontend(behandling.vedtatt)}
-                        {behandling.vedtatt && behandling.vedtakId?.id && ' / '}
-                        {behandling.vedtakId?.id}
+                        {behandling.vedtatt && behandling.vedtakId && ' / '}
+                        {behandling.vedtakId}
                       </BodyShort>
                     </Table.DataCell>
                     <Table.DataCell>

@@ -17,15 +17,9 @@ import {
   Tag,
   VStack,
 } from '@navikt/ds-react';
-import { hentJournalpostInfo } from 'lib/clientApi';
+import { FetchJsonBody, hentJournalpostInfo } from 'lib/clientApi';
 import { ForenkletAvklaringsbehov } from 'lib/types/avklaringsbehov';
-import {
-  Fordelingsresultat,
-  JournalpostInfoDTO,
-  kanalInfo,
-  PostmottakAvklaringsbehov,
-  PostmottakBehandling,
-} from 'lib/types/postmottak';
+import { kanalInfo } from 'lib/types/postmottak';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { formaterBehandlingType } from 'lib/utils/formatting';
 import Link from 'next/link';
@@ -34,6 +28,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { AvklaringsbehovInfo } from 'components/drift/sakogbehandling/avklaringsbehov/AvklaringsbehovInfo';
 import { Oppgaver } from 'components/drift/sakogbehandling/oppgave/Oppgaver';
 import { KopierJournalpost } from 'components/drift/postmottak/KopierJournalpost.tsx';
+
+type JournalpostInfoDTO = FetchJsonBody<ReturnType<typeof hentJournalpostInfo>>;
+type Fordelingsresultat = NonNullable<JournalpostInfoDTO['fordelingsresultat']>;
+type PostmottakBehandling = JournalpostInfoDTO['behandlinger'][number];
+type PostmottakAvklaringsbehov = PostmottakBehandling['avklaringsbehov'][number];
 
 function mapTilForenkletAvklaringsbehov(behov: PostmottakAvklaringsbehov): ForenkletAvklaringsbehov {
   return {

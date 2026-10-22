@@ -2,8 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { Alert, BodyShort, Box, Heading, HGrid, HStack, Loader, Tabs, Tag, VStack } from '@navikt/ds-react';
-import { hentSakDriftsinfo } from 'lib/clientApi';
-import { SakDriftsinfoDTO } from 'lib/types/avklaringsbehov';
+import { FetchJsonBody, hentSakDriftsinfo } from 'lib/clientApi';
 import { SakInfoPanel } from 'components/drift/sakogbehandling/SakInfoPanel';
 import { capitalize, normaliserSaksnummer } from 'lib/utils/formatting';
 import { BehandlingOversikt } from 'components/drift/sakogbehandling/BehandlingOversikt';
@@ -12,6 +11,8 @@ import { Dialogmeldinger } from 'components/drift/sakogbehandling/dialogmeldinge
 import { Meldekort } from 'components/drift/sakogbehandling/meldekort/Meldekort';
 import { BrevBestillinger } from 'components/drift/sakogbehandling/brev/BrevBestillinger';
 import { UtbetalingPanel } from 'components/drift/sakogbehandling/utbetaling/UtbetalingPanel';
+
+type SakDriftsinfoDTO = FetchJsonBody<ReturnType<typeof hentSakDriftsinfo>>;
 
 enum Tab {
   BEHANDLINGER = 'BEHANDLINGER',

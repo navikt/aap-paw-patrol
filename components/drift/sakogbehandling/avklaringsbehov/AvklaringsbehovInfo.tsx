@@ -1,21 +1,27 @@
-import { AvklaringsbehovStatus, ForenkletAvklaringsbehov } from 'lib/types/avklaringsbehov';
+import { FetchJsonBody, hentSakDriftsinfo } from 'lib/clientApi';
+import { ForenkletAvklaringsbehov as SimplifiedAvklaringsbehov } from 'lib/types/avklaringsbehov';
 import { BodyShort, InlineMessage, Process, Tag, VStack } from '@navikt/ds-react';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
 
-const tagStatusColor = (status: AvklaringsbehovStatus) => {
+type BehandlingsflytAvklaringsbehov = FetchJsonBody<
+  ReturnType<typeof hentSakDriftsinfo>
+>['behandlinger'][number]['avklaringsbehov'][number];
+type ForenkletAvklaringsbehov = BehandlingsflytAvklaringsbehov | SimplifiedAvklaringsbehov;
+
+const tagStatusColor = (status: string) => {
   switch (status) {
-    case AvklaringsbehovStatus.OPPRETTET:
+    case 'OPPRETTET':
       return 'info';
-    case AvklaringsbehovStatus.KVALITETSSIKRET:
-    case AvklaringsbehovStatus.TOTRINNS_VURDERT:
+    case 'KVALITETSSIKRET':
+    case 'TOTRINNS_VURDERT':
       return 'success';
-    case AvklaringsbehovStatus.SENDT_TILBAKE_FRA_KVALITETSSIKRER:
-    case AvklaringsbehovStatus.SENDT_TILBAKE_FRA_BESLUTTER:
+    case 'SENDT_TILBAKE_FRA_KVALITETSSIKRER':
+    case 'SENDT_TILBAKE_FRA_BESLUTTER':
       return 'warning';
-    case AvklaringsbehovStatus.AVBRUTT:
+    case 'AVBRUTT':
       return 'error';
-    case AvklaringsbehovStatus.AVSLUTTET:
+    case 'AVSLUTTET':
     default:
       return 'neutral';
   }
