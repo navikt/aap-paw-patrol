@@ -11,7 +11,7 @@ import {
   Tag,
   type SortState,
 } from '@navikt/ds-react';
-import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
+import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { capitalize, formaterBehandlingType } from 'lib/utils/formatting';
 import { AvklaringsbehovInfo } from 'components/drift/sakogbehandling/avklaringsbehov/AvklaringsbehovInfo';
@@ -172,7 +172,8 @@ export const BehandlingOversikt = ({
                         iconPosition="right"
                         copyText={behandling.referanse}
                         text={behandling.referanse}
-                        style={{ whiteSpace: 'nowrap' }}
+                        onClick={(event) => event.stopPropagation()}
+                        style={{ whiteSpace: 'nowrap', fontSize: 'var(--ax-font-size-small)' }}
                       />
                     </Table.DataCell>
                     <Table.DataCell>
@@ -202,8 +203,17 @@ export const BehandlingOversikt = ({
                       )}
                     </Table.DataCell>
                     <Table.DataCell>
-                      <BodyShort style={{ whiteSpace: 'nowrap' }}>
-                        {behandling.vedtatt && formaterDatoMedTidspunktSekunderForFrontend(behandling.vedtatt)}
+                      <BodyShort
+                        style={{ whiteSpace: 'nowrap' }}
+                        title={
+                          behandling.vedtatt
+                            ? formaterDatoMedTidspunktSekunderForFrontend(behandling.vedtatt)
+                            : undefined
+                        }
+                      >
+                        {behandling.vedtatt && formaterDatoForFrontend(behandling.vedtatt)}
+                        {behandling.vedtatt && behandling.vedtakId?.id && ' / '}
+                        {behandling.vedtakId?.id}
                       </BodyShort>
                     </Table.DataCell>
                     <Table.DataCell>
