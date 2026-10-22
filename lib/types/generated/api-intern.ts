@@ -897,7 +897,7 @@ export interface paths {
                          *         {
                          *           "status": "LØPENDE",
                          *           "saksnummer": "4MGL8LS",
-                         *           "vedtaksdato": "2026-10-20",
+                         *           "vedtaksdato": "2026-10-22",
                          *           "periode": {
                          *             "fraOgMedDato": "2021-01-01",
                          *             "tilOgMedDato": "2021-01-31"

@@ -54,7 +54,7 @@ export enum SakStatus {
 
 export interface BehandlingDriftsinfo {
   referanse: string;
-  vedtakId?: { id: number };
+  vedtakId?: number;
   type: string;
   status: BehandlingStatus;
   vurderingsbehov: string[];

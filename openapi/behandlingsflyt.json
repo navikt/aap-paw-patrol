@@ -10373,18 +10373,9 @@
         "type": "object"
       },
       "no.nav.aap.behandlingsflyt.behandling.vedtak.VedtakId": {
+        "format": "int64",
         "nullable": false,
-        "properties": {
-          "id": {
-            "format": "int64",
-            "nullable": false,
-            "type": "integer"
-          }
-        },
-        "required": [
-          "id"
-        ],
-        "type": "object"
+        "type": "integer"
       },
       "no.nav.aap.behandlingsflyt.behandling.vedtakslengde.VedtakslengdeGrunnlagResponse": {
         "nullable": false,
@@ -14169,18 +14160,9 @@
         ]
       },
       "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.krav.Kravreferanse": {
+        "format": "uuid",
         "nullable": false,
-        "properties": {
-          "verdi": {
-            "format": "uuid",
-            "nullable": false,
-            "type": "string"
-          }
-        },
-        "required": [
-          "verdi"
-        ],
-        "type": "object"
+        "type": "string"
       },
       "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.krav.MigrertKravLøsningDto": {
         "nullable": false,
@@ -18088,61 +18070,70 @@
         },
         "oneOf": [
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Aktivitetskort"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.AktivitetskortV0"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.AnnetRelevantDokument"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.AnnetRelevantDokumentV0"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.ForeldrepengeVedtak"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.AnnetRelevantDokumentV1"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.InstitusjonsOppholdHendelse"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.ForeldrepengeVedtakV0"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KabalHendelse"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.InstitusjonsOppholdHendelseV0"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Klage"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KabalHendelseV0"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KorrigerSøknadsdato"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KlageV0"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Legeerklæring"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.KorrigerSøknadsdatoV0"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.ManuellRevurdering"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.LegeerklæringV0"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Meldekort"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.ManuellRevurderingV0"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.MeldekortV0"
           },
           {
             "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.MigreringFraArenaV0"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.NyÅrsakTilBehandling"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.NyÅrsakTilBehandlingV0"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.OmgjøringKlageRevurdering"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.OmgjøringKlageRevurderingV0"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Oppfølgingsoppgave"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.OmgjøringKlageRevurderingV1"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.PdlHendelse"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.OppfølgingsoppgaveV0"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.SykepengeSpleisVedtak"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.PdlHendelseV0"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Søknad"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.SykepengevedtakV0"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.TilbakekrevingHendelse"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.SøknadV0"
           },
           {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.Uførevedtak"
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.FagsysteminfoBehovV0"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.TilbakekrevingHendelseV0"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.dokumenter.UførevedtakV0"
           }
         ]
       },
@@ -20287,7 +20278,11 @@
         "nullable": false,
         "properties": {
           "andreUtbetalinger": {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.test.AndreUtbetalingerApiDto",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.test.AndreUtbetalingerApiDto"
+              }
+            ],
             "description": "Om søker svarte at hen mottar andre utbetalinger i søknaden."
           },
           "automatiskMeldekort": {
@@ -22254,7 +22249,7 @@
   "info": {
     "description": "For å teste API i dev, besøk\n<a href=\"https://azure-token-generator.intern.dev.nav.no/api/m2m?aud=dev-gcp:aap:behandlingsflyt\">Token Generator</a> for å få token.",
     "title": "AAP - Behandlingsflyt",
-    "version": "5d449d8984ea0afd76af67d8b45b91b90c2bd04e"
+    "version": "434e07f59eb9f8f6e32aa4822336cf0bde162a9a"
   },
   "openapi": "3.0.0",
   "paths": {

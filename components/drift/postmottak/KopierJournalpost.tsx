@@ -1,13 +1,15 @@
 'use client';
 
 import { Alert, Button, HelpText, Label } from '@navikt/ds-react';
-import { kopierJournalpost } from 'lib/clientApi';
+import { FetchJsonBody, kopierJournalpost } from 'lib/clientApi';
 import { useState } from 'react';
+
+type NyJournalpostId = FetchJsonBody<ReturnType<typeof kopierJournalpost>>;
 
 export const KopierJournalpost = ({ journalpostId }: { journalpostId: string }) => {
   const [error, setError] = useState<string>();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [nyJournalpost, setNyJournalpost] = useState<string>();
+  const [nyJournalpost, setNyJournalpost] = useState<NyJournalpostId>();
 
   const onClickKopierJournalpost = async () => {
     setNyJournalpost(undefined);
@@ -22,7 +24,7 @@ export const KopierJournalpost = ({ journalpostId }: { journalpostId: string }) 
             throw Error(await res.text());
           }
         })
-        .then((data: string) => {
+        .then((data) => {
           setNyJournalpost(data);
         })
         .catch((err) => {
@@ -45,7 +47,12 @@ export const KopierJournalpost = ({ journalpostId }: { journalpostId: string }) 
           å opprette noe på en ny sak.
         </HelpText>
       </div>
-      <Button size="small" onClick={onClickKopierJournalpost} loading={isSubmitting} disabled={nyJournalpost !== undefined}>
+      <Button
+        size="small"
+        onClick={onClickKopierJournalpost}
+        loading={isSubmitting}
+        disabled={nyJournalpost !== undefined}
+      >
         Kopier journalpost
       </Button>
       {nyJournalpost && <Alert variant="info">Har opprettet ny journalpost - ny id er {nyJournalpost}</Alert>}

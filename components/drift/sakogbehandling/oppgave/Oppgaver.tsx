@@ -1,10 +1,18 @@
 import { useEffect, useState } from 'react';
-import { hentOppgaver } from 'lib/clientApi';
+import { FetchJsonItem, hentOppgaver } from 'lib/clientApi';
 import { BodyShort, Box, HStack, Loader, Table, Tag } from '@navikt/ds-react';
-import { OppgaveDriftsinfoDTO, OppgaveHistorikkDto, OppgaveStatus } from 'lib/types/oppgave';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
 import { mapBehovskodeTilBehovstype } from 'lib/utils/oversettelser';
+
+type OppgaveDriftsinfoDTO = FetchJsonItem<ReturnType<typeof hentOppgaver>>;
+type OppgaveHistorikkDto = OppgaveDriftsinfoDTO['historikk'][number];
+type OppgaveStatusType = OppgaveDriftsinfoDTO['status'];
+
+const OppgaveStatus = {
+  AVSLUTTET: 'AVSLUTTET',
+  OPPRETTET: 'OPPRETTET',
+} as const;
 
 export const Oppgaver = ({ behandlingsreferanse }: { behandlingsreferanse: string }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -127,7 +135,7 @@ const OppgaveHistorikk = ({ historikk }: { historikk: OppgaveHistorikkDto[] }) =
   );
 };
 
-const tag = (status: OppgaveStatus) => {
+const tag = (status: OppgaveStatusType) => {
   switch (status) {
     case OppgaveStatus.AVSLUTTET:
       return (

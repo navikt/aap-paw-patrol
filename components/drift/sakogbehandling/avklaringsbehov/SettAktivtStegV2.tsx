@@ -1,9 +1,10 @@
 import { Alert, Button, Heading, InlineMessage, Tag, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
 import { muligeStegOptions } from 'components/drift/settaktivtsteg/SettAktivtSteg';
 import { useState } from 'react';
-import { kjørFraSteg } from 'lib/clientApi';
-import { BehandlingDriftsinfo, BehandlingStatus } from 'lib/types/avklaringsbehov';
+import { FetchJsonBody, hentSakDriftsinfo, kjørFraSteg } from 'lib/clientApi';
 import { formaterBehandlingType } from 'lib/utils/formatting';
+
+type BehandlingDriftsinfo = FetchJsonBody<ReturnType<typeof hentSakDriftsinfo>>['behandlinger'][number];
 
 export const SettAktivtStegV2 = ({ behandling }: { behandling: BehandlingDriftsinfo }) => {
   const behandlingsreferanse = behandling.referanse;
@@ -37,7 +38,7 @@ export const SettAktivtStegV2 = ({ behandling }: { behandling: BehandlingDriftsi
     setIsLoading(false);
   };
 
-  if ([BehandlingStatus.IVERKSETTES, BehandlingStatus.AVSLUTTET].includes(behandling.status)) {
+  if (behandling.status === 'IVERKSETTES' || behandling.status === 'AVSLUTTET') {
     return null;
   }
 

@@ -1,16 +1,13 @@
 'use client';
 import { Alert, Button, HStack, Table, Tag, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
-import { hentTidligereVurderinger } from 'lib/clientApi';
-import {
-  BehandlingsutfallType,
-  RettighetsType,
-  TidligereVurderingerDto,
-  rettighetsTypeHjemmel,
-} from 'lib/types/tidligereVurderinger';
+import { FetchJsonBody, hentTidligereVurderinger } from 'lib/clientApi';
+import { BehandlingsutfallType, RettighetsType, rettighetsTypeHjemmel } from 'lib/types/tidligereVurderinger';
 import { formaterDatoForFrontend } from 'lib/utils/date';
 import { useState } from 'react';
 
 import { revurderingSteg } from 'components/drift/settaktivtsteg/SettAktivtSteg';
+
+type TidligereVurderingerDto = FetchJsonBody<ReturnType<typeof hentTidligereVurderinger>>;
 
 const stegOptions = Object.entries(revurderingSteg).map(([key, value]) => ({ label: value, value: key }));
 
@@ -119,7 +116,7 @@ const utfallTag = (utfall: BehandlingsutfallType) => {
   }
 };
 
-const formaterRettighetstype = (type: RettighetsType | null) => {
+const formaterRettighetstype = (type: RettighetsType | null | undefined) => {
   if (!type) return '–';
   return `${type} (${rettighetsTypeHjemmel[type]})`;
 };

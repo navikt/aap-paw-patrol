@@ -2,8 +2,9 @@
 
 import { Alert, BodyShort, Button, Heading, HStack, Loader, Table, TextField, VStack } from '@navikt/ds-react';
 import { useState } from 'react';
-import { Behandler } from 'lib/types';
-import { hentBehandler } from 'lib/clientApi';
+import { FetchJsonItem, hentBehandler } from 'lib/clientApi';
+
+type Behandler = FetchJsonItem<ReturnType<typeof hentBehandler>>;
 
 export const Behandleroppslag = () => {
   const [isLoading, setIsLoading] = useState(false);

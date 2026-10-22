@@ -17,17 +17,21 @@ import {
   VStack,
 } from '@navikt/ds-react';
 import { PencilIcon, PlusIcon, TrashIcon } from '@navikt/aksel-icons';
-import { hentOppgavefiltre, slettOppgavefilter } from 'lib/clientApi';
-import { AvklaringsbehovKodeNavn, FilterDriftsinfoDTO, FilterOversiktDTO, MarkeringForBehandling } from 'lib/types/oppgave';
+import { FetchJsonBody, hentOppgavefiltre, slettOppgavefilter } from 'lib/clientApi';
+import { AvklaringsbehovKodeNavn } from 'lib/types/oppgave';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
 import { OppgavefilterSkjema } from 'components/drift/oppgavefilter/OppgavefilterSkjema';
 
 const ALLE = 'ALLE';
 
+type FilterOversiktDTO = FetchJsonBody<ReturnType<typeof hentOppgavefiltre>>;
+type FilterDriftsinfoDTO = FilterOversiktDTO['filtre'][number];
+type MarkeringForBehandling = FilterDriftsinfoDTO['inkluderteMarkeringer'][number];
+
 const markeringLabel: Record<MarkeringForBehandling, string> = {
-  [MarkeringForBehandling.HASTER]: 'Haster',
-  [MarkeringForBehandling.AVSLAG_11_5]: 'Avslag § 11-5',
+  HASTER: 'Haster',
+  AVSLAG_11_5: 'Avslag § 11-5',
 };
 
 const MarkeringerVisning = ({

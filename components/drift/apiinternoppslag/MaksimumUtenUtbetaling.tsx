@@ -1,38 +1,9 @@
-import {
-  Box,
-  Button,
-  InlineMessage,
-  Loader,
-  LocalAlert,
-  Table,
-  VStack,
-} from '@navikt/ds-react';
+import { Box, Button, InlineMessage, Loader, LocalAlert, Table, VStack } from '@navikt/ds-react';
 import { formatISO } from 'date-fns';
-import { hentMaksimumUtenUtbetaling } from 'lib/clientApi';
+import { FetchJsonBody, hentMaksimumUtenUtbetaling } from 'lib/clientApi';
 import { useState } from 'react';
 
-interface MaksimumUtenUtbetalingResponse {
-  vedtak: Vedtak[];
-}
-
-interface Vedtak {
-  dagsats: number;
-  dagsatsEtterUføreReduksjon?: number;
-  vedtakId: string;
-  status: string;
-  saksnummer: string;
-  vedtaksdato: string;
-  vedtaksTypeKode?: string;
-  vedtaksTypeNavn?: string;
-  periode: { fraOgMedDato: string, tilOgMedDato: string };
-  rettighetsType: string;
-  beregningsgrunnlag: number;
-  barnMedStonad: number;
-  barnetillegg: number;
-  kildesystem: string;
-  samordningsId?: string | null;
-  opphorsAarsak?: string | null;
-}
+type MaksimumUtenUtbetalingResponse = FetchJsonBody<ReturnType<typeof hentMaksimumUtenUtbetaling>>;
 
 export interface Props {
   fom?: Date | null;
@@ -40,7 +11,7 @@ export interface Props {
   fnr?: string | null;
 }
 
-export const MaksimumUtenUtbetaling = ({fom, tom, fnr}: Props) => {
+export const MaksimumUtenUtbetaling = ({ fom, tom, fnr }: Props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
   const [vedtak, setVedtak] = useState<MaksimumUtenUtbetalingResponse>();
@@ -114,30 +85,29 @@ export const MaksimumUtenUtbetaling = ({fom, tom, fnr}: Props) => {
                 </Table.Row>
               </Table.Header>
               <Table.Body>
-                {vedtak.vedtak.map( (v) => {
-                    return (
-                      <Table.Row key={`${v.saksnummer}${v.vedtakId}${v.periode.fraOgMedDato}`}>
-                        <Table.DataCell>{v.periode.fraOgMedDato}</Table.DataCell>
-                        <Table.DataCell>{v.periode.tilOgMedDato}</Table.DataCell>
-                        <Table.DataCell>{v.kildesystem}</Table.DataCell>
-                        <Table.DataCell>{v.saksnummer}</Table.DataCell>
-                        <Table.DataCell>{v.vedtakId}</Table.DataCell>
-                        <Table.DataCell>{v.status}</Table.DataCell>
-                        <Table.DataCell>{v.rettighetsType}</Table.DataCell>
-                        <Table.DataCell>{v.vedtaksdato}</Table.DataCell>
-                        <Table.DataCell>{v.vedtaksTypeKode}</Table.DataCell>
-                        <Table.DataCell>{v.vedtaksTypeNavn}</Table.DataCell>
-                        <Table.DataCell>{v.beregningsgrunnlag}</Table.DataCell>
-                        <Table.DataCell>{v.dagsats}</Table.DataCell>
-                        <Table.DataCell>{v.dagsatsEtterUføreReduksjon}</Table.DataCell>
-                        <Table.DataCell>{v.barnMedStonad}</Table.DataCell>
-                        <Table.DataCell>{v.barnetillegg}</Table.DataCell>
-                        <Table.DataCell>{v.samordningsId}</Table.DataCell>
-                        <Table.DataCell>{v.opphorsAarsak}</Table.DataCell>
-                      </Table.Row>
-                    );
-                  }
-                )}
+                {vedtak.vedtak.map((v) => {
+                  return (
+                    <Table.Row key={`${v.saksnummer}${v.vedtakId}${v.periode.fraOgMedDato}`}>
+                      <Table.DataCell>{v.periode.fraOgMedDato}</Table.DataCell>
+                      <Table.DataCell>{v.periode.tilOgMedDato}</Table.DataCell>
+                      <Table.DataCell>{v.kildesystem}</Table.DataCell>
+                      <Table.DataCell>{v.saksnummer}</Table.DataCell>
+                      <Table.DataCell>{v.vedtakId}</Table.DataCell>
+                      <Table.DataCell>{v.status}</Table.DataCell>
+                      <Table.DataCell>{v.rettighetsType}</Table.DataCell>
+                      <Table.DataCell>{v.vedtaksdato}</Table.DataCell>
+                      <Table.DataCell>{v.vedtaksTypeKode}</Table.DataCell>
+                      <Table.DataCell>{v.vedtaksTypeNavn}</Table.DataCell>
+                      <Table.DataCell>{v.beregningsgrunnlag}</Table.DataCell>
+                      <Table.DataCell>{v.dagsats}</Table.DataCell>
+                      <Table.DataCell>{v.dagsatsEtterUføreReduksjon}</Table.DataCell>
+                      <Table.DataCell>{v.barnMedStonad}</Table.DataCell>
+                      <Table.DataCell>{v.barnetillegg}</Table.DataCell>
+                      <Table.DataCell>{v.samordningsId}</Table.DataCell>
+                      <Table.DataCell>{v.opphorsAarsak}</Table.DataCell>
+                    </Table.Row>
+                  );
+                })}
               </Table.Body>
             </Table>
           )
@@ -145,4 +115,4 @@ export const MaksimumUtenUtbetaling = ({fom, tom, fnr}: Props) => {
       </VStack>
     </Box>
   );
-}
+};

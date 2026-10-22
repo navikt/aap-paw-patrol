@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { hentTilkjentYtelse } from 'lib/clientApi';
+import { FetchJsonBody, hentTilkjentYtelse } from 'lib/clientApi';
 import { BodyShort, Box, HStack, Loader, Table } from '@navikt/ds-react';
 import { formaterDatoForFrontend, formaterPeriode } from 'lib/utils/date';
-import { TilkjentYtelseDto } from 'lib/types/tilkjentytelse';
 import { formaterTilNok, formaterTilProsent } from 'lib/utils/formatting';
+
+type TilkjentYtelseDto = FetchJsonBody<ReturnType<typeof hentTilkjentYtelse>>;
 
 export const TilkjentYtelse = ({ behandlingsreferanse }: { behandlingsreferanse: string }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);

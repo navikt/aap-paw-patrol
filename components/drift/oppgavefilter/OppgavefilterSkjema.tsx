@@ -1,30 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Alert,
-  Button,
-  Checkbox,
-  CheckboxGroup,
-  HStack,
-  Select,
-  Tag,
-  TextField,
-  VStack,
-} from '@navikt/ds-react';
+import { Alert, Button, Checkbox, CheckboxGroup, HStack, Select, Tag, TextField, VStack } from '@navikt/ds-react';
 import { PlusIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { lagreOppgavefilter } from 'lib/clientApi';
-import {
-  AvklaringsbehovKodeNavn,
-  BEHANDLINGSTYPER,
-  EnhetDriftRequest,
-  FilterDriftRequest,
-  FilterDriftsinfoDTO,
-  Filtermodus,
-  FilterType,
-  MarkeringDriftRequest,
-  MarkeringForBehandling,
-} from 'lib/types/oppgave';
+import { FetchJsonBody, hentOppgavefiltre, lagreOppgavefilter } from 'lib/clientApi';
+import { AvklaringsbehovKodeNavn, BEHANDLINGSTYPER } from 'lib/types/oppgave';
+
+type FilterDriftRequest = Parameters<typeof lagreOppgavefilter>[0];
+type FilterDriftsinfoDTO = FetchJsonBody<ReturnType<typeof hentOppgavefiltre>>['filtre'][number];
+type FilterType = FilterDriftRequest['type'];
+type EnhetDriftRequest = FilterDriftRequest['enheter'][number];
+type MarkeringDriftRequest = FilterDriftRequest['markeringer'][number];
+type MarkeringForBehandling = MarkeringDriftRequest['type'];
+type Behandlingstype = FilterDriftRequest['behandlingstyper'][number];
 
 interface Props {
   eksisterendeFilter?: FilterDriftsinfoDTO;
@@ -33,13 +21,10 @@ interface Props {
   onAvbryt: () => void;
 }
 
-function mapTilEnheter(
-  inkluderte: string[],
-  ekskluderte: string[]
-): EnhetDriftRequest[] {
+function mapTilEnheter(inkluderte: string[], ekskluderte: string[]): EnhetDriftRequest[] {
   return [
-    ...inkluderte.map((enhet) => ({ enhet, filtermodus: Filtermodus.INKLUDER })),
-    ...ekskluderte.map((enhet) => ({ enhet, filtermodus: Filtermodus.EKSKLUDER })),
+    ...inkluderte.map((enhet) => ({ enhet, filtermodus: 'INKLUDER' as const })),
+    ...ekskluderte.map((enhet) => ({ enhet, filtermodus: 'EKSKLUDER' as const })),
   ];
 }
 
@@ -48,39 +33,30 @@ function mapTilMarkeringer(
   ekskluderte: MarkeringForBehandling[]
 ): MarkeringDriftRequest[] {
   return [
-    ...inkluderte.map((type) => ({ type, filtermodus: Filtermodus.INKLUDER })),
-    ...ekskluderte.map((type) => ({ type, filtermodus: Filtermodus.EKSKLUDER })),
+    ...inkluderte.map((type) => ({ type, filtermodus: 'INKLUDER' as const })),
+    ...ekskluderte.map((type) => ({ type, filtermodus: 'EKSKLUDER' as const })),
   ];
 }
 
-const MARKERINGER = Object.values(MarkeringForBehandling);
+const MARKERINGER: MarkeringForBehandling[] = ['HASTER', 'AVSLAG_11_5'];
 
 const markeringLabel: Record<MarkeringForBehandling, string> = {
-  [MarkeringForBehandling.HASTER]: 'Haster',
-  [MarkeringForBehandling.AVSLAG_11_5]: 'Avslag § 11-5',
+  HASTER: 'Haster',
+  AVSLAG_11_5: 'Avslag § 11-5',
 };
 
-export const OppgavefilterSkjema = ({
-  eksisterendeFilter,
-  alleAvklaringsbehov,
-  onLagret,
-  onAvbryt,
-}: Props) => {
+export const OppgavefilterSkjema = ({ eksisterendeFilter, alleAvklaringsbehov, onLagret, onAvbryt }: Props) => {
   const [navn, setNavn] = useState(eksisterendeFilter?.navn ?? '');
   const [beskrivelse, setBeskrivelse] = useState(eksisterendeFilter?.beskrivelse ?? '');
-  const [type, setType] = useState<FilterType>(eksisterendeFilter?.type ?? FilterType.GENERELL);
+  const [type, setType] = useState<FilterType>(eksisterendeFilter?.type ?? 'GENERELL');
   const [valgteAvklaringsbehov, setValgteAvklaringsbehov] = useState<string[]>(
     eksisterendeFilter?.avklaringsbehov.map((a) => a.kode) ?? []
   );
-  const [valgteBehandlingstyper, setValgteBehandlingstyper] = useState<string[]>(
+  const [valgteBehandlingstyper, setValgteBehandlingstyper] = useState<Behandlingstype[]>(
     eksisterendeFilter?.behandlingstyper ?? []
   );
-  const [inkluderteEnheter, setInkluderteEnheter] = useState<string[]>(
-    eksisterendeFilter?.inkluderteEnheter ?? []
-  );
-  const [ekskluderteEnheter, setEkskluderteEnheter] = useState<string[]>(
-    eksisterendeFilter?.ekskluderteEnheter ?? []
-  );
+  const [inkluderteEnheter, setInkluderteEnheter] = useState<string[]>(eksisterendeFilter?.inkluderteEnheter ?? []);
+  const [ekskluderteEnheter, setEkskluderteEnheter] = useState<string[]>(eksisterendeFilter?.ekskluderteEnheter ?? []);
   const [inkluderteMarkeringer, setInkluderteMarkeringer] = useState<MarkeringForBehandling[]>(
     eksisterendeFilter?.inkluderteMarkeringer ?? []
   );
@@ -93,6 +69,9 @@ export const OppgavefilterSkjema = ({
 
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string>();
+
+  const erBehandlingstype = (value: string): value is Behandlingstype =>
+    BEHANDLINGSTYPER.some((behandlingstype) => behandlingstype === value);
 
   const leggTilInkludert = () => {
     const val = nyInkludertEnhet.trim().toUpperCase();
@@ -111,9 +90,7 @@ export const OppgavefilterSkjema = ({
   };
 
   const toggleAvklaringsbehov = (kode: string) => {
-    setValgteAvklaringsbehov((prev) =>
-      prev.includes(kode) ? prev.filter((k) => k !== kode) : [...prev, kode]
-    );
+    setValgteAvklaringsbehov((prev) => (prev.includes(kode) ? prev.filter((k) => k !== kode) : [...prev, kode]));
   };
 
   const handleSubmit = async () => {
@@ -158,12 +135,7 @@ export const OppgavefilterSkjema = ({
         </Alert>
       )}
 
-      <TextField
-        label="Navn"
-        size="small"
-        value={navn}
-        onChange={(e) => setNavn(e.target.value)}
-      />
+      <TextField label="Navn" size="small" value={navn} onChange={(e) => setNavn(e.target.value)} />
 
       <TextField
         label="Beskrivelse"
@@ -172,13 +144,8 @@ export const OppgavefilterSkjema = ({
         onChange={(e) => setBeskrivelse(e.target.value)}
       />
 
-      <Select
-        label="Type"
-        size="small"
-        value={type}
-        onChange={(e) => setType(e.target.value as FilterType)}
-      >
-        {Object.values(FilterType).map((t) => (
+      <Select label="Type" size="small" value={type} onChange={(e) => setType(e.target.value as FilterType)}>
+        {(['GENERELL', 'ALLE_OPPGAVER', 'KVALITETSSIKRING'] as const).map((t) => (
           <option key={t} value={t}>
             {t}
           </option>
@@ -190,7 +157,7 @@ export const OppgavefilterSkjema = ({
         legend="Behandlingstyper"
         size="small"
         value={valgteBehandlingstyper}
-        onChange={setValgteBehandlingstyper}
+        onChange={(selected) => setValgteBehandlingstyper(selected.filter(erBehandlingstype))}
       >
         {BEHANDLINGSTYPER.map((bt) => (
           <Checkbox key={bt} value={bt}>
@@ -224,16 +191,20 @@ export const OppgavefilterSkjema = ({
             );
           })}
         </HStack>
-        <VStack gap="space-2" style={{ maxHeight: '16rem', overflowY: 'auto', border: '1px solid var(--ax-border-neutral-subtle)', borderRadius: 4, padding: '0.5rem' }}>
+        <VStack
+          gap="space-2"
+          style={{
+            maxHeight: '16rem',
+            overflowY: 'auto',
+            border: '1px solid var(--ax-border-neutral-subtle)',
+            borderRadius: 4,
+            padding: '0.5rem',
+          }}
+        >
           {filtrerteBehov.map((b) => {
             const erValgt = valgteAvklaringsbehov.includes(b.kode);
             return (
-              <Checkbox
-                key={b.kode}
-                size="small"
-                checked={erValgt}
-                onChange={() => toggleAvklaringsbehov(b.kode)}
-              >
+              <Checkbox key={b.kode} size="small" checked={erValgt} onChange={() => toggleAvklaringsbehov(b.kode)}>
                 {b.navn} ({b.kode})
               </Checkbox>
             );
@@ -351,4 +322,3 @@ export const OppgavefilterSkjema = ({
     </VStack>
   );
 };
-

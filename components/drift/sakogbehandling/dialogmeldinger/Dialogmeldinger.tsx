@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { hentDialogmeldinger } from 'lib/clientApi';
-import { DialogmeldingDriftinfoDTO } from 'lib/types/dokumenter';
+import { FetchJsonItem, hentDialogmeldinger } from 'lib/clientApi';
+
+type DialogmeldingDriftinfoDTO = FetchJsonItem<ReturnType<typeof hentDialogmeldinger>>;
 import { Alert, Box, Heading, Loader, Table } from '@navikt/ds-react';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 
