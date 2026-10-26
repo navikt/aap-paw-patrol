@@ -185,6 +185,17 @@ export default function Home() {
 
               <LinkCard size="small">
                 <LinkCardIcon>
+                  <ClockIcon fontSize="2rem" />
+                </LinkCardIcon>
+                <LinkCardTitle>
+                  <LinkCardAnchor href={`/drift/tilbakestill-rettighetsperiode`}>
+                    Tilbakestill rettighetsperiode for trukket sak
+                  </LinkCardAnchor>
+                </LinkCardTitle>
+              </LinkCard>
+
+              <LinkCard size="small">
+                <LinkCardIcon>
                   <FilterIcon fontSize="2rem" />
                 </LinkCardIcon>
                 <LinkCardTitle>
