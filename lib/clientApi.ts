@@ -159,8 +159,12 @@ export function oppdaterPersonIdenter(
   );
 }
 
-export function tilbakestillRettighetsperiodeForTrukketSak(saksnummer: string): Promise<Response> {
-  return fetch(`/api/drift/sak/${saksnummer}/tilbakestill-rettighetsperiode-trukket-sak`, { method: 'POST' });
+export function tilbakestillRettighetsperiodeForTrukketSak(
+  saksnummer: string
+): FetchResult<BehandlingsflytPaths['/api/drift/sak/{saksnummer}/tilbakestill-rettighetsperiode-trukket-sak']['post']> {
+  return fetchTyped<
+    BehandlingsflytPaths['/api/drift/sak/{saksnummer}/tilbakestill-rettighetsperiode-trukket-sak']['post']
+  >(`/api/drift/sak/${saksnummer}/tilbakestill-rettighetsperiode-trukket-sak`, { method: 'POST' });
 }
 
 export function oppdaterMeldeperioder(
