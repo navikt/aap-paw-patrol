@@ -785,6 +785,112 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.api.intern.EienSak": {
+        "nullable": false,
+        "properties": {
+          "foreløpigMaksdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "kilde": {
+            "enum": [
+              "ARENA",
+              "KELVIN"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "perioderMedRett": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.api.intern.PeriodeDTO"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "sakId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "saksbehandlingsstatus": {
+            "enum": [
+              "FERDIGBEHANDLET",
+              "REVURDERING_UNDER_BEHANDLING",
+              "SOKNAD_UNDER_BEHANDLING"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "søknadsdatoer": {
+            "items": {
+              "example": "2025-04-01",
+              "format": "date",
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "vedtaksdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "venteårsak": {
+            "nullable": true,
+            "type": "string"
+          },
+          "ytelsesstatus": {
+            "enum": [
+              "AVSLUTTET",
+              "FOR_VEDTAK",
+              "LOPENDE"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kilde",
+          "perioderMedRett",
+          "sakId",
+          "saksbehandlingsstatus",
+          "søknadsdatoer",
+          "ytelsesstatus"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.api.intern.EienSakerRequest": {
+        "nullable": false,
+        "properties": {
+          "personidentifikator": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "personidentifikator"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.api.intern.EienSakerResponse": {
+        "nullable": false,
+        "properties": {
+          "saker": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.api.intern.EienSak"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "saker"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.api.intern.HolmesArbeidstimerResponse": {
         "nullable": false,
         "properties": {
@@ -4023,6 +4129,74 @@
         ]
       }
     },
+    "/eien/sakerByFnr": {
+      "post": {
+        "description": "Endepunkt ment for prosjekt Eien (Én innbygger - ett Nav). Krever on-behalf-of-token\nfor veileder. Veileders tilgang til personen kontrolleres av tilgang-plugin.\nReturnerer kun saker fra Kelvin, ikke Arena. En tom liste betyr derfor ikke\nat personen ikke har AAP. Ikke tilgjengelig i prod ennå.",
+        "parameters": [
+          {
+            "allowEmptyValue": false,
+            "deprecated": false,
+            "description": "callId",
+            "explode": true,
+            "in": "header",
+            "name": "nav-callid",
+            "required": false,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "allowEmptyValue": false,
+            "deprecated": false,
+            "description": "correlation id",
+            "explode": true,
+            "in": "header",
+            "name": "x-correlation-id",
+            "required": false,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.api.intern.EienSakerRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.api.intern.EienSakerResponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Eien",
+          "Tilgangkontrollert",
+          "Eien"
+        ]
+      }
+    },
     "/meldekort-backend/sakerByFnr": {
       "post": {
         "description": "Henter saker for en person. Kan kun kalles fra meldekort-backend.",
@@ -4681,7 +4855,7 @@
                     {
                       "status": "LØPENDE",
                       "saksnummer": "4MGL8LS",
-                      "vedtaksdato": "2026-10-22",
+                      "vedtaksdato": "2026-10-26",
                       "periode": {
                         "fraOgMedDato": "2021-01-01",
                         "tilOgMedDato": "2021-01-31"
@@ -5594,6 +5768,10 @@
     {
       "description": "Endepunkter brukt av Bisys",
       "name": "Bisys"
+    },
+    {
+      "description": "Endepunkter brukt av prosjekt Eien (Én innbygger - ett Nav)",
+      "name": "Eien"
     },
     {
       "description": "For å hente informasjon om AAP historikk fra Arena",

@@ -71,14 +71,14 @@ export const fetchWithRetry = async <ResponseBody>(
   // 200
   // 204
   // 404
-  // 500
+  // 500 og 400 (med feilmelding i body)
 
   if (response.status === 204) {
     return undefined as ResponseBody;
   }
 
   if (!response.ok) {
-    if (response.status === 500) {
+    if (response.status === 500 || response.status === 400) {
       let responseJson;
       try {
         responseJson = await response.json();

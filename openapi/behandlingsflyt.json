@@ -22249,7 +22249,7 @@
   "info": {
     "description": "For å teste API i dev, besøk\n<a href=\"https://azure-token-generator.intern.dev.nav.no/api/m2m?aud=dev-gcp:aap:behandlingsflyt\">Token Generator</a> for å få token.",
     "title": "AAP - Behandlingsflyt",
-    "version": "434e07f59eb9f8f6e32aa4822336cf0bde162a9a"
+    "version": "a34f886efd3e0b9e1c50dc9d46f009688ff99e06"
   },
   "openapi": "3.0.0",
   "paths": {
@@ -29236,6 +29236,47 @@
                 "schema": {
                   "nullable": false,
                   "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/drift/sak/{saksnummer}/tilbakestill-rettighetsperiode-trukket-sak": {
+      "post": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "saksnummer",
+            "explode": false,
+            "in": "path",
+            "name": "saksnummer",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
                 }
               }
             },

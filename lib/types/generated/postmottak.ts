@@ -1635,7 +1635,7 @@ export interface components {
             behovstype: string;
             skalTilAap: boolean;
             /** @enum {string|null} */
-            tema?: "AAP" | "BAR" | "BID" | "DAG" | "ENF" | "ERS" | "EYB" | "EYO" | "FEI" | "FOR" | "FUL" | "GEN" | "GRU" | "IND" | "INN" | "KOM" | "OMS" | "OPP" | "PEN" | "SAK" | "SER" | "SYK" | "TIL" | "TRK" | "TSO" | "UFO" | "UKJENT" | "YRK" | null;
+            tema?: "AAP" | "BAR" | "BID" | "DAG" | "ENF" | "ERS" | "EYB" | "EYO" | "FEI" | "FOR" | "FUL" | "GEN" | "GRU" | "IND" | "KOM" | "OMS" | "OPP" | "PAI" | "PEN" | "SAK" | "SER" | "SYK" | "TIL" | "TRK" | "TSO" | "UFO" | "UKJENT" | "YRK" | null;
         };
         "no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklaringsbehovL\u00F8sning": components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklarFordelingL\u00F8sning"] | components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklarOverleveringL\u00F8sning"] | components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklarSaksnummerL\u00F8sning"] | components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklarTemaL\u00F8sning"] | components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.DigitaliserDokumentL\u00F8sning"] | components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.SattP\u00E5VentL\u00F8sning"];
         "no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.DigitaliserDokumentL\u00F8sning": {

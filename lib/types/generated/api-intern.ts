@@ -447,6 +447,56 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/eien/sakerByFnr": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * @description Endepunkt ment for prosjekt Eien (Én innbygger - ett Nav). Krever on-behalf-of-token
+         *     for veileder. Veileders tilgang til personen kontrolleres av tilgang-plugin.
+         *     Returnerer kun saker fra Kelvin, ikke Arena. En tom liste betyr derfor ikke
+         *     at personen ikke har AAP. Ikke tilgjengelig i prod ennå.
+         */
+        post: {
+            parameters: {
+                query?: never;
+                header?: {
+                    /** @description callId */
+                    "nav-callid"?: string;
+                    /** @description correlation id */
+                    "x-correlation-id"?: string;
+                };
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["no.nav.aap.api.intern.EienSakerRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["no.nav.aap.api.intern.EienSakerResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/meldekort-backend/sakerByFnr": {
         parameters: {
             query?: never;
@@ -897,7 +947,7 @@ export interface paths {
                          *         {
                          *           "status": "LØPENDE",
                          *           "saksnummer": "4MGL8LS",
-                         *           "vedtaksdato": "2026-10-22",
+                         *           "vedtaksdato": "2026-10-26",
                          *           "periode": {
                          *             "fraOgMedDato": "2021-01-01",
                          *             "tilOgMedDato": "2021-01-31"
@@ -1991,6 +2041,34 @@ export interface components {
             /** @enum {string|null} */
             vedtaksvariant?: "E_FORLENGE" | "E_VERDI" | "G_AVSLAG" | "G_INNV_NAV" | "G_INNV_SOKNAD" | "O_AVSLAG" | "O_INNV_NAV" | "O_INNV_SOKNAD" | "S_DOD" | "S_OPPHOR" | "S_STANS" | null;
             virkningsperiode: components["schemas"]["no.nav.aap.api.intern.PeriodeNullableTomDTO"];
+        };
+        "no.nav.aap.api.intern.EienSak": {
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            "forel\u00F8pigMaksdato"?: string | null;
+            /** @enum {string} */
+            kilde: "ARENA" | "KELVIN";
+            perioderMedRett: components["schemas"]["no.nav.aap.api.intern.PeriodeDTO"][];
+            sakId: string;
+            /** @enum {string} */
+            saksbehandlingsstatus: "FERDIGBEHANDLET" | "REVURDERING_UNDER_BEHANDLING" | "SOKNAD_UNDER_BEHANDLING";
+            "s\u00F8knadsdatoer": string[];
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            vedtaksdato?: string | null;
+            "vente\u00E5rsak"?: string | null;
+            /** @enum {string} */
+            ytelsesstatus: "AVSLUTTET" | "FOR_VEDTAK" | "LOPENDE";
+        };
+        "no.nav.aap.api.intern.EienSakerRequest": {
+            personidentifikator: string;
+        };
+        "no.nav.aap.api.intern.EienSakerResponse": {
+            saker: components["schemas"]["no.nav.aap.api.intern.EienSak"][];
         };
         "no.nav.aap.api.intern.HolmesArbeidstimerResponse": {
             /** @description Liste av meldeperioder med registrerte arbeidstimer. */

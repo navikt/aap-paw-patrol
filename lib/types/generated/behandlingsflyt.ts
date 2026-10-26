@@ -6017,6 +6017,44 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/drift/sak/{saksnummer}/tilbakestill-rettighetsperiode-trukket-sak": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description saksnummer */
+                    saksnummer: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["no.nav.aap.komponenter.type.Periode"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/behandling/{referanse}/utbetaling/simulering": {
         parameters: {
             query?: never;
