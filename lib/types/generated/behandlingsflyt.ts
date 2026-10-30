@@ -5386,7 +5386,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.lovvalgmedlemskap.grunnlag.PeriodisertForutg\u00E5endeMedlemskapGrunnlagResponse"];
+                        "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.forutg\u00E5endemedlemskap.grunnlag.PeriodisertForutg\u00E5endeMedlemskapGrunnlagResponse"];
                     };
                 };
             };
@@ -7746,6 +7746,11 @@ export interface components {
             kanVurderes: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
             nyeVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.etableringegenvirksomhet.EtableringEgenVirksomhetVurderingResponse"][];
             sisteVedtatteVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.etableringegenvirksomhet.EtableringEgenVirksomhetVurderingResponse"][];
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            tom?: string | null;
             vurderingerMeta: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"];
         };
         "no.nav.aap.behandlingsflyt.behandling.etableringegenvirksomhet.EtableringEgenVirksomhetVurderingResponse": {
@@ -7764,14 +7769,16 @@ export interface components {
             jobberBrukerAktivMedVirksomheten?: boolean | null;
             "kanF\u00F8reTilSelvfors\u00F8rget"?: boolean | null;
             oppfylt: boolean;
-            oppstartsPeriode: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+            oppstartsPeriode?: components["schemas"]["no.nav.aap.komponenter.type.Periode"][] | null;
             orgNr?: string | null;
             /**
              * Format: date
              * @example 2025-04-01
              */
             tom?: string | null;
-            utviklingsPeriode: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+            utviklingsPeriode?: components["schemas"]["no.nav.aap.komponenter.type.Periode"][] | null;
+            /** @enum {string} */
+            versjon: "V0" | "V1";
             virksomhetErNy?: boolean | null;
             virksomhetNavn: string;
             vurderingerMeta: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"];
@@ -7825,6 +7832,33 @@ export interface components {
             /** @enum {string|null} */
             "avslags\u00E5rsak"?: "ANNEN_FULL_YTELSE" | "ANNEN_FULL_YTELSE_AVSLAG" | "BRUDD_PÅ_AKTIVITETSPLIKT_OPPHØR" | "BRUDD_PÅ_AKTIVITETSPLIKT_STANS" | "BRUDD_PÅ_OPPHOLDSKRAV_OPPHØR" | "BRUDD_PÅ_OPPHOLDSKRAV_STANS" | "BRUKER_OVER_67" | "BRUKER_UNDER_18" | "HAR_RETT_TIL_FULLT_UTTAK_ALDERSPENSJON" | "IKKE_BEHOV_FOR_OPPFOLGING" | "IKKE_MEDLEM" | "IKKE_MEDLEM_FORUTGÅENDE" | "IKKE_NOK_REDUSERT_ARBEIDSEVNE" | "IKKE_OPPFYLT_OPPHOLDSKRAV_EØS" | "IKKE_RETT_PA_AAP_I_PERIODE_SOM_ARBEIDSSOKER" | "IKKE_RETT_PA_AAP_UNDER_BEHANDLING_AV_UFORE" | "IKKE_RETT_PA_STUDENT" | "IKKE_RETT_PA_SYKEPENGEERSTATNING" | "IKKE_RETT_UNDER_STRAFFEGJENNOMFØRING" | "IKKE_SYKDOM_AV_VISS_VARIGHET" | "IKKE_SYKDOM_SKADE_LYTE" | "IKKE_SYKDOM_SKADE_LYTE_VESENTLIGDEL" | "INNTEKTSTAP_DEKKES_ETTER_ANNEN_LOVGIVNING" | "MANGLENDE_DOKUMENTASJON" | "NORGE_IKKE_KOMPETENT_STAT" | "ORDINÆRKVOTE_BRUKT_OPP" | "SYKEPENGEERSTATNINGKVOTE_BRUKT_OPP" | "VARIGHET_OVERSKREDET_ARBEIDSSØKER" | "VARIGHET_OVERSKREDET_OVERGANG_UFORE" | "VARIGHET_OVERSKREDET_STUDENT" | null;
             "vilk\u00E5r": string;
+        };
+        "no.nav.aap.behandlingsflyt.behandling.forutg\u00E5endemedlemskap.grunnlag.PeriodisertForutg\u00E5endeMedlemskapGrunnlagResponse": {
+            "beh\u00F8verVurderinger": components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+            "harTilgangTil\u00C5Saksbehandle": boolean;
+            ikkeRelevantePerioder: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+            kanVurderes: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+            nyeVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.forutg\u00E5endemedlemskap.grunnlag.PeriodisertManuellVurderingForForutg\u00E5endeMedlemskapResponse"][];
+            overstyrt: boolean;
+            sisteVedtatteVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.forutg\u00E5endemedlemskap.grunnlag.PeriodisertManuellVurderingForForutg\u00E5endeMedlemskapResponse"][];
+        };
+        "no.nav.aap.behandlingsflyt.behandling.forutg\u00E5endemedlemskap.grunnlag.PeriodisertManuellVurderingForForutg\u00E5endeMedlemskapResponse": {
+            begrunnelse: string;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            fom: string;
+            "harForutg\u00E5endeMedlemskap": boolean;
+            medlemMedUnntakAvMaksFemAar?: boolean | null;
+            overstyrt: boolean;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            tom?: string | null;
+            varMedlemMedNedsattArbeidsevne?: boolean | null;
+            vurderingerMeta: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"];
         };
         "no.nav.aap.behandlingsflyt.behandling.grunnlag.avslag_11_27.Avslag11_27GrunnlagDto": {
             brukersYtelseAlternativer: ("FERIE_I_SYKEPENGEPERIODE" | "FORELDREPENGER" | "OMSORGSPENGER" | "OPPLÆRINGSPENGER" | "PLEIEPENGER" | "SVANGERSKAPSPENGER" | "SYKEPENGER")[];
@@ -8400,15 +8434,6 @@ export interface components {
             begrunnelse: string;
             varMedlemIFolketrygd: boolean;
         };
-        "no.nav.aap.behandlingsflyt.behandling.lovvalgmedlemskap.grunnlag.PeriodisertForutg\u00E5endeMedlemskapGrunnlagResponse": {
-            "beh\u00F8verVurderinger": components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
-            "harTilgangTil\u00C5Saksbehandle": boolean;
-            ikkeRelevantePerioder: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
-            kanVurderes: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
-            nyeVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.lovvalgmedlemskap.grunnlag.PeriodisertManuellVurderingForForutg\u00E5endeMedlemskapResponse"][];
-            overstyrt: boolean;
-            sisteVedtatteVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.lovvalgmedlemskap.grunnlag.PeriodisertManuellVurderingForForutg\u00E5endeMedlemskapResponse"][];
-        };
         "no.nav.aap.behandlingsflyt.behandling.lovvalgmedlemskap.grunnlag.PeriodisertLovvalgMedlemskapGrunnlagResponse": {
             "beh\u00F8verVurderinger": components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
             "harTilgangTil\u00C5Saksbehandle": boolean;
@@ -8417,24 +8442,6 @@ export interface components {
             nyeVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.lovvalgmedlemskap.grunnlag.PeriodisertManuellVurderingForLovvalgMedlemskapResponse"][];
             overstyrt: boolean;
             sisteVedtatteVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.lovvalgmedlemskap.grunnlag.PeriodisertManuellVurderingForLovvalgMedlemskapResponse"][];
-        };
-        "no.nav.aap.behandlingsflyt.behandling.lovvalgmedlemskap.grunnlag.PeriodisertManuellVurderingForForutg\u00E5endeMedlemskapResponse": {
-            begrunnelse: string;
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            fom: string;
-            "harForutg\u00E5endeMedlemskap": boolean;
-            medlemMedUnntakAvMaksFemAar?: boolean | null;
-            overstyrt: boolean;
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            tom?: string | null;
-            varMedlemMedNedsattArbeidsevne?: boolean | null;
-            vurderingerMeta: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"];
         };
         "no.nav.aap.behandlingsflyt.behandling.lovvalgmedlemskap.grunnlag.PeriodisertManuellVurderingForLovvalgMedlemskapResponse": {
             /**
@@ -9719,14 +9726,24 @@ export interface components {
             foreliggerFagligVurdering: boolean;
             jobberBrukerAktivMedVirksomheten?: boolean | null;
             "kanF\u00F8reTilSelvfors\u00F8rget"?: boolean | null;
-            oppstartsPerioder: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+            /**
+             * @deprecated
+             * @description Bruk fase + fom. Fjernes etter frontend mignering
+             */
+            oppstartsPerioder?: components["schemas"]["no.nav.aap.komponenter.type.Periode"][] | null;
             orgNr?: string | null;
             /**
              * Format: date
              * @example 2025-04-01
              */
             tom?: string | null;
-            utviklingsPerioder: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
+            /**
+             * @deprecated
+             * @description Bruk fase + fom. Fjernes etter frontend mignering
+             */
+            utviklingsPerioder?: components["schemas"]["no.nav.aap.komponenter.type.Periode"][] | null;
+            /** @enum {string} */
+            versjon: "V0" | "V1";
             virksomhetErNy?: boolean | null;
             virksomhetNavn: string;
         };

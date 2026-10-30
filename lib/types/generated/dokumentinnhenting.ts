@@ -862,6 +862,44 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/dokumenter/{journalpostId}/utsendingsinfo": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description Journalpost-ID */
+                    journalpostId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["dokumentinnhenting.api.HentUtsendingsinfoResponse"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/dokumenter/{journalpostId}/knyttTilAnnenSak": {
         parameters: {
             query?: never;
@@ -1446,6 +1484,9 @@ export interface components {
         "dokumentinnhenting.api.HentDokumentoversiktJournalpostListeParams": {
             journalpostIdListe: string[];
         };
+        "dokumentinnhenting.api.HentUtsendingsinfoResponse": {
+            utsendingsinfo?: components["schemas"]["dokumentinnhenting.integrasjoner.saf.Utsendingsinfo"];
+        };
         "dokumentinnhenting.api.TaAvVentRequest": {
             saksnummer: string;
         };
@@ -1541,6 +1582,25 @@ export interface components {
             dato: string;
             /** @enum {string} */
             datotype: "DATO_AVS_RETUR" | "DATO_DOKUMENT" | "DATO_EKSPEDERT" | "DATO_JOURNALFOERT" | "DATO_LEST" | "DATO_REGISTRERT" | "DATO_SENDT_PRINT";
+        };
+        "dokumentinnhenting.integrasjoner.saf.Utsendingsinfo": {
+            digitalpostSendt?: components["schemas"]["dokumentinnhenting.integrasjoner.saf.Utsendingsinfo.DigitalpostSendt"];
+            fysiskpostSendt?: components["schemas"]["dokumentinnhenting.integrasjoner.saf.Utsendingsinfo.FysiskpostSendt"];
+            varselSendt?: components["schemas"]["dokumentinnhenting.integrasjoner.saf.Utsendingsinfo.VarselSendt"][] | null;
+        };
+        "dokumentinnhenting.integrasjoner.saf.Utsendingsinfo.DigitalpostSendt": {
+            adresse?: string | null;
+        };
+        "dokumentinnhenting.integrasjoner.saf.Utsendingsinfo.FysiskpostSendt": {
+            adressetekstKonvolutt?: string | null;
+        };
+        "dokumentinnhenting.integrasjoner.saf.Utsendingsinfo.VarselSendt": {
+            type?: string | null;
+            /**
+             * Format: date-time
+             * @example 2025-04-01T12:30:00
+             */
+            varslingstidspunkt?: string | null;
         };
         "dokumentinnhenting.integrasjoner.syfo.oppslag.FritekstRequest": {
             fritekst: string;

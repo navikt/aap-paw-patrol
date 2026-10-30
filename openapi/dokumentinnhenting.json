@@ -183,6 +183,15 @@
         ],
         "type": "object"
       },
+      "dokumentinnhenting.api.HentUtsendingsinfoResponse": {
+        "nullable": false,
+        "properties": {
+          "utsendingsinfo": {
+            "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.saf.Utsendingsinfo"
+          }
+        },
+        "type": "object"
+      },
       "dokumentinnhenting.api.TaAvVentRequest": {
         "nullable": false,
         "properties": {
@@ -584,6 +593,61 @@
           "dato",
           "datotype"
         ],
+        "type": "object"
+      },
+      "dokumentinnhenting.integrasjoner.saf.Utsendingsinfo": {
+        "nullable": false,
+        "properties": {
+          "digitalpostSendt": {
+            "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.saf.Utsendingsinfo.DigitalpostSendt"
+          },
+          "fysiskpostSendt": {
+            "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.saf.Utsendingsinfo.FysiskpostSendt"
+          },
+          "varselSendt": {
+            "items": {
+              "$ref": "#/components/schemas/dokumentinnhenting.integrasjoner.saf.Utsendingsinfo.VarselSendt"
+            },
+            "nullable": true,
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "dokumentinnhenting.integrasjoner.saf.Utsendingsinfo.DigitalpostSendt": {
+        "nullable": false,
+        "properties": {
+          "adresse": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "dokumentinnhenting.integrasjoner.saf.Utsendingsinfo.FysiskpostSendt": {
+        "nullable": false,
+        "properties": {
+          "adressetekstKonvolutt": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "dokumentinnhenting.integrasjoner.saf.Utsendingsinfo.VarselSendt": {
+        "nullable": false,
+        "properties": {
+          "type": {
+            "nullable": true,
+            "type": "string"
+          },
+          "varslingstidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          }
+        },
         "type": "object"
       },
       "dokumentinnhenting.integrasjoner.syfo.oppslag.FritekstRequest": {
@@ -2122,6 +2186,47 @@
                   "format": "binary",
                   "nullable": false,
                   "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Dokumenter"
+        ]
+      }
+    },
+    "/api/dokumenter/{journalpostId}/utsendingsinfo": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "Journalpost-ID",
+            "explode": false,
+            "in": "path",
+            "name": "journalpostId",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dokumentinnhenting.api.HentUtsendingsinfoResponse"
                 }
               }
             },

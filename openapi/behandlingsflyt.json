@@ -5335,6 +5335,12 @@
             "nullable": false,
             "type": "array"
           },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
           "vurderingerMeta": {
             "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"
           }
@@ -5404,7 +5410,7 @@
             "items": {
               "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
             },
-            "nullable": false,
+            "nullable": true,
             "type": "array"
           },
           "orgNr": {
@@ -5421,8 +5427,16 @@
             "items": {
               "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
             },
-            "nullable": false,
+            "nullable": true,
             "type": "array"
+          },
+          "versjon": {
+            "enum": [
+              "V0",
+              "V1"
+            ],
+            "nullable": false,
+            "type": "string"
           },
           "virksomhetErNy": {
             "nullable": true,
@@ -5441,8 +5455,7 @@
           "fom",
           "foreliggerFagligVurdering",
           "oppfylt",
-          "oppstartsPeriode",
-          "utviklingsPeriode",
+          "versjon",
           "virksomhetNavn",
           "vurderingerMeta"
         ],
@@ -5743,6 +5756,112 @@
         },
         "required": [
           "vilkår"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.behandling.forutgåendemedlemskap.grunnlag.PeriodisertForutgåendeMedlemskapGrunnlagResponse": {
+        "nullable": false,
+        "properties": {
+          "behøverVurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "harTilgangTilÅSaksbehandle": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "ikkeRelevantePerioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "kanVurderes": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "nyeVurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.forutgåendemedlemskap.grunnlag.PeriodisertManuellVurderingForForutgåendeMedlemskapResponse"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "overstyrt": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "sisteVedtatteVurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.forutgåendemedlemskap.grunnlag.PeriodisertManuellVurderingForForutgåendeMedlemskapResponse"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "behøverVurderinger",
+          "harTilgangTilÅSaksbehandle",
+          "ikkeRelevantePerioder",
+          "kanVurderes",
+          "nyeVurderinger",
+          "overstyrt",
+          "sisteVedtatteVurderinger"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.behandling.forutgåendemedlemskap.grunnlag.PeriodisertManuellVurderingForForutgåendeMedlemskapResponse": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "harForutgåendeMedlemskap": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "medlemMedUnntakAvMaksFemAar": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "overstyrt": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "varMedlemMedNedsattArbeidsevne": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "vurderingerMeta": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"
+          }
+        },
+        "required": [
+          "begrunnelse",
+          "fom",
+          "harForutgåendeMedlemskap",
+          "overstyrt",
+          "vurderingerMeta"
         ],
         "type": "object"
       },
@@ -8173,64 +8292,6 @@
         ],
         "type": "object"
       },
-      "no.nav.aap.behandlingsflyt.behandling.lovvalgmedlemskap.grunnlag.PeriodisertForutgåendeMedlemskapGrunnlagResponse": {
-        "nullable": false,
-        "properties": {
-          "behøverVurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "harTilgangTilÅSaksbehandle": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "ikkeRelevantePerioder": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "kanVurderes": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "nyeVurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.lovvalgmedlemskap.grunnlag.PeriodisertManuellVurderingForForutgåendeMedlemskapResponse"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "overstyrt": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "sisteVedtatteVurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.lovvalgmedlemskap.grunnlag.PeriodisertManuellVurderingForForutgåendeMedlemskapResponse"
-            },
-            "nullable": false,
-            "type": "array"
-          }
-        },
-        "required": [
-          "behøverVurderinger",
-          "harTilgangTilÅSaksbehandle",
-          "ikkeRelevantePerioder",
-          "kanVurderes",
-          "nyeVurderinger",
-          "overstyrt",
-          "sisteVedtatteVurderinger"
-        ],
-        "type": "object"
-      },
       "no.nav.aap.behandlingsflyt.behandling.lovvalgmedlemskap.grunnlag.PeriodisertLovvalgMedlemskapGrunnlagResponse": {
         "nullable": false,
         "properties": {
@@ -8286,54 +8347,6 @@
           "nyeVurderinger",
           "overstyrt",
           "sisteVedtatteVurderinger"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.behandling.lovvalgmedlemskap.grunnlag.PeriodisertManuellVurderingForForutgåendeMedlemskapResponse": {
-        "nullable": false,
-        "properties": {
-          "begrunnelse": {
-            "nullable": false,
-            "type": "string"
-          },
-          "fom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": false,
-            "type": "string"
-          },
-          "harForutgåendeMedlemskap": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "medlemMedUnntakAvMaksFemAar": {
-            "nullable": true,
-            "type": "boolean"
-          },
-          "overstyrt": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "tom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          },
-          "varMedlemMedNedsattArbeidsevne": {
-            "nullable": true,
-            "type": "boolean"
-          },
-          "vurderingerMeta": {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"
-          }
-        },
-        "required": [
-          "begrunnelse",
-          "fom",
-          "harForutgåendeMedlemskap",
-          "overstyrt",
-          "vurderingerMeta"
         ],
         "type": "object"
       },
@@ -13962,10 +13975,12 @@
             "type": "boolean"
           },
           "oppstartsPerioder": {
+            "deprecated": true,
+            "description": "Bruk fase + fom. Fjernes etter frontend mignering",
             "items": {
               "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
             },
-            "nullable": false,
+            "nullable": true,
             "type": "array"
           },
           "orgNr": {
@@ -13979,11 +13994,21 @@
             "type": "string"
           },
           "utviklingsPerioder": {
+            "deprecated": true,
+            "description": "Bruk fase + fom. Fjernes etter frontend mignering",
             "items": {
               "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
             },
-            "nullable": false,
+            "nullable": true,
             "type": "array"
+          },
+          "versjon": {
+            "enum": [
+              "V0",
+              "V1"
+            ],
+            "nullable": false,
+            "type": "string"
           },
           "virksomhetErNy": {
             "nullable": true,
@@ -13998,8 +14023,7 @@
           "begrunnelse",
           "fom",
           "foreliggerFagligVurdering",
-          "oppstartsPerioder",
-          "utviklingsPerioder",
+          "versjon",
           "virksomhetNavn"
         ],
         "type": "object"
@@ -22249,7 +22273,7 @@
   "info": {
     "description": "For å teste API i dev, besøk\n<a href=\"https://azure-token-generator.intern.dev.nav.no/api/m2m?aud=dev-gcp:aap:behandlingsflyt\">Token Generator</a> for å få token.",
     "title": "AAP - Behandlingsflyt",
-    "version": "a34f886efd3e0b9e1c50dc9d46f009688ff99e06"
+    "version": "aa891d84837b43d3ce843ae855cf06da6ebad64a"
   },
   "openapi": "3.0.0",
   "paths": {
@@ -28375,7 +28399,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.lovvalgmedlemskap.grunnlag.PeriodisertForutgåendeMedlemskapGrunnlagResponse"
+                  "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.forutgåendemedlemskap.grunnlag.PeriodisertForutgåendeMedlemskapGrunnlagResponse"
                 }
               }
             },
