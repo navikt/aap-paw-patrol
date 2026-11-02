@@ -8,6 +8,7 @@ type JournalpostDriftsinfoDto =
   PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.JournalpostDriftsinfoDto'];
 type PersonSøkJournalposterDto =
   PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.PersonSøkDriftsinfoDto'];
+type AvstemmingsrapportDto = PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.AvstemmingsrapportDto'];
 type UtbetalingStatusDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingStatusDto'];
 type MigreringsStatusDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingMigreringStatusDto'];
 type UtbetalingstidslinjeDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingstidslinjeDto'];
@@ -273,4 +274,9 @@ export const hentJournalposterForPerson = async (ident: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('postmottak');
   const url = `${baseUrl}/api/drift/person/journalposter/søk`;
   return await fetchProxy<PersonSøkJournalposterDto>(url, scope, 'POST', { ident });
+};
+
+export const hentJoarkAvstemming = async () => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('postmottak');
+  return await fetchProxy<AvstemmingsrapportDto>(`${baseUrl}/api/drift/joark-avstemming`, scope, 'GET');
 };

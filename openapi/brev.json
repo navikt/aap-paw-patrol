@@ -325,6 +325,13 @@
         "type": "object"
       },
       "no.nav.aap.brev.kontrakt.BlokkInnhold": {
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "FAKTAGRUNNLAG": "#/components/schemas/no.nav.aap.brev.kontrakt.BlokkInnhold.Faktagrunnlag",
+            "TEKST": "#/components/schemas/no.nav.aap.brev.kontrakt.BlokkInnhold.FormattertTekst"
+          }
+        },
         "oneOf": [
           {
             "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.BlokkInnhold.Faktagrunnlag"
@@ -352,8 +359,7 @@
           },
           "type": {
             "enum": [
-              "FAKTAGRUNNLAG",
-              "TEKST"
+              "FAKTAGRUNNLAG"
             ],
             "nullable": false,
             "type": "string"
@@ -394,7 +400,6 @@
           },
           "type": {
             "enum": [
-              "FAKTAGRUNNLAG",
               "TEKST"
             ],
             "nullable": false,
@@ -688,6 +693,30 @@
         "type": "object"
       },
       "no.nav.aap.brev.kontrakt.Faktagrunnlag": {
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "AAP_FOM_DATO": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.AapFomDato",
+            "TIDSPUNKT_VURDERING": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.AarsakTidspunktVurdering",
+            "AVSLAG_AARSAK": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.AvslagAarsak",
+            "BARN_UTEN_BARNETILLEGG": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.BarnUtenBarnetillegg",
+            "DATO_AVKLART_FOR_JOBBSOK": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.DatoAvklartForJobbsøk",
+            "DODSFALL": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.Dødsfall",
+            "FORHOLD_TIL_ANDRE_YTELSER": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser",
+            "FRIST_DATO_11_7": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.FristDato11_7",
+            "FRITAK_MELDEPLIKT": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.FritakMeldepliktGrunnlag",
+            "SYKEPENGEGRUNNLAG": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.GrunnlagAndreYtelser",
+            "GRUNNLAG_BEREGNING": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.GrunnlagBeregning",
+            "INNVILGET_UFORETRYGD": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.InnvilgetUføretrygd",
+            "KRAVDATO_UFORETRYGD": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.KravdatoUføretrygd",
+            "SISTE_DAG_MED_YTELSE": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.SisteDagMedYtelse",
+            "SYKDOMSVURDERING": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.Sykdomsvurdering",
+            "TILKJENT_YTELSE": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.TilkjentYtelse",
+            "UTVIDET_AAP_FOM_DATO": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.UtvidetAapFomDato",
+            "YRKESSKADE_BEREGNING": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.YrkesskadeBeregning",
+            "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.YrkesskadeISøknadIkkeIRegister"
+          }
+        },
         "oneOf": [
           {
             "$ref": "#/components/schemas/no.nav.aap.brev.kontrakt.Faktagrunnlag.AapFomDato"
@@ -759,25 +788,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "AAP_FOM_DATO"
             ],
             "nullable": false,
             "type": "string"
@@ -818,25 +829,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "TIDSPUNKT_VURDERING"
             ],
             "nullable": false,
             "type": "string"
@@ -861,25 +854,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "AVSLAG_AARSAK"
             ],
             "nullable": false,
             "type": "string"
@@ -903,25 +878,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "BARN_UTEN_BARNETILLEGG"
             ],
             "nullable": false,
             "type": "string"
@@ -966,25 +923,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "DATO_AVKLART_FOR_JOBBSOK"
             ],
             "nullable": false,
             "type": "string"
@@ -1011,25 +950,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "DODSFALL"
             ],
             "nullable": false,
             "type": "string"
@@ -1095,25 +1016,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "FORHOLD_TIL_ANDRE_YTELSER"
             ],
             "nullable": false,
             "type": "string"
@@ -1335,25 +1238,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "FRIST_DATO_11_7"
             ],
             "nullable": false,
             "type": "string"
@@ -1377,25 +1262,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "FRITAK_MELDEPLIKT"
             ],
             "nullable": false,
             "type": "string"
@@ -1452,25 +1319,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "SYKEPENGEGRUNNLAG"
             ],
             "nullable": false,
             "type": "string"
@@ -1517,25 +1366,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "GRUNNLAG_BEREGNING"
             ],
             "nullable": false,
             "type": "string"
@@ -1575,25 +1406,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "INNVILGET_UFORETRYGD"
             ],
             "nullable": false,
             "type": "string"
@@ -1616,25 +1429,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "KRAVDATO_UFORETRYGD"
             ],
             "nullable": false,
             "type": "string"
@@ -1657,25 +1452,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "SISTE_DAG_MED_YTELSE"
             ],
             "nullable": false,
             "type": "string"
@@ -1696,25 +1473,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "SYKDOMSVURDERING"
             ],
             "nullable": false,
             "type": "string"
@@ -1772,25 +1531,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "TILKJENT_YTELSE"
             ],
             "nullable": false,
             "type": "string"
@@ -1812,25 +1553,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "UTVIDET_AAP_FOM_DATO"
             ],
             "nullable": false,
             "type": "string"
@@ -1859,25 +1582,7 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
-              "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
+              "YRKESSKADE_BEREGNING"
             ],
             "nullable": false,
             "type": "string"
@@ -1925,24 +1630,6 @@
           },
           "type": {
             "enum": [
-              "AAP_FOM_DATO",
-              "AVSLAG_AARSAK",
-              "BARN_UTEN_BARNETILLEGG",
-              "DATO_AVKLART_FOR_JOBBSOK",
-              "DODSFALL",
-              "FORHOLD_TIL_ANDRE_YTELSER",
-              "FRIST_DATO_11_7",
-              "FRITAK_MELDEPLIKT",
-              "GRUNNLAG_ANDRE_YTELSER",
-              "GRUNNLAG_BEREGNING",
-              "INNVILGET_UFORETRYGD",
-              "KRAVDATO_UFORETRYGD",
-              "SISTE_DAG_MED_YTELSE",
-              "SYKDOMSVURDERING",
-              "TIDSPUNKT_VURDERING",
-              "TILKJENT_YTELSE",
-              "UTVIDET_AAP_FOM_DATO",
-              "YRKESSKADE_BEREGNING",
               "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER"
             ],
             "nullable": false,
