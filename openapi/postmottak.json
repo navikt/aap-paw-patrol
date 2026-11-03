@@ -214,6 +214,34 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.postmottak.api.drift.AvstemmingsrapportDto": {
+        "nullable": false,
+        "properties": {
+          "fullfortTidspunkt": {
+            "example": "2025-04-01T10:30:00Z",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "resultater": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.JournalpostAvstemmingsresultatDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "startetTidspunkt": {
+            "example": "2025-04-01T10:30:00Z",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "resultater"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.postmottak.api.drift.BehandlingDriftsinfo": {
         "nullable": false,
         "properties": {
@@ -371,6 +399,35 @@
         "required": [
           "journalpostId",
           "status"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.drift.JournalpostAvstemmingsresultatDto": {
+        "nullable": false,
+        "properties": {
+          "datoOpprettet": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "journalpostId": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          },
+          "kanal": {
+            "nullable": true,
+            "type": "string"
+          },
+          "utfall": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "journalpostId",
+          "utfall"
         ],
         "type": "object"
       },
@@ -1345,33 +1402,6 @@
         ],
         "type": "object"
       },
-      "no.nav.aap.postmottak.avklaringsbehov.løsning.AvklarFordelingLøsning": {
-        "nullable": false,
-        "properties": {
-          "behovstype": {
-            "nullable": false,
-            "type": "string"
-          },
-          "kommentar": {
-            "nullable": true,
-            "type": "string"
-          },
-          "valgtSystem": {
-            "enum": [
-              "ARENA",
-              "BEGGE",
-              "KELVIN"
-            ],
-            "nullable": false,
-            "type": "string"
-          }
-        },
-        "required": [
-          "behovstype",
-          "valgtSystem"
-        ],
-        "type": "object"
-      },
       "no.nav.aap.postmottak.avklaringsbehov.løsning.AvklarOverleveringLøsning": {
         "nullable": false,
         "properties": {
@@ -1489,9 +1519,6 @@
       },
       "no.nav.aap.postmottak.avklaringsbehov.løsning.AvklaringsbehovLøsning": {
         "oneOf": [
-          {
-            "$ref": "#/components/schemas/no.nav.aap.postmottak.avklaringsbehov.løsning.AvklarFordelingLøsning"
-          },
           {
             "$ref": "#/components/schemas/no.nav.aap.postmottak.avklaringsbehov.løsning.AvklarOverleveringLøsning"
           },
@@ -3059,6 +3086,32 @@
         ],
         "responses": {
           "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/drift/joark-avstemming": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.AvstemmingsrapportDto"
+                }
+              }
+            },
             "description": "OK"
           }
         },

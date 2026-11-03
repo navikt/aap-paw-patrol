@@ -21428,73 +21428,6 @@
         ],
         "type": "object"
       },
-      "no.nav.aap.dokumentinnhenting.kontrakt.DialogmeldingStatusTilBehandslingsflytDto": {
-        "nullable": false,
-        "properties": {
-          "behandlerNavn": {
-            "nullable": false,
-            "type": "string"
-          },
-          "behandlerRef": {
-            "nullable": false,
-            "type": "string"
-          },
-          "behandlingsReferanse": {
-            "format": "uuid",
-            "nullable": false,
-            "type": "string"
-          },
-          "dialogmeldingUuid": {
-            "format": "uuid",
-            "nullable": false,
-            "type": "string"
-          },
-          "fritekst": {
-            "nullable": false,
-            "type": "string"
-          },
-          "opprettet": {
-            "example": "2025-04-01T12:30:00",
-            "format": "date-time",
-            "nullable": false,
-            "type": "string"
-          },
-          "personId": {
-            "nullable": false,
-            "type": "string"
-          },
-          "saksnummer": {
-            "nullable": false,
-            "type": "string"
-          },
-          "status": {
-            "enum": [
-              "AVVIST",
-              "BESTILT",
-              "MOTTATT",
-              "OK",
-              "SENDT"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "statusTekst": {
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "required": [
-          "behandlerNavn",
-          "behandlerRef",
-          "behandlingsReferanse",
-          "dialogmeldingUuid",
-          "fritekst",
-          "opprettet",
-          "personId",
-          "saksnummer"
-        ],
-        "type": "object"
-      },
       "no.nav.aap.komponenter.type.Periode": {
         "nullable": false,
         "properties": {
@@ -22273,7 +22206,7 @@
   "info": {
     "description": "For å teste API i dev, besøk\n<a href=\"https://azure-token-generator.intern.dev.nav.no/api/m2m?aud=dev-gcp:aap:behandlingsflyt\">Token Generator</a> for å få token.",
     "title": "AAP - Behandlingsflyt",
-    "version": "aa891d84837b43d3ce843ae855cf06da6ebad64a"
+    "version": "eac59541f47440cfc667fff969eede6f7668657f"
   },
   "openapi": "3.0.0",
   "paths": {
@@ -27501,51 +27434,6 @@
                 "schema": {
                   "nullable": false,
                   "type": "string"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "jwtAuth": [
-              "BEHANDLINGSFLYT"
-            ]
-          }
-        ],
-        "tags": [
-          "Tilgangkontrollert"
-        ]
-      }
-    },
-    "/api/dokumentinnhenting/syfo/status/{saksnummer}": {
-      "get": {
-        "parameters": [
-          {
-            "deprecated": false,
-            "description": "saksnummer",
-            "explode": false,
-            "in": "path",
-            "name": "saksnummer",
-            "required": true,
-            "schema": {
-              "nullable": false,
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.DialogmeldingStatusTilBehandslingsflytDto"
-                  },
-                  "nullable": false,
-                  "type": "array"
                 }
               }
             },

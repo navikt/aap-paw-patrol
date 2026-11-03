@@ -1118,6 +1118,41 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/drift/joark-avstemming": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["no.nav.aap.postmottak.api.drift.AvstemmingsrapportDto"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/drift/behandling/{referanse}/prosesser": {
         parameters: {
             query?: never;
@@ -1345,6 +1380,19 @@ export interface components {
         "no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`": {
             begrunnelse: string;
         };
+        "no.nav.aap.postmottak.api.drift.AvstemmingsrapportDto": {
+            /**
+             * Format: date-time
+             * @example 2025-04-01T10:30:00Z
+             */
+            fullfortTidspunkt?: string | null;
+            resultater: components["schemas"]["no.nav.aap.postmottak.api.drift.JournalpostAvstemmingsresultatDto"][];
+            /**
+             * Format: date-time
+             * @example 2025-04-01T10:30:00Z
+             */
+            startetTidspunkt?: string | null;
+        };
         "no.nav.aap.postmottak.api.drift.BehandlingDriftsinfo": {
             aktivtSteg: string;
             avklaringsbehov: components["schemas"]["no.nav.aap.postmottak.api.drift.ForenkletAvklaringsbehov"][];
@@ -1385,6 +1433,17 @@ export interface components {
             status: "EVALUERT" | "GOSYS_FDR" | "GOSYS_JFR" | "IGNORERT" | "VIDERESENDT_TIL_ARENA" | "VIDERSENDT_TIL_KELVIN";
             /** @enum {string|null} */
             "\u00E5rsakTilStatus"?: "ALLEREDE_JOURNALFØRT" | "MANGLER_IDENT" | "ORGNR" | "UTGÅTT" | null;
+        };
+        "no.nav.aap.postmottak.api.drift.JournalpostAvstemmingsresultatDto": {
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            datoOpprettet?: string | null;
+            /** Format: int64 */
+            journalpostId: number;
+            kanal?: string | null;
+            utfall: string;
         };
         "no.nav.aap.postmottak.api.drift.JournalpostDriftsinfoDto": {
             behandlinger: components["schemas"]["no.nav.aap.postmottak.api.drift.BehandlingDriftsinfo"][];
@@ -1611,12 +1670,6 @@ export interface components {
             status: string;
             steg: string;
         };
-        "no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklarFordelingL\u00F8sning": {
-            behovstype: string;
-            kommentar?: string | null;
-            /** @enum {string} */
-            valgtSystem: "ARENA" | "BEGGE" | "KELVIN";
-        };
         "no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklarOverleveringL\u00F8sning": {
             begrunnelse?: string | null;
             behovstype: string;
@@ -1637,7 +1690,7 @@ export interface components {
             /** @enum {string|null} */
             tema?: "AAP" | "BAR" | "BID" | "DAG" | "ENF" | "ERS" | "EYB" | "EYO" | "FEI" | "FOR" | "FUL" | "GEN" | "GRU" | "IND" | "KOM" | "OMS" | "OPP" | "PAI" | "PEN" | "SAK" | "SER" | "SYK" | "TIL" | "TRK" | "TSO" | "UFO" | "UKJENT" | "YRK" | null;
         };
-        "no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklaringsbehovL\u00F8sning": components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklarFordelingL\u00F8sning"] | components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklarOverleveringL\u00F8sning"] | components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklarSaksnummerL\u00F8sning"] | components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklarTemaL\u00F8sning"] | components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.DigitaliserDokumentL\u00F8sning"] | components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.SattP\u00E5VentL\u00F8sning"];
+        "no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklaringsbehovL\u00F8sning": components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklarOverleveringL\u00F8sning"] | components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklarSaksnummerL\u00F8sning"] | components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.AvklarTemaL\u00F8sning"] | components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.DigitaliserDokumentL\u00F8sning"] | components["schemas"]["no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.SattP\u00E5VentL\u00F8sning"];
         "no.nav.aap.postmottak.avklaringsbehov.l\u00F8sning.DigitaliserDokumentL\u00F8sning": {
             behovstype: string;
             /** @enum {string} */

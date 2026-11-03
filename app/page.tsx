@@ -5,6 +5,7 @@ import { LinkCard, LinkCardAnchor, LinkCardIcon, LinkCardTitle } from '@navikt/d
 import {
   ArrowsSquarepathIcon,
   BackwardIcon,
+  ClipboardCheckmarkIcon,
   ClockIcon,
   EnvelopeClosedIcon,
   FileJsonIcon,
@@ -151,6 +152,15 @@ export default function Home() {
                 </LinkCardIcon>
                 <LinkCardTitle>
                   <LinkCardAnchor href={`/drift/postmottak`}>Trigg prosesser behandling i postmottak</LinkCardAnchor>
+                </LinkCardTitle>
+              </LinkCard>
+
+              <LinkCard size="small">
+                <LinkCardIcon>
+                  <ClipboardCheckmarkIcon fontSize="2rem" />
+                </LinkCardIcon>
+                <LinkCardTitle>
+                  <LinkCardAnchor href="/drift/postmottak/joark-avstemming">Joark-avstemming</LinkCardAnchor>
                 </LinkCardTitle>
               </LinkCard>
 

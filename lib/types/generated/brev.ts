@@ -1308,16 +1308,22 @@ export interface components {
             id: string;
             tekniskNavn: string;
             visningsnavn: string;
-            /** @enum {string} */
-            type: "FAKTAGRUNNLAG" | "TEKST";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "FAKTAGRUNNLAG";
         };
         "no.nav.aap.brev.kontrakt.BlokkInnhold.FormattertTekst": {
             formattering: ("FET" | "KURSIV" | "UNDERSTREK")[];
             /** Format: uuid */
             id: string;
             tekst: string;
-            /** @enum {string} */
-            type: "FAKTAGRUNNLAG" | "TEKST";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "TEKST";
         };
         "no.nav.aap.brev.kontrakt.Brev": {
             journalpostTittel?: string | null;
@@ -1386,27 +1392,39 @@ export interface components {
              * @example 2025-04-01
              */
             dato: string;
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "AAP_FOM_DATO";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.AarsakTidspunktVurdering": {
             /** @enum {string|null} */
             aarsakBeregningsTidspunktVurdering?: "ANNET" | "DATO_PAA_LEGEERKLAERING" | "HENVIST_TIL_BEHANDLING" | "KRAVDATO" | "SEKSTEN_AAR_SOM_BEREGNINGSTIDSPUNKT" | "SYKEMELDINGSDATO" | "UFOERETIDSPUNKT" | null;
             /** @enum {string|null} */
             aarsakYtterligereNedsattTidspunktVurdering?: "ANNET" | "IKKE_BETYDNING_IKKE_RELEVANT" | "OKT_UFOEREGRAD" | "UFOERETIDSPUNKT" | "YTTERLIGERE_NEDSATT" | null;
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "TIDSPUNKT_VURDERING";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.AvslagAarsak": {
             /** @enum {string} */
             aarsak: "AVSLAG_11_2" | "AVSLAG_11_3" | "AVSLAG_11_4";
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "AVSLAG_AARSAK";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.BarnUtenBarnetillegg": {
             barn: components["schemas"]["no.nav.aap.brev.kontrakt.Faktagrunnlag.BarnUtenBarnetillegg.Barn"][];
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "BARN_UTEN_BARNETILLEGG";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.BarnUtenBarnetillegg.Barn": {
             begrunnelse: string;
@@ -1419,8 +1437,11 @@ export interface components {
              * @example 2025-04-01
              */
             dato: string;
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "DATO_AVKLART_FOR_JOBBSOK";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.D\u00F8dsfall": {
             /**
@@ -1429,8 +1450,11 @@ export interface components {
              */
             "d\u00F8dsdato": string;
             navn: string;
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "DODSFALL";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser": {
             fradragAndreYtelser: components["schemas"]["no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.FradragYtelse"][];
@@ -1441,8 +1465,11 @@ export interface components {
             samordningBarnepensjon: components["schemas"]["no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.SamordningBarnepensjon"][];
             "samordningUf\u00F8re": components["schemas"]["no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.SamordningUf\u00F8re"][];
             sykestipend: components["schemas"]["no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.Sykestipend"][];
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "FORHOLD_TIL_ANDRE_YTELSER";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.ForholdTilAndreYtelser.FradragYtelse": {
             /**
@@ -1549,13 +1576,19 @@ export interface components {
              * @example 2025-04-01
              */
             frist: string;
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "FRIST_DATO_11_7";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.FritakMeldepliktGrunnlag": {
             fritakMeldepliktGrunnlag: components["schemas"]["no.nav.aap.brev.kontrakt.Faktagrunnlag.FritakMeldepliktGrunnlag.FritakMeldepliktVurdering"][];
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "FRITAK_MELDEPLIKT";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.FritakMeldepliktGrunnlag.FritakMeldepliktVurdering": {
             /**
@@ -1578,8 +1611,11 @@ export interface components {
              */
             ytelseTom: string;
             ytelseType: string;
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "SYKEPENGEGRUNNLAG";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.GrunnlagBeregning": {
             beregningsgrunnlag?: number | null;
@@ -1591,8 +1627,11 @@ export interface components {
             /** @enum {string|null} */
             beregningsutfallKategori?: "GJENNOMSNITT" | "INNTEKT_OVER_6G" | "MINSTESATS_OVER_25" | "MINSTESATS_UNDER_25" | "SISTE_AAR" | null;
             "inntekterPer\u00C5r": components["schemas"]["no.nav.aap.brev.kontrakt.Faktagrunnlag.GrunnlagBeregning.InntektPer\u00C5r"][];
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "GRUNNLAG_BEREGNING";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.GrunnlagBeregning.InntektPer\u00C5r": {
             inntekt: number;
@@ -1604,8 +1643,11 @@ export interface components {
              * @example 2025-04-01
              */
             virkningsTidspunkt: string;
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "INNVILGET_UFORETRYGD";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.KravdatoUf\u00F8retrygd": {
             /**
@@ -1613,8 +1655,11 @@ export interface components {
              * @example 2025-04-01
              */
             dato: string;
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "KRAVDATO_UFORETRYGD";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.SisteDagMedYtelse": {
             /**
@@ -1622,13 +1667,19 @@ export interface components {
              * @example 2025-04-01
              */
             dato: string;
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "SISTE_DAG_MED_YTELSE";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.Sykdomsvurdering": {
             begrunnelse: string;
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "SYKDOMSVURDERING";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.TilkjentYtelse": {
             /** Format: int32 */
@@ -1642,8 +1693,11 @@ export interface components {
             "minste\u00C5rligYtelse"?: number | null;
             "minste\u00C5rligYtelseUnder25"?: number | null;
             "\u00E5rligYtelse"?: number | null;
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "TILKJENT_YTELSE";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.UtvidetAapFomDato": {
             /**
@@ -1651,15 +1705,21 @@ export interface components {
              * @example 2025-04-01
              */
             dato: string;
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "UTVIDET_AAP_FOM_DATO";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.YrkesskadeBeregning": {
             /** Format: int32 */
             andelAvNedsettelseSomSkyldesYrkesskade?: number | null;
             yrkesskader: components["schemas"]["no.nav.aap.brev.kontrakt.Faktagrunnlag.YrkesskadeBeregning.Yrkesskade"][];
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "YRKESSKADE_BEREGNING";
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.YrkesskadeBeregning.Yrkesskade": {
             arbeidsinntektPaaSkadetidspunktet?: number | null;
@@ -1673,8 +1733,11 @@ export interface components {
         };
         "no.nav.aap.brev.kontrakt.Faktagrunnlag.YrkesskadeIS\u00F8knadIkkeIRegister": {
             verdi: boolean;
-            /** @enum {string} */
-            type: "AAP_FOM_DATO" | "AVSLAG_AARSAK" | "BARN_UTEN_BARNETILLEGG" | "DATO_AVKLART_FOR_JOBBSOK" | "DODSFALL" | "FORHOLD_TIL_ANDRE_YTELSER" | "FRIST_DATO_11_7" | "FRITAK_MELDEPLIKT" | "GRUNNLAG_ANDRE_YTELSER" | "GRUNNLAG_BEREGNING" | "INNVILGET_UFORETRYGD" | "KRAVDATO_UFORETRYGD" | "SISTE_DAG_MED_YTELSE" | "SYKDOMSVURDERING" | "TIDSPUNKT_VURDERING" | "TILKJENT_YTELSE" | "UTVIDET_AAP_FOM_DATO" | "YRKESSKADE_BEREGNING" | "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "YRKESSKADE_I_SOKNAD_IKKE_I_REGISTER";
         };
         "no.nav.aap.brev.kontrakt.FerdigstillBrevRequest": {
             /**

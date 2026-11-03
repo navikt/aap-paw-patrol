@@ -1208,7 +1208,11 @@
             "type": "array"
           },
           "arbeidsgrad": {
-            "$ref": "#/components/schemas/no.nav.aap.api.intern.NksArbeidsgrad",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/no.nav.aap.api.intern.NksArbeidsgrad"
+              }
+            ],
             "description": "Arbeidsgrad for denne meldeperioden."
           },
           "dagsatser": {
@@ -1723,7 +1727,11 @@
         "nullable": false,
         "properties": {
           "enhet": {
-            "$ref": "#/components/schemas/no.nav.aap.api.intern.NåværendeEnhet",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/no.nav.aap.api.intern.NåværendeEnhet"
+              }
+            ],
             "deprecated": true,
             "description": "Ikke i bruk av konsument."
           },
@@ -1742,7 +1750,11 @@
             "type": "string"
           },
           "periode": {
-            "$ref": "#/components/schemas/no.nav.aap.api.intern.Periode",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/no.nav.aap.api.intern.Periode"
+              }
+            ],
             "deprecated": true,
             "description": "Ikke i bruk av konsument (straks)."
           },
@@ -1989,7 +2001,11 @@
             "$ref": "#/components/schemas/no.nav.aap.api.intern.Periode"
           },
           "reduksjon": {
-            "$ref": "#/components/schemas/no.nav.aap.api.intern.Reduksjon",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/no.nav.aap.api.intern.Reduksjon"
+              }
+            ],
             "description": "Reduksjon i utbetaling. Denne fås kun fra Arena, er null fra Kelvin."
           },
           "utbetalingsgrad": {
@@ -2328,7 +2344,11 @@
         "nullable": false,
         "properties": {
           "periode": {
-            "$ref": "#/components/schemas/no.nav.aap.api.intern.behandlingsflyt.Periode",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/no.nav.aap.api.intern.behandlingsflyt.Periode"
+              }
+            ],
             "deprecated": true,
             "description": "Ikke del denne ut. Dette er rettighetsperiode, som ikke betyr det vi tror den betyr."
           },
@@ -2663,25 +2683,46 @@
         ],
         "type": "object"
       },
-      "no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelseDto": {
+      "no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse": {
+        "discriminator": {
+          "propertyName": "navn",
+          "mapping": {
+            "ALDER_LOVVALG_MEDLEMSKAP": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.AlderLovvalgMedlemskap",
+            "FERDIG_BEHANDLET": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.FerdigBehandlet",
+            "NAV_KONTOR": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.NavKontor",
+            "NAY": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.Nay",
+            "SØKNAD_MOTTATT": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.SøknadMottatt"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.AlderLovvalgMedlemskap"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.FerdigBehandlet"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.NavKontor"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.Nay"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.SøknadMottatt"
+          }
+        ]
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.AlderLovvalgMedlemskap": {
         "nullable": false,
         "properties": {
           "navn": {
             "enum": [
-              "FERDIG_BEHANDLET",
-              "SØKNAD_MOTTATT",
-              "SØKNAD_TRUKKET",
-              "UNDER_BEHANDLING",
-              "VENTER_PÅ_MEDISINSKE_OPPLYSNINGER",
-              "VENTER_PÅ_OPPLYSNINGER",
-              "VENTER_PÅ_OPPLYSNINGER_FRA_UTENLANDSKE_MYNDIGHETER",
-              "VENTER_PÅ_SVAR_FRA_BRUKER",
-              "VENTER_PÅ_SVAR_PÅ_FORHÅNDSVARSEL"
+              "ALDER_LOVVALG_MEDLEMSKAP"
             ],
             "nullable": false,
             "type": "string"
           },
-          "status": {
+          "progresjon": {
             "enum": [
               "AKTIV",
               "FULLFØRT",
@@ -2690,7 +2731,160 @@
             "nullable": false,
             "type": "string"
           },
-          "tidsstempel": {
+          "sistEndret": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "MOTTATT_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER",
+              "VENTER_PÅ_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "navn",
+          "progresjon"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.FerdigBehandlet": {
+        "nullable": false,
+        "properties": {
+          "navn": {
+            "enum": [
+              "FERDIG_BEHANDLET"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "progresjon": {
+            "enum": [
+              "AKTIV",
+              "FULLFØRT",
+              "IKKE_PÅBEGYNT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "sistEndret": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "navn",
+          "progresjon"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.NavKontor": {
+        "nullable": false,
+        "properties": {
+          "navn": {
+            "enum": [
+              "NAV_KONTOR"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "progresjon": {
+            "enum": [
+              "AKTIV",
+              "FULLFØRT",
+              "IKKE_PÅBEGYNT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "sistEndret": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "MOTTATT_LEGEERKLÆRING",
+              "PURRET_PÅ_LEGERERKLÆRING",
+              "VENTER_PÅ_LEGEERKLÆRING"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "navn",
+          "progresjon"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.Nay": {
+        "nullable": false,
+        "properties": {
+          "navn": {
+            "enum": [
+              "NAY"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "progresjon": {
+            "enum": [
+              "AKTIV",
+              "FULLFØRT",
+              "IKKE_PÅBEGYNT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "sistEndret": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "MOTTATT_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER",
+              "VENTER_PÅ_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "navn",
+          "progresjon"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse.SøknadMottatt": {
+        "nullable": false,
+        "properties": {
+          "navn": {
+            "enum": [
+              "SØKNAD_MOTTATT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "progresjon": {
+            "enum": [
+              "AKTIV",
+              "FULLFØRT",
+              "IKKE_PÅBEGYNT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "sistEndret": {
             "example": "2025-04-01T12:30:00",
             "format": "date-time",
             "nullable": false,
@@ -2699,8 +2893,8 @@
         },
         "required": [
           "navn",
-          "status",
-          "tidsstempel"
+          "progresjon",
+          "sistEndret"
         ],
         "type": "object"
       },
@@ -2724,7 +2918,7 @@
           },
           "hendelser": {
             "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelseDto"
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.datadeling.BehandlingHendelse"
             },
             "nullable": false,
             "type": "array"
@@ -4855,7 +5049,7 @@
                     {
                       "status": "LØPENDE",
                       "saksnummer": "4MGL8LS",
-                      "vedtaksdato": "2026-10-28",
+                      "vedtaksdato": "2026-11-02",
                       "periode": {
                         "fraOgMedDato": "2021-01-01",
                         "tilOgMedDato": "2021-01-31"
