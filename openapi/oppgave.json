@@ -1710,6 +1710,53 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.oppgave.drift.OppgaveIkkeEndretDto": {
+        "nullable": false,
+        "properties": {
+          "avklaringsbehovKode": {
+            "nullable": false,
+            "type": "string"
+          },
+          "behandlingRef": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "endretTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "enhetForKø": {
+            "nullable": false,
+            "type": "string"
+          },
+          "oppgaveId": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          },
+          "opprettetTidspunkt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "avklaringsbehovKode",
+          "behandlingRef",
+          "enhetForKø",
+          "oppgaveId",
+          "opprettetTidspunkt"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.oppgave.drift.SlettFilterRequest": {
         "nullable": false,
         "properties": {
@@ -4682,6 +4729,36 @@
         ],
         "tags": [
           "MotorAPI"
+        ]
+      }
+    },
+    "/api/drift/oppgaver-ikke-endret": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.oppgave.drift.OppgaveIkkeEndretDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
         ]
       }
     },

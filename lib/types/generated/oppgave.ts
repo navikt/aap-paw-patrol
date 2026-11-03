@@ -1464,6 +1464,41 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/drift/oppgaver-ikke-endret": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["no.nav.aap.oppgave.drift.OppgaveIkkeEndretDto"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/drift/oppgave/behandling/{referanse}": {
         parameters: {
             query?: never;
@@ -1968,6 +2003,25 @@ export interface components {
             reservertTidspunkt?: string | null;
             /** @enum {string} */
             status: "AVSLUTTET" | "OPPRETTET";
+        };
+        "no.nav.aap.oppgave.drift.OppgaveIkkeEndretDto": {
+            avklaringsbehovKode: string;
+            /** Format: uuid */
+            behandlingRef: string;
+            /**
+             * Format: date-time
+             * @example 2025-04-01T12:30:00
+             */
+            endretTidspunkt?: string | null;
+            "enhetForK\u00F8": string;
+            /** Format: int64 */
+            oppgaveId: number;
+            /**
+             * Format: date-time
+             * @example 2025-04-01T12:30:00
+             */
+            opprettetTidspunkt: string;
+            saksnummer?: string | null;
         };
         "no.nav.aap.oppgave.drift.SlettFilterRequest": {
             /** Format: int64 */

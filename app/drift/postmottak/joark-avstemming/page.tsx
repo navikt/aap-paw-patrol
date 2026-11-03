@@ -1,10 +1,10 @@
-import { Alert, BodyShort, Heading, Link, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Heading, VStack } from '@navikt/ds-react';
 import { Page, PageBlock } from '@navikt/ds-react/Page';
-import { Table, TableBody, TableDataCell, TableHeader, TableHeaderCell, TableRow } from '@navikt/ds-react/Table';
 import { IngenTilgangAlert } from 'components/drift/IngenTilgangAlert';
+import { JoarkAvstemmingDataGrid } from 'components/drift/postmottak/JoarkAvstemmingDataGrid';
 import { harLeseTilgang, hentRollerForBruker } from 'lib/azure/azureUserService';
 import { hentJoarkAvstemming } from 'lib/services/driftService';
-import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
+import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 
 export default async function JoarkAvstemmingPage() {
   const roller = await hentRollerForBruker();
@@ -48,30 +48,7 @@ export default async function JoarkAvstemmingPage() {
           ) : (
             <>
               <BodyShort>Antall journalposter: {rapport.resultater.length}</BodyShort>
-              <Table size="small">
-                <TableHeader>
-                  <TableRow>
-                    <TableHeaderCell>Journalpost-ID</TableHeaderCell>
-                    <TableHeaderCell>Utfall</TableHeaderCell>
-                    <TableHeaderCell>Kanal</TableHeaderCell>
-                    <TableHeaderCell>Dato opprettet</TableHeaderCell>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {rapport.resultater.map((resultat) => (
-                    <TableRow key={resultat.journalpostId}>
-                      <TableDataCell>
-                        <Link href={`/drift/postmottak/${resultat.journalpostId}`}>{resultat.journalpostId}</Link>
-                      </TableDataCell>
-                      <TableDataCell>{resultat.utfall}</TableDataCell>
-                      <TableDataCell>{resultat.kanal ?? '-'}</TableDataCell>
-                      <TableDataCell>
-                        {resultat.datoOpprettet ? formaterDatoForFrontend(resultat.datoOpprettet) : '-'}
-                      </TableDataCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+              <JoarkAvstemmingDataGrid resultater={rapport.resultater} />
             </>
           )}
         </VStack>

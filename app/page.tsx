@@ -212,6 +212,15 @@ export default function Home() {
                   <LinkCardAnchor href={`/drift/oppgavefilter`}>Oppgavefiltre (køer)</LinkCardAnchor>
                 </LinkCardTitle>
               </LinkCard>
+
+              <LinkCard size="small">
+                <LinkCardIcon>
+                  <ClockIcon fontSize="2rem" />
+                </LinkCardIcon>
+                <LinkCardTitle>
+                  <LinkCardAnchor href="/drift/oppgaver-ikke-endret">Gamle oppgaver som ikke er endret</LinkCardAnchor>
+                </LinkCardTitle>
+              </LinkCard>
             </HGrid>
           </Box>
         </VStack>
