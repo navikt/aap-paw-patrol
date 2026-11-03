@@ -269,6 +269,25 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.utbetal.admin.UtbetalingStatusAntallDto": {
+        "nullable": false,
+        "properties": {
+          "antallPerStatus": {
+            "additionalProperties": {
+              "format": "int32",
+              "nullable": false,
+              "type": "integer"
+            },
+            "description": "Key type: no.nav.aap.utbetal.kodeverk.Status",
+            "nullable": false,
+            "type": "object"
+          }
+        },
+        "required": [
+          "antallPerStatus"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.utbetal.admin.UtbetalingStatusDto": {
         "nullable": false,
         "properties": {
@@ -290,6 +309,56 @@
         "required": [
           "utbetalingerMedFeiletStatus",
           "utbetalingerSomManglerKvittering"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.utbetal.admin.UtbetalingsmeldingMedStatusDto": {
+        "nullable": false,
+        "properties": {
+          "melding": {
+            "nullable": false,
+            "type": "string"
+          },
+          "opprettet": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          },
+          "referanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "FEILET",
+              "HOS_OPPDRAG",
+              "IKKE_SENDT",
+              "MOTTATT",
+              "OK",
+              "SENDT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "utbetalingsmeldingType": {
+            "enum": [
+              "MIGRERT_SLETT_AVVENT_PERIODE",
+              "MIGRERT_UTBETALING",
+              "SLETT_AVVENT_PERIODE",
+              "UTBETALING"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "melding",
+          "opprettet",
+          "referanse",
+          "status",
+          "utbetalingsmeldingType"
         ],
         "type": "object"
       },
@@ -1933,6 +2002,77 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/no.nav.aap.utbetal.migrering.ErMigrertResponseDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/admin/utbetalingsmelding/status": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.utbetal.admin.UtbetalingStatusAntallDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/admin/utbetalingsmelding/{saksnummer}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "saksnummer",
+            "explode": false,
+            "in": "path",
+            "name": "saksnummer",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.utbetal.admin.UtbetalingsmeldingMedStatusDto"
+                  },
+                  "nullable": false,
+                  "type": "array"
                 }
               }
             },

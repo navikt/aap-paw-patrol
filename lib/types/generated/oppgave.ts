@@ -1473,7 +1473,12 @@ export interface paths {
         };
         get: {
             parameters: {
-                query?: never;
+                query?: {
+                    /** @description Antall uker uten endring. Defaultverdi er 5. */
+                    antallUker?: number;
+                    /** @description Bare ureserverte oppgaver. Defaultverdi er true. */
+                    kunUreserverte?: boolean;
+                };
                 header?: never;
                 path?: never;
                 cookie?: never;

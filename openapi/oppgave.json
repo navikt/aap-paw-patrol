@@ -4734,6 +4734,37 @@
     },
     "/api/drift/oppgaver-ikke-endret": {
       "get": {
+        "parameters": [
+          {
+            "allowEmptyValue": false,
+            "deprecated": false,
+            "description": "Antall uker uten endring. Defaultverdi er 5.",
+            "explode": false,
+            "in": "query",
+            "name": "antallUker",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "form"
+          },
+          {
+            "allowEmptyValue": false,
+            "deprecated": false,
+            "description": "Bare ureserverte oppgaver. Defaultverdi er true.",
+            "explode": false,
+            "in": "query",
+            "name": "kunUreserverte",
+            "required": false,
+            "schema": {
+              "nullable": false,
+              "type": "boolean"
+            },
+            "style": "form"
+          }
+        ],
         "responses": {
           "200": {
             "content": {
