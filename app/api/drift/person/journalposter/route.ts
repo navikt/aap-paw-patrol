@@ -1,3 +1,4 @@
+import { opprettFeilrespons } from 'lib/services/feilrespons';
 import { NextRequest, NextResponse } from 'next/server';
 import { hentJournalposterForPerson } from 'lib/services/driftService';
 
@@ -6,7 +7,7 @@ export async function POST(req: NextRequest) {
 
   try {
     return NextResponse.json(await hentJournalposterForPerson(ident));
-  } catch (err: any) {
-    return new Response(err?.message, { status: 500 });
+  } catch (err) {
+    return opprettFeilrespons(err);
   }
 }

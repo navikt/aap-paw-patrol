@@ -15,6 +15,8 @@ type UtbetalingstidslinjeDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.
 type MigreringsresultatDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.migrering.MigreringsresultatDto'];
 export type JobbInfo = BehandlingsflytComponents['schemas']['no.nav.aap.motor.api.JobbInfoDto'];
 export type JobbKommentar = BehandlingsflytComponents['schemas']['no.nav.aap.motor.Kommentar'];
+type AvbrytJobbRequest =
+  BehandlingsflytComponents['schemas']['no.nav.aap.motor.api.`MotorApiKt$motorApi$1$7$AvbrytJobbRequest`'];
 
 export type AppNavn =
   | 'behandlingsflyt'
@@ -160,7 +162,7 @@ export const kjørJobb = async (appNavn: AppNavn, jobbId: string) => {
   return await fetchProxy<string>(url, scope, 'POST');
 };
 
-export const avbrytJobb = async (appNavn: AppNavn, jobbId: string, body: any) => {
+export const avbrytJobb = async (appNavn: AppNavn, jobbId: string, body: AvbrytJobbRequest) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp(appNavn);
   const url = `${baseUrl}/drift/api/jobb/avbryt/${jobbId}`;
   return await fetchProxy<string>(url, scope, 'POST', body);

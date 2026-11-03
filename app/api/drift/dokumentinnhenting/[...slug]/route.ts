@@ -1,3 +1,4 @@
+import { opprettFeilrespons } from 'lib/services/feilrespons';
 import { NextRequest, NextResponse } from 'next/server';
 import { getBaseUrlAndScopeForApp } from 'lib/services/driftService';
 import { fetchProxy } from 'lib/services/fetchProxy';
@@ -17,7 +18,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ slu
     const url = `${baseUrl}/drift/api/${slug.join('/')}`;
 
     return NextResponse.json(await fetchProxy<DokumentinnhentingResponse>(url, scope, 'POST', body));
-  } catch (err: any) {
-    return new Response(err?.message, { status: 500 });
+  } catch (err) {
+    return opprettFeilrespons(err);
   }
 }

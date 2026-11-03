@@ -1,3 +1,4 @@
+import { opprettFeilrespons } from 'lib/services/feilrespons';
 import { NextRequest, NextResponse } from 'next/server';
 import { fetchProxy } from '../../../../../lib/services/fetchProxy';
 import { getBaseUrlAndScopeForApp } from '../../../../../lib/services/driftService';
@@ -12,7 +13,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       await fetchProxy<MediumResponse>(`${baseUrl}/maksimumUtenUtbetaling`, scope, 'POST', body)
     );
-  } catch (err: any) {
-    return new Response(err?.message, { status: 500 });
+  } catch (err) {
+    return opprettFeilrespons(err);
   }
 }

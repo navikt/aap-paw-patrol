@@ -1,3 +1,4 @@
+import { opprettFeilrespons } from 'lib/services/feilrespons';
 import { NextRequest, NextResponse } from 'next/server';
 import { hentTidligereVurderinger } from 'lib/services/sakOgBehandlingService';
 
@@ -12,7 +13,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<Params
   const etterSteg = searchParams.get('etterSteg') ?? undefined;
   try {
     return NextResponse.json(await hentTidligereVurderinger(behandlingsreferanse, førSteg, etterSteg));
-  } catch (err: any) {
-    return new Response(err?.message, { status: 500 });
+  } catch (err) {
+    return opprettFeilrespons(err);
   }
 }

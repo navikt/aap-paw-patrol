@@ -1,3 +1,4 @@
+import { opprettFeilrespons } from 'lib/services/feilrespons';
 import { NextRequest } from 'next/server';
 import { kopierJournalpostIPostmottak } from 'lib/services/driftService';
 
@@ -10,9 +11,7 @@ export async function POST(_: NextRequest, { params }: { params: Promise<Params>
 
   try {
     return Response.json(await kopierJournalpostIPostmottak(referanse), { status: 200 });
-  } catch (err: any) {
-    return new Response(err?.message, { status: 500 });
+  } catch (err) {
+    return opprettFeilrespons(err);
   }
 }
-
-

@@ -1,5 +1,6 @@
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
+import tseslint from '@typescript-eslint/eslint-plugin';
 
 const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
@@ -15,6 +16,10 @@ export default [
   ...compat.extends('@navikt/eslint-config-aap').map((config) => ({
     files: ['**/*.{js,cjs,mjs,jsx,ts,tsx}'],
     ...config,
+  })),
+  ...tseslint.configs['flat/strict'].map((config) => ({
+    ...config,
+    files: ['**/*.{ts,tsx}'],
   })),
   {
     files: ['**/*.{js,cjs,mjs,jsx,ts,tsx}'],

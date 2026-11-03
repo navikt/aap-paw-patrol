@@ -34,5 +34,5 @@ export const lagreOppgavefilter = async (request: FilterDriftRequest): Promise<F
 export const slettOppgavefilter = async (id: number): Promise<void> => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('oppgave');
   const url = `${baseUrl}/api/drift/filter/slett`;
-  return await fetchProxy<void>(url, scope, 'POST', { id });
+  await fetchProxy<undefined>(url, scope, 'POST', { id });
 };

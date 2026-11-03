@@ -3,12 +3,13 @@
 import { Alert, BodyShort, Button, Heading, HStack, Loader, Table, TextField, VStack } from '@navikt/ds-react';
 import { useState } from 'react';
 import { FetchJsonItem, hentBehandler } from 'lib/clientApi';
+import { hentFeilmelding } from 'lib/utils/feil';
 
 type Behandler = FetchJsonItem<ReturnType<typeof hentBehandler>>;
 
 export const Behandleroppslag = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<any>(undefined);
+  const [error, setError] = useState<string>();
   const [result, setResult] = useState<Behandler[]>([]);
 
   const [request, setRequest] = useState({ saksnummer: '', fritekst: '' });
@@ -26,9 +27,9 @@ export const Behandleroppslag = () => {
           setResult(await res.json());
         }
       })
-      .catch((err) => {
+      .catch((err: unknown) => {
         console.error(err);
-        setError(err);
+        setError(hentFeilmelding(err));
       })
       .finally(() => setIsLoading(false));
   };
