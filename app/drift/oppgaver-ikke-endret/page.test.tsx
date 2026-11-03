@@ -43,7 +43,8 @@ describe('OppgaverIkkeEndretPage', () => {
   });
 
   it('viser oppgaver med sortering, filtre og lenker til sak og behandling', async () => {
-    const html = renderToStaticMarkup(await OppgaverIkkeEndretPage());
+    const html = renderToStaticMarkup(await OppgaverIkkeEndretPage({ searchParams: Promise.resolve({}) }));
+    expect(hentOppgaverIkkeEndret).toHaveBeenCalledWith(null, null);
     expect(html).toContain('aksel-data-grid');
     expect(html).toContain('Viser 2 av 2 oppgaver');
     expect(html).toContain('Søk i oppgaver');
@@ -62,7 +63,7 @@ describe('OppgaverIkkeEndretPage', () => {
 
   it('henter ikke oppgaver uten lesetilgang', async () => {
     vi.mocked(harLeseTilgang).mockReturnValue(false);
-    const html = renderToStaticMarkup(await OppgaverIkkeEndretPage());
+    const html = renderToStaticMarkup(await OppgaverIkkeEndretPage({ searchParams: Promise.resolve({}) }));
     expect(html).toContain('Du har ikke tilgang til denne siden.');
     expect(hentOppgaverIkkeEndret).not.toHaveBeenCalled();
   });

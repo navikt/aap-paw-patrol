@@ -1,16 +1,25 @@
 import { fetchProxy } from 'lib/services/fetchProxy';
 import { getBaseUrlAndScopeForApp } from 'lib/services/driftService';
-import { components } from 'lib/types/generated/oppgave';
+import { components, paths } from 'lib/types/generated/oppgave';
 
 type FilterDriftRequest = components['schemas']['no.nav.aap.oppgave.drift.FilterDriftRequest'];
 type FilterDriftsinfoDTO = components['schemas']['no.nav.aap.oppgave.drift.FilterDriftResponse'];
 type FilterOversiktDTO = components['schemas']['no.nav.aap.oppgave.drift.DriftFilterResponsDTO'];
 type OppgaveDriftsinfoDTO = components['schemas']['no.nav.aap.oppgave.drift.OppgaveDriftsinfoDTO'];
 type OppgaveIkkeEndretDto = components['schemas']['no.nav.aap.oppgave.drift.OppgaveIkkeEndretDto'];
+type OppgaverIkkeEndretQuery = NonNullable<paths['/api/drift/oppgaver-ikke-endret']['get']['parameters']['query']>;
 
-export const hentOppgaverIkkeEndret = async (): Promise<OppgaveIkkeEndretDto[]> => {
+export const hentOppgaverIkkeEndret = async (
+  antallUker: OppgaverIkkeEndretQuery['antallUker'] | null = null,
+  kunUreserverte: OppgaverIkkeEndretQuery['kunUreserverte'] | null = null
+): Promise<OppgaveIkkeEndretDto[]> => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('oppgave');
-  return await fetchProxy<OppgaveIkkeEndretDto[]>(`${baseUrl}/api/drift/oppgaver-ikke-endret`, scope, 'GET');
+  const query = new URLSearchParams();
+  if (antallUker != null) query.set('antallUker', String(antallUker));
+  if (kunUreserverte != null) query.set('kunUreserverte', String(kunUreserverte));
+  const queryString = query.toString();
+  const url = `${baseUrl}/api/drift/oppgaver-ikke-endret${queryString ? `?${queryString}` : ''}`;
+  return await fetchProxy<OppgaveIkkeEndretDto[]>(url, scope, 'GET');
 };
 
 export const hentOppgaver = async (behandlingsreferanse: string) => {
