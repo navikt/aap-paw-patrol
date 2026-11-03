@@ -6,6 +6,12 @@ type FilterDriftRequest = components['schemas']['no.nav.aap.oppgave.drift.Filter
 type FilterDriftsinfoDTO = components['schemas']['no.nav.aap.oppgave.drift.FilterDriftResponse'];
 type FilterOversiktDTO = components['schemas']['no.nav.aap.oppgave.drift.DriftFilterResponsDTO'];
 type OppgaveDriftsinfoDTO = components['schemas']['no.nav.aap.oppgave.drift.OppgaveDriftsinfoDTO'];
+type OppgaveIkkeEndretDto = components['schemas']['no.nav.aap.oppgave.drift.OppgaveIkkeEndretDto'];
+
+export const hentOppgaverIkkeEndret = async (): Promise<OppgaveIkkeEndretDto[]> => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('oppgave');
+  return await fetchProxy<OppgaveIkkeEndretDto[]>(`${baseUrl}/api/drift/oppgaver-ikke-endret`, scope, 'GET');
+};
 
 export const hentOppgaver = async (behandlingsreferanse: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('oppgave');

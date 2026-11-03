@@ -33,6 +33,13 @@ describe('JoarkAvstemmingPage', () => {
     const html = renderToStaticMarkup(await JoarkAvstemmingPage());
 
     expect(html).toContain('Antall journalposter: 2');
+    expect(html).toContain('aksel-data-grid');
+    expect(html).toContain('aria-label="Journalposter i Joark-avstemmingsrapporten"');
+    expect(html).not.toContain('type="radio"');
+    expect(html).not.toContain('type="checkbox"');
+    expect(html).toContain('Søk i journalposter');
+    expect(html).toContain('Alle utfall');
+    expect(html).toContain('Viser 2 av 2 journalposter');
     expect(html).toContain('href="/drift/postmottak/123"');
     expect(html).toContain('href="/drift/postmottak/456"');
     expect(html).toContain('FUNNET');
@@ -56,6 +63,26 @@ describe('JoarkAvstemmingPage', () => {
     expect(html).toContain('Ikke startet');
     expect(html).toContain('Ikke fullført');
     expect(html).not.toContain('<table');
+  });
+
+  it.each([
+    ['UAVSTEMT_UKJENT', 'Uavstemt – ukjent'],
+    ['UAVSTEMT_KELVIN', 'Uavstemt – Kelvin'],
+    ['GOSYS_OPPGAVE_OPPRETTET', 'Gosys-oppgave opprettet'],
+    ['FORDELINGSOPPGAVE_OPPRETTET', 'Fordelingsoppgave opprettet'],
+    ['ALLEREDE_HAR_OPPGAVE', 'Har allerede oppgave'],
+    ['IKKE_NOK_INFORMASJON', 'Ikke nok informasjon'],
+    ['NYTT_UTFALL', 'NYTT_UTFALL'],
+  ])('viser %s som %s', async (utfall, tekst) => {
+    vi.mocked(hentJoarkAvstemming).mockResolvedValue({
+      resultater: [{ journalpostId: 123, utfall, kanal: 'NAV_NO' }],
+    });
+
+    const html = renderToStaticMarkup(await JoarkAvstemmingPage());
+
+    expect(html).toContain(tekst);
+    expect(html).toContain('NAV_NO');
+    expect(html).toContain(`<option value="${utfall}">${tekst}</option>`);
   });
 
   it('viser en tom rapport uten å si at rapporten mangler', async () => {
