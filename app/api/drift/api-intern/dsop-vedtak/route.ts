@@ -1,3 +1,4 @@
+import { opprettFeilrespons } from 'lib/services/feilrespons';
 import { NextRequest, NextResponse } from 'next/server';
 import { fetchProxy } from '../../../../../lib/services/fetchProxy';
 import { getBaseUrlAndScopeForApp } from '../../../../../lib/services/driftService';
@@ -10,7 +11,7 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   try {
     return NextResponse.json(await fetchProxy<DsopResponse>(`${baseUrl}/kelvin/dsop/vedtak-test`, scope, 'POST', body));
-  } catch (err: any) {
-    return new Response(err?.message, { status: 500 });
+  } catch (err) {
+    return opprettFeilrespons(err);
   }
 }

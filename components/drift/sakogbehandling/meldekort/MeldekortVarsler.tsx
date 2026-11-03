@@ -3,7 +3,7 @@ import type { Varsel } from 'lib/types/meldekort';
 import { formaterDatoMedTidspunktSekunderForFrontend, formaterPeriode } from 'lib/utils/date';
 
 export const MeldekortVarsler = ({ varsler }: { varsler: Varsel[] }) => {
-  let sorterteVarlser = [...varsler].sort((a, b) => a.sendingstidspunkt.localeCompare(b.sendingstidspunkt));
+  const sorterteVarlser = [...varsler].sort((a, b) => a.sendingstidspunkt.localeCompare(b.sendingstidspunkt));
   return (
     <Box
       background="neutral-soft"

@@ -18,7 +18,8 @@ export const JobbTabell = ({ jobber, appNavn }: Props) => {
   async function onKjørJobbClick(id: number) {
     setIsLoadingKjørJobb(true);
     try {
-      const kjørRes = await kjørJobb(appNavn!, id);
+      if (!appNavn) throw new Error('Appnavn mangler for kjøring av jobb');
+      const kjørRes = await kjørJobb(appNavn, id);
       if (kjørRes.ok) {
         const message = await kjørRes.text();
         setMessage(message);
@@ -104,6 +105,6 @@ export const JobbTabell = ({ jobber, appNavn }: Props) => {
   );
 };
 
-export function objectToMap(value: Object): Map<string, string> {
+export function objectToMap(value: Record<string, string>): Map<string, string> {
   return new Map(Object.entries(value));
 }

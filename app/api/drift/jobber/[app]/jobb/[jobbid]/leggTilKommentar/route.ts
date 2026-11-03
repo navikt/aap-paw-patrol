@@ -1,3 +1,4 @@
+import { opprettFeilrespons } from 'lib/services/feilrespons';
 import { NextRequest, NextResponse } from 'next/server';
 import { AppNavn, leggTilKommentar } from 'lib/services/driftService';
 
@@ -11,7 +12,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<Param
   const { kommentar } = await req.json();
   try {
     return NextResponse.json(await leggTilKommentar(app as AppNavn, jobbid, kommentar), { status: 200 });
-  } catch (err: any) {
-    return new Response(err?.message, { status: 500 });
+  } catch (err) {
+    return opprettFeilrespons(err);
   }
 }

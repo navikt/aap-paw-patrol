@@ -18,7 +18,7 @@ import {
   VStack,
 } from '@navikt/ds-react';
 import { FetchJsonBody, hentJournalpostInfo } from 'lib/clientApi';
-import { ForenkletAvklaringsbehov } from 'lib/types/avklaringsbehov';
+import { AvklaringsbehovStatus, ForenkletAvklaringsbehov } from 'lib/types/avklaringsbehov';
 import { kanalInfo } from 'lib/types/postmottak';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { formaterBehandlingType } from 'lib/utils/formatting';
@@ -41,7 +41,7 @@ function mapTilForenkletAvklaringsbehov(behov: PostmottakAvklaringsbehov): Foren
       kvalitetssikres: false,
       kreverToTrinn: behov.definisjon.kreverToTrinn,
     },
-    status: behov.status as any,
+    status: AvklaringsbehovStatus[behov.status],
     tidsstempel: behov.tidsstempel,
     endretAv: behov.endretAv,
     årsakTilSettPåVent: behov.årsakTilSettPåVent ?? undefined,

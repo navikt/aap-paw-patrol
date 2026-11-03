@@ -84,7 +84,7 @@ const VilkårKort = ({ vilkår }: { vilkår: VilkårDriftsinfoDTO }) => {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {vilkår.perioder.map((periode: any) => (
+              {vilkår.perioder.map((periode) => (
                 <Table.Row key={crypto.randomUUID()}>
                   <Table.DataCell>
                     {formaterDatoForFrontend(periode.periode.fom)} - {formaterDatoForFrontend(periode.periode.tom)}

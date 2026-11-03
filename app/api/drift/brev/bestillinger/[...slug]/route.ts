@@ -1,3 +1,4 @@
+import { opprettFeilrespons } from 'lib/services/feilrespons';
 import { NextRequest, NextResponse } from 'next/server';
 import { getBaseUrlAndScopeForApp } from 'lib/services/driftService';
 import { fetchProxy } from 'lib/services/fetchProxy';
@@ -18,7 +19,7 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ slug: 
       return NextResponse.json(result);
     }
     return new NextResponse(result, { status: 200 });
-  } catch (err: any) {
-    return new Response(err?.message, { status: 500 });
+  } catch (err) {
+    return opprettFeilrespons(err);
   }
 }

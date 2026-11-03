@@ -1,3 +1,4 @@
+import { opprettFeilrespons } from 'lib/services/feilrespons';
 import { NextRequest } from 'next/server';
 import { AppNavn, avbrytJobb } from 'lib/services/driftService';
 
@@ -12,7 +13,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<Param
 
   try {
     return new Response(await avbrytJobb(app as AppNavn, jobbid, body), { status: 200 });
-  } catch (err: any) {
-    return new Response(err?.message, { status: 500 });
+  } catch (err) {
+    return opprettFeilrespons(err);
   }
 }
