@@ -421,6 +421,14 @@
             "type": "string"
           },
           "utfall": {
+            "enum": [
+              "ALLEREDE_HAR_OPPGAVE",
+              "FORDELINGSOPPGAVE_OPPRETTET",
+              "GOSYS_OPPGAVE_OPPRETTET",
+              "IKKE_NOK_INFORMASJON",
+              "UAVSTEMT_KELVIN",
+              "UAVSTEMT_UKJENT"
+            ],
             "nullable": false,
             "type": "string"
           }
