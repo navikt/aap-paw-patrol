@@ -3,6 +3,7 @@ import { ForenkletAvklaringsbehov as SimplifiedAvklaringsbehov } from 'lib/types
 import { BodyShort, InlineMessage, Process, Tag, VStack } from '@navikt/ds-react';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
+import { mapBehovskodeTilBehovstype } from 'lib/utils/oversettelser.ts';
 
 type BehandlingsflytAvklaringsbehov = FetchJsonBody<
   ReturnType<typeof hentSakDriftsinfo>
@@ -40,7 +41,7 @@ export const AvklaringsbehovInfo = ({ avklaringsbehov }: { avklaringsbehov: Fore
           title={
             behov.årsakTilSettPåVent
               ? `${capitalize(behov.årsakTilSettPåVent)} (frist ${behov.fristSettPåVent ? formaterDatoForFrontend(behov.fristSettPåVent) : 'N/A'})`
-              : `${capitalize(behov.definisjon.løsesISteg)} (${behov.definisjon.kode})`
+              : `${capitalize(behov.definisjon.løsesISteg === 'UDEFINERT' ? mapBehovskodeTilBehovstype(behov.definisjon.kode) : behov.definisjon.løsesISteg)} (${behov.definisjon.kode})`
           }
           timestamp={`${formaterDatoMedTidspunktSekunderForFrontend(behov.tidsstempel)} - ${behov.endretAv}`}
           bullet={avklaringsbehov.length - i}
