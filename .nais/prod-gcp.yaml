@@ -1,0 +1,110 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "50M"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "90"
+  name: "paw-patrol"
+  namespace: "aap"
+  labels:
+    "team": "aap"
+    "systemkatalog.nav.no/system": "SK-268"
+spec:
+  image: {{image}}
+  ingresses:
+    - https://aap-paw-patrol.ansatt.nav.no
+  port: 3000
+  liveness:
+    path: "/api/internal/isAlive"
+    initialDelay: 20
+    timeout: 60
+  readiness:
+    path: "/api/internal/isReady"
+    initialDelay: 20
+    timeout: 60
+  replicas:
+    min: 1
+    max: 2
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      memory: 512Mi
+  azure:
+    application:
+      enabled: true
+      allowAllUsers: false
+      claims:
+        groups:
+          # 0000-GA-AAP_DRIFT
+          - id: ff9a228b-4aab-47bd-8aee-598d80f0fb4b
+          # 0000-GA-AAP_DRIFT_LES
+          - id: ec868c89-5d4f-47b4-8298-e954035d3873
+          # nais-team-aap
+          - id: ee2a0374-97a6-462e-9a05-3cb7be3d8fc5
+    sidecar:
+      enabled: true
+      autoLogin: true
+  observability:
+    autoInstrumentation:
+      enabled: true
+      runtime: nodejs
+    logging:
+      destinations:
+        - id: elastic
+        - id: loki
+  accessPolicy:
+    outbound:
+      rules:
+        - application: behandlingsflyt
+        - application: brev
+        - application: postmottak-backend
+        - application: dokumentinnhenting
+        - application: statistikk
+        - application: oppgave
+        - application: utbetal
+        - application: innsending
+        - application: meldekort-backend
+        - application: api-intern
+  env:
+    - name: POSTMOTTAK_API_BASE_URL
+      value: http://postmottak-backend
+    - name: POSTMOTTAK_API_SCOPE
+      value: api://prod-gcp.aap.postmottak-backend/.default
+    - name: BEHANDLING_API_BASE_URL
+      value: http://behandlingsflyt
+    - name: BEHANDLING_API_SCOPE
+      value: api://prod-gcp.aap.behandlingsflyt/.default
+    - name: BREV_API_BASE_URL
+      value: http://brev
+    - name: BREV_API_SCOPE
+      value: api://prod-gcp.aap.brev/.default
+    - name: DOKUMENTINNHENTING_API_BASE_URL
+      value: http://dokumentinnhenting
+    - name: DOKUMENTINNHENTING_API_SCOPE
+      value: api://prod-gcp.aap.dokumentinnhenting/.default
+    - name: STATISTIKK_API_BASE_URL
+      value: http://statistikk
+    - name: STATISTIKK_API_SCOPE
+      value: api://prod-gcp.aap.statistikk/.default
+    - name: API_INTERN_BASE_URL
+      value: http://api-intern
+    - name: API_INTERN_SCOPE
+      value: api://prod-gcp.aap.api-intern/.default
+    - name: OPPGAVE_API_BASE_URL
+      value: http://oppgave
+    - name: OPPGAVE_API_SCOPE
+      value: api://prod-gcp.aap.oppgave/.default
+    - name: MELDEKORT_API_BASE_URL
+      value: http://meldekort-backend
+    - name: MELDEKORT_API_SCOPE
+      value: api://prod-gcp.aap.meldekort-backend/.default
+    - name: UTBETAL_API_BASE_URL
+      value: http://utbetal
+    - name: UTBETAL_API_SCOPE
+      value: api://prod-gcp.aap.utbetal/.default
+    - name: INNSENDING_API_BASE_URL
+      value: http://innsending
+    - name: INNSENDING_API_SCOPE
+      value: api://prod-gcp.aap.innsending/.default
