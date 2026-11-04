@@ -10,7 +10,6 @@ metadata:
     "team": "aap"
     "systemkatalog.nav.no/system": "SK-268"
 spec:
-  image: {{image}}
   ingresses:
     - https://aap-paw-patrol.intern.dev.nav.no
     - https://aap-paw-patrol.ansatt.dev.nav.no
