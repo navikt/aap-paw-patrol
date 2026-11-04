@@ -92,6 +92,10 @@ export const fetchWithRetry = async <ResponseBody>(
     if (response.status === 404) {
       throw new Error(`Ikke funnet: ${url}`);
     }
+    if (response.status === 401 || response.status === 403) {
+      logWarning(`Ingen tilgang til ${url} (HTTP ${response.status})`);
+      throw new Error(`Ingen tilgang`);
+    }
 
     logWarning(
       `Kall mot ${url} feilet med statuskode ${response.status}, prøver på nytt. Antall forsøk igjen: ${retries}`
