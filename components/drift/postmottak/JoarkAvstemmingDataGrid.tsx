@@ -10,16 +10,18 @@ import { dataGridCollator as collator, filtrerOgSorterRader } from 'lib/utils/da
 type JournalpostAvstemmingsresultat =
   components['schemas']['no.nav.aap.postmottak.api.drift.JournalpostAvstemmingsresultatDto'];
 
-const utfallTekster = new Map<string, string>([
-  ['UAVSTEMT_UKJENT', 'Uavstemt – ukjent'],
-  ['UAVSTEMT_KELVIN', 'Uavstemt – Kelvin'],
-  ['GOSYS_OPPGAVE_OPPRETTET', 'Gosys-oppgave opprettet'],
-  ['FORDELINGSOPPGAVE_OPPRETTET', 'Fordelingsoppgave opprettet'],
-  ['ALLEREDE_HAR_OPPGAVE', 'Har allerede oppgave'],
-  ['IKKE_NOK_INFORMASJON', 'Ikke nok informasjon'],
-]);
+type Avstemmingsutfall = JournalpostAvstemmingsresultat['utfall'];
 
-const utfallTilTekst = (utfall: string) => utfallTekster.get(utfall) ?? utfall;
+const utfallTekster: Record<Avstemmingsutfall, string> = {
+  UAVSTEMT_UKJENT: 'Uavstemt – ukjent',
+  UAVSTEMT_KELVIN: 'Uavstemt – Kelvin',
+  GOSYS_OPPGAVE_OPPRETTET: 'Gosys-oppgave opprettet',
+  FORDELINGSOPPGAVE_OPPRETTET: 'Fordelingsoppgave opprettet',
+  ALLEREDE_HAR_OPPGAVE: 'Har allerede oppgave',
+  IKKE_NOK_INFORMASJON: 'Ikke nok informasjon',
+};
+
+const utfallTilTekst = (utfall: Avstemmingsutfall) => utfallTekster[utfall] ?? utfall;
 
 function sorteringsverdi(resultat: JournalpostAvstemmingsresultat, columnId: string) {
   switch (columnId) {
@@ -88,12 +90,12 @@ const columns: DataGrid.Columns<JournalpostAvstemmingsresultat> = [
 
 export const JoarkAvstemmingDataGrid = ({ resultater }: { resultater: JournalpostAvstemmingsresultat[] }) => {
   const [søketekst, setSøketekst] = useState('');
-  const [utfallFilter, setUtfallFilter] = useState('');
+  const [utfallFilter, setUtfallFilter] = useState('UAVSTEMT_KELVIN');
   const [sortOrder, setSortOrder] = useState<DataGrid.Table.SortEntry[]>([]);
   const utfall = useMemo(
     () =>
-      [...new Set(resultater.map((resultat) => resultat.utfall))].sort((a, b) =>
-        collator.compare(utfallTilTekst(a), utfallTilTekst(b))
+      [...new Set<Avstemmingsutfall>(['UAVSTEMT_KELVIN', ...resultater.map((resultat) => resultat.utfall)])].sort(
+        (a, b) => collator.compare(utfallTilTekst(a), utfallTilTekst(b))
       ),
     [resultater]
   );

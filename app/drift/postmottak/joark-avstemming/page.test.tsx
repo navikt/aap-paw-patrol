@@ -25,25 +25,27 @@ describe('JoarkAvstemmingPage', () => {
       startetTidspunkt: '2026-11-02T10:00:00Z',
       fullfortTidspunkt: '2026-11-02T10:01:00Z',
       resultater: [
-        { journalpostId: 123, utfall: 'FUNNET', kanal: 'NAV_NO', datoOpprettet: '2026-11-01' },
-        { journalpostId: 456, utfall: 'MANGLER', kanal: null, datoOpprettet: null },
+        { journalpostId: 123, utfall: 'UAVSTEMT_KELVIN', kanal: 'NAV_NO', datoOpprettet: '2026-11-01' },
+        { journalpostId: 456, utfall: 'UAVSTEMT_KELVIN', kanal: null, datoOpprettet: null },
+        { journalpostId: 789, utfall: 'ALLEREDE_HAR_OPPGAVE', kanal: 'ALTINN', datoOpprettet: null },
       ],
     });
 
     const html = renderToStaticMarkup(await JoarkAvstemmingPage());
 
-    expect(html).toContain('Antall journalposter: 2');
+    expect(html).toContain('Antall journalposter: 3');
     expect(html).toContain('aksel-data-grid');
     expect(html).toContain('aria-label="Journalposter i Joark-avstemmingsrapporten"');
     expect(html).not.toContain('type="radio"');
     expect(html).not.toContain('type="checkbox"');
     expect(html).toContain('Søk i journalposter');
     expect(html).toContain('Alle utfall');
-    expect(html).toContain('Viser 2 av 2 journalposter');
+    expect(html).toContain('Viser 2 av 3 journalposter');
+    expect(html).toContain('<option value="UAVSTEMT_KELVIN" selected="">Uavstemt – Kelvin</option>');
+    expect(html).not.toContain('href="/drift/postmottak/789"');
     expect(html).toContain('href="/drift/postmottak/123"');
     expect(html).toContain('href="/drift/postmottak/456"');
-    expect(html).toContain('FUNNET');
-    expect(html).toContain('MANGLER');
+    expect(html).toContain('Uavstemt – Kelvin');
     expect(html).toContain('NAV_NO');
     expect(html).toContain('01.11.2026');
     expect(html).not.toContain('Ikke startet');
@@ -72,8 +74,7 @@ describe('JoarkAvstemmingPage', () => {
     ['FORDELINGSOPPGAVE_OPPRETTET', 'Fordelingsoppgave opprettet'],
     ['ALLEREDE_HAR_OPPGAVE', 'Har allerede oppgave'],
     ['IKKE_NOK_INFORMASJON', 'Ikke nok informasjon'],
-    ['NYTT_UTFALL', 'NYTT_UTFALL'],
-  ])('viser %s som %s', async (utfall, tekst) => {
+  ] as const)('viser %s som %s', async (utfall, tekst) => {
     vi.mocked(hentJoarkAvstemming).mockResolvedValue({
       resultater: [{ journalpostId: 123, utfall, kanal: 'NAV_NO' }],
     });
@@ -81,8 +82,15 @@ describe('JoarkAvstemmingPage', () => {
     const html = renderToStaticMarkup(await JoarkAvstemmingPage());
 
     expect(html).toContain(tekst);
-    expect(html).toContain('NAV_NO');
-    expect(html).toContain(`<option value="${utfall}">${tekst}</option>`);
+    if (utfall === 'UAVSTEMT_KELVIN') {
+      expect(html).toContain('NAV_NO');
+      expect(html).toContain(`<option value="${utfall}" selected="">${tekst}</option>`);
+    } else {
+      expect(html).toContain(`<option value="${utfall}">${tekst}</option>`);
+      expect(html).toContain('Viser 0 av 1 journalposter');
+      expect(html).toContain('Ingen journalposter samsvarer med filtrene.');
+      expect(html).toContain('<option value="UAVSTEMT_KELVIN" selected="">Uavstemt – Kelvin</option>');
+    }
   });
 
   it('viser en tom rapport uten å si at rapporten mangler', async () => {

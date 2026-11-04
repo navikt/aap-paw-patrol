@@ -1,10 +1,11 @@
 import { describe, expect, it } from 'vitest';
+import type { components } from 'lib/types/generated/postmottak';
 import { filtrerOgSorterResultater } from './JoarkAvstemmingDataGrid';
 
-const resultater = [
+const resultater: components['schemas']['no.nav.aap.postmottak.api.drift.JournalpostAvstemmingsresultatDto'][] = [
   { journalpostId: 10, utfall: 'UAVSTEMT_KELVIN', kanal: 'NAV_NO', datoOpprettet: '2026-11-02' },
   { journalpostId: 2, utfall: 'ALLEREDE_HAR_OPPGAVE', kanal: 'ALTINN', datoOpprettet: '2025-12-31' },
-  { journalpostId: 100, utfall: 'NYTT_UTFALL', kanal: null, datoOpprettet: null },
+  { journalpostId: 100, utfall: 'IKKE_NOK_INFORMASJON', kanal: null, datoOpprettet: null },
   { journalpostId: 20, utfall: 'GOSYS_OPPGAVE_OPPRETTET', kanal: 'NAV_NO', datoOpprettet: '2026-01-01' },
 ];
 
@@ -19,7 +20,7 @@ describe('filtrerOgSorterResultater', () => {
     ['100', [100]],
     ['02.11.2026', [10]],
     ['2025-12-31', [2]],
-    ['nytt_utfall', [100]],
+    ['ikke_nok_informasjon', [100]],
     ['ingen treff', []],
   ])('filtrerer på %s', (søketekst, forventet) => {
     expect(ids(filtrerOgSorterResultater(resultater, søketekst, ''))).toEqual(forventet);

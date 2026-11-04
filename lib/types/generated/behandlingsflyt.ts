@@ -4614,7 +4614,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.behandlerdialog.MeldingMedDokumenterDto"][];
+                        "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.behandlerdialog.MeldingerResponse"];
                     };
                 };
             };

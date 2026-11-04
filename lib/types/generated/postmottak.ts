@@ -1443,7 +1443,8 @@ export interface components {
             /** Format: int64 */
             journalpostId: number;
             kanal?: string | null;
-            utfall: string;
+            /** @enum {string} */
+            utfall: "ALLEREDE_HAR_OPPGAVE" | "FORDELINGSOPPGAVE_OPPRETTET" | "GOSYS_OPPGAVE_OPPRETTET" | "IKKE_NOK_INFORMASJON" | "UAVSTEMT_KELVIN" | "UAVSTEMT_UKJENT";
         };
         "no.nav.aap.postmottak.api.drift.JournalpostDriftsinfoDto": {
             behandlinger: components["schemas"]["no.nav.aap.postmottak.api.drift.BehandlingDriftsinfo"][];
