@@ -5,7 +5,7 @@ import { Alert, BodyShort, Box, Heading, HGrid, HStack, Loader, Tabs, Tag, VStac
 import { FetchJsonBody, hentSakDriftsinfo } from 'lib/clientApi';
 import { SakInfoPanel } from 'components/drift/sakogbehandling/SakInfoPanel';
 import { capitalize, normaliserSaksnummer } from 'lib/utils/formatting';
-import { BehandlingOversikt } from 'components/drift/sakogbehandling/BehandlingOversikt';
+import { BehandlingOversikt } from 'components/drift/sakogbehandling/behandlinger/BehandlingOversikt';
 import { MottatteDokumenter } from 'components/drift/sakogbehandling/dokumenter/MottatteDokumenter';
 import { Dialogmeldinger } from 'components/drift/sakogbehandling/dialogmeldinger/Dialogmeldinger';
 import { Meldekort } from 'components/drift/sakogbehandling/meldekort/Meldekort';
