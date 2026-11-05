@@ -6,10 +6,10 @@ import {
   HelpText,
   HGrid,
   HStack,
+  type SortState,
   Table,
   Tabs,
   Tag,
-  type SortState,
 } from '@navikt/ds-react';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
@@ -20,13 +20,14 @@ import { Vilkårsresultat } from 'components/drift/sakogbehandling/vilkårsresul
 import { Oppgaver } from 'components/drift/sakogbehandling/oppgave/Oppgaver';
 import { useCallback, useEffect, useState } from 'react';
 import { FetchJsonBody, hentSakDriftsinfo } from 'lib/clientApi';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { TilkjentYtelse } from 'components/drift/sakogbehandling/tilkjentytelse/TilkjentYtelse';
 import { TidligereVurderinger } from 'components/drift/sakogbehandling/tidligereVurderinger/TidligereVurderinger';
 import { ProsesserBehandling } from './avklaringsbehov/ProsesserBehandling';
 import { BrevBestillinger } from 'components/drift/sakogbehandling/brev/BrevBestillinger';
 import { Yrkesskader } from 'components/drift/sakogbehandling/yrkesskade/Yrkesskader';
 import { KravOgStønadsperiode } from 'components/drift/sakogbehandling/kravogstonadsperiode/KravOgStonadsperiode';
+import { SakQueryParam } from 'components/drift/sakogbehandling/SakOversikt.tsx';
 
 type BehandlingDriftsinfo = FetchJsonBody<ReturnType<typeof hentSakDriftsinfo>>['behandlinger'][number];
 
@@ -49,7 +50,6 @@ export const BehandlingOversikt = ({
   saksnummer: string;
   behandlinger: BehandlingDriftsinfo[];
 }) => {
-  const router = useRouter();
   const searchParams = useSearchParams();
 
   const [tab, setTab] = useState<Tab>(Tab.AVKLARINGSBEHOV);
@@ -79,24 +79,23 @@ export const BehandlingOversikt = ({
     return sort.direction === 'descending' ? -sammenligning : sammenligning;
   });
 
-  const oppdaterValgtBehandling = useCallback(
-    (behandling?: BehandlingDriftsinfo) => {
-      if (behandling) {
-        router.replace(`?behandlingref=${behandling.referanse}`);
-      } else {
-        router.replace('');
-      }
-      setValgtBehandling(behandling);
-    },
-    [router]
-  );
+  const oppdaterValgtBehandling = useCallback((behandling?: BehandlingDriftsinfo) => {
+    const url = new URL(window.location.href);
+    if (behandling) {
+      url.searchParams.set(SakQueryParam.BEHANDLINGREF, behandling.referanse);
+    } else {
+      url.searchParams.delete(SakQueryParam.BEHANDLINGREF);
+    }
+    window.history.replaceState(null, '', url);
+    setValgtBehandling(behandling);
+  }, []);
 
   useEffect(() => {
     if (behandlinger?.length === 1) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       oppdaterValgtBehandling(behandlinger[0]);
-    } else if (searchParams.get('behandlingref')) {
-      const behandling = behandlinger.find((b) => b.referanse === searchParams.get('behandlingref'));
+    } else if (searchParams.get(SakQueryParam.BEHANDLINGREF)) {
+      const behandling = behandlinger.find((b) => b.referanse === searchParams.get(SakQueryParam.BEHANDLINGREF));
       oppdaterValgtBehandling(behandling);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

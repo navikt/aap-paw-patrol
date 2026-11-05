@@ -11,23 +11,43 @@ import { Dialogmeldinger } from 'components/drift/sakogbehandling/dialogmeldinge
 import { Meldekort } from 'components/drift/sakogbehandling/meldekort/Meldekort';
 import { BrevBestillinger } from 'components/drift/sakogbehandling/brev/BrevBestillinger';
 import { UtbetalingPanel } from 'components/drift/sakogbehandling/utbetaling/UtbetalingPanel';
+import { useSearchParams } from 'next/navigation';
 
 type SakDriftsinfoDTO = FetchJsonBody<ReturnType<typeof hentSakDriftsinfo>>;
 
 enum Tab {
-  BEHANDLINGER = 'BEHANDLINGER',
-  MOTTATTE_DOKUMENTER = 'MOTTATTE_DOKUMENTER',
-  DIALOGMELDINGER = 'DIALOGMELDINGER',
-  MELDEKORT = 'MELDEKORT',
-  BREV = 'BREV',
-  UTBETALING = 'UTBETALING',
+  BEHANDLINGER = 'behandlinger',
+  MOTTATTE_DOKUMENTER = 'mottatte-dokumenter',
+  DIALOGMELDINGER = 'dialogmeldinger',
+  MELDEKORT = 'meldekort',
+  BREV = 'brev',
+  UTBETALING = 'utbetaling',
+}
+
+export enum SakQueryParam {
+  FANE = 'fane',
+  BEHANDLINGREF = 'behandlingref',
 }
 
 export const SakOversikt = ({ saksnummer, harDriftTilgang }: { saksnummer: string; harDriftTilgang: boolean }) => {
   const [error, setError] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [sak, setSak] = useState<SakDriftsinfoDTO>();
-  const [tab, setTab] = useState<Tab>(Tab.BEHANDLINGER);
+
+  const searchParams = useSearchParams();
+  const fane = searchParams.get(SakQueryParam.FANE);
+  const tab = Object.values(Tab).find((value) => value === fane) ?? Tab.BEHANDLINGER;
+
+  const endreFane = (value: string) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set(SakQueryParam.FANE, value);
+
+    if (value !== Tab.BEHANDLINGER) {
+      url.searchParams.delete(SakQueryParam.BEHANDLINGREF);
+    }
+
+    window.history.pushState(null, '', url);
+  };
 
   const hentSak = useCallback(async (saksnummer: string) => {
     setSak(undefined);
@@ -79,7 +99,7 @@ export const SakOversikt = ({ saksnummer, harDriftTilgang }: { saksnummer: strin
             </VStack>
           </Box>
 
-          <Tabs defaultValue={Tab.BEHANDLINGER} onChange={(value) => setTab(value as Tab)} value={tab}>
+          <Tabs onChange={endreFane} value={tab}>
             <Tabs.List>
               <Tabs.Tab value={Tab.BEHANDLINGER} label="Behandlinger" />
               <Tabs.Tab value={Tab.MOTTATTE_DOKUMENTER} label="Mottatte dokumenter" />
