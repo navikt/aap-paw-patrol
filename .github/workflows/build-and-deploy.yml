@@ -47,26 +47,34 @@ jobs:
 
   deployDev:
     needs: buildDev
-    uses: navikt/aap-workflows/.github/workflows/deploy.yml@main
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
-    secrets: inherit
-    with:
-      cluster: dev-gcp
-      manifest: .nais/nais.yaml
-      imageSuffix: -dev-gcp
-      vars: .nais/dev.yaml
+    steps:
+      - uses: actions/checkout@v6
+      - uses: nais/setup@v1
+        with:
+          team: aap
+      - run: |
+          nais apply .nais/dev-gcp.yaml \
+            --environment dev-gcp \
+            --set spec.image="${{ needs.buildDev.outputs.image }}" \
+            --wait
 
   deployProd:
     needs: [ buildProd, deployDev ]
-    uses: navikt/aap-workflows/.github/workflows/deploy.yml@main
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
-    secrets: inherit
-    with:
-      cluster: prod-gcp
-      manifest: .nais/nais.yaml
-      imageSuffix: -prod-gcp
-      vars: .nais/prod.yaml
+    steps:
+      - uses: actions/checkout@v6
+      - uses: nais/setup@v1
+        with:
+          team: aap
+      - run: |
+          nais apply .nais/prod-gcp.yaml \
+            --environment prod-gcp \
+            --set spec.image="${{ needs.buildProd.outputs.image }}" \
+            --wait
