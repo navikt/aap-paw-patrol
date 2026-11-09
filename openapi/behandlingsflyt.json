@@ -1,6 +1,271 @@
 {
   "components": {
     "schemas": {
+      "no.nav.aap.barnetillegg.BarnetilleggDto": {
+        "nullable": false,
+        "properties": {
+          "barnSomTrengerVurdering": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.barnetillegg.IdentifiserteBarnDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "folkeregisterbarn": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.barnetillegg.IdentifiserteBarnDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "harTilgangTilÅSaksbehandle": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "saksbehandlerOppgitteBarn": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.barnetillegg.IdentifiserteBarnDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "søknadstidspunkt": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "vurderingerMeta": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"
+          },
+          "vurderteBarn": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.barnetillegg.ExtendedVurdertBarnDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "vurderteFolkeregisterBarn": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.barnetillegg.ExtendedVurdertBarnDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "vurderteSaksbehandlerOppgitteBarn": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.barnetillegg.SlettbarVurdertBarnDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "barnSomTrengerVurdering",
+          "folkeregisterbarn",
+          "harTilgangTilÅSaksbehandle",
+          "saksbehandlerOppgitteBarn",
+          "søknadstidspunkt",
+          "vurderteBarn",
+          "vurderteFolkeregisterBarn",
+          "vurderteSaksbehandlerOppgitteBarn"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.barnetillegg.ExtendedVurdertBarnDto": {
+        "nullable": false,
+        "properties": {
+          "dødsdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "fødselsdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "ident": {
+            "nullable": true,
+            "type": "string"
+          },
+          "navn": {
+            "nullable": true,
+            "type": "string"
+          },
+          "oppgittForeldreRelasjon": {
+            "enum": [
+              "FORELDER",
+              "FOSTERFORELDER"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "vurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.barnetillegg.VurderingAvForeldreAnsvarDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "vurderinger"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.barnetillegg.IdentifiserteBarnDto": {
+        "nullable": false,
+        "properties": {
+          "dodsDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "fodselsDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "forsorgerPeriode": {
+            "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+          },
+          "ident": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.sakogbehandling.Ident"
+          },
+          "navn": {
+            "nullable": true,
+            "type": "string"
+          },
+          "oppgittForeldreRelasjon": {
+            "enum": [
+              "FORELDER",
+              "FOSTERFORELDER"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "no.nav.aap.barnetillegg.SlettbarVurdertBarnDto": {
+        "nullable": false,
+        "properties": {
+          "erSlettbar": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "vurdertBarn": {
+            "$ref": "#/components/schemas/no.nav.aap.barnetillegg.ExtendedVurdertBarnDto"
+          }
+        },
+        "required": [
+          "erSlettbar",
+          "vurdertBarn"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.barnetillegg.VurderingAvForeldreAnsvarDto": {
+        "nullable": false,
+        "properties": {
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "erFosterForelder": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "fraDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "harForeldreAnsvar": {
+            "nullable": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "begrunnelse",
+          "fraDato",
+          "harForeldreAnsvar"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.barnetillegg.VurderingerForBarnetillegg": {
+        "nullable": false,
+        "properties": {
+          "saksbehandlerOppgitteBarn": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.barnetillegg.VurdertBarnDto"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "vurderteBarn": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.barnetillegg.VurdertBarnDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "saksbehandlerOppgitteBarn",
+          "vurderteBarn"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.barnetillegg.VurdertBarnDto": {
+        "nullable": false,
+        "properties": {
+          "dødsdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "fødselsdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "ident": {
+            "nullable": true,
+            "type": "string"
+          },
+          "navn": {
+            "nullable": true,
+            "type": "string"
+          },
+          "oppgittForeldreRelasjon": {
+            "enum": [
+              "FORELDER",
+              "FOSTERFORELDER"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "vurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.barnetillegg.VurderingAvForeldreAnsvarDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "vurderinger"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.behandlingsflyt.PersoninfoDTO": {
         "nullable": false,
         "properties": {
@@ -903,7 +1168,7 @@
             "type": "string"
           },
           "vurderingerForBarnetillegg": {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.barn.VurderingerForBarnetillegg"
+            "$ref": "#/components/schemas/no.nav.aap.barnetillegg.VurderingerForBarnetillegg"
           }
         },
         "required": [
@@ -1336,7 +1601,7 @@
           },
           "løsningerForPerioder": {
             "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.student.PeriodisertStudentDto"
+              "$ref": "#/components/schemas/no.nav.aap.student.PeriodisertStudentDto"
             },
             "nullable": false,
             "type": "array"
@@ -1511,6 +1776,7 @@
             "5053": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.SykdomsvurderingForBrevLøsning",
             "5054": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.BekreftVurderingerOppfølgingLøsning",
             "5056": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.TjenestepensjonRefusjonskravLøsning",
+            "5058": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.EtableringEgenVirksomhetLøsning",
             "5060": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.ForeslåVedtakVedtakslengdeLøsning",
             "5096": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.ForeslåUttakLøsning",
             "5097": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.KvalitetssikringLøsning",
@@ -1590,6 +1856,9 @@
           },
           {
             "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.BekreftVurderingerOppfølgingLøsning"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.EtableringEgenVirksomhetLøsning"
           },
           {
             "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.FastsettBehandlendeEnhetLøsning"
@@ -2120,7 +2389,6 @@
             "5035": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.AvklarOppholdskravLøsning",
             "5037": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.AvklarStudentLøsningV2",
             "5057": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.ArbeidsopptrappingLøsning",
-            "5058": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.EtableringEgenVirksomhetLøsning",
             "5059": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.AvklarVedtakslengdeLøsning"
           }
         },
@@ -2160,9 +2428,6 @@
           },
           {
             "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.AvklarVedtakslengdeLøsning"
-          },
-          {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.EtableringEgenVirksomhetLøsning"
           },
           {
             "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avklaringsbehov.løsning.PeriodisertAvklarSykepengerErstatningLøsning"
@@ -2972,174 +3237,6 @@
         "required": [
           "fom",
           "månedsbeløp"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.behandling.barnetillegg.BarnetilleggDto": {
-        "nullable": false,
-        "properties": {
-          "barnSomTrengerVurdering": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.barnetillegg.IdentifiserteBarnDto"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "folkeregisterbarn": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.barnetillegg.IdentifiserteBarnDto"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "harTilgangTilÅSaksbehandle": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "saksbehandlerOppgitteBarn": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.barnetillegg.IdentifiserteBarnDto"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "søknadstidspunkt": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": false,
-            "type": "string"
-          },
-          "vurderingerMeta": {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"
-          },
-          "vurderteBarn": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.barnetillegg.ExtendedVurdertBarnDto"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "vurderteFolkeregisterBarn": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.barnetillegg.ExtendedVurdertBarnDto"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "vurderteSaksbehandlerOppgitteBarn": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.barnetillegg.SlettbarVurdertBarnDto"
-            },
-            "nullable": false,
-            "type": "array"
-          }
-        },
-        "required": [
-          "barnSomTrengerVurdering",
-          "folkeregisterbarn",
-          "harTilgangTilÅSaksbehandle",
-          "saksbehandlerOppgitteBarn",
-          "søknadstidspunkt",
-          "vurderteBarn",
-          "vurderteFolkeregisterBarn",
-          "vurderteSaksbehandlerOppgitteBarn"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.behandling.barnetillegg.ExtendedVurdertBarnDto": {
-        "nullable": false,
-        "properties": {
-          "dødsdato": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          },
-          "fødselsdato": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          },
-          "ident": {
-            "nullable": true,
-            "type": "string"
-          },
-          "navn": {
-            "nullable": true,
-            "type": "string"
-          },
-          "oppgittForeldreRelasjon": {
-            "enum": [
-              "FORELDER",
-              "FOSTERFORELDER"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "vurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.barn.VurderingAvForeldreAnsvarDto"
-            },
-            "nullable": false,
-            "type": "array"
-          }
-        },
-        "required": [
-          "vurderinger"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.behandling.barnetillegg.IdentifiserteBarnDto": {
-        "nullable": false,
-        "properties": {
-          "dodsDato": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          },
-          "fodselsDato": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          },
-          "forsorgerPeriode": {
-            "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-          },
-          "ident": {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.sakogbehandling.Ident"
-          },
-          "navn": {
-            "nullable": true,
-            "type": "string"
-          },
-          "oppgittForeldreRelasjon": {
-            "enum": [
-              "FORELDER",
-              "FOSTERFORELDER"
-            ],
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.behandling.barnetillegg.SlettbarVurdertBarnDto": {
-        "nullable": false,
-        "properties": {
-          "erSlettbar": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "vurdertBarn": {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.barnetillegg.ExtendedVurdertBarnDto"
-          }
-        },
-        "required": [
-          "erSlettbar",
-          "vurdertBarn"
         ],
         "type": "object"
       },
@@ -8302,6 +8399,9 @@
             "nullable": false,
             "type": "array"
           },
+          "delvurderinger": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vilkår.medlemskap.KanBehandlesAutomatiskVurdering"
+          },
           "harTilgangTilÅSaksbehandle": {
             "nullable": false,
             "type": "boolean"
@@ -8341,6 +8441,7 @@
         },
         "required": [
           "behøverVurderinger",
+          "delvurderinger",
           "harTilgangTilÅSaksbehandle",
           "ikkeRelevantePerioder",
           "kanVurderes",
@@ -8353,6 +8454,9 @@
       "no.nav.aap.behandlingsflyt.behandling.lovvalgmedlemskap.grunnlag.PeriodisertManuellVurderingForLovvalgMedlemskapResponse": {
         "nullable": false,
         "properties": {
+          "delvurderinger": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vilkår.medlemskap.KanBehandlesAutomatiskVurdering"
+          },
           "fom": {
             "example": "2025-04-01",
             "format": "date",
@@ -9371,135 +9475,6 @@
             "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.avbrytrevurdering.flate.AvbrytRevurderingVurderingDto"
           }
         },
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.behandling.student.StudentGrunnlagResponse": {
-        "nullable": false,
-        "properties": {
-          "behøverVurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "harTilgangTilÅSaksbehandle": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "ikkeRelevantePerioder": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "kanVurderes": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "nyeVurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.student.StudentVurderingResponse"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "oppgittStudent": {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.student.OppgittStudent"
-          },
-          "sisteVedtatteVurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.student.StudentVurderingResponse"
-            },
-            "nullable": false,
-            "type": "array"
-          }
-        },
-        "required": [
-          "behøverVurderinger",
-          "harTilgangTilÅSaksbehandle",
-          "ikkeRelevantePerioder",
-          "kanVurderes",
-          "nyeVurderinger",
-          "sisteVedtatteVurderinger"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.behandling.student.StudentVurderingResponse": {
-        "nullable": false,
-        "properties": {
-          "avbruddMerEnn6Måneder": {
-            "nullable": true,
-            "type": "boolean"
-          },
-          "avbruttPgaSykdomEllerSkade": {
-            "nullable": true,
-            "type": "boolean"
-          },
-          "avbruttStudieDato": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          },
-          "begrunnelse": {
-            "nullable": false,
-            "type": "string"
-          },
-          "bidiagnoser": {
-            "items": {
-              "nullable": false,
-              "type": "string"
-            },
-            "nullable": true,
-            "type": "array"
-          },
-          "fom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": false,
-            "type": "string"
-          },
-          "godkjentStudieAvLånekassen": {
-            "nullable": true,
-            "type": "boolean"
-          },
-          "harAvbruttStudie": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "harBehovForBehandling": {
-            "nullable": true,
-            "type": "boolean"
-          },
-          "hoveddiagnose": {
-            "nullable": true,
-            "type": "string"
-          },
-          "kodeverk": {
-            "nullable": true,
-            "type": "string"
-          },
-          "tom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          },
-          "vurderingerMeta": {
-            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"
-          }
-        },
-        "required": [
-          "begrunnelse",
-          "fom",
-          "harAvbruttStudie",
-          "vurderingerMeta"
-        ],
         "type": "object"
       },
       "no.nav.aap.behandlingsflyt.behandling.student.sykestipend.SykestipendGrunnlagResponse": {
@@ -11553,6 +11528,11 @@
       "no.nav.aap.behandlingsflyt.drift.MottattDokumentDriftsinfoDTO": {
         "nullable": false,
         "properties": {
+          "behandlingReferanse": {
+            "format": "uuid",
+            "nullable": true,
+            "type": "string"
+          },
           "kanal": {
             "enum": [
               "DIGITAL",
@@ -13620,103 +13600,6 @@
         ],
         "type": "object"
       },
-      "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.barn.VurderingAvForeldreAnsvarDto": {
-        "nullable": false,
-        "properties": {
-          "begrunnelse": {
-            "nullable": false,
-            "type": "string"
-          },
-          "erFosterForelder": {
-            "nullable": true,
-            "type": "boolean"
-          },
-          "fraDato": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": false,
-            "type": "string"
-          },
-          "harForeldreAnsvar": {
-            "nullable": false,
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "begrunnelse",
-          "fraDato",
-          "harForeldreAnsvar"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.barn.VurderingerForBarnetillegg": {
-        "nullable": false,
-        "properties": {
-          "saksbehandlerOppgitteBarn": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.barn.VurdertBarnDto"
-            },
-            "nullable": false,
-            "type": "array"
-          },
-          "vurderteBarn": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.barn.VurdertBarnDto"
-            },
-            "nullable": false,
-            "type": "array"
-          }
-        },
-        "required": [
-          "saksbehandlerOppgitteBarn",
-          "vurderteBarn"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.barn.VurdertBarnDto": {
-        "nullable": false,
-        "properties": {
-          "dødsdato": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          },
-          "fødselsdato": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          },
-          "ident": {
-            "nullable": true,
-            "type": "string"
-          },
-          "navn": {
-            "nullable": true,
-            "type": "string"
-          },
-          "oppgittForeldreRelasjon": {
-            "enum": [
-              "FORELDER",
-              "FOSTERFORELDER"
-            ],
-            "nullable": true,
-            "type": "string"
-          },
-          "vurderinger": {
-            "items": {
-              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.barn.VurderingAvForeldreAnsvarDto"
-            },
-            "nullable": false,
-            "type": "array"
-          }
-        },
-        "required": [
-          "vurderinger"
-        ],
-        "type": "object"
-      },
       "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.barnepensjon.BarnepensjonLøsningDto": {
         "nullable": false,
         "properties": {
@@ -14620,98 +14503,6 @@
         ],
         "type": "object"
       },
-      "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.student.OppgittStudent": {
-        "nullable": false,
-        "properties": {
-          "avbruttDato": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          },
-          "erStudentStatus": {
-            "enum": [
-              "AVBRUTT",
-              "JA",
-              "NEI"
-            ],
-            "nullable": false,
-            "type": "string"
-          },
-          "id": {
-            "format": "int64",
-            "nullable": true,
-            "type": "integer"
-          },
-          "skalGjenopptaStudieStatus": {
-            "enum": [
-              "IKKE_OPPGITT",
-              "JA",
-              "NEI",
-              "VET_IKKE"
-            ],
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "required": [
-          "erStudentStatus"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.student.PeriodisertStudentDto": {
-        "nullable": false,
-        "properties": {
-          "avbruddMerEnn6Måneder": {
-            "nullable": true,
-            "type": "boolean"
-          },
-          "avbruttPgaSykdomEllerSkade": {
-            "nullable": true,
-            "type": "boolean"
-          },
-          "avbruttStudieDato": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          },
-          "begrunnelse": {
-            "nullable": false,
-            "type": "string"
-          },
-          "fom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": false,
-            "type": "string"
-          },
-          "godkjentStudieAvLånekassen": {
-            "nullable": true,
-            "type": "boolean"
-          },
-          "harAvbruttStudie": {
-            "nullable": false,
-            "type": "boolean"
-          },
-          "harBehovForBehandling": {
-            "nullable": true,
-            "type": "boolean"
-          },
-          "tom": {
-            "example": "2025-04-01",
-            "format": "date",
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "required": [
-          "begrunnelse",
-          "fom",
-          "harAvbruttStudie"
-        ],
-        "type": "object"
-      },
       "no.nav.aap.behandlingsflyt.faktagrunnlag.saksbehandler.student.sykestipend.SamordningSykestipendVurderingDto": {
         "nullable": false,
         "properties": {
@@ -15241,6 +15032,8 @@
         "type": "object"
       },
       "no.nav.aap.behandlingsflyt.flyt.ArenaStatusDTO": {
+        "deprecated": true,
+        "description": "Bruk harArenaHistorikk fra GET /api/behandling/{referanse}/egenskaper",
         "nullable": false,
         "properties": {
           "harArenaHistorikk": {
@@ -15320,6 +15113,29 @@
         "required": [
           "periode",
           "relevans"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.flyt.BehandlingEgenskaperDTO": {
+        "nullable": false,
+        "properties": {
+          "erKantIKantMedArena": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "erMigrertFraArena": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "harArenaHistorikk": {
+            "nullable": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "erKantIKantMedArena",
+          "erMigrertFraArena",
+          "harArenaHistorikk"
         ],
         "type": "object"
       },
@@ -21987,6 +21803,227 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.student.OppgittStudent": {
+        "nullable": false,
+        "properties": {
+          "avbruttDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "erStudentStatus": {
+            "enum": [
+              "AVBRUTT",
+              "JA",
+              "NEI"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "id": {
+            "format": "int64",
+            "nullable": true,
+            "type": "integer"
+          },
+          "skalGjenopptaStudieStatus": {
+            "enum": [
+              "IKKE_OPPGITT",
+              "JA",
+              "NEI",
+              "VET_IKKE"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "erStudentStatus"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.student.PeriodisertStudentDto": {
+        "nullable": false,
+        "properties": {
+          "avbruddMerEnn6Måneder": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "avbruttPgaSykdomEllerSkade": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "avbruttStudieDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "godkjentStudieAvLånekassen": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "harAvbruttStudie": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "harBehovForBehandling": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "begrunnelse",
+          "fom",
+          "harAvbruttStudie"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.student.StudentGrunnlagResponse": {
+        "nullable": false,
+        "properties": {
+          "behøverVurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "harTilgangTilÅSaksbehandle": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "ikkeRelevantePerioder": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "kanVurderes": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.komponenter.type.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "nyeVurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.student.StudentVurderingResponse"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "oppgittStudent": {
+            "$ref": "#/components/schemas/no.nav.aap.student.OppgittStudent"
+          },
+          "sisteVedtatteVurderinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.student.StudentVurderingResponse"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "behøverVurderinger",
+          "harTilgangTilÅSaksbehandle",
+          "ikkeRelevantePerioder",
+          "kanVurderes",
+          "nyeVurderinger",
+          "sisteVedtatteVurderinger"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.student.StudentVurderingResponse": {
+        "nullable": false,
+        "properties": {
+          "avbruddMerEnn6Måneder": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "avbruttPgaSykdomEllerSkade": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "avbruttStudieDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "begrunnelse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "bidiagnoser": {
+            "items": {
+              "nullable": false,
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "fom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": false,
+            "type": "string"
+          },
+          "godkjentStudieAvLånekassen": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "harAvbruttStudie": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "harBehovForBehandling": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "hoveddiagnose": {
+            "nullable": true,
+            "type": "string"
+          },
+          "kodeverk": {
+            "nullable": true,
+            "type": "string"
+          },
+          "tom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "vurderingerMeta": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.vurdering.VurderingerMetaResponse"
+          }
+        },
+        "required": [
+          "begrunnelse",
+          "fom",
+          "harAvbruttStudie",
+          "vurderingerMeta"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.utbetal.simulering.SimuleringDto": {
         "nullable": false,
         "properties": {
@@ -22206,7 +22243,7 @@
   "info": {
     "description": "For å teste API i dev, besøk\n<a href=\"https://azure-token-generator.intern.dev.nav.no/api/m2m?aud=dev-gcp:aap:behandlingsflyt\">Token Generator</a> for å få token.",
     "title": "AAP - Behandlingsflyt",
-    "version": "20a001e5b50ab67104b782cb04014875a6e18975"
+    "version": "a3098869ee69448fa32b10ef0a0e60ea8f861fc4"
   },
   "openapi": "3.0.0",
   "paths": {
@@ -22911,6 +22948,49 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.flyt.DetaljertBehandlingDTO"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Behandling",
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/behandling/{referanse}/egenskaper": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.flyt.BehandlingEgenskaperDTO"
                 }
               }
             },
@@ -23682,7 +23762,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.student.StudentGrunnlagResponse"
+                  "$ref": "#/components/schemas/no.nav.aap.student.StudentGrunnlagResponse"
                 }
               }
             },
@@ -24665,7 +24745,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.barnetillegg.BarnetilleggDto"
+                  "$ref": "#/components/schemas/no.nav.aap.barnetillegg.BarnetilleggDto"
                 }
               }
             },
@@ -27488,47 +27568,6 @@
       }
     },
     "/api/dokumentinnhenting/syfo/dialogmeldinger/{saksnummer}": {
-      "get": {
-        "parameters": [
-          {
-            "deprecated": false,
-            "description": "saksnummer",
-            "explode": false,
-            "in": "path",
-            "name": "saksnummer",
-            "required": true,
-            "schema": {
-              "nullable": false,
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.behandling.behandlerdialog.MeldingerResponse"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "jwtAuth": [
-              "BEHANDLINGSFLYT"
-            ]
-          }
-        ],
-        "tags": [
-          "Tilgangkontrollert"
-        ]
-      }
-    },
-    "/api/dokumentinnhenting/syfo/dialogmeldinger/{saksnummer}/v2": {
       "get": {
         "parameters": [
           {

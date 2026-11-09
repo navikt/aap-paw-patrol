@@ -1,4 +1,5 @@
 export interface MottattDokumentDriftsinfoDTO {
+  behandlingReferanse?: string | null;
   referanse: InnsendingReferanse;
   mottattTidspunkt: string;
   type: string;

@@ -57,6 +57,7 @@ export const MottatteDokumenter = ({ saksnummer }: { saksnummer: string }) => {
           <Table.Row>
             <Table.HeaderCell scope="col">ID</Table.HeaderCell>
             <Table.HeaderCell scope="col">Referanse</Table.HeaderCell>
+            <Table.HeaderCell scope="col">Behandlingsreferanse</Table.HeaderCell>
             <Table.HeaderCell scope="col">Type</Table.HeaderCell>
             <Table.HeaderCell scope="col">Kanal</Table.HeaderCell>
             <Table.HeaderCell scope="col">Status</Table.HeaderCell>
@@ -83,6 +84,15 @@ export const MottatteDokumenter = ({ saksnummer }: { saksnummer: string }) => {
                 )}
               </Table.DataCell>
               <Table.DataCell>{capitalize(dokument.referanse.type)}</Table.DataCell>
+              <Table.DataCell>
+                {dokument.behandlingReferanse ? (
+                  <Link href={`/drift/sak/${saksnummer}?behandlingref=${dokument.behandlingReferanse}`}>
+                    {dokument.behandlingReferanse}
+                  </Link>
+                ) : (
+                  '-'
+                )}
+              </Table.DataCell>
               <Table.DataCell>{capitalize(dokument.type)}</Table.DataCell>
               <Table.DataCell>{dokument.kanal}</Table.DataCell>
               <Table.DataCell>{dokument.status}</Table.DataCell>
