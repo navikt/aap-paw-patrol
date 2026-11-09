@@ -192,6 +192,26 @@
         },
         "type": "object"
       },
+      "dokumentinnhenting.api.PåminnelseRequest": {
+        "nullable": false,
+        "properties": {
+          "behandlingsreferanse": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          },
+          "dialogmeldingUuid": {
+            "format": "uuid",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behandlingsreferanse",
+          "dialogmeldingUuid"
+        ],
+        "type": "object"
+      },
       "dokumentinnhenting.api.TaAvVentRequest": {
         "nullable": false,
         "properties": {
@@ -989,6 +1009,10 @@
           "automatiskPåminnelse": {
             "nullable": true,
             "type": "boolean"
+          },
+          "bestillerNavIdent": {
+            "nullable": true,
+            "type": "string"
           },
           "dialogmeldingReferanse": {
             "format": "uuid",
@@ -2596,6 +2620,116 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.PåminnelseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/io.ktor.http.HttpStatusCode"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Påminnelse",
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/dialogmelding/paaminnelse/v2/send": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dokumentinnhenting.api.PåminnelseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "format": "uuid",
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Påminnelse",
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/dialogmelding/paaminnelse/v2/avbryt-automatisk-paaminnelse": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dokumentinnhenting.api.PåminnelseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/io.ktor.http.HttpStatusCode"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Påminnelse",
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/dialogmelding/paaminnelse/v2/gjenoppta-automatisk-paaminnelse": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dokumentinnhenting.api.PåminnelseRequest"
               }
             }
           }

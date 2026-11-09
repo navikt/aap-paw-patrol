@@ -947,7 +947,7 @@ export interface paths {
                          *         {
                          *           "status": "LØPENDE",
                          *           "saksnummer": "4MGL8LS",
-                         *           "vedtaksdato": "2026-11-04",
+                         *           "vedtaksdato": "2026-11-06",
                          *           "periode": {
                          *             "fraOgMedDato": "2021-01-01",
                          *             "tilOgMedDato": "2021-01-31"
@@ -1797,7 +1797,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["kotlin.Unit"][];
+                        "application/json": components["schemas"]["no.nav.aap.api.mineaap.SakMedBehandlingerVisning"][];
                     };
                 };
             };
@@ -1817,7 +1817,6 @@ export interface components {
         "behandlingsflyt.DialogmeldingEksistererDto": {
             eksisterer: boolean;
         };
-        "kotlin.Unit": Record<string, never>;
         "no.nav.aap.api.SakerRequest": {
             /** @description Liste med personidentifikatorer. Må svare til samme person. */
             personidentifikatorer: string[];
@@ -2614,6 +2613,96 @@ export interface components {
         "no.nav.aap.api.kelvin.MeldekortPerioderDTO": {
             meldekortPerioder: components["schemas"]["no.nav.aap.komponenter.type.Periode"][];
             personIdent: string;
+        };
+        "no.nav.aap.api.mineaap.BehandlingHendelseResponse": components["schemas"]["no.nav.aap.api.mineaap.BehandlingHendelseResponse.AlderLovvalgMedlemskap"] | components["schemas"]["no.nav.aap.api.mineaap.BehandlingHendelseResponse.FerdigBehandlet"] | components["schemas"]["no.nav.aap.api.mineaap.BehandlingHendelseResponse.NavKontor"] | components["schemas"]["no.nav.aap.api.mineaap.BehandlingHendelseResponse.Nay"] | components["schemas"]["no.nav.aap.api.mineaap.BehandlingHendelseResponse.S\u00F8knadMottatt"];
+        "no.nav.aap.api.mineaap.BehandlingHendelseResponse.AlderLovvalgMedlemskap": {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            navn: "ALDER_LOVVALG_MEDLEMSKAP";
+            /** @enum {string} */
+            progresjon: "AKTIV" | "FULLFØRT" | "IKKE_PÅBEGYNT";
+            /**
+             * Format: date-time
+             * @example 2025-04-01T12:30:00
+             */
+            sistEndret?: string | null;
+            /** @enum {string|null} */
+            status?: "MOTTATT_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER" | "VENTER_PÅ_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER" | null;
+        };
+        "no.nav.aap.api.mineaap.BehandlingHendelseResponse.FerdigBehandlet": {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            navn: "FERDIG_BEHANDLET";
+            /** @enum {string} */
+            progresjon: "AKTIV" | "FULLFØRT" | "IKKE_PÅBEGYNT";
+            /**
+             * Format: date-time
+             * @example 2025-04-01T12:30:00
+             */
+            sistEndret?: string | null;
+        };
+        "no.nav.aap.api.mineaap.BehandlingHendelseResponse.NavKontor": {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            navn: "NAV_KONTOR";
+            /** @enum {string} */
+            progresjon: "AKTIV" | "FULLFØRT" | "IKKE_PÅBEGYNT";
+            /**
+             * Format: date-time
+             * @example 2025-04-01T12:30:00
+             */
+            sistEndret?: string | null;
+            /** @enum {string|null} */
+            status?: "MOTTATT_LEGEERKLÆRING" | "PURRET_PÅ_LEGERERKLÆRING" | "VENTER_PÅ_LEGEERKLÆRING" | null;
+        };
+        "no.nav.aap.api.mineaap.BehandlingHendelseResponse.Nay": {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            navn: "NAY";
+            /** @enum {string} */
+            progresjon: "AKTIV" | "FULLFØRT" | "IKKE_PÅBEGYNT";
+            /**
+             * Format: date-time
+             * @example 2025-04-01T12:30:00
+             */
+            sistEndret?: string | null;
+            /** @enum {string|null} */
+            status?: "MOTTATT_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER" | "VENTER_PÅ_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER" | null;
+        };
+        "no.nav.aap.api.mineaap.BehandlingHendelseResponse.S\u00F8knadMottatt": {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            navn: "SØKNAD_MOTTATT";
+            /** @enum {string} */
+            progresjon: "AKTIV" | "FULLFØRT" | "IKKE_PÅBEGYNT";
+            /**
+             * Format: date-time
+             * @example 2025-04-01T12:30:00
+             */
+            sistEndret: string;
+        };
+        "no.nav.aap.api.mineaap.BehandlingVisningResponse": {
+            avsluttet: boolean;
+            behandlingReferanse: string;
+            /** @enum {string} */
+            behandlingType: "KLAGE" | "SØKNAD";
+            hendelser: components["schemas"]["no.nav.aap.api.mineaap.BehandlingHendelseResponse"][];
+        };
+        "no.nav.aap.api.mineaap.SakMedBehandlingerVisning": {
+            behandlinger: components["schemas"]["no.nav.aap.api.mineaap.BehandlingVisningResponse"][];
+            /** @enum {string} */
+            sakStatus: "FERDIGBEHANDLET" | "REVURDERING_UNDER_BEHANDLING" | "SOKNAD_UNDER_BEHANDLING";
+            saksnummer: string;
         };
         "no.nav.aap.arenaoppslag.kontrakt.apiv1.Oppgave": {
             arbeidsbenk?: string | null;

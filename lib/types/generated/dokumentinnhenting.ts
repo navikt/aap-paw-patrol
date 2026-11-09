@@ -1249,6 +1249,123 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/dialogmelding/paaminnelse/v2/send": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["dokumentinnhenting.api.P\u00E5minnelseRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": string;
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/dialogmelding/paaminnelse/v2/avbryt-automatisk-paaminnelse": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["dokumentinnhenting.api.P\u00E5minnelseRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["io.ktor.http.HttpStatusCode"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/dialogmelding/paaminnelse/v2/gjenoppta-automatisk-paaminnelse": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["dokumentinnhenting.api.P\u00E5minnelseRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["io.ktor.http.HttpStatusCode"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/drift/api/syfo/behandleroppslag/search": {
         parameters: {
             query?: never;
@@ -1487,6 +1604,12 @@ export interface components {
         "dokumentinnhenting.api.HentUtsendingsinfoResponse": {
             utsendingsinfo?: components["schemas"]["dokumentinnhenting.integrasjoner.saf.Utsendingsinfo"];
         };
+        "dokumentinnhenting.api.P\u00E5minnelseRequest": {
+            /** Format: uuid */
+            behandlingsreferanse: string;
+            /** Format: uuid */
+            dialogmeldingUuid: string;
+        };
         "dokumentinnhenting.api.TaAvVentRequest": {
             saksnummer: string;
         };
@@ -1685,6 +1808,7 @@ export interface components {
         };
         "no.nav.aap.dokumentinnhenting.kontrakt.FellesDialogmeldingDto": {
             "automatiskP\u00E5minnelse"?: boolean | null;
+            bestillerNavIdent?: string | null;
             /** Format: uuid */
             dialogmeldingReferanse?: string | null;
             /** @enum {string|null} */

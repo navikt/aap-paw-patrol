@@ -14,10 +14,6 @@
         ],
         "type": "object"
       },
-      "kotlin.Unit": {
-        "nullable": false,
-        "type": "object"
-      },
       "no.nav.aap.api.SakerRequest": {
         "nullable": false,
         "properties": {
@@ -2418,6 +2414,287 @@
         "required": [
           "meldekortPerioder",
           "personIdent"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.api.mineaap.BehandlingHendelseResponse": {
+        "discriminator": {
+          "propertyName": "navn",
+          "mapping": {
+            "ALDER_LOVVALG_MEDLEMSKAP": "#/components/schemas/no.nav.aap.api.mineaap.BehandlingHendelseResponse.AlderLovvalgMedlemskap",
+            "FERDIG_BEHANDLET": "#/components/schemas/no.nav.aap.api.mineaap.BehandlingHendelseResponse.FerdigBehandlet",
+            "NAV_KONTOR": "#/components/schemas/no.nav.aap.api.mineaap.BehandlingHendelseResponse.NavKontor",
+            "NAY": "#/components/schemas/no.nav.aap.api.mineaap.BehandlingHendelseResponse.Nay",
+            "SØKNAD_MOTTATT": "#/components/schemas/no.nav.aap.api.mineaap.BehandlingHendelseResponse.SøknadMottatt"
+          }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/no.nav.aap.api.mineaap.BehandlingHendelseResponse.AlderLovvalgMedlemskap"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.api.mineaap.BehandlingHendelseResponse.FerdigBehandlet"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.api.mineaap.BehandlingHendelseResponse.NavKontor"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.api.mineaap.BehandlingHendelseResponse.Nay"
+          },
+          {
+            "$ref": "#/components/schemas/no.nav.aap.api.mineaap.BehandlingHendelseResponse.SøknadMottatt"
+          }
+        ]
+      },
+      "no.nav.aap.api.mineaap.BehandlingHendelseResponse.AlderLovvalgMedlemskap": {
+        "nullable": false,
+        "properties": {
+          "navn": {
+            "enum": [
+              "ALDER_LOVVALG_MEDLEMSKAP"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "progresjon": {
+            "enum": [
+              "AKTIV",
+              "FULLFØRT",
+              "IKKE_PÅBEGYNT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "sistEndret": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "MOTTATT_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER",
+              "VENTER_PÅ_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "navn",
+          "progresjon"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.api.mineaap.BehandlingHendelseResponse.FerdigBehandlet": {
+        "nullable": false,
+        "properties": {
+          "navn": {
+            "enum": [
+              "FERDIG_BEHANDLET"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "progresjon": {
+            "enum": [
+              "AKTIV",
+              "FULLFØRT",
+              "IKKE_PÅBEGYNT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "sistEndret": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "navn",
+          "progresjon"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.api.mineaap.BehandlingHendelseResponse.NavKontor": {
+        "nullable": false,
+        "properties": {
+          "navn": {
+            "enum": [
+              "NAV_KONTOR"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "progresjon": {
+            "enum": [
+              "AKTIV",
+              "FULLFØRT",
+              "IKKE_PÅBEGYNT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "sistEndret": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "MOTTATT_LEGEERKLÆRING",
+              "PURRET_PÅ_LEGERERKLÆRING",
+              "VENTER_PÅ_LEGEERKLÆRING"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "navn",
+          "progresjon"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.api.mineaap.BehandlingHendelseResponse.Nay": {
+        "nullable": false,
+        "properties": {
+          "navn": {
+            "enum": [
+              "NAY"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "progresjon": {
+            "enum": [
+              "AKTIV",
+              "FULLFØRT",
+              "IKKE_PÅBEGYNT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "sistEndret": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "MOTTATT_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER",
+              "VENTER_PÅ_INFORMASJON_FRA_UTENLANDSKE_MYNDIGHETER"
+            ],
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "navn",
+          "progresjon"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.api.mineaap.BehandlingHendelseResponse.SøknadMottatt": {
+        "nullable": false,
+        "properties": {
+          "navn": {
+            "enum": [
+              "SØKNAD_MOTTATT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "progresjon": {
+            "enum": [
+              "AKTIV",
+              "FULLFØRT",
+              "IKKE_PÅBEGYNT"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "sistEndret": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "navn",
+          "progresjon",
+          "sistEndret"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.api.mineaap.BehandlingVisningResponse": {
+        "nullable": false,
+        "properties": {
+          "avsluttet": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "behandlingReferanse": {
+            "nullable": false,
+            "type": "string"
+          },
+          "behandlingType": {
+            "enum": [
+              "KLAGE",
+              "SØKNAD"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "hendelser": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.api.mineaap.BehandlingHendelseResponse"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "avsluttet",
+          "behandlingReferanse",
+          "behandlingType",
+          "hendelser"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.api.mineaap.SakMedBehandlingerVisning": {
+        "nullable": false,
+        "properties": {
+          "behandlinger": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.api.mineaap.BehandlingVisningResponse"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "sakStatus": {
+            "enum": [
+              "FERDIGBEHANDLET",
+              "REVURDERING_UNDER_BEHANDLING",
+              "SOKNAD_UNDER_BEHANDLING"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "behandlinger",
+          "sakStatus",
+          "saksnummer"
         ],
         "type": "object"
       },
@@ -5049,7 +5326,7 @@
                     {
                       "status": "LØPENDE",
                       "saksnummer": "4MGL8LS",
-                      "vedtaksdato": "2026-11-04",
+                      "vedtaksdato": "2026-11-06",
                       "periode": {
                         "fraOgMedDato": "2021-01-01",
                         "tilOgMedDato": "2021-01-31"
@@ -5906,7 +6183,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/kotlin.Unit"
+                    "$ref": "#/components/schemas/no.nav.aap.api.mineaap.SakMedBehandlingerVisning"
                   },
                   "nullable": false,
                   "type": "array"
