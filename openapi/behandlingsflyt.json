@@ -11885,6 +11885,88 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.behandlingsflyt.drift.YrkesskadeGrunnlagDriftsinfoDto": {
+        "nullable": false,
+        "properties": {
+          "vurdering": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.drift.YrkesskadevurderingDriftsinfoDto"
+              }
+            ],
+            "nullable": true
+          },
+          "yrkesskader": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.drift.YrkesskadeDriftsinfoDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "vurdering",
+          "yrkesskader"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.drift.YrkesskadevurderingDriftsinfoDto": {
+        "nullable": false,
+        "properties": {
+          "andelAvNedsettelsen": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "erÅrsakssammenheng": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "harBegrunnelse": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "relevanteSaker": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.drift.RelevantYrkesskadeSakDriftsinfoDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "andelAvNedsettelsen",
+          "erÅrsakssammenheng",
+          "harBegrunnelse",
+          "relevanteSaker"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.drift.RelevantYrkesskadeSakDriftsinfoDto": {
+        "nullable": false,
+        "properties": {
+          "manuellYrkesskadeDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "referanse": {
+            "nullable": true,
+            "type": "string"
+          },
+          "referanseSkjermet": {
+            "nullable": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "manuellYrkesskadeDato",
+          "referanse",
+          "referanseSkjermet"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.behandlingsflyt.drift.`DriftApiKt$driftApi$1$AvbrytBrevBody`": {
         "nullable": false,
         "properties": {
@@ -28737,11 +28819,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.drift.YrkesskadeDriftsinfoDto"
-                  },
-                  "nullable": false,
-                  "type": "array"
+                  "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.drift.YrkesskadeGrunnlagDriftsinfoDto"
                 }
               }
             },
