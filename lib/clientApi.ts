@@ -365,6 +365,12 @@ export function hentUtbetalingStatus(): FetchResult<UtbetalPaths['/admin/status'
   return fetchTyped<UtbetalPaths['/admin/status']['get']>(`/api/drift/utbetaling/feilstatus`, { method: 'GET' });
 }
 
+export function hentUtbetalingStatusAntall(): FetchResult<UtbetalPaths['/admin/utbetalingsmelding/status']['get']> {
+  return fetchTyped<UtbetalPaths['/admin/utbetalingsmelding/status']['get']>(`/api/drift/utbetaling/status`, {
+    method: 'GET',
+  });
+}
+
 export function hentMigreringsStatus(): FetchResult<UtbetalPaths['/admin/migrering/status']['get']> {
   return fetchTyped<UtbetalPaths['/admin/migrering/status']['get']>(`/api/drift/utbetaling/migrering`, {
     method: 'GET',

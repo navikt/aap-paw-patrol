@@ -10,6 +10,7 @@ type PersonSøkJournalposterDto =
   PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.PersonSøkDriftsinfoDto'];
 type AvstemmingsrapportDto = PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.AvstemmingsrapportDto'];
 type UtbetalingStatusDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingStatusDto'];
+type UtbetalingStatusAntallDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingStatusAntallDto'];
 type MigreringsStatusDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingMigreringStatusDto'];
 type UtbetalingstidslinjeDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingstidslinjeDto'];
 type MigreringsresultatDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.migrering.MigreringsresultatDto'];
@@ -203,6 +204,12 @@ export const hentUtbetalingFeilstatus = async () => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('utbetal');
   const url = `${baseUrl}/admin/status`;
   return await fetchProxy<UtbetalingStatusDto>(url, scope, 'GET');
+};
+
+export const hentUtbetalingStatusAntall = async () => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('utbetal');
+  const url = `${baseUrl}/admin/utbetalingsmelding/status`;
+  return await fetchProxy<UtbetalingStatusAntallDto>(url, scope, 'GET');
 };
 
 export const hentMigreringsStatus = async () => {
