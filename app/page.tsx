@@ -106,6 +106,15 @@ export default function Home() {
                   <MagnifyingGlassIcon fontSize="2rem" />
                 </LinkCardIcon>
                 <LinkCardTitle>
+                  <LinkCardAnchor href="/drift/utbetaling/status">Utbetalingsstatuser</LinkCardAnchor>
+                </LinkCardTitle>
+              </LinkCard>
+
+              <LinkCard size="small">
+                <LinkCardIcon>
+                  <MagnifyingGlassIcon fontSize="2rem" />
+                </LinkCardIcon>
+                <LinkCardTitle>
                   <LinkCardAnchor href={`/drift/utbetaling/migrering`}>Sjekk migreringsstatus</LinkCardAnchor>
                 </LinkCardTitle>
               </LinkCard>

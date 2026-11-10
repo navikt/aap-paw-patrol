@@ -10,9 +10,10 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { HttpResponse, http } from 'msw';
 import type { RequestHandler } from 'msw';
 import { startMockHttpServer } from './standaloneServer.ts';
-import { getMockName, MOCK_SPECS } from './mock-specs.mjs';
+import { getMockBasePath, getMockName, MOCK_SPECS } from './mock-specs.mjs';
 
 const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 
@@ -52,9 +53,25 @@ loadEnvLocal();
 
 async function startAll() {
   const handlers: RequestHandler[] = [];
+  const mockBaseUrl = process.env.MOCK_API_BASE_URL ?? 'http://localhost:8080';
 
   for (const { spec } of MOCK_SPECS) {
     const mockName = getMockName(spec);
+    if (spec === 'utbetal.json') {
+      handlers.push(
+        http.get(`${mockBaseUrl}${getMockBasePath(spec)}/admin/utbetalingsmelding/status`, () =>
+          HttpResponse.json({
+            antallPerStatus: {
+              IKKE_SENDT: 12,
+              SENDT: 8,
+              HOS_OPPDRAG: 3,
+              UKJENT_STATUS: 1,
+            },
+          })
+        )
+      );
+    }
+
     const handlersPath = path.join(rootDir, 'mocks', 'generated', mockName, 'handlers.ts');
     if (!existsSync(handlersPath)) {
       console.warn(`[mocks/run] Skipping ${mockName}: no generated handlers found (run yarn mock:generate first).`);
@@ -64,7 +81,6 @@ async function startAll() {
     handlers.push(...generated.handlers);
   }
 
-  const mockBaseUrl = process.env.MOCK_API_BASE_URL ?? 'http://localhost:8080';
   startMockHttpServer(portFromBaseUrl(mockBaseUrl), handlers, 'all');
 }
 
