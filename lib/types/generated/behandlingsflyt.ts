@@ -5733,7 +5733,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.drift.YrkesskadeDriftsinfoDto"][];
+                        "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.drift.YrkesskadeGrunnlagDriftsinfoDto"];
                     };
                 };
             };
@@ -9265,6 +9265,26 @@ export interface components {
              * @example 2025-04-01
              */
             vedtaksdato?: string | null;
+        };
+        "no.nav.aap.behandlingsflyt.drift.YrkesskadeGrunnlagDriftsinfoDto": {
+            vurdering: components["schemas"]["no.nav.aap.behandlingsflyt.drift.YrkesskadevurderingDriftsinfoDto"] | null;
+            yrkesskader: components["schemas"]["no.nav.aap.behandlingsflyt.drift.YrkesskadeDriftsinfoDto"][];
+        };
+        "no.nav.aap.behandlingsflyt.drift.YrkesskadevurderingDriftsinfoDto": {
+            /** Format: int32 */
+            andelAvNedsettelsen: number | null;
+            "er\u00C5rsakssammenheng": boolean;
+            harBegrunnelse: boolean;
+            relevanteSaker: components["schemas"]["no.nav.aap.behandlingsflyt.drift.RelevantYrkesskadeSakDriftsinfoDto"][];
+        };
+        "no.nav.aap.behandlingsflyt.drift.RelevantYrkesskadeSakDriftsinfoDto": {
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            manuellYrkesskadeDato: string | null;
+            referanse: string | null;
+            referanseSkjermet: boolean;
         };
         "no.nav.aap.behandlingsflyt.drift.`DriftApiKt$driftApi$1$AvbrytBrevBody`": {
             begrunnelse: string;
