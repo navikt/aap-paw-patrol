@@ -1043,6 +1043,10 @@
             "nullable": true,
             "type": "string"
           },
+          "kanSendeManuellPåminnelse": {
+            "nullable": false,
+            "type": "boolean"
+          },
           "meldingFraNavn": {
             "nullable": false,
             "type": "string"
@@ -1062,6 +1066,12 @@
             "nullable": false,
             "type": "string"
           },
+          "sisteForespørselSendt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
           "tekst": {
             "nullable": true,
             "type": "string"
@@ -1069,6 +1079,7 @@
         },
         "required": [
           "innkommendeUtgående",
+          "kanSendeManuellPåminnelse",
           "meldingFraNavn",
           "opprettetTidspunkt"
         ],
@@ -1146,20 +1157,6 @@
         "type": "object"
       },
       "no.nav.aap.dokumentinnhenting.kontrakt.LegeerklæringPurringDto": {
-        "nullable": false,
-        "properties": {
-          "dialogmeldingUuid": {
-            "format": "uuid",
-            "nullable": false,
-            "type": "string"
-          }
-        },
-        "required": [
-          "dialogmeldingUuid"
-        ],
-        "type": "object"
-      },
-      "no.nav.aap.dokumentinnhenting.kontrakt.PåminnelseDto": {
         "nullable": false,
         "properties": {
           "dialogmeldingUuid": {
@@ -2545,7 +2542,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.PåminnelseDto"
+                "$ref": "#/components/schemas/dokumentinnhenting.api.PåminnelseRequest"
               }
             }
           }
@@ -2583,7 +2580,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.PåminnelseDto"
+                "$ref": "#/components/schemas/dokumentinnhenting.api.PåminnelseRequest"
               }
             }
           }
@@ -2614,116 +2611,6 @@
       }
     },
     "/dialogmelding/paaminnelse/gjenoppta-automatisk-paaminnelse": {
-      "post": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/no.nav.aap.dokumentinnhenting.kontrakt.PåminnelseDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/io.ktor.http.HttpStatusCode"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "jwtAuth": [
-              "BEHANDLINGSFLYT"
-            ]
-          }
-        ],
-        "tags": [
-          "Påminnelse",
-          "Tilgangkontrollert"
-        ]
-      }
-    },
-    "/dialogmelding/paaminnelse/v2/send": {
-      "post": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/dokumentinnhenting.api.PåminnelseRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "format": "uuid",
-                  "nullable": false,
-                  "type": "string"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "jwtAuth": [
-              "BEHANDLINGSFLYT"
-            ]
-          }
-        ],
-        "tags": [
-          "Påminnelse",
-          "Tilgangkontrollert"
-        ]
-      }
-    },
-    "/dialogmelding/paaminnelse/v2/avbryt-automatisk-paaminnelse": {
-      "post": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/dokumentinnhenting.api.PåminnelseRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/io.ktor.http.HttpStatusCode"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "jwtAuth": [
-              "BEHANDLINGSFLYT"
-            ]
-          }
-        ],
-        "tags": [
-          "Påminnelse",
-          "Tilgangkontrollert"
-        ]
-      }
-    },
-    "/dialogmelding/paaminnelse/v2/gjenoppta-automatisk-paaminnelse": {
       "post": {
         "requestBody": {
           "content": {

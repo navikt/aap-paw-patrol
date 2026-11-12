@@ -4703,119 +4703,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/dokumentinnhenting/paaminnelse/send": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.behandlerdialog.PurringLegeerkl\u00E6ringRequest"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": string;
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/dokumentinnhenting/paaminnelse/avbryt-automatisk-paaminnelse": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.behandlerdialog.PurringLegeerkl\u00E6ringRequest"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/dokumentinnhenting/paaminnelse/gjenoppta-automatisk-paaminnelse": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.behandlerdialog.PurringLegeerkl\u00E6ringRequest"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/api/dokumentinnhenting/paaminnelse": {
         parameters: {
             query?: never;
@@ -7180,6 +7067,7 @@ export interface components {
         "no.nav.aap.behandlingsflyt.behandling.barnepensjon.BarnepensjonGrunnlagDto": {
             "harTilgangTil\u00C5Saksbehandle": boolean;
             historiskeVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.barnepensjon.BarnepensjonVurderingDto"][];
+            vedtattePerioder: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.barnepensjon.BarnepensjonVurderingPeriodeDto"][];
             vurdering?: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.barnepensjon.BarnepensjonVurderingDto"];
         };
         "no.nav.aap.behandlingsflyt.behandling.barnepensjon.BarnepensjonVurderingDto": {
@@ -7248,6 +7136,8 @@ export interface components {
             telefon?: string | null;
         };
         "no.nav.aap.behandlingsflyt.behandling.behandlerdialog.MeldingDto": {
+            bestillerNavIdent?: string | null;
+            bestillerNavn?: string | null;
             /** Format: uuid */
             dialogmeldingId?: string | null;
             /** @enum {string|null} */
@@ -7273,12 +7163,6 @@ export interface components {
         "no.nav.aap.behandlingsflyt.behandling.behandlerdialog.MeldingerResponse": {
             kommendeMeldinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.behandlerdialog.KommendeMeldingDto"][];
             meldinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.behandlerdialog.MeldingMedDokumenterDto"][];
-        };
-        "no.nav.aap.behandlingsflyt.behandling.behandlerdialog.PurringLegeerkl\u00E6ringRequest": {
-            /** Format: uuid */
-            behandlingsReferanse: string;
-            /** Format: uuid */
-            dialogmeldingPurringUUID: string;
         };
         "no.nav.aap.behandlingsflyt.behandling.behandlerdialog.UbesvarteForesp\u00F8rslerLegeerkl\u00E6ringResponse": {
             "foresp\u00F8rsler": components["schemas"]["no.nav.aap.behandlingsflyt.behandling.behandlerdialog.MeldingDto"][];
@@ -7954,6 +7838,7 @@ export interface components {
         "no.nav.aap.behandlingsflyt.behandling.grunnlag.samordning.SamordningUf\u00F8reVurderingGrunnlagDTO": {
             grunnlag: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.grunnlag.samordning.SamordningUf\u00F8reGrunnlagDTO"][];
             "harTilgangTil\u00C5Saksbehandle": boolean;
+            vedtattePerioder: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.grunnlag.samordning.SamordningUf\u00F8reVurderingPeriodeDTO"][];
             vurdering?: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.grunnlag.samordning.SamordningUf\u00F8reVurderingDTO"];
         };
         "no.nav.aap.behandlingsflyt.behandling.grunnlag.samordning.SamordningUf\u00F8reVurderingPeriodeDTO": {
@@ -7997,6 +7882,7 @@ export interface components {
             historiskeVurderinger: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.grunnlag.samordning.SamordningYtelseVurderingDTO"][];
             mottarSykepenger?: boolean | null;
             tpYtelser?: components["schemas"]["no.nav.aap.behandlingsflyt.faktagrunnlag.delvurdering.samordning.tjenestepensjon.TjenestePensjonForhold"][] | null;
+            vedtattePerioder: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.grunnlag.samordning.SamordningVurderingDTO"][];
             vurdering?: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.grunnlag.samordning.SamordningYtelseVurderingDTO"];
             ytelser: components["schemas"]["no.nav.aap.behandlingsflyt.behandling.grunnlag.samordning.SamordningYtelseDTO"][];
         };
@@ -9195,6 +9081,15 @@ export interface components {
         "no.nav.aap.behandlingsflyt.drift.PersonS\u00F8kDriftsinfoDto": {
             saker: components["schemas"]["no.nav.aap.behandlingsflyt.drift.SaksnummerOgRettighetsperiode"][];
         };
+        "no.nav.aap.behandlingsflyt.drift.RelevantYrkesskadeSakDriftsinfoDto": {
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            manuellYrkesskadeDato?: string | null;
+            referanse?: string | null;
+            referanseSkjermet: boolean;
+        };
         "no.nav.aap.behandlingsflyt.drift.SakDriftsinfoDTO": {
             "andreSakerP\u00E5Bruker": string[];
             behandlinger: components["schemas"]["no.nav.aap.behandlingsflyt.drift.BehandlingDriftsinfo"][];
@@ -9206,8 +9101,12 @@ export interface components {
             person: components["schemas"]["no.nav.aap.behandlingsflyt.drift.PersonDriftsinfo"];
             rettighetsperiode: components["schemas"]["no.nav.aap.komponenter.type.Periode"];
             saksnummer: string;
-            /** @enum {string} */
-            status: "AVSLUTTET" | "LØPENDE" | "OPPRETTET" | "UTREDES";
+            /**
+             * @deprecated
+             * @description Saker hadde tidligere status, men de ble aldri satt til noe annet enn først OPPRETTET, og så noen millisekunder senere til UTREDES
+             * @enum {string}
+             */
+            status: "UTREDES";
         };
         "no.nav.aap.behandlingsflyt.drift.SakTjenestePensjonYtelserDto": {
             forhold: components["schemas"]["no.nav.aap.behandlingsflyt.drift.TjenestePensjonForholdDto"][];
@@ -9267,24 +9166,15 @@ export interface components {
             vedtaksdato?: string | null;
         };
         "no.nav.aap.behandlingsflyt.drift.YrkesskadeGrunnlagDriftsinfoDto": {
-            vurdering: components["schemas"]["no.nav.aap.behandlingsflyt.drift.YrkesskadevurderingDriftsinfoDto"] | null;
+            vurdering?: components["schemas"]["no.nav.aap.behandlingsflyt.drift.YrkesskadevurderingDriftsinfoDto"];
             yrkesskader: components["schemas"]["no.nav.aap.behandlingsflyt.drift.YrkesskadeDriftsinfoDto"][];
         };
         "no.nav.aap.behandlingsflyt.drift.YrkesskadevurderingDriftsinfoDto": {
             /** Format: int32 */
-            andelAvNedsettelsen: number | null;
+            andelAvNedsettelsen?: number | null;
             "er\u00C5rsakssammenheng": boolean;
             harBegrunnelse: boolean;
             relevanteSaker: components["schemas"]["no.nav.aap.behandlingsflyt.drift.RelevantYrkesskadeSakDriftsinfoDto"][];
-        };
-        "no.nav.aap.behandlingsflyt.drift.RelevantYrkesskadeSakDriftsinfoDto": {
-            /**
-             * Format: date
-             * @example 2025-04-01
-             */
-            manuellYrkesskadeDato: string | null;
-            referanse: string | null;
-            referanseSkjermet: boolean;
         };
         "no.nav.aap.behandlingsflyt.drift.`DriftApiKt$driftApi$1$AvbrytBrevBody`": {
             begrunnelse: string;
@@ -11015,8 +10905,12 @@ export interface components {
             opprettetTidspunkt: string;
             periode: components["schemas"]["no.nav.aap.komponenter.type.Periode"];
             saksnummer: string;
-            /** @enum {string} */
-            status: "AVSLUTTET" | "LØPENDE" | "OPPRETTET" | "UTREDES";
+            /**
+             * @deprecated
+             * @description Saker hadde tidligere status, men de ble aldri satt til noe annet enn først OPPRETTET, og så noen millisekunder senere til UTREDES
+             * @enum {string}
+             */
+            status: "UTREDES";
             "s\u00F8knadErTrukket"?: boolean | null;
             /**
              * Format: date

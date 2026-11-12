@@ -5,6 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import { SakQueryParam } from 'components/drift/sakogbehandling/SakOversikt.tsx';
 import { BehandlingVisningPanel } from 'components/drift/sakogbehandling/behandlinger/BehandlingVisningPanel.tsx';
 import { BehandlingTableRow } from 'components/drift/sakogbehandling/behandlinger/BehandlingTableRow.tsx';
+import { JournalposterForSak } from 'components/drift/sakogbehandling/JournalposterForSak';
+import { normaliserSaksnummer } from 'lib/utils/formatting';
 
 export type BehandlingDriftsinfo = FetchJsonBody<ReturnType<typeof hentSakDriftsinfo>>['behandlinger'][number];
 
@@ -135,6 +137,8 @@ export const BehandlingOversikt = ({
           </Table>
         </Box>
       )}
+
+      <JournalposterForSak key={saksnummer} saksnummer={normaliserSaksnummer(saksnummer.trim())} />
 
       {valgtBehandling && <BehandlingVisningPanel valgtBehandling={valgtBehandling} />}
     </Box>

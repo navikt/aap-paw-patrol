@@ -52,6 +52,18 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.meldekort.AnsvarligeMeldekortløsningerDto": {
+        "nullable": false,
+        "properties": {
+          "arena": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.MeldekortløsningDto"
+          },
+          "kelvin": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.MeldekortløsningDto"
+          }
+        },
+        "type": "object"
+      },
       "no.nav.aap.meldekort.DagSvarDto": {
         "nullable": false,
         "properties": {
@@ -166,6 +178,23 @@
         },
         "required": [
           "kanSendesFra"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.meldekort.MeldekortløsningDto": {
+        "nullable": false,
+        "properties": {
+          "rettighetsperiode": {
+            "$ref": "#/components/schemas/no.nav.aap.meldekort.PeriodeDto"
+          },
+          "saksnummer": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "rettighetsperiode",
+          "saksnummer"
         ],
         "type": "object"
       },
@@ -1147,10 +1176,33 @@
   "info": {
     "description": "For å teste API i dev, besøk\n<a href=\"https://tokenx-token-generator.intern.dev.nav.no/api/obo?aud=dev-gcp:aap:meldekort-backend\">Token Generator</a> for å få token.",
     "title": "AAP - Meldekort",
-    "version": "9414230e247cdd41bdf318099b64fcd6052c052e"
+    "version": "95718d94cc2ccf46c4f0db2cce8290662fd38c40"
   },
   "openapi": "3.0.0",
   "paths": {
+    "/api/v2/ansvarlig-system": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.meldekort.AnsvarligeMeldekortløsningerDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
     "/api/ansvarlig-system": {
       "get": {
         "responses": {

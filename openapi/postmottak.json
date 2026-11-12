@@ -533,12 +533,95 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.postmottak.api.drift.JournalpostPåSakDto": {
+        "nullable": false,
+        "properties": {
+          "journalpostId": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.kontrakt.journalpost.JournalpostId"
+          },
+          "journalstatus": {
+            "enum": [
+              "AVBRUTT",
+              "EKSPEDERT",
+              "FEILREGISTRERT",
+              "FERDIGSTILT",
+              "JOURNALFOERT",
+              "MOTTATT",
+              "OPPLASTING_DOKUMENT",
+              "RESERVERT",
+              "UKJENT",
+              "UKJENT_BRUKER",
+              "UNDER_ARBEID",
+              "UTGAAR"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "kanal": {
+            "enum": [
+              "ALTINN",
+              "ALTINN_INNBOKS",
+              "DPVT",
+              "EESSI",
+              "EIA",
+              "EKST_OPPS",
+              "E_POST",
+              "HELSENETTET",
+              "INGEN_DISTRIBUSJON",
+              "INNSENDT_NAV_ANSATT",
+              "LOKAL_UTSKRIFT",
+              "NAV_NO",
+              "NAV_NO_CHAT",
+              "NAV_NO_UINNLOGGET",
+              "SDP",
+              "SENTRAL_UTSKRIFT",
+              "SKAN_IM",
+              "SKAN_NETS",
+              "SKAN_PEN",
+              "TRYGDERETTEN",
+              "UKJENT"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "mottattDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "tema": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "journalpostId"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.postmottak.api.drift.PersonSøkDriftsinfoDto": {
         "nullable": false,
         "properties": {
           "journalposter": {
             "items": {
               "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.InnkommendeJournalpostDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "journalposter"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.drift.SakJournalposterDto": {
+        "nullable": false,
+        "properties": {
+          "journalposter": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.JournalpostPåSakDto"
             },
             "nullable": false,
             "type": "array"
@@ -3117,6 +3200,47 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.AvstemmingsrapportDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/drift/sak/{saksnummer}/journalposter": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "saksnummer",
+            "explode": false,
+            "in": "path",
+            "name": "saksnummer",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.SakJournalposterDto"
                 }
               }
             },
