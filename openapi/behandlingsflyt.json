@@ -3515,6 +3515,10 @@
             "nullable": true,
             "type": "string"
           },
+          "kanSendeManuellPåminnelse": {
+            "nullable": false,
+            "type": "boolean"
+          },
           "meldingFraNavn": {
             "nullable": true,
             "type": "string"
@@ -3538,6 +3542,12 @@
             "nullable": true,
             "type": "boolean"
           },
+          "sisteForespørselSendt": {
+            "example": "2025-04-01T12:30:00",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
           "tekst": {
             "nullable": true,
             "type": "string"
@@ -3545,6 +3555,7 @@
         },
         "required": [
           "innkommendeUtgående",
+          "kanSendeManuellPåminnelse",
           "opprettetTidspunkt"
         ],
         "type": "object"

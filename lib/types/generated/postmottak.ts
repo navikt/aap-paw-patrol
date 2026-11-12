@@ -1266,6 +1266,45 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/drift/ettersend-for-person": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["no.nav.aap.postmottak.api.drift.EttersendForPersonRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["no.nav.aap.postmottak.api.drift.EttersendForPersonResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/drift/journalpost/{referanse}/kopier-journalpost": {
         parameters: {
             query?: never;
@@ -1444,6 +1483,16 @@ export interface components {
             /** @enum {string} */
             status: "AVSLUTTET" | "IVERKSETTES" | "OPPRETTET" | "UTREDES";
             type: string;
+        };
+        "no.nav.aap.postmottak.api.drift.EttersendForPersonRequest": {
+            eksternReferanseId?: string | null;
+            filNavn: string;
+            ident: string;
+            pdfBase64: string;
+        };
+        "no.nav.aap.postmottak.api.drift.EttersendForPersonResponse": {
+            /** Format: int64 */
+            journalpostId: number;
         };
         "no.nav.aap.postmottak.api.drift.ForenkletAvklaringsbehov": {
             definisjon: components["schemas"]["no.nav.aap.postmottak.kontrakt.avklaringsbehov.Definisjon"];

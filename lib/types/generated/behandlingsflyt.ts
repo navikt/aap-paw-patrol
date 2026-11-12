@@ -7145,6 +7145,7 @@ export interface components {
             /** @enum {string} */
             "innkommendeUtg\u00E5ende": "INNKOMMENDE" | "UTGÅENDE";
             journalpostId?: string | null;
+            "kanSendeManuellP\u00E5minnelse": boolean;
             meldingFraNavn?: string | null;
             /** @enum {string|null} */
             meldingStatus?: "FEILET" | "LEVERT" | "SENDT" | null;
@@ -7154,6 +7155,11 @@ export interface components {
              */
             opprettetTidspunkt: string;
             "p\u00E5minnelseAvbrutt"?: boolean | null;
+            /**
+             * Format: date-time
+             * @example 2025-04-01T12:30:00
+             */
+            "sisteForesp\u00F8rselSendt"?: string | null;
             tekst?: string | null;
         };
         "no.nav.aap.behandlingsflyt.behandling.behandlerdialog.MeldingMedDokumenterDto": {

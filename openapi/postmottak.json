@@ -292,6 +292,47 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.postmottak.api.drift.EttersendForPersonRequest": {
+        "nullable": false,
+        "properties": {
+          "eksternReferanseId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "filNavn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "ident": {
+            "nullable": false,
+            "type": "string"
+          },
+          "pdfBase64": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "filNavn",
+          "ident",
+          "pdfBase64"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.drift.EttersendForPersonResponse": {
+        "nullable": false,
+        "properties": {
+          "journalpostId": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "journalpostId"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.postmottak.api.drift.ForenkletAvklaringsbehov": {
         "nullable": false,
         "properties": {
@@ -3311,6 +3352,41 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.PersonSøkDriftsinfoDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/drift/ettersend-for-person": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.EttersendForPersonRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.EttersendForPersonResponse"
                 }
               }
             },
