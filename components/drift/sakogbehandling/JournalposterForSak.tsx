@@ -39,7 +39,7 @@ export const JournalposterForSak = ({ saksnummer }: { saksnummer: string }) => {
     <Box
       background="neutral-soft"
       padding="space-16"
-      marginBlock="space-16"
+      margin="space-16"
       borderRadius="16"
       borderColor="neutral-subtle"
       borderWidth="1"
