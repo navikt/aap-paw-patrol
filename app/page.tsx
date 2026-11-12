@@ -9,6 +9,7 @@ import {
   ClockIcon,
   EnvelopeClosedIcon,
   FileJsonIcon,
+  FilePdfIcon,
   FilterIcon,
   MagnifyingGlassIcon,
   PersonIcon,
@@ -228,6 +229,15 @@ export default function Home() {
                 </LinkCardIcon>
                 <LinkCardTitle>
                   <LinkCardAnchor href="/drift/oppgaver-ikke-endret">Gamle oppgaver som ikke er endret</LinkCardAnchor>
+                </LinkCardTitle>
+              </LinkCard>
+
+              <LinkCard size="small">
+                <LinkCardIcon>
+                  <FilePdfIcon fontSize="2rem"  />
+                </LinkCardIcon>
+                <LinkCardTitle>
+                  <LinkCardAnchor href="/drift/ettersend-for-person">Ettersend dokument for person</LinkCardAnchor>
                 </LinkCardTitle>
               </LinkCard>
             </HGrid>

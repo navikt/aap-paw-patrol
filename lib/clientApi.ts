@@ -334,6 +334,16 @@ export function hentJournalposterForPerson(
   });
 }
 
+export function ettersendForPerson(
+  dokument: unknown
+): FetchResult<unknown> {
+  return fetchTyped<unknown>(`/api/drift/postmottak/ettersend-for-person`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dokument),
+  });
+}
+
 export function hentBehandler(
   saksnummer: string,
   fritekst: string

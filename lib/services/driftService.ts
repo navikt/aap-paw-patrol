@@ -289,3 +289,9 @@ export const hentJoarkAvstemming = async () => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('postmottak');
   return await fetchProxy<AvstemmingsrapportDto>(`${baseUrl}/api/drift/joark-avstemming`, scope, 'GET');
 };
+
+export const ettersendDokumentForPerson = async (payload: object) => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('postmottak');
+  const url = `${baseUrl}/api/drift/ettersend-for-person`;
+  return await fetchProxy<string>(url, scope, 'POST', payload);
+};
