@@ -6,6 +6,7 @@ import { FetchJsonBody, hentSakDriftsinfo } from 'lib/clientApi';
 import { SakInfoPanel } from 'components/drift/sakogbehandling/SakInfoPanel';
 import { capitalize, normaliserSaksnummer } from 'lib/utils/formatting';
 import { BehandlingOversikt } from 'components/drift/sakogbehandling/behandlinger/BehandlingOversikt';
+import { JournalposterForSak } from 'components/drift/sakogbehandling/JournalposterForSak';
 import { MottatteDokumenter } from 'components/drift/sakogbehandling/dokumenter/MottatteDokumenter';
 import { Dialogmeldinger } from 'components/drift/sakogbehandling/dialogmeldinger/Dialogmeldinger';
 import { Meldekort } from 'components/drift/sakogbehandling/meldekort/Meldekort';
@@ -17,6 +18,7 @@ type SakDriftsinfoDTO = FetchJsonBody<ReturnType<typeof hentSakDriftsinfo>>;
 
 enum Tab {
   BEHANDLINGER = 'behandlinger',
+  JOURNALPOSTER = 'journalposter',
   MOTTATTE_DOKUMENTER = 'mottatte-dokumenter',
   DIALOGMELDINGER = 'dialogmeldinger',
   MELDEKORT = 'meldekort',
@@ -102,6 +104,7 @@ export const SakOversikt = ({ saksnummer, harDriftTilgang }: { saksnummer: strin
           <Tabs onChange={endreFane} value={tab}>
             <Tabs.List>
               <Tabs.Tab value={Tab.BEHANDLINGER} label="Behandlinger" />
+              <Tabs.Tab value={Tab.JOURNALPOSTER} label="Journalposter" />
               <Tabs.Tab value={Tab.MOTTATTE_DOKUMENTER} label="Mottatte dokumenter" />
               <Tabs.Tab value={Tab.DIALOGMELDINGER} label="Dialogmeldinger" />
               <Tabs.Tab value={Tab.MELDEKORT} label="Meldekort" />
@@ -111,6 +114,9 @@ export const SakOversikt = ({ saksnummer, harDriftTilgang }: { saksnummer: strin
 
             <Tabs.Panel value={Tab.BEHANDLINGER}>
               <BehandlingOversikt saksnummer={saksnummer} behandlinger={sak?.behandlinger ?? []} />
+            </Tabs.Panel>
+            <Tabs.Panel value={Tab.JOURNALPOSTER}>
+              <JournalposterForSak key={saksnummer} saksnummer={normaliserSaksnummer(saksnummer.trim())} />
             </Tabs.Panel>
             <Tabs.Panel value={Tab.MOTTATTE_DOKUMENTER}>
               <MottatteDokumenter saksnummer={saksnummer} />

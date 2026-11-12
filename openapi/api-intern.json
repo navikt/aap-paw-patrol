@@ -2788,6 +2788,10 @@
             "nullable": false,
             "type": "integer"
           },
+          "vedtakstatuskode": {
+            "nullable": false,
+            "type": "string"
+          },
           "vedtaktypeKode": {
             "nullable": false,
             "type": "string"
@@ -2796,6 +2800,7 @@
         "required": [
           "aktfaseKode",
           "vedtakId",
+          "vedtakstatuskode",
           "vedtaktypeKode"
         ],
         "type": "object"
@@ -5326,7 +5331,7 @@
                     {
                       "status": "LØPENDE",
                       "saksnummer": "4MGL8LS",
-                      "vedtaksdato": "2026-11-06",
+                      "vedtaksdato": "2026-11-11",
                       "periode": {
                         "fraOgMedDato": "2021-01-01",
                         "tilOgMedDato": "2021-01-31"
