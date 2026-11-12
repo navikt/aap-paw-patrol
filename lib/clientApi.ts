@@ -390,6 +390,15 @@ export function hentUtbetalingStatusAntall(): FetchResult<UtbetalPaths['/admin/u
   });
 }
 
+export function hentUtbetalingsmeldinger(
+  saksnummer: string
+): FetchResult<UtbetalPaths['/admin/utbetalingsmelding/{saksnummer}']['get']> {
+  return fetchTyped<UtbetalPaths['/admin/utbetalingsmelding/{saksnummer}']['get']>(
+    `/api/drift/utbetaling/meldinger/${encodeURIComponent(saksnummer)}`,
+    { method: 'GET', cache: 'no-store' }
+  );
+}
+
 export function hentMigreringsStatus(): FetchResult<UtbetalPaths['/admin/migrering/status']['get']> {
   return fetchTyped<UtbetalPaths['/admin/migrering/status']['get']>(`/api/drift/utbetaling/migrering`, {
     method: 'GET',

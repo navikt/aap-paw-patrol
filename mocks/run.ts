@@ -12,10 +12,48 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { HttpResponse, http } from 'msw';
 import type { RequestHandler } from 'msw';
+import type { components as UtbetalComponents } from '../lib/types/generated/utbetal.ts';
 import { startMockHttpServer } from './standaloneServer.ts';
 import { getMockBasePath, getMockName, MOCK_SPECS } from './mock-specs.mjs';
 
 const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+
+type UtbetalingsmeldingDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingsmeldingMedStatusDto'];
+
+const mockUtbetalingsmeldinger: UtbetalingsmeldingDto[] = [
+  {
+    melding: `{
+  "type": "UTBETALING",
+  "saksnummer": "TEST123",
+  "belop": 1250
+}`,
+    opprettet: '2025-04-01T12:30:00',
+    referanse: '11111111-1111-4111-8111-111111111111',
+    status: 'MOTTATT',
+    utbetalingsmeldingType: 'UTBETALING',
+  },
+  {
+    melding: `{
+  "type": "UTBETALING",
+  "saksnummer": "TEST123",
+  "belop": 1250
+}`,
+    opprettet: '2025-04-01T12:31:00',
+    referanse: '11111111-1111-4111-8111-111111111111',
+    status: 'OK',
+    utbetalingsmeldingType: 'UTBETALING',
+  },
+  {
+    melding: `{
+  "type": "SLETT_AVVENT_PERIODE",
+  "saksnummer": "TEST123"
+}`,
+    opprettet: '2025-04-02T09:15:00',
+    referanse: '22222222-2222-4222-8222-222222222222',
+    status: 'SENDT',
+    utbetalingsmeldingType: 'SLETT_AVVENT_PERIODE',
+  },
+];
 
 function loadEnvLocal() {
   const envPath = path.join(rootDir, '.env.local');
@@ -68,7 +106,28 @@ async function startAll() {
               UKJENT_STATUS: 1,
             },
           })
-        )
+        ),
+        http.get(`${mockBaseUrl}${getMockBasePath(spec)}/admin/utbetalingsmelding/:saksnummer`, ({ params }) => {
+          const saksnummer = String(params.saksnummer).toUpperCase();
+
+          if (saksnummer === 'TOM') return HttpResponse.json([]);
+          if (saksnummer === 'FEIL') {
+            return HttpResponse.json({ detail: 'Synthetic mock service error' }, { status: 500 });
+          }
+          if (saksnummer === 'INGENTILGANG') {
+            return HttpResponse.json({ detail: 'Synthetic mock access denied' }, { status: 403 });
+          }
+          if (saksnummer === 'UGYLDIGJSON') {
+            return HttpResponse.json([
+              {
+                ...mockUtbetalingsmeldinger[0],
+                melding: '{ invalid synthetic JSON',
+              },
+            ]);
+          }
+
+          return HttpResponse.json(mockUtbetalingsmeldinger);
+        })
       );
     }
 

@@ -3,6 +3,7 @@ import { isDev, isLocal } from '@navikt/aap-felles-utils';
 import { components as PostmottakComponents } from 'lib/types/generated/postmottak';
 import { components as UtbetalComponents } from 'lib/types/generated/utbetal';
 import { components as BehandlingsflytComponents } from 'lib/types/generated/behandlingsflyt';
+import type { UtbetalingsmeldingDto } from 'lib/types/utbetaling';
 
 type JournalpostDriftsinfoDto =
   PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.JournalpostDriftsinfoDto'];
@@ -214,6 +215,19 @@ export const hentUtbetalingStatusAntall = async () => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('utbetal');
   const url = `${baseUrl}/admin/utbetalingsmelding/status`;
   return await fetchProxy<UtbetalingStatusAntallDto>(url, scope, 'GET');
+};
+
+export const hentUtbetalingsmeldinger = async (saksnummer: string) => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('utbetal');
+  const url = `${baseUrl}/admin/utbetalingsmelding/${encodeURIComponent(saksnummer)}`;
+  return await fetchProxy<UtbetalingsmeldingDto[]>(
+    url,
+    scope,
+    'GET',
+    undefined,
+    undefined,
+    'hent-utbetalingsmeldinger'
+  );
 };
 
 export const hentMigreringsStatus = async () => {
