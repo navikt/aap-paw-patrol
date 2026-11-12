@@ -40,16 +40,20 @@ export const EttersendDokument = () => {
 
     try {
       const pdfBase64 = await fileToBase64(file.file);
-      const response = await ettersendForPerson({
-        ident,
-        eksternReferanseId: eksternReferanseId || null,
-        pdfBase64,
-        filNavn: file.file.name,
-      });
-      if (response.ok) {
-        setMessage('ok 👍');
+      if(pdfBase64){
+        const response = await ettersendForPerson({
+          ident,
+          eksternReferanseId: eksternReferanseId || null,
+          pdfBase64,
+          filNavn: file.file.name,
+        });
+        if (response.ok) {
+          setMessage('ok 👍');
+        } else {
+          setMessage(await response.text());
+        }
       } else {
-        setMessage(await response.text());
+        setMessage('Noe gikk galt med base64-enkoding av pdfen')
       }
     } catch (err) {
       console.log(err);

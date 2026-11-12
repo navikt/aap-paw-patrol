@@ -8,6 +8,10 @@ type JournalpostDriftsinfoDto =
   PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.JournalpostDriftsinfoDto'];
 type PersonSøkJournalposterDto =
   PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.PersonSøkDriftsinfoDto'];
+export type EttersendForPersonRequest =
+  PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.EttersendForPersonRequest'];
+type EttersendForPersonResponse =
+  PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.EttersendForPersonResponse'];
 type AvstemmingsrapportDto = PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.AvstemmingsrapportDto'];
 type UtbetalingStatusDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingStatusDto'];
 type UtbetalingStatusAntallDto = UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingStatusAntallDto'];
@@ -290,8 +294,8 @@ export const hentJoarkAvstemming = async () => {
   return await fetchProxy<AvstemmingsrapportDto>(`${baseUrl}/api/drift/joark-avstemming`, scope, 'GET');
 };
 
-export const ettersendDokumentForPerson = async (payload: object) => {
+export const ettersendDokumentForPerson = async (payload: EttersendForPersonRequest) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('postmottak');
   const url = `${baseUrl}/api/drift/ettersend-for-person`;
-  return await fetchProxy<string>(url, scope, 'POST', payload);
+  return await fetchProxy<EttersendForPersonResponse>(url, scope, 'POST', payload);
 };

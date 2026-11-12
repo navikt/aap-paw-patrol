@@ -1,4 +1,4 @@
-import { AppNavn } from 'lib/services/driftService';
+import { AppNavn, EttersendForPersonRequest } from 'lib/services/driftService';
 import type { paths as ApiInternPaths } from 'lib/types/generated/api-intern';
 import type { paths as BehandlingsflytPaths } from 'lib/types/generated/behandlingsflyt';
 import type { paths as BrevPaths } from 'lib/types/generated/brev';
@@ -335,9 +335,9 @@ export function hentJournalposterForPerson(
 }
 
 export function ettersendForPerson(
-  dokument: unknown
-): FetchResult<unknown> {
-  return fetchTyped<unknown>(`/api/drift/postmottak/ettersend-for-person`, {
+  dokument: EttersendForPersonRequest
+): FetchResult<PostmottakPaths['/api/drift/ettersend-for-person']['post']> {
+  return fetchTyped<PostmottakPaths['/api/drift/ettersend-for-person']['post']>(`/api/drift/postmottak/ettersend-for-person`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(dokument),
