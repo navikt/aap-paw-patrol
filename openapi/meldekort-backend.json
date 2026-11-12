@@ -1176,7 +1176,7 @@
   "info": {
     "description": "For å teste API i dev, besøk\n<a href=\"https://tokenx-token-generator.intern.dev.nav.no/api/obo?aud=dev-gcp:aap:meldekort-backend\">Token Generator</a> for å få token.",
     "title": "AAP - Meldekort",
-    "version": "430a3c1e511ac7bb0a8c9f2e11c4e385ac108fb8"
+    "version": "95718d94cc2ccf46c4f0db2cce8290662fd38c40"
   },
   "openapi": "3.0.0",
   "paths": {

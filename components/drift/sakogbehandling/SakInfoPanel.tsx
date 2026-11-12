@@ -1,7 +1,7 @@
-import { BodyShort, HStack, Label, List, VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, Label, Link, List, VStack } from '@navikt/ds-react';
 import { FetchJsonBody, hentSakDriftsinfo } from 'lib/clientApi';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { OppdaterIdenterModal } from 'components/drift/person-identer/OppdaterIdenterModal';
 
 type SakDriftsinfoDTO = FetchJsonBody<ReturnType<typeof hentSakDriftsinfo>>;
@@ -44,7 +44,9 @@ export const SakInfoPanel = ({ sak }: { sak: SakDriftsinfoDTO }) => (
         <List>
           {sak.andreSakerPåBruker.map((saksnummer) => (
             <List.Item key={`rel-sak-${saksnummer}`}>
-              <Link href={`/drift/sak/${saksnummer}`}>{saksnummer}</Link>
+              <Link as={NextLink} href={`/drift/sak/${saksnummer}`}>
+                {saksnummer}
+              </Link>
             </List.Item>
           ))}
         </List>

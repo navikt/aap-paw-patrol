@@ -11,6 +11,7 @@ import {
   HGrid,
   HStack,
   Label,
+  Link,
   Loader,
   Table,
   Tabs,
@@ -22,7 +23,7 @@ import { AvklaringsbehovStatus, ForenkletAvklaringsbehov } from 'lib/types/avkla
 import { kanalInfo } from 'lib/types/postmottak';
 import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { formaterBehandlingType } from 'lib/utils/formatting';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
 
 import { AvklaringsbehovInfo } from 'components/drift/sakogbehandling/avklaringsbehov/AvklaringsbehovInfo';
@@ -382,7 +383,9 @@ export const JournalpostOversikt = ({ journalpostId }: { journalpostId: string }
                 <Label size="small">Saksnummer</Label>
                 {journalpost.saksnummer ? (
                   <BodyShort>
-                    <Link href={`/drift/sak/${journalpost.saksnummer}`}>{journalpost.saksnummer}</Link>
+                    <Link as={NextLink} href={`/drift/sak/${journalpost.saksnummer}`}>
+                      {journalpost.saksnummer}
+                    </Link>
                   </BodyShort>
                 ) : (
                   <BodyShort textColor="subtle">Ikke tildelt</BodyShort>

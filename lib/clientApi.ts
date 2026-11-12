@@ -216,6 +216,15 @@ export function hentMottatteDokumenter(
   );
 }
 
+export function hentJournalposterForSak(
+  saksnummer: string
+): FetchResult<PostmottakPaths['/api/drift/sak/{saksnummer}/journalposter']['get']> {
+  return fetchTyped<PostmottakPaths['/api/drift/sak/{saksnummer}/journalposter']['get']>(
+    `/api/drift/sak/${encodeURIComponent(saksnummer)}/journalposter`,
+    { method: 'GET' }
+  );
+}
+
 export function hentMeldekortDriftsinfo(
   saksnummer: string
 ): FetchResult<MeldekortBackendPaths['/api/drift/sak/{saksnummer}/meldekort']['get']> {

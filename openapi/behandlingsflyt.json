@@ -22337,7 +22337,7 @@
   "info": {
     "description": "For å teste API i dev, besøk\n<a href=\"https://azure-token-generator.intern.dev.nav.no/api/m2m?aud=dev-gcp:aap:behandlingsflyt\">Token Generator</a> for å få token.",
     "title": "AAP - Behandlingsflyt",
-    "version": "0de9f0abdcca447d6041d439c2001596f61bbd81"
+    "version": "c2baa0e3d2022454bfeb041c9cda6beceda9df9a"
   },
   "openapi": "3.0.0",
   "paths": {

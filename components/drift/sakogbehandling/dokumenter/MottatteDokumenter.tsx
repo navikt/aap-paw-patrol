@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { hentMottatteDokumenter } from 'lib/clientApi';
 import { MottattDokumentDriftsinfoDTO } from 'lib/types/dokumenter';
-import { Alert, BodyShort, Box, Heading, HelpText, HStack, Loader, Table } from '@navikt/ds-react';
+import { Alert, BodyShort, Box, Heading, HelpText, HStack, Link, Loader, Table } from '@navikt/ds-react';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
-import Link from 'next/link';
+import NextLink from 'next/link';
 
 export const MottatteDokumenter = ({ saksnummer }: { saksnummer: string }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -78,7 +78,9 @@ export const MottatteDokumenter = ({ saksnummer }: { saksnummer: string }) => {
             <Table.Row key={crypto.randomUUID()}>
               <Table.DataCell>
                 {dokument.referanse.type === 'JOURNALPOST' ? (
-                  <Link href={`/drift/postmottak/${dokument.referanse.verdi}`}>{dokument.referanse.verdi}</Link>
+                  <Link as={NextLink} href={`/drift/postmottak/${dokument.referanse.verdi}`}>
+                    {dokument.referanse.verdi}
+                  </Link>
                 ) : (
                   dokument.referanse.verdi
                 )}
@@ -86,7 +88,7 @@ export const MottatteDokumenter = ({ saksnummer }: { saksnummer: string }) => {
               <Table.DataCell>{capitalize(dokument.referanse.type)}</Table.DataCell>
               <Table.DataCell>
                 {dokument.behandlingReferanse ? (
-                  <Link href={`/drift/sak/${saksnummer}?behandlingref=${dokument.behandlingReferanse}`}>
+                  <Link as={NextLink} href={`/drift/sak/${saksnummer}?behandlingref=${dokument.behandlingReferanse}`}>
                     {dokument.behandlingReferanse}
                   </Link>
                 ) : (
