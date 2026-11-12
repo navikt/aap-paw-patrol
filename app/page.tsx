@@ -131,6 +131,15 @@ export default function Home() {
 
               <LinkCard size="small">
                 <LinkCardIcon>
+                  <MagnifyingGlassIcon fontSize="2rem" />
+                </LinkCardIcon>
+                <LinkCardTitle>
+                  <LinkCardAnchor href="/drift/utbetaling/meldinger">Utbetalingsmeldinger</LinkCardAnchor>
+                </LinkCardTitle>
+              </LinkCard>
+
+              <LinkCard size="small">
+                <LinkCardIcon>
                   <ArrowsSquarepathIcon fontSize="2rem" />
                 </LinkCardIcon>
                 <LinkCardTitle>

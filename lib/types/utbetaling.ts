@@ -1,3 +1,8 @@
+import type { components as UtbetalComponents } from 'lib/types/generated/utbetal';
+
+export type UtbetalingsmeldingDto =
+  UtbetalComponents['schemas']['no.nav.aap.utbetal.admin.UtbetalingsmeldingMedStatusDto'];
+
 export interface UtbetalingStatusDto {
   utbetalingerSomManglerKvittering: UtbetalingInfoDto[];
   utbetalingerMedFeiletStatus: UtbetalingInfoDto[];

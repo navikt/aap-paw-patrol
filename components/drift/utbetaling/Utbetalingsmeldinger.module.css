@@ -1,0 +1,79 @@
+.container {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.searchForm {
+  max-width: 36rem;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-8);
+}
+
+.tableScroll {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+.table {
+  min-width: 61rem;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.expandColumn {
+  width: 3rem;
+}
+
+.referenceHeader {
+  width: 18rem;
+}
+
+.referenceColumn {
+  display: table-cell;
+  white-space: nowrap;
+  font-family: monospace;
+  font-size: 0.7rem;
+}
+
+.referenceContent {
+  display: flex;
+  align-items: center;
+  gap: var(--ax-space-4);
+}
+
+.typeColumn {
+  width: 18rem;
+}
+
+.dateColumn {
+  width: 14rem;
+  white-space: nowrap;
+}
+
+.statusColumn {
+  width: 8rem;
+  white-space: nowrap;
+}
+
+.messageScroll {
+  box-sizing: border-box;
+  max-width: 100%;
+  max-height: 32rem;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: var(--ax-space-12);
+  background: var(--ax-bg-sunken);
+}
+
+.messageScroll pre {
+  margin: 0;
+  white-space: pre;
+  overflow-wrap: normal;
+  font-family: monospace;
+}
