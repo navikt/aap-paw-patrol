@@ -4,6 +4,41 @@
  */
 
 export interface paths {
+    "/api/v2/ansvarlig-system": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["no.nav.aap.meldekort.AnsvarligeMeldekortl\u00F8sningerDto"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/ansvarlig-system": {
         parameters: {
             query?: never;
@@ -1037,6 +1072,10 @@ export interface components {
             /** @enum {string|null} */
             status?: "AVSLUTTET" | "LØPENDE" | "UTREDES" | null;
         };
+        "no.nav.aap.meldekort.AnsvarligeMeldekortl\u00F8sningerDto": {
+            arena?: components["schemas"]["no.nav.aap.meldekort.Meldekortl\u00F8sningDto"];
+            kelvin?: components["schemas"]["no.nav.aap.meldekort.Meldekortl\u00F8sningDto"];
+        };
         "no.nav.aap.meldekort.DagSvarDto": {
             /**
              * Format: date
@@ -1080,6 +1119,10 @@ export interface components {
              * @example 2025-04-01
              */
             kanSendesFra: string;
+        };
+        "no.nav.aap.meldekort.Meldekortl\u00F8sningDto": {
+            rettighetsperiode: components["schemas"]["no.nav.aap.meldekort.PeriodeDto"];
+            saksnummer: string;
         };
         "no.nav.aap.meldekort.MeldekortstatusDto": {
             harInnsendteMeldekort: boolean;

@@ -947,7 +947,7 @@ export interface paths {
                          *         {
                          *           "status": "LØPENDE",
                          *           "saksnummer": "4MGL8LS",
-                         *           "vedtaksdato": "2026-11-06",
+                         *           "vedtaksdato": "2026-11-11",
                          *           "periode": {
                          *             "fraOgMedDato": "2021-01-01",
                          *             "tilOgMedDato": "2021-01-31"
@@ -2749,6 +2749,7 @@ export interface components {
             til?: string | null;
             /** Format: int32 */
             vedtakId: number;
+            vedtakstatuskode: string;
             vedtaktypeKode: string;
         };
         "no.nav.aap.arenaoppslag.kontrakt.intern.ManuellFordelingsgrunnlagRequest": {

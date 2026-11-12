@@ -1153,6 +1153,44 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/drift/sak/{saksnummer}/journalposter": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description saksnummer */
+                    saksnummer: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["no.nav.aap.postmottak.api.drift.SakJournalposterDto"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/drift/behandling/{referanse}/prosesser": {
         parameters: {
             query?: never;
@@ -1218,6 +1256,45 @@ export interface paths {
                     };
                     content: {
                         "application/json": components["schemas"]["no.nav.aap.postmottak.api.drift.PersonS\u00F8kDriftsinfoDto"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/drift/ettersend-for-person": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["no.nav.aap.postmottak.api.drift.EttersendForPersonRequest"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["no.nav.aap.postmottak.api.drift.EttersendForPersonResponse"];
                     };
                 };
             };
@@ -1407,6 +1484,16 @@ export interface components {
             status: "AVSLUTTET" | "IVERKSETTES" | "OPPRETTET" | "UTREDES";
             type: string;
         };
+        "no.nav.aap.postmottak.api.drift.EttersendForPersonRequest": {
+            eksternReferanseId?: string | null;
+            filNavn: string;
+            ident: string;
+            pdfBase64: string;
+        };
+        "no.nav.aap.postmottak.api.drift.EttersendForPersonResponse": {
+            /** Format: int64 */
+            journalpostId: number;
+        };
         "no.nav.aap.postmottak.api.drift.ForenkletAvklaringsbehov": {
             definisjon: components["schemas"]["no.nav.aap.postmottak.kontrakt.avklaringsbehov.Definisjon"];
             endretAv: string;
@@ -1464,8 +1551,24 @@ export interface components {
             saksnummer?: string | null;
             tema?: string | null;
         };
+        "no.nav.aap.postmottak.api.drift.JournalpostP\u00E5SakDto": {
+            journalpostId: components["schemas"]["no.nav.aap.postmottak.kontrakt.journalpost.JournalpostId"];
+            /** @enum {string|null} */
+            journalstatus?: "AVBRUTT" | "EKSPEDERT" | "FEILREGISTRERT" | "FERDIGSTILT" | "JOURNALFOERT" | "MOTTATT" | "OPPLASTING_DOKUMENT" | "RESERVERT" | "UKJENT" | "UKJENT_BRUKER" | "UNDER_ARBEID" | "UTGAAR" | null;
+            /** @enum {string|null} */
+            kanal?: "ALTINN" | "ALTINN_INNBOKS" | "DPVT" | "EESSI" | "EIA" | "EKST_OPPS" | "E_POST" | "HELSENETTET" | "INGEN_DISTRIBUSJON" | "INNSENDT_NAV_ANSATT" | "LOKAL_UTSKRIFT" | "NAV_NO" | "NAV_NO_CHAT" | "NAV_NO_UINNLOGGET" | "SDP" | "SENTRAL_UTSKRIFT" | "SKAN_IM" | "SKAN_NETS" | "SKAN_PEN" | "TRYGDERETTEN" | "UKJENT" | null;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            mottattDato?: string | null;
+            tema?: string | null;
+        };
         "no.nav.aap.postmottak.api.drift.PersonS\u00F8kDriftsinfoDto": {
             journalposter: components["schemas"]["no.nav.aap.postmottak.api.drift.InnkommendeJournalpostDto"][];
+        };
+        "no.nav.aap.postmottak.api.drift.SakJournalposterDto": {
+            journalposter: components["schemas"]["no.nav.aap.postmottak.api.drift.JournalpostP\u00E5SakDto"][];
         };
         "no.nav.aap.postmottak.api.faktagrunnlag.dokument.DokumentDto": {
             dokumentInfoId: string;

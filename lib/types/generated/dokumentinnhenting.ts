@@ -1150,7 +1150,7 @@ export interface paths {
             };
             requestBody?: {
                 content: {
-                    "application/json": components["schemas"]["no.nav.aap.dokumentinnhenting.kontrakt.P\u00E5minnelseDto"];
+                    "application/json": components["schemas"]["dokumentinnhenting.api.P\u00E5minnelseRequest"];
                 };
             };
             responses: {
@@ -1189,7 +1189,7 @@ export interface paths {
             };
             requestBody?: {
                 content: {
-                    "application/json": components["schemas"]["no.nav.aap.dokumentinnhenting.kontrakt.P\u00E5minnelseDto"];
+                    "application/json": components["schemas"]["dokumentinnhenting.api.P\u00E5minnelseRequest"];
                 };
             };
             responses: {
@@ -1211,123 +1211,6 @@ export interface paths {
         trace?: never;
     };
     "/dialogmelding/paaminnelse/gjenoppta-automatisk-paaminnelse": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["no.nav.aap.dokumentinnhenting.kontrakt.P\u00E5minnelseDto"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["io.ktor.http.HttpStatusCode"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/dialogmelding/paaminnelse/v2/send": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["dokumentinnhenting.api.P\u00E5minnelseRequest"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": string;
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/dialogmelding/paaminnelse/v2/avbryt-automatisk-paaminnelse": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["dokumentinnhenting.api.P\u00E5minnelseRequest"];
-                };
-            };
-            responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["io.ktor.http.HttpStatusCode"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/dialogmelding/paaminnelse/v2/gjenoppta-automatisk-paaminnelse": {
         parameters: {
             query?: never;
             header?: never;
@@ -1816,6 +1699,7 @@ export interface components {
             /** @enum {string} */
             "innkommendeUtg\u00E5ende": "INNKOMMENDE" | "UTGÅENDE";
             journalpostId?: string | null;
+            "kanSendeManuellP\u00E5minnelse": boolean;
             meldingFraNavn: string;
             /** @enum {string|null} */
             meldingStatus?: "FEILET" | "LEVERT" | "SENDT" | null;
@@ -1824,6 +1708,11 @@ export interface components {
              * @example 2025-04-01T12:30:00
              */
             opprettetTidspunkt: string;
+            /**
+             * Format: date-time
+             * @example 2025-04-01T12:30:00
+             */
+            "sisteForesp\u00F8rselSendt"?: string | null;
             tekst?: string | null;
         };
         "no.nav.aap.dokumentinnhenting.kontrakt.Forh\u00E5ndsvisDialogmeldingDto": {
@@ -1843,10 +1732,6 @@ export interface components {
             journalpost?: components["schemas"]["no.nav.aap.dokumentinnhenting.kontrakt.BegrensetJournalpostDto"];
         };
         "no.nav.aap.dokumentinnhenting.kontrakt.Legeerkl\u00E6ringPurringDto": {
-            /** Format: uuid */
-            dialogmeldingUuid: string;
-        };
-        "no.nav.aap.dokumentinnhenting.kontrakt.P\u00E5minnelseDto": {
             /** Format: uuid */
             dialogmeldingUuid: string;
         };

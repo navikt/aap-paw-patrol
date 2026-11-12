@@ -292,6 +292,47 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.postmottak.api.drift.EttersendForPersonRequest": {
+        "nullable": false,
+        "properties": {
+          "eksternReferanseId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "filNavn": {
+            "nullable": false,
+            "type": "string"
+          },
+          "ident": {
+            "nullable": false,
+            "type": "string"
+          },
+          "pdfBase64": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "filNavn",
+          "ident",
+          "pdfBase64"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.drift.EttersendForPersonResponse": {
+        "nullable": false,
+        "properties": {
+          "journalpostId": {
+            "format": "int64",
+            "nullable": false,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "journalpostId"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.postmottak.api.drift.ForenkletAvklaringsbehov": {
         "nullable": false,
         "properties": {
@@ -533,12 +574,95 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.postmottak.api.drift.JournalpostPåSakDto": {
+        "nullable": false,
+        "properties": {
+          "journalpostId": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.kontrakt.journalpost.JournalpostId"
+          },
+          "journalstatus": {
+            "enum": [
+              "AVBRUTT",
+              "EKSPEDERT",
+              "FEILREGISTRERT",
+              "FERDIGSTILT",
+              "JOURNALFOERT",
+              "MOTTATT",
+              "OPPLASTING_DOKUMENT",
+              "RESERVERT",
+              "UKJENT",
+              "UKJENT_BRUKER",
+              "UNDER_ARBEID",
+              "UTGAAR"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "kanal": {
+            "enum": [
+              "ALTINN",
+              "ALTINN_INNBOKS",
+              "DPVT",
+              "EESSI",
+              "EIA",
+              "EKST_OPPS",
+              "E_POST",
+              "HELSENETTET",
+              "INGEN_DISTRIBUSJON",
+              "INNSENDT_NAV_ANSATT",
+              "LOKAL_UTSKRIFT",
+              "NAV_NO",
+              "NAV_NO_CHAT",
+              "NAV_NO_UINNLOGGET",
+              "SDP",
+              "SENTRAL_UTSKRIFT",
+              "SKAN_IM",
+              "SKAN_NETS",
+              "SKAN_PEN",
+              "TRYGDERETTEN",
+              "UKJENT"
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "mottattDato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "tema": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "journalpostId"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.postmottak.api.drift.PersonSøkDriftsinfoDto": {
         "nullable": false,
         "properties": {
           "journalposter": {
             "items": {
               "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.InnkommendeJournalpostDto"
+            },
+            "nullable": false,
+            "type": "array"
+          }
+        },
+        "required": [
+          "journalposter"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.drift.SakJournalposterDto": {
+        "nullable": false,
+        "properties": {
+          "journalposter": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.JournalpostPåSakDto"
             },
             "nullable": false,
             "type": "array"
@@ -3135,6 +3259,47 @@
         ]
       }
     },
+    "/api/drift/sak/{saksnummer}/journalposter": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "saksnummer",
+            "explode": false,
+            "in": "path",
+            "name": "saksnummer",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.SakJournalposterDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
     "/api/drift/behandling/{referanse}/prosesser": {
       "post": {
         "parameters": [
@@ -3187,6 +3352,41 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.PersonSøkDriftsinfoDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/drift/ettersend-for-person": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.EttersendForPersonRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.EttersendForPersonResponse"
                 }
               }
             },
