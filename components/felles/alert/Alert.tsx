@@ -23,14 +23,18 @@ export const Alert = ({ variant, children, size = 'small', className, ...rest }:
         className={className}
         {...rest}
       >
-        {
-          {
-            success: <InfoCardMessage icon={<CheckmarkCircleIcon aria-hidden />}>{children}</InfoCardMessage>,
-            warning: <InfoCardMessage icon={<ExclamationmarkTriangleIcon aria-hidden />}>{children}</InfoCardMessage>,
-            info: <InfoCardMessage icon={<InformationSquareIcon aria-hidden />}>{children}</InfoCardMessage>,
-            error: <InfoCardMessage icon={<XMarkOctagonIcon aria-hidden />}>{children}</InfoCardMessage>,
-          }[variant]
-        }
+        <InfoCardMessage
+          icon={
+            {
+              success: <CheckmarkCircleIcon aria-hidden />,
+              warning: <ExclamationmarkTriangleIcon aria-hidden />,
+              info: <InformationSquareIcon aria-hidden />,
+              error: <XMarkOctagonIcon aria-hidden />,
+            }[variant]
+          }
+        >
+          {children}
+        </InfoCardMessage>
       </InfoCard>
     </Box>
   );
