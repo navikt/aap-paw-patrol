@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { BodyShort, Box, Heading, HStack, Link, Loader, Table } from '@navikt/ds-react';
+import { BodyShort, Box, Heading, HStack, InfoCard, Link, Loader, Table } from '@navikt/ds-react';
 import NextLink from 'next/link';
 import { FetchJsonBody, hentJournalposterForSak } from 'lib/clientApi';
 import { formaterDatoForFrontend } from 'lib/utils/date';
-import { Alert } from 'components/felles/alert/Alert.tsx';
+import { InformationSquareIcon } from '@navikt/aksel-icons';
 
 type SakJournalposterDto = FetchJsonBody<ReturnType<typeof hentJournalposterForSak>>;
 
@@ -46,8 +46,15 @@ export const JournalposterForSak = ({ saksnummer }: { saksnummer: string }) => {
       borderWidth="1"
     >
       <Heading size="medium" level="2" textColor="subtle" spacing>
-        Alle journalposter knyttet til sak{data ? ` (${data.journalposter.length})` : ''}
+        Journalposter tilknyttet sak{data ? ` (${data.journalposter.length})` : ''}
       </Heading>
+      <InfoCard data-color="neutral" size="small">
+        <InfoCard.Message icon={<InformationSquareIcon />}>
+          Viser kun journalposter som har blitt behandlet i Postmottak og knyttet til denne saken. Bruk Gosys for å se
+          alle journalposter på brukeren.
+        </InfoCard.Message>
+      </InfoCard>
+
       {error ? (
         <Alert variant="error" size="small">
           {error}
