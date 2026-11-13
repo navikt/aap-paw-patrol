@@ -1,4 +1,4 @@
-import { Alert } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 
 interface IngenTilgangAlertProps {
   /** Sett til true dersom siden også er tilgjengelig med AAP_DRIFT_LES (ren lesetilgang). */

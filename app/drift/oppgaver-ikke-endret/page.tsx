@@ -1,4 +1,5 @@
-import { Alert, BodyShort, Button, Heading, HStack, Select, TextField, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, HStack, Select, TextField, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { Page, PageBlock } from '@navikt/ds-react/Page';
 import { IngenTilgangAlert } from 'components/drift/IngenTilgangAlert';
 import { OppgaverIkkeEndretDataGrid } from 'components/drift/oppgave/OppgaverIkkeEndretDataGrid';

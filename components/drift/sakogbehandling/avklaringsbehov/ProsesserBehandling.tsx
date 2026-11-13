@@ -1,4 +1,5 @@
-import { Alert, Button, Checkbox, Heading, InlineMessage, VStack } from '@navikt/ds-react';
+import { Button, Checkbox, Heading, InlineMessage, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { useState } from 'react';
 import { FetchJsonBody, hentSakDriftsinfo, prosesserBehandling } from 'lib/clientApi';
 

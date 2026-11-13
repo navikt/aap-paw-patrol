@@ -1,7 +1,8 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { Alert, BodyShort, Box, Heading, HGrid, HStack, Loader, Tabs, Tag, VStack } from '@navikt/ds-react';
+import { BodyShort, Box, Heading, HGrid, HStack, Loader, Tabs, Tag, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { FetchJsonBody, hentSakDriftsinfo } from 'lib/clientApi';
 import { SakInfoPanel } from 'components/drift/sakogbehandling/SakInfoPanel';
 import { capitalize, normaliserSaksnummer } from 'lib/utils/formatting';

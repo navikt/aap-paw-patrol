@@ -1,6 +1,7 @@
 'use client';
 
-import { Alert, BodyShort, Button, Heading, HStack, Loader, Table, TextField, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, HStack, Loader, Table, TextField, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { useState } from 'react';
 import { FetchJsonItem, hentBehandler } from 'lib/clientApi';
 import { hentFeilmelding } from 'lib/utils/feil';

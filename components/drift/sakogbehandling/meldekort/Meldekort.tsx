@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FetchJsonBody, hentMeldekortDriftsinfo } from 'lib/clientApi';
-import { Alert, BodyShort, Box, HStack, Label, Loader } from '@navikt/ds-react';
+import { BodyShort, Box, HStack, Label, Loader } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { MeldekortVarsler } from 'components/drift/sakogbehandling/meldekort/MeldekortVarsler';
 import { MeldekortUtfyllinger } from 'components/drift/sakogbehandling/meldekort/MeldekortUtfyllinger';
 import { MeldekortAktuelleMeldeperioder } from 'components/drift/sakogbehandling/meldekort/MeldekortAktuelleMeldeperioder';

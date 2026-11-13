@@ -1,6 +1,7 @@
 'use client';
 
-import { Alert, Button, VStack } from '@navikt/ds-react';
+import { Button, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 
 export default function OppgaverIkkeEndretError({ reset }: { reset: () => void }) {
   return (

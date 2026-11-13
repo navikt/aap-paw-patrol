@@ -1,8 +1,9 @@
-import { Alert, Heading } from '@navikt/ds-react';
+import { Heading } from '@navikt/ds-react';
 import { Page, PageBlock } from '@navikt/ds-react/Page';
 import { redirect } from 'next/navigation';
 import { erFødselsnummer, erSaksnummer } from 'lib/utils/validering.ts';
 import { normaliserSaksnummer } from 'lib/utils/formatting.ts';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 
 interface Props {
   searchParams: Promise<{ q?: string }>;

@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Alert, Button, Checkbox, CheckboxGroup, HStack, Select, Tag, TextField, VStack } from '@navikt/ds-react';
+import { Button, Checkbox, CheckboxGroup, HStack, Select, Tag, TextField, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { PlusIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { FetchJsonBody, hentOppgavefiltre, lagreOppgavefilter } from 'lib/clientApi';
 import { AvklaringsbehovKodeNavn, BEHANDLINGSTYPER } from 'lib/types/oppgave';

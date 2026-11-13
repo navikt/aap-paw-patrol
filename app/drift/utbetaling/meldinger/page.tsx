@@ -1,4 +1,4 @@
-import { Alert } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { Page, PageBlock } from '@navikt/ds-react/Page';
 import { Utbetalingsmeldinger } from 'components/drift/utbetaling/Utbetalingsmeldinger';
 import { harLeseTilgang, hentRollerForBruker } from 'lib/azure/azureUserService';

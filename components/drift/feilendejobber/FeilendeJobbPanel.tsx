@@ -1,18 +1,7 @@
 'use client';
 
-import {
-  Alert,
-  BodyShort,
-  Box,
-  Button,
-  CopyButton,
-  Detail,
-  Heading,
-  HelpText,
-  HStack,
-  Label,
-  VStack,
-} from '@navikt/ds-react';
+import { BodyShort, Box, Button, CopyButton, Detail, Heading, HelpText, HStack, Label, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { objectToMap } from 'components/drift/jobbtabell/JobbTabell';
 import React, { useEffect, useState } from 'react';
 import { AppNavn, JobbInfo } from 'lib/services/driftService';

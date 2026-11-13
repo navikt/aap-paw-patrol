@@ -1,6 +1,7 @@
 'use client';
 
-import { Alert, Box, Button, Heading, Link, Table, TextField, VStack } from '@navikt/ds-react';
+import { Box, Button, Heading, Link, Table, TextField, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { useCallback, useEffect, useState } from 'react';
 import { MagnifyingGlassIcon } from '@navikt/aksel-icons';
 import { Periode } from 'lib/types/felles';
@@ -92,9 +93,7 @@ export const PersonSøkeside = () => {
     <VStack gap="space-16" marginBlock="space-32" justify="center">
       <Heading size="medium">Hent persondata</Heading>
 
-      <Alert variant="info" inline>
-        Henter saker og journalposter tilknyttet oppgitt person.
-      </Alert>
+      <Alert variant="info">Henter saker og journalposter tilknyttet oppgitt person.</Alert>
 
       <form onSubmit={handleSubmit}>
         <VStack gap="space-12">

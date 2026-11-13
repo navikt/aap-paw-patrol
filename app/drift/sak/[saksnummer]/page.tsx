@@ -1,6 +1,6 @@
 import { Page, PageBlock } from '@navikt/ds-react/Page';
 import { harDriftTilgang, harLeseTilgang, hentRollerForBruker } from 'lib/azure/azureUserService';
-import { Alert } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { SakOversikt } from 'components/drift/sakogbehandling/SakOversikt';
 import { SakNavbar } from 'components/drift/navbar/SakNavbar';
 import { IngenTilgangAlert } from 'components/drift/IngenTilgangAlert';

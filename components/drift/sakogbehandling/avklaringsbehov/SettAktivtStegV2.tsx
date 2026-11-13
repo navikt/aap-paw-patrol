@@ -1,4 +1,5 @@
-import { Alert, Button, Heading, InlineMessage, Tag, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
+import { Button, Heading, InlineMessage, Tag, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { muligeStegOptions } from 'components/drift/settaktivtsteg/SettAktivtSteg';
 import { useState } from 'react';
 import { FetchJsonBody, hentSakDriftsinfo, kjørFraSteg } from 'lib/clientApi';

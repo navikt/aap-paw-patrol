@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Alert, Box, Heading, Loader, Table } from '@navikt/ds-react';
+import { Box, Heading, Loader, Table } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { hentUtbetalingstidslinje } from 'lib/clientApi';
 import { UtbetalingstidslinjeDto } from 'lib/types/utbetaling';
 import { formaterDatoForFrontend, formaterPeriode } from 'lib/utils/date';

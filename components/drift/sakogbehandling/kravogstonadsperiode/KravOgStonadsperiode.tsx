@@ -1,5 +1,6 @@
 'use client';
-import { Alert, BodyShort, CopyButton, HStack, Link, Loader, Table, Tag, VStack } from '@navikt/ds-react';
+import { BodyShort, CopyButton, HStack, Link, Loader, Table, Tag, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { useEffect, useState } from 'react';
 import { hentKravOgStønadsperiode } from 'lib/clientApi';
 import { capitalize } from 'lib/utils/formatting';
