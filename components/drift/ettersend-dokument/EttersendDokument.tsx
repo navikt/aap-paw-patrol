@@ -18,7 +18,7 @@ import { fileToBase64 } from 'lib/utils/file.ts';
 
 export const EttersendDokument = () => {
   const [ident, setIdent] = useState('');
-  const [eksternReferanseId, setEksternReferanseId] = useState('');
+  const [eksternReferanseId, setEksternReferanseId] = useState(generateUUID());
   const [file, setFile] = useState<FileObject>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
@@ -49,6 +49,8 @@ export const EttersendDokument = () => {
         });
         if (response.ok) {
           setMessage('ok 👍');
+          setEksternReferanseId(generateUUID())
+          setFile(undefined)
         } else {
           setMessage(await response.text());
         }
@@ -83,11 +85,6 @@ export const EttersendDokument = () => {
       </InfoCard>
 
       <TextField label="Brukers fnr" value={ident} onChange={(e) => setIdent(e.target.value)} />
-      <TextField
-        label="Innsendingsid(valgfritt)"
-        value={eksternReferanseId}
-        onChange={(e) => setEksternReferanseId(e.target.value)}
-      />
       <FileUpload.Trigger
         accept=".pdf"
         maxSizeInBytes={1_000_000}
@@ -119,3 +116,7 @@ export const EttersendDokument = () => {
     </VStack>
   );
 };
+
+function generateUUID() {
+  return crypto.randomUUID();
+}
