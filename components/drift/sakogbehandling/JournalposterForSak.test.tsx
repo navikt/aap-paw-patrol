@@ -16,7 +16,7 @@ describe('JournalposterForSak', () => {
 
     expect(html).toContain('Alle behandlinger');
     expect(html).toContain('Behandlingsdetaljer');
-    expect(html).toContain('Alle journalposter knyttet til sak');
+    expect(html).toContain('Journalposter tilknyttet sak');
     expect(html).toContain('role="status"');
     expect(html).toContain('Henter journalposter...');
     expect(html).not.toContain('Ingen journalposter knyttet til saken.');
