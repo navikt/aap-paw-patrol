@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Alert, BodyShort, Box, Button, Dialog, Heading, HStack, Loader, Table, Tag } from '@navikt/ds-react';
+import { BodyShort, Box, Button, Dialog, Heading, HStack, Loader, Table, Tag } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { hentBrevbestillingerForBehandling, hentBrevbestillingerForSak } from 'lib/clientApi';
 import { BrevbestillingDriftsinfoDto } from 'lib/types/brev';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';

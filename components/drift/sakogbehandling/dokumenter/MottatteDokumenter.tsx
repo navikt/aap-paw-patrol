@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { hentMottatteDokumenter } from 'lib/clientApi';
 import { MottattDokumentDriftsinfoDTO } from 'lib/types/dokumenter';
-import { Alert, BodyShort, Box, Heading, HelpText, HStack, Link, Loader, Table } from '@navikt/ds-react';
+import { BodyShort, Box, Heading, HelpText, HStack, Link, Loader, Table } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
 import NextLink from 'next/link';

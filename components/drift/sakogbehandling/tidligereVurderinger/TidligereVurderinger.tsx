@@ -1,5 +1,6 @@
 'use client';
-import { Alert, Button, HStack, Table, Tag, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
+import { Button, HStack, Table, Tag, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { FetchJsonBody, hentTidligereVurderinger } from 'lib/clientApi';
 import { BehandlingsutfallType, RettighetsType, rettighetsTypeHjemmel } from 'lib/types/tidligereVurderinger';
 import { formaterDatoForFrontend } from 'lib/utils/date';

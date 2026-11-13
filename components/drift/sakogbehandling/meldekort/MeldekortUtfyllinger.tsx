@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Alert, Box, Heading, Table } from '@navikt/ds-react';
+import { Box, Heading, Table } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import type { SortState } from '@navikt/ds-react';
 import type { UtfyllingDriftsinfo } from 'lib/types/meldekort';
 import { formaterDatoMedTidspunktSekunderForFrontend, formaterPeriode } from 'lib/utils/date';

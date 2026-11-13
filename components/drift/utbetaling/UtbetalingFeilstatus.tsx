@@ -1,6 +1,7 @@
 'use client';
 
-import { Alert, Heading, Loader, Table, VStack } from '@navikt/ds-react';
+import { Heading, Loader, Table, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { hentUtbetalingStatus } from 'lib/clientApi';
 import { UtbetalingInfoDto, UtbetalingStatusDto } from 'lib/types/utbetaling';
 import { useEffect, useState } from 'react';
@@ -50,10 +51,7 @@ export const UtbetalingFeilstatus = () => {
             tittel="Utbetalinger som mangler kvittering"
             elementer={resultat.utbetalingerSomManglerKvittering}
           />
-          <StatusTabell
-            tittel="Utbetalinger med feilet status"
-            elementer={resultat.utbetalingerMedFeiletStatus}
-          />
+          <StatusTabell tittel="Utbetalinger med feilet status" elementer={resultat.utbetalingerMedFeiletStatus} />
         </VStack>
       )}
     </VStack>

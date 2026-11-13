@@ -1,6 +1,7 @@
 'use client';
 
-import { Alert, Button, HelpText, Label } from '@navikt/ds-react';
+import { Button, HelpText, Label } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { FetchJsonBody, kopierJournalpost } from 'lib/clientApi';
 import { useState } from 'react';
 

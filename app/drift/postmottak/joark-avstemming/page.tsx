@@ -1,4 +1,5 @@
-import { Alert, BodyShort, Heading, VStack } from '@navikt/ds-react';
+import { BodyShort, Heading, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { Page, PageBlock } from '@navikt/ds-react/Page';
 import { IngenTilgangAlert } from 'components/drift/IngenTilgangAlert';
 import { JoarkAvstemmingDataGrid } from 'components/drift/postmottak/JoarkAvstemmingDataGrid';

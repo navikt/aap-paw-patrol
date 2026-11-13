@@ -1,6 +1,7 @@
 'use client';
 
-import { Alert, Button, Heading, Switch, Table, TextField, VStack } from '@navikt/ds-react';
+import { Button, Heading, Switch, Table, TextField, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { startMigreringAntall, startMigreringEnkeltSak } from 'lib/clientApi';
 import { MigreringsresultatDto } from 'lib/types/utbetaling';
 import { useState } from 'react';

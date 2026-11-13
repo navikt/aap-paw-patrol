@@ -1,4 +1,5 @@
-import { Alert, BodyShort, Box, Button, Detail, HStack, Label, Link, Tag, Textarea, VStack } from '@navikt/ds-react';
+import { BodyShort, Box, Button, Detail, HStack, Label, Link, Tag, Textarea, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { AppNavn, JobbKommentar } from 'lib/services/driftService';
 import React, { useState } from 'react';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
@@ -135,7 +136,7 @@ export const Kommentarfelt = ({
             </Button>
 
             {result && (
-              <Alert variant={result.success ? 'success' : 'error'} size="small" inline>
+              <Alert variant={result.success ? 'success' : 'error'} size="small">
                 {result.message}
               </Alert>
             )}

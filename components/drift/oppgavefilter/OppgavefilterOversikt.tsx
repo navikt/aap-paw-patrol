@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import {
-  Alert,
   BodyShort,
   Box,
   Button,
@@ -16,6 +15,7 @@ import {
   Tag,
   VStack,
 } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { PencilIcon, PlusIcon, TrashIcon } from '@navikt/aksel-icons';
 import { FetchJsonBody, hentOppgavefiltre, slettOppgavefilter } from 'lib/clientApi';
 import { AvklaringsbehovKodeNavn } from 'lib/types/oppgave';

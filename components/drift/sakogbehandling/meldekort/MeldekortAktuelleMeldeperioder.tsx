@@ -1,4 +1,5 @@
-import { Alert, Box, Button, Heading, HStack, Table } from '@navikt/ds-react';
+import { Box, Button, Heading, HStack, Table } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import type { AktuelleMeldeperioderDriftsinfo } from 'lib/types/meldekort';
 import { formaterPeriode } from 'lib/utils/date';
 import { oppdaterMeldeperioder } from 'lib/clientApi';
@@ -76,19 +77,13 @@ export const MeldekortAktuelleMeldeperioder = ({
               >
                 <Table.DataCell>{rad.antallUbesvarteMeldeperioder}</Table.DataCell>
                 <Table.DataCell>
-                  {rad.manglerOpplysninger
-                    ? formaterPeriode(rad.manglerOpplysninger)
-                    : '–'}
+                  {rad.manglerOpplysninger ? formaterPeriode(rad.manglerOpplysninger) : '–'}
                 </Table.DataCell>
                 <Table.DataCell>
-                  {rad.nesteMeldeperiode
-                    ? formaterPeriode(rad.nesteMeldeperiode.meldeperioden)
-                    : '–'}
+                  {rad.nesteMeldeperiode ? formaterPeriode(rad.nesteMeldeperiode.meldeperioden) : '–'}
                 </Table.DataCell>
                 <Table.DataCell>
-                  {rad.nesteMeldeperiode
-                    ? formaterPeriode(rad.nesteMeldeperiode.meldevindu)
-                    : '–'}
+                  {rad.nesteMeldeperiode ? formaterPeriode(rad.nesteMeldeperiode.meldevindu) : '–'}
                 </Table.DataCell>
               </Table.Row>
             ))}

@@ -2,7 +2,6 @@
 
 import { CheckmarkCircleFillIcon, InformationSquareFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import {
-  Alert,
   BodyShort,
   Box,
   CopyButton,
@@ -18,6 +17,7 @@ import {
   Tag,
   VStack,
 } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { FetchJsonBody, hentJournalpostInfo } from 'lib/clientApi';
 import { AvklaringsbehovStatus, ForenkletAvklaringsbehov } from 'lib/types/avklaringsbehov';
 import { kanalInfo } from 'lib/types/postmottak';

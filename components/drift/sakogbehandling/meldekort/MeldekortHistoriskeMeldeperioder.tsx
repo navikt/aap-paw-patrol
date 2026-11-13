@@ -1,4 +1,5 @@
-import { Alert, BodyShort, Box, Heading, Table } from '@navikt/ds-react';
+import { BodyShort, Box, Heading, Table } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import type { HistoriskeMeldeperioderDriftsinfo } from 'lib/types/meldekort';
 import { formaterPeriode } from 'lib/utils/date';
 

@@ -1,6 +1,7 @@
 'use client';
 
-import { Alert, BodyShort, CopyButton, Heading, Loader, Search, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, CopyButton, Heading, Loader, Search, Table, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { hentUtbetalingsmeldinger } from 'lib/clientApi';
 import type { UtbetalingsmeldingDto } from 'lib/types/utbetaling';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';

@@ -1,6 +1,7 @@
 'use client';
 
-import { Alert, Heading, HGrid, Loader, VStack } from '@navikt/ds-react';
+import { Heading, HGrid, Loader, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { hentMigreringsStatus } from 'lib/clientApi';
 import { MigreringsStatusDto } from 'lib/types/utbetaling';
 import { useEffect, useState } from 'react';
@@ -55,11 +56,7 @@ export const MigreringStatus = () => {
 };
 
 const TallKort = ({ tittel, antall }: { tittel: string; antall: number }) => (
-  <VStack
-    gap="space-4"
-    padding="space-16"
-    style={{ background: 'var(--ax-bg-neutral-soft)', borderRadius: '8px' }}
-  >
+  <VStack gap="space-4" padding="space-16" style={{ background: 'var(--ax-bg-neutral-soft)', borderRadius: '8px' }}>
     <Heading size="small">{tittel}</Heading>
     <Heading size="xlarge">{antall}</Heading>
   </VStack>

@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { FetchJsonItem, hentDialogmeldinger } from 'lib/clientApi';
 
 type DialogmeldingDriftinfoDTO = FetchJsonItem<ReturnType<typeof hentDialogmeldinger>>;
-import { Alert, Box, Heading, Loader, Table } from '@navikt/ds-react';
+import { Box, Heading, Loader, Table } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 
 export const Dialogmeldinger = ({ saksnummer }: { saksnummer: string }) => {

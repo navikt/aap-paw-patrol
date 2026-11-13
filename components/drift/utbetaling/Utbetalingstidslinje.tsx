@@ -1,6 +1,7 @@
 'use client';
 
-import { Alert, Heading, Loader, Search, Table, VStack } from '@navikt/ds-react';
+import { Heading, Loader, Search, Table, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { hentUtbetalingstidslinje } from 'lib/clientApi';
 import { UtbetalingstidslinjeDto } from 'lib/types/utbetaling';
 import { useState } from 'react';

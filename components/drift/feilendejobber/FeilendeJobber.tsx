@@ -1,4 +1,5 @@
-import { Alert, Chips, Heading, VStack } from '@navikt/ds-react';
+import { Chips, Heading, VStack } from '@navikt/ds-react';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 import { AppNavn, JobbInfo } from 'lib/services/driftService';
 import { FeilendeJobbPanel } from 'components/drift/feilendejobber/FeilendeJobbPanel';
 import { useState } from 'react';

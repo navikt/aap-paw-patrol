@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Alert, BodyShort, Box, Heading, HStack, Link, Loader, Table } from '@navikt/ds-react';
+import { BodyShort, Box, Heading, HStack, Link, Loader, Table } from '@navikt/ds-react';
 import NextLink from 'next/link';
 import { FetchJsonBody, hentJournalposterForSak } from 'lib/clientApi';
 import { formaterDatoForFrontend } from 'lib/utils/date';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 
 type SakJournalposterDto = FetchJsonBody<ReturnType<typeof hentJournalposterForSak>>;
 
