@@ -4,6 +4,7 @@ import NextLink from 'next/link';
 import { FetchJsonBody, hentJournalposterForSak } from 'lib/clientApi';
 import { formaterDatoForFrontend } from 'lib/utils/date';
 import { InformationSquareIcon } from '@navikt/aksel-icons';
+import { Alert } from 'components/felles/alert/Alert.tsx';
 
 type SakJournalposterDto = FetchJsonBody<ReturnType<typeof hentJournalposterForSak>>;
 
