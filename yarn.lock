@@ -1029,28 +1029,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aap-felles-prettier@npm:^6.8.0":
-  version: 6.8.0
-  resolution: "@navikt/aap-felles-prettier@npm:6.8.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faap-felles-prettier%2F6.8.0%2F8486fc5f1dfa45f1615aaa9158b900d3aebe7562"
+"@navikt/aap-felles-prettier@npm:^6.11.0":
+  version: 6.11.0
+  resolution: "@navikt/aap-felles-prettier@npm:6.11.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faap-felles-prettier%2F6.11.0%2Fbe0729c9b900c2abde6800a3b7189532da10514c"
   dependencies:
     prettier: "npm:^3.9.5"
-  checksum: 10c0/2a03af98214a559d6ac45b80ab049cad4cd06e82ffda3edf6b4dfc9177a7ccc4b3b07a736664b9df0b88554c581bae8aca63952b6d4ef59bef3651184eee7c0e
+  checksum: 10c0/e33afeab7b61a9c5ba7c22a1462381627435dfd69606f53ad5e12612225c58c393bfe7f2cc67c348989d514e5856929d944812a26f2ab9a6e0163f54417f5c4b
   languageName: node
   linkType: hard
 
-"@navikt/aap-felles-utils@npm:^6.8.0":
-  version: 6.8.0
-  resolution: "@navikt/aap-felles-utils@npm:6.8.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faap-felles-utils%2F6.8.0%2F5c985345b80381b454eed96ba2a282dcc8683185"
+"@navikt/aap-felles-utils@npm:^6.11.0":
+  version: 6.11.0
+  resolution: "@navikt/aap-felles-utils@npm:6.11.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faap-felles-utils%2F6.11.0%2F23d5c42c0c852db14718a687469e331f4c000ac8"
   dependencies:
     "@navikt/oasis": "npm:^4.1.4"
     axios: "npm:^1.18.1"
     date-fns: "npm:^4.4.0"
     jose: "npm:^6.2.3"
-    next: "npm:16.4.3"
+    next: "npm:16.4.6"
     pino: "npm:^10.3.1"
     prom-client: "npm:^15.1.3"
     server-only: "npm:^0.0.1"
-  checksum: 10c0/7866569a7e208e46967167db4d5e5caa1074a1926571aaca622dac7f93a4be0113073a04d458971cdc35f41aab7f52810a725ad2a9c3fc40bffb6b91d012879d
+  checksum: 10c0/03eea4fac390b0b42076d7b940afd67c63b648f13cad3b269001f48991b5d88b6d283847ed96d0877b8b566000f72eac130fdd7785f4684d7d4e6f8bf91617fe
   languageName: node
   linkType: hard
 
@@ -1131,17 +1131,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/env@npm:16.4.3":
-  version: 16.4.3
-  resolution: "@next/env@npm:16.4.3"
-  checksum: 10c0/9502fdaed8caa4a31aa05fec41c71c573ea5def37ecc2f3f935c06443f6c38e74074f62ffbd924605621f105161189d4f37fdb105d3ddeeac9cee03007b61f43
-  languageName: node
-  linkType: hard
-
 "@next/env@npm:16.4.5":
   version: 16.4.5
   resolution: "@next/env@npm:16.4.5"
   checksum: 10c0/5c93b1fcc7aa2718a6043a043bb3a98213b543a96876f61def80a21ce42c2a150887448be894d3ef47622d2fde7639c01b411a52fae8fee30b67ce85c90b17dd
+  languageName: node
+  linkType: hard
+
+"@next/env@npm:16.4.6":
+  version: 16.4.6
+  resolution: "@next/env@npm:16.4.6"
+  checksum: 10c0/250195b2e55869e2dd3178e0445e8933f6a0919dd305eb4e64d68e55e426bc56b0612eb91a602d4d7bc15e8aedcc31dd93b9993d7d790bf3ad5f89f61fbebe97
   languageName: node
   linkType: hard
 
@@ -1154,13 +1154,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-darwin-arm64@npm:16.4.3":
-  version: 16.4.3
-  resolution: "@next/swc-darwin-arm64@npm:16.4.3"
-  conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@next/swc-darwin-arm64@npm:16.4.5":
   version: 16.4.5
   resolution: "@next/swc-darwin-arm64@npm:16.4.5"
@@ -1168,10 +1161,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-darwin-x64@npm:16.4.3":
-  version: 16.4.3
-  resolution: "@next/swc-darwin-x64@npm:16.4.3"
-  conditions: os=darwin & cpu=x64
+"@next/swc-darwin-arm64@npm:16.4.6":
+  version: 16.4.6
+  resolution: "@next/swc-darwin-arm64@npm:16.4.6"
+  conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -1182,10 +1175,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm64-gnu@npm:16.4.3":
-  version: 16.4.3
-  resolution: "@next/swc-linux-arm64-gnu@npm:16.4.3"
-  conditions: os=linux & cpu=arm64 & libc=glibc
+"@next/swc-darwin-x64@npm:16.4.6":
+  version: 16.4.6
+  resolution: "@next/swc-darwin-x64@npm:16.4.6"
+  conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
@@ -1196,10 +1189,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm64-musl@npm:16.4.3":
-  version: 16.4.3
-  resolution: "@next/swc-linux-arm64-musl@npm:16.4.3"
-  conditions: os=linux & cpu=arm64 & libc=musl
+"@next/swc-linux-arm64-gnu@npm:16.4.6":
+  version: 16.4.6
+  resolution: "@next/swc-linux-arm64-gnu@npm:16.4.6"
+  conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
@@ -1210,10 +1203,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-gnu@npm:16.4.3":
-  version: 16.4.3
-  resolution: "@next/swc-linux-x64-gnu@npm:16.4.3"
-  conditions: os=linux & cpu=x64 & libc=glibc
+"@next/swc-linux-arm64-musl@npm:16.4.6":
+  version: 16.4.6
+  resolution: "@next/swc-linux-arm64-musl@npm:16.4.6"
+  conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
@@ -1224,10 +1217,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-musl@npm:16.4.3":
-  version: 16.4.3
-  resolution: "@next/swc-linux-x64-musl@npm:16.4.3"
-  conditions: os=linux & cpu=x64 & libc=musl
+"@next/swc-linux-x64-gnu@npm:16.4.6":
+  version: 16.4.6
+  resolution: "@next/swc-linux-x64-gnu@npm:16.4.6"
+  conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
@@ -1238,10 +1231,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-win32-arm64-msvc@npm:16.4.3":
-  version: 16.4.3
-  resolution: "@next/swc-win32-arm64-msvc@npm:16.4.3"
-  conditions: os=win32 & cpu=arm64
+"@next/swc-linux-x64-musl@npm:16.4.6":
+  version: 16.4.6
+  resolution: "@next/swc-linux-x64-musl@npm:16.4.6"
+  conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
@@ -1252,16 +1245,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-win32-x64-msvc@npm:16.4.3":
-  version: 16.4.3
-  resolution: "@next/swc-win32-x64-msvc@npm:16.4.3"
-  conditions: os=win32 & cpu=x64
+"@next/swc-win32-arm64-msvc@npm:16.4.6":
+  version: 16.4.6
+  resolution: "@next/swc-win32-arm64-msvc@npm:16.4.6"
+  conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
 "@next/swc-win32-x64-msvc@npm:16.4.5":
   version: 16.4.5
   resolution: "@next/swc-win32-x64-msvc@npm:16.4.5"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@next/swc-win32-x64-msvc@npm:16.4.6":
+  version: 16.4.6
+  resolution: "@next/swc-win32-x64-msvc@npm:16.4.6"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -1903,8 +1903,8 @@ __metadata:
     "@eslint/eslintrc": "npm:^3.3.7"
     "@eslint/js": "npm:^10.0.1"
     "@faker-js/faker": "npm:^10.6.0"
-    "@navikt/aap-felles-prettier": "npm:^6.8.0"
-    "@navikt/aap-felles-utils": "npm:^6.8.0"
+    "@navikt/aap-felles-prettier": "npm:^6.11.0"
+    "@navikt/aap-felles-utils": "npm:^6.11.0"
     "@navikt/aksel-icons": "npm:^8.22.1"
     "@navikt/ds-css": "npm:^8.22.1"
     "@navikt/ds-react": "npm:^8.22.1"
@@ -5308,66 +5308,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:16.4.3":
-  version: 16.4.3
-  resolution: "next@npm:16.4.3"
-  dependencies:
-    "@next/env": "npm:16.4.3"
-    "@next/swc-darwin-arm64": "npm:16.4.3"
-    "@next/swc-darwin-x64": "npm:16.4.3"
-    "@next/swc-linux-arm64-gnu": "npm:16.4.3"
-    "@next/swc-linux-arm64-musl": "npm:16.4.3"
-    "@next/swc-linux-x64-gnu": "npm:16.4.3"
-    "@next/swc-linux-x64-musl": "npm:16.4.3"
-    "@next/swc-win32-arm64-msvc": "npm:16.4.3"
-    "@next/swc-win32-x64-msvc": "npm:16.4.3"
-    "@swc/helpers": "npm:0.5.23"
-    baseline-browser-mapping: "npm:^2.9.19"
-    caniuse-lite: "npm:^1.0.30001579"
-    postcss: "npm:8.5.23"
-    sharp: "npm:^0.35.5"
-    styled-jsx: "npm:5.1.6"
-  peerDependencies:
-    "@opentelemetry/api": ^1.1.0
-    "@playwright/test": ^1.51.1
-    babel-plugin-react-compiler: "*"
-    react: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
-    react-dom: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
-    sass: ^1.3.0
-  dependenciesMeta:
-    "@next/swc-darwin-arm64":
-      optional: true
-    "@next/swc-darwin-x64":
-      optional: true
-    "@next/swc-linux-arm64-gnu":
-      optional: true
-    "@next/swc-linux-arm64-musl":
-      optional: true
-    "@next/swc-linux-x64-gnu":
-      optional: true
-    "@next/swc-linux-x64-musl":
-      optional: true
-    "@next/swc-win32-arm64-msvc":
-      optional: true
-    "@next/swc-win32-x64-msvc":
-      optional: true
-    sharp:
-      optional: true
-  peerDependenciesMeta:
-    "@opentelemetry/api":
-      optional: true
-    "@playwright/test":
-      optional: true
-    babel-plugin-react-compiler:
-      optional: true
-    sass:
-      optional: true
-  bin:
-    next: dist/bin/next
-  checksum: 10c0/a61625eb95fa29f15d84a71333d24ebb5a2666bf7a8235aa3d6eb3ac8c9ea1159c12ffbfe5f4c315646a34b6fcaf87b3b3f737222b364e331f7e6da16d1d857e
-  languageName: node
-  linkType: hard
-
 "next@npm:16.4.5":
   version: 16.4.5
   resolution: "next@npm:16.4.5"
@@ -5425,6 +5365,66 @@ __metadata:
   bin:
     next: dist/bin/next
   checksum: 10c0/d88fdc4f837f62882cbb31df613a4746371645b231e2e34611e2c99b464c01aef3c9e0272af8d2e1ed60aa15c83aa2b596b379baea28d56bb4caf331b25510c2
+  languageName: node
+  linkType: hard
+
+"next@npm:16.4.6":
+  version: 16.4.6
+  resolution: "next@npm:16.4.6"
+  dependencies:
+    "@next/env": "npm:16.4.6"
+    "@next/swc-darwin-arm64": "npm:16.4.6"
+    "@next/swc-darwin-x64": "npm:16.4.6"
+    "@next/swc-linux-arm64-gnu": "npm:16.4.6"
+    "@next/swc-linux-arm64-musl": "npm:16.4.6"
+    "@next/swc-linux-x64-gnu": "npm:16.4.6"
+    "@next/swc-linux-x64-musl": "npm:16.4.6"
+    "@next/swc-win32-arm64-msvc": "npm:16.4.6"
+    "@next/swc-win32-x64-msvc": "npm:16.4.6"
+    "@swc/helpers": "npm:0.5.23"
+    baseline-browser-mapping: "npm:^2.9.19"
+    caniuse-lite: "npm:^1.0.30001579"
+    postcss: "npm:8.5.23"
+    sharp: "npm:^0.35.5"
+    styled-jsx: "npm:5.1.6"
+  peerDependencies:
+    "@opentelemetry/api": ^1.1.0
+    "@playwright/test": ^1.51.1
+    babel-plugin-react-compiler: "*"
+    react: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
+    react-dom: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
+    sass: ^1.3.0
+  dependenciesMeta:
+    "@next/swc-darwin-arm64":
+      optional: true
+    "@next/swc-darwin-x64":
+      optional: true
+    "@next/swc-linux-arm64-gnu":
+      optional: true
+    "@next/swc-linux-arm64-musl":
+      optional: true
+    "@next/swc-linux-x64-gnu":
+      optional: true
+    "@next/swc-linux-x64-musl":
+      optional: true
+    "@next/swc-win32-arm64-msvc":
+      optional: true
+    "@next/swc-win32-x64-msvc":
+      optional: true
+    sharp:
+      optional: true
+  peerDependenciesMeta:
+    "@opentelemetry/api":
+      optional: true
+    "@playwright/test":
+      optional: true
+    babel-plugin-react-compiler:
+      optional: true
+    sass:
+      optional: true
+  bin:
+    next: dist/bin/next
+  checksum: 10c0/c387dabdbe5f796afd67fe1cafb9c29ce5e1952335c5df730b04c3b6e2ffaba0837e36ca2b075a6d33bccd6bfb39cf4dc3f35f7fd61dbdfd0b365265fab742c4
   languageName: node
   linkType: hard
 
