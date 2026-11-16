@@ -321,6 +321,15 @@ export function hentJournalpostInfo(
   );
 }
 
+export function hentPostmottakVurderinger(
+  referanse: string
+): FetchResult<PostmottakPaths['/api/drift/journalpost/{referanse}/vurderinger']['get']> {
+  return fetchTyped<PostmottakPaths['/api/drift/journalpost/{referanse}/vurderinger']['get']>(
+    `/api/drift/postmottak/${encodeURIComponent(referanse)}/vurderinger`,
+    { method: 'GET', cache: 'no-store' }
+  );
+}
+
 export function kopierJournalpost(
   journalpostId: string
 ): FetchResult<PostmottakPaths['/api/drift/journalpost/{referanse}/kopier-journalpost']['post']> {
@@ -346,11 +355,14 @@ export function hentJournalposterForPerson(
 export function ettersendForPerson(
   dokument: EttersendForPersonRequest
 ): FetchResult<PostmottakPaths['/api/drift/ettersend-for-person']['post']> {
-  return fetchTyped<PostmottakPaths['/api/drift/ettersend-for-person']['post']>(`/api/drift/postmottak/ettersend-for-person`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(dokument),
-  });
+  return fetchTyped<PostmottakPaths['/api/drift/ettersend-for-person']['post']>(
+    `/api/drift/postmottak/ettersend-for-person`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dokument),
+    }
+  );
 }
 
 export function hentBehandler(
