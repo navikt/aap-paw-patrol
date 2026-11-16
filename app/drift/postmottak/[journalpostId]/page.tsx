@@ -3,6 +3,7 @@ import { harLeseTilgang, hentRollerForBruker } from 'lib/azure/azureUserService'
 import { JournalpostOversikt } from 'components/drift/postmottak/JournalpostOversikt';
 import { IngenTilgangAlert } from 'components/drift/IngenTilgangAlert';
 import { Metadata } from 'next';
+import { JournalpostNavbar } from 'components/drift/navbar/JournalpostNavbar.tsx';
 
 export async function generateMetadata({ params }: { params: Promise<{ journalpostId: string }> }): Promise<Metadata> {
   const { journalpostId } = await params;
@@ -16,13 +17,17 @@ const JournalpostPage = async ({ params }: { params: Promise<{ journalpostId: st
   const { journalpostId } = await params;
   const roller = await hentRollerForBruker();
 
-  return harLeseTilgang(roller) ? (
-    <JournalpostOversikt journalpostId={journalpostId} />
-  ) : (
+  return (
     <Page>
-      <PageBlock width="2xl">
-        <IngenTilgangAlert krevesLeseTilgang />
-      </PageBlock>
+      <JournalpostNavbar journalpostId={journalpostId} />
+
+      {harLeseTilgang(roller) ? (
+        <JournalpostOversikt journalpostId={journalpostId} />
+      ) : (
+        <PageBlock width="2xl">
+          <IngenTilgangAlert krevesLeseTilgang />
+        </PageBlock>
+      )}
     </Page>
   );
 };
