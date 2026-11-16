@@ -1,6 +1,19 @@
 'use client';
 
-import { BodyShort, Box, Heading, HelpText, HGrid, HStack, Label, Link, Loader, Tag, VStack } from '@navikt/ds-react';
+import {
+  BodyShort,
+  Box,
+  Heading,
+  HelpText,
+  HGrid,
+  HStack,
+  Label,
+  Link,
+  Loader,
+  Tabs,
+  Tag,
+  VStack,
+} from '@navikt/ds-react';
 import { Alert } from 'components/felles/alert/Alert.tsx';
 import { FetchJsonBody, hentJournalpostInfo } from 'lib/clientApi';
 import { kanalInfo } from 'lib/types/postmottak';
@@ -10,8 +23,14 @@ import { useCallback, useEffect, useState } from 'react';
 import { KopierJournalpost } from 'components/drift/postmottak/KopierJournalpost.tsx';
 import { BehandlingerPanel } from 'components/drift/postmottak/behandlinger/BehandlingPanel.tsx';
 import { FordelingsresultatPanel } from 'components/drift/postmottak/FordelingsresultatPanel.tsx';
+import { VurderingerPanel } from 'components/drift/postmottak/vurderinger/VurderingerPanel.tsx';
 
 export type JournalpostInfoDTO = FetchJsonBody<ReturnType<typeof hentJournalpostInfo>>;
+
+enum Tab {
+  BEHANDLINGER = 'Behandlinger',
+  VURDERINGER = 'Vurderinger',
+}
 
 const KanalTag = ({ kanal }: { kanal: string }) => {
   const info = kanalInfo[kanal as keyof typeof kanalInfo];
@@ -33,6 +52,7 @@ const KanalTag = ({ kanal }: { kanal: string }) => {
 };
 
 export const JournalpostOversikt = ({ journalpostId }: { journalpostId: string }) => {
+  const [tab, setTab] = useState<Tab>(Tab.BEHANDLINGER);
   const [error, setError] = useState<string>();
   const [isLoading, setIsLoading] = useState(true);
   const [journalpost, setJournalpost] = useState<JournalpostInfoDTO>();
@@ -133,14 +153,25 @@ export const JournalpostOversikt = ({ journalpostId }: { journalpostId: string }
           </Box>
 
           {/* Høyre: fordelingsresultat + behandlinger */}
-          <VStack gap="space-16" padding="space-16">
-            {journalpost.fordelingsresultat ? (
-              <FordelingsresultatPanel fordelingsresultat={journalpost.fordelingsresultat} />
-            ) : (
-              <BodyShort textColor="subtle">Ingen fordelingsresultat tilgjengelig</BodyShort>
-            )}
-            {journalpost.behandlinger.length > 0 && <BehandlingerPanel behandlinger={journalpost.behandlinger} />}
-          </VStack>
+          <Tabs onChange={(value) => setTab(value as Tab)} value={tab}>
+            <Tabs.List>
+              <Tabs.Tab value={Tab.BEHANDLINGER} label="Behandlinger" />
+              <Tabs.Tab value={Tab.VURDERINGER} label="Vurderinger" />
+            </Tabs.List>
+            <Tabs.Panel value={Tab.BEHANDLINGER}>
+              <VStack gap="space-16" padding="space-16">
+                {journalpost.fordelingsresultat ? (
+                  <FordelingsresultatPanel fordelingsresultat={journalpost.fordelingsresultat} />
+                ) : (
+                  <BodyShort textColor="subtle">Ingen fordelingsresultat tilgjengelig</BodyShort>
+                )}
+                {journalpost.behandlinger.length > 0 && <BehandlingerPanel behandlinger={journalpost.behandlinger} />}
+              </VStack>
+            </Tabs.Panel>
+            <Tabs.Panel value={Tab.VURDERINGER}>
+              <VurderingerPanel journapostId={journalpostId} />
+            </Tabs.Panel>
+          </Tabs>
         </HGrid>
       </Box>
     </Box>

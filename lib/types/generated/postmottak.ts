@@ -1153,6 +1153,44 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/drift/journalpost/{referanse}/vurderinger": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description referanse */
+                    referanse: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["no.nav.aap.postmottak.api.drift.VurderingerDriftsinfo"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/drift/sak/{saksnummer}/journalposter": {
         parameters: {
             query?: never;
@@ -1484,6 +1522,11 @@ export interface components {
             status: "AVSLUTTET" | "IVERKSETTES" | "OPPRETTET" | "UTREDES";
             type: string;
         };
+        "no.nav.aap.postmottak.api.drift.DigitaliseringsvurderingDriftsinfo": {
+            digitalisertManueltGjennomPostmottak?: boolean | null;
+            /** @enum {string} */
+            kategori: "ANNEN_KATEGORI" | "ANNET_RELEVANT_DOKUMENT" | "KLAGE" | "LEGEERKLÆRING" | "MELDEKORT" | "NY_ÅRSAK_TIL_BEHANDLING" | "SØKNAD";
+        };
         "no.nav.aap.postmottak.api.drift.EttersendForPersonRequest": {
             eksternReferanseId?: string | null;
             filNavn: string;
@@ -1493,6 +1536,10 @@ export interface components {
         "no.nav.aap.postmottak.api.drift.EttersendForPersonResponse": {
             /** Format: int64 */
             journalpostId: number;
+        };
+        "no.nav.aap.postmottak.api.drift.FordelingsvurderingDriftsinfo": {
+            /** @enum {string} */
+            system: "ARENA" | "BEGGE" | "IGNORERT" | "KELVIN";
         };
         "no.nav.aap.postmottak.api.drift.ForenkletAvklaringsbehov": {
             definisjon: components["schemas"]["no.nav.aap.postmottak.kontrakt.avklaringsbehov.Definisjon"];
@@ -1564,11 +1611,30 @@ export interface components {
             mottattDato?: string | null;
             tema?: string | null;
         };
+        "no.nav.aap.postmottak.api.drift.OverleveringsvurderingDriftsinfo": {
+            skalOverleveresTilKelvin: boolean;
+        };
         "no.nav.aap.postmottak.api.drift.PersonS\u00F8kDriftsinfoDto": {
             journalposter: components["schemas"]["no.nav.aap.postmottak.api.drift.InnkommendeJournalpostDto"][];
         };
         "no.nav.aap.postmottak.api.drift.SakJournalposterDto": {
             journalposter: components["schemas"]["no.nav.aap.postmottak.api.drift.JournalpostP\u00E5SakDto"][];
+        };
+        "no.nav.aap.postmottak.api.drift.SaksvurderingDriftsinfo": {
+            generellSak: boolean;
+            opprettetNy: boolean;
+        };
+        "no.nav.aap.postmottak.api.drift.TemavurderingDriftsinfo": {
+            skalTilAap: boolean;
+            /** @enum {string} */
+            tema: "AAP" | "BAR" | "BID" | "DAG" | "ENF" | "ERS" | "EYB" | "EYO" | "FEI" | "FOR" | "FUL" | "GEN" | "GRU" | "IND" | "KOM" | "OMS" | "OPP" | "PAI" | "PEN" | "SAK" | "SER" | "SYK" | "TIL" | "TRK" | "TSO" | "UFO" | "UKJENT" | "YRK";
+        };
+        "no.nav.aap.postmottak.api.drift.VurderingerDriftsinfo": {
+            digitalisering?: components["schemas"]["no.nav.aap.postmottak.api.drift.DigitaliseringsvurderingDriftsinfo"];
+            fordeling?: components["schemas"]["no.nav.aap.postmottak.api.drift.FordelingsvurderingDriftsinfo"];
+            overlevering?: components["schemas"]["no.nav.aap.postmottak.api.drift.OverleveringsvurderingDriftsinfo"];
+            sak?: components["schemas"]["no.nav.aap.postmottak.api.drift.SaksvurderingDriftsinfo"];
+            tema?: components["schemas"]["no.nav.aap.postmottak.api.drift.TemavurderingDriftsinfo"];
         };
         "no.nav.aap.postmottak.api.faktagrunnlag.dokument.DokumentDto": {
             dokumentInfoId: string;

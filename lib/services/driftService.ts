@@ -5,6 +5,8 @@ import { components as UtbetalComponents } from 'lib/types/generated/utbetal';
 import { components as BehandlingsflytComponents } from 'lib/types/generated/behandlingsflyt';
 import type { UtbetalingsmeldingDto } from 'lib/types/utbetaling';
 
+type VurderingerDriftsinfoDto =
+  PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.VurderingerDriftsinfo'];
 type JournalpostDriftsinfoDto =
   PostmottakComponents['schemas']['no.nav.aap.postmottak.api.drift.JournalpostDriftsinfoDto'];
 type PersonSøkJournalposterDto =
@@ -295,6 +297,12 @@ export const hentJournalpostInfo = async (journalpostId: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('postmottak');
   const url = `${baseUrl}/api/drift/journalpost/${journalpostId}/info`;
   return await fetchProxy<JournalpostDriftsinfoDto>(url, scope, 'GET');
+};
+
+export const hentPostmottakVurderinger = async (referanse: string) => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('postmottak');
+  const url = `${baseUrl}/api/drift/journalpost/${encodeURIComponent(referanse)}/vurderinger`;
+  return await fetchProxy<VurderingerDriftsinfoDto>(url, scope, 'GET');
 };
 
 export const hentJournalposterForPerson = async (ident: string) => {

@@ -292,6 +292,32 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.postmottak.api.drift.DigitaliseringsvurderingDriftsinfo": {
+        "nullable": false,
+        "properties": {
+          "digitalisertManueltGjennomPostmottak": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "kategori": {
+            "enum": [
+              "ANNEN_KATEGORI",
+              "ANNET_RELEVANT_DOKUMENT",
+              "KLAGE",
+              "LEGEERKLÆRING",
+              "MELDEKORT",
+              "NY_ÅRSAK_TIL_BEHANDLING",
+              "SØKNAD"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kategori"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.postmottak.api.drift.EttersendForPersonRequest": {
         "nullable": false,
         "properties": {
@@ -330,6 +356,25 @@
         },
         "required": [
           "journalpostId"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.drift.FordelingsvurderingDriftsinfo": {
+        "nullable": false,
+        "properties": {
+          "system": {
+            "enum": [
+              "ARENA",
+              "BEGGE",
+              "IGNORERT",
+              "KELVIN"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "system"
         ],
         "type": "object"
       },
@@ -641,6 +686,19 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.postmottak.api.drift.OverleveringsvurderingDriftsinfo": {
+        "nullable": false,
+        "properties": {
+          "skalOverleveresTilKelvin": {
+            "nullable": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "skalOverleveresTilKelvin"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.postmottak.api.drift.PersonSøkDriftsinfoDto": {
         "nullable": false,
         "properties": {
@@ -671,6 +729,93 @@
         "required": [
           "journalposter"
         ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.drift.SaksvurderingDriftsinfo": {
+        "nullable": false,
+        "properties": {
+          "generellSak": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "opprettetNy": {
+            "nullable": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "generellSak",
+          "opprettetNy"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.drift.TemavurderingDriftsinfo": {
+        "nullable": false,
+        "properties": {
+          "skalTilAap": {
+            "nullable": false,
+            "type": "boolean"
+          },
+          "tema": {
+            "enum": [
+              "AAP",
+              "BAR",
+              "BID",
+              "DAG",
+              "ENF",
+              "ERS",
+              "EYB",
+              "EYO",
+              "FEI",
+              "FOR",
+              "FUL",
+              "GEN",
+              "GRU",
+              "IND",
+              "KOM",
+              "OMS",
+              "OPP",
+              "PAI",
+              "PEN",
+              "SAK",
+              "SER",
+              "SYK",
+              "TIL",
+              "TRK",
+              "TSO",
+              "UFO",
+              "UKJENT",
+              "YRK"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "skalTilAap",
+          "tema"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.api.drift.VurderingerDriftsinfo": {
+        "nullable": false,
+        "properties": {
+          "digitalisering": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.DigitaliseringsvurderingDriftsinfo"
+          },
+          "fordeling": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.FordelingsvurderingDriftsinfo"
+          },
+          "overlevering": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.OverleveringsvurderingDriftsinfo"
+          },
+          "sak": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.SaksvurderingDriftsinfo"
+          },
+          "tema": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.TemavurderingDriftsinfo"
+          }
+        },
         "type": "object"
       },
       "no.nav.aap.postmottak.api.faktagrunnlag.dokument.DokumentDto": {
@@ -3241,6 +3386,48 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.AvstemmingsrapportDto"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Tilgangkontrollert"
+        ]
+      }
+    },
+    "/api/drift/journalpost/{referanse}/vurderinger": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "referanse",
+            "explode": false,
+            "in": "path",
+            "name": "referanse",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "nullable": false,
+              "type": "integer"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/no.nav.aap.postmottak.api.drift.VurderingerDriftsinfo"
                 }
               }
             },
