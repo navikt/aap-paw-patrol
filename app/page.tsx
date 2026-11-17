@@ -241,16 +241,14 @@ export default function Home() {
                 </LinkCardTitle>
               </LinkCard>
 
-              {(isDev() || isLocal()) && (
-                <LinkCard size="small">
-                  <LinkCardIcon>
-                    <FilePdfIcon fontSize="2rem" />
-                  </LinkCardIcon>
-                  <LinkCardTitle>
-                    <LinkCardAnchor href="/drift/ettersend-for-person">Ettersend dokument for person</LinkCardAnchor>
-                  </LinkCardTitle>
-                </LinkCard>
-              )}
+              <LinkCard size="small">
+                <LinkCardIcon>
+                  <FilePdfIcon fontSize="2rem" />
+                </LinkCardIcon>
+                <LinkCardTitle>
+                  <LinkCardAnchor href="/drift/ettersend-for-person">Ettersend dokument for person</LinkCardAnchor>
+                </LinkCardTitle>
+              </LinkCard>
             </HGrid>
           </Box>
         </VStack>
