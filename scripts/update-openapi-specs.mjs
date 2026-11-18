@@ -7,24 +7,11 @@ import { writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { OPENAPI_SPECS } from '../openapi.config.mjs';
+import { filterOpenApiSpec } from './filter-openapi-spec.mjs';
 
 const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const openApiDir = path.join(rootDir, 'openapi');
-
-const SPECS = [
-  { app: 'behandlingsflyt', url: 'https://aap-behandlingsflyt.intern.dev.nav.no/openapi.json' },
-  { app: 'utbetal', url: 'https://aap-utbetal.intern.dev.nav.no/openapi.json' },
-  { app: 'oppgave', url: 'https://aap-oppgave.intern.dev.nav.no/openapi.json' },
-  { app: 'brev', url: 'https://aap-brev.intern.dev.nav.no/openapi.json' },
-  {
-    app: 'meldekort-backend',
-    url: 'https://aap-meldekort-backend.intern.dev.nav.no/openapi.json',
-  },
-  { app: 'postmottak', url: 'https://aap-postmottak-backend.intern.dev.nav.no/openapi.json' },
-  { app: 'dokumentinnhenting', url: 'https://aap-dokumentinnhenting.intern.dev.nav.no/openapi.json' },
-  { app: 'statistikk', url: 'https://aap-statistikk.intern.dev.nav.no/openapi.json' },
-  { app: 'api-intern', url: 'https://aap-api.intern.dev.nav.no/openapi.json' },
-];
 
 async function downloadSpec({ app, url }) {
   const res = await fetch(url);
@@ -33,14 +20,14 @@ async function downloadSpec({ app, url }) {
   }
   const body = await res.text();
   // Validate + pretty-print so diffs stay readable.
-  const json = JSON.parse(body);
+  const json = filterOpenApiSpec(JSON.parse(body), app);
   const outPath = path.join(openApiDir, `${app}.json`);
   writeFileSync(outPath, `${JSON.stringify(json, null, 2)}\n`);
   console.log(`✔ ${app} -> ${path.relative(rootDir, outPath)}`);
 }
 
 async function main() {
-  const results = await Promise.allSettled(SPECS.map(downloadSpec));
+  const results = await Promise.allSettled(OPENAPI_SPECS.map(downloadSpec));
 
   const failures = results.filter((r) => r.status === 'rejected');
   for (const failure of failures) {
