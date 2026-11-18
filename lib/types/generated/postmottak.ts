@@ -1525,7 +1525,7 @@ export interface components {
         "no.nav.aap.postmottak.api.drift.DigitaliseringsvurderingDriftsinfo": {
             digitalisertManueltGjennomPostmottak?: boolean | null;
             /** @enum {string} */
-            kategori: "ANNEN_KATEGORI" | "ANNET_RELEVANT_DOKUMENT" | "KLAGE" | "LEGEERKLÆRING" | "MELDEKORT" | "NY_ÅRSAK_TIL_BEHANDLING" | "SØKNAD";
+            kategori: "AKTIVITETSKORT" | "ANNET_RELEVANT_DOKUMENT" | "DIALOGMELDING" | "FAGSYSTEMINFO_BEHOV_HENDELSE" | "FORELDREPENGE_VEDTAK_HENDELSE" | "INSTITUSJONSOPPHOLD" | "KABAL_HENDELSE" | "KLAGE" | "KORRIGER_SØKNADSDATO" | "LEGEERKLÆRING" | "LEGEERKLÆRING_AVVIST" | "MANUELL_REVURDERING" | "MELDEKORT" | "MIGRERING_FRA_ARENA" | "NY_ÅRSAK_TIL_BEHANDLING" | "OMGJØRING_KLAGE_REVURDERING" | "OPPFØLGINGSOPPGAVE" | "PDL_HENDELSE_DODSFALL_BARN" | "PDL_HENDELSE_DODSFALL_BRUKER" | "PDL_HENDELSE_FOLKEREGISTERIDENT" | "SYKEPENGE_VEDTAK_HENDELSE" | "SØKNAD" | "TILBAKEKREVING_HENDELSE" | "UFØRE_VEDTAK_HENDELSE";
         };
         "no.nav.aap.postmottak.api.drift.EttersendForPersonRequest": {
             eksternReferanseId?: string | null;

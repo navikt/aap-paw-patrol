@@ -3,15 +3,32 @@ import type { components } from 'lib/types/generated/postmottak';
 
 type VurderingerDriftsinfo = components['schemas']['no.nav.aap.postmottak.api.drift.VurderingerDriftsinfo'];
 
-const digitaliseringskategorier = {
-  SØKNAD: 'Søknad',
-  MELDEKORT: 'Meldekort',
-  LEGEERKLÆRING: 'Legeerklæring',
-  KLAGE: 'Klage',
+const digitaliseringskategorier: Record<NonNullable<VurderingerDriftsinfo['digitalisering']>['kategori'], string> = {
+  AKTIVITETSKORT: 'Aktivitetskort',
   ANNET_RELEVANT_DOKUMENT: 'Annet relevant dokument',
+  DIALOGMELDING: 'Dialogmelding',
+  FAGSYSTEMINFO_BEHOV_HENDELSE: 'Fagsysteminfo-behov hendelse',
+  FORELDREPENGE_VEDTAK_HENDELSE: 'Foreldrepengevedtak hendelse',
+  INSTITUSJONSOPPHOLD: 'Institusjonsopphold',
+  KABAL_HENDELSE: 'Kabal hendelse',
+  KLAGE: 'Klage',
+  KORRIGER_SØKNADSDATO: 'Korriger søknadsdato',
+  LEGEERKLÆRING: 'Legeerklæring',
+  LEGEERKLÆRING_AVVIST: 'Legeerklæring avvist',
+  MANUELL_REVURDERING: 'Manuell revurdering',
+  MELDEKORT: 'Meldekort',
+  MIGRERING_FRA_ARENA: 'Migrering fra Arena',
   NY_ÅRSAK_TIL_BEHANDLING: 'Ny årsak til behandling',
-  ANNEN_KATEGORI: 'Annen kategori',
-} satisfies Record<NonNullable<VurderingerDriftsinfo['digitalisering']>['kategori'], string>;
+  OMGJØRING_KLAGE_REVURDERING: 'Omgjøring etter klage (revurdering)',
+  OPPFØLGINGSOPPGAVE: 'Oppfølgingsoppgave',
+  PDL_HENDELSE_DODSFALL_BARN: 'PDL-hendelse: dødsfall barn',
+  PDL_HENDELSE_DODSFALL_BRUKER: 'PDL-hendelse: dødsfall bruker',
+  PDL_HENDELSE_FOLKEREGISTERIDENT: 'PDL-hendelse: folkeregisterident',
+  SYKEPENGE_VEDTAK_HENDELSE: 'Sykepengevedtak hendelse',
+  SØKNAD: 'Søknad',
+  TILBAKEKREVING_HENDELSE: 'Tilbakekreving hendelse',
+  UFØRE_VEDTAK_HENDELSE: 'Uføre vedtak hendelse',
+};
 
 const formaterBoolskVerdi = (verdi: boolean | null | undefined): string => {
   if (verdi === null || verdi === undefined) return 'Ikke vurdert';

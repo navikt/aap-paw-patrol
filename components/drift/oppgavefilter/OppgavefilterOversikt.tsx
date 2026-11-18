@@ -19,7 +19,7 @@ import { Alert } from 'components/felles/alert/Alert.tsx';
 import { PencilIcon, PlusIcon, TrashIcon } from '@navikt/aksel-icons';
 import { FetchJsonBody, hentOppgavefiltre, slettOppgavefilter } from 'lib/clientApi';
 import { AvklaringsbehovKodeNavn } from 'lib/types/oppgave';
-import { formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
+import { formaterDatoForFrontend, formaterDatoMedTidspunktSekunderForFrontend } from 'lib/utils/date';
 import { capitalize } from 'lib/utils/formatting';
 import { OppgavefilterSkjema } from 'components/drift/oppgavefilter/OppgavefilterSkjema';
 
@@ -209,6 +209,17 @@ const FilterDetaljer = ({
               ))}
             </HStack>
           )}
+        </div>
+        <div>
+          <Label size="small">Behandling opprettet</Label>
+          <BodyShort
+            size="small"
+            textColor={filter.behandlingOpprettetFom || filter.behandlingOpprettetTom ? undefined : 'subtle'}
+          >
+            {filter.behandlingOpprettetFom || filter.behandlingOpprettetTom
+              ? `${filter.behandlingOpprettetFom ? formaterDatoForFrontend(filter.behandlingOpprettetFom) : '…'} – ${filter.behandlingOpprettetTom ? formaterDatoForFrontend(filter.behandlingOpprettetTom) : '…'}`
+              : 'Ingen'}
+          </BodyShort>
         </div>
       </VStack>
     </HStack>
