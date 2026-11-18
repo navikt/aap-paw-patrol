@@ -594,12 +594,20 @@
             ],
             "nullable": false,
             "type": "string"
+          },
+          "type": {
+            "enum": [
+              "info"
+            ],
+            "nullable": false,
+            "type": "string"
           }
         },
         "required": [
           "fagsystem",
           "message",
-          "status"
+          "status",
+          "type"
         ],
         "type": "object"
       },
@@ -650,10 +658,18 @@
             },
             "nullable": false,
             "type": "array"
+          },
+          "type": {
+            "enum": [
+              "simulering"
+            ],
+            "nullable": false,
+            "type": "string"
           }
         },
         "required": [
-          "perioder"
+          "perioder",
+          "type"
         ],
         "type": "object"
       },
@@ -688,6 +704,13 @@
         "type": "object"
       },
       "no.nav.aap.utbetal.simuleringv2.SimuleringsresponseDto": {
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "info": "#/components/schemas/no.nav.aap.utbetal.simuleringv2.InfoDto",
+            "simulering": "#/components/schemas/no.nav.aap.utbetal.simuleringv2.SimuleringDto"
+          }
+        },
         "oneOf": [
           {
             "$ref": "#/components/schemas/no.nav.aap.utbetal.simuleringv2.InfoDto"

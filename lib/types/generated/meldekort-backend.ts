@@ -1312,6 +1312,7 @@ export interface components {
             ident: string;
         };
         "no.nav.aap.meldekort.kontrakt.sak.MeldeperioderV0": {
+            fritak: components["schemas"]["no.nav.aap.meldekort.kontrakt.Periode"][];
             meldeperioder: components["schemas"]["no.nav.aap.meldekort.kontrakt.Periode"][];
             meldeplikt: components["schemas"]["no.nav.aap.meldekort.kontrakt.Periode"][];
             opplysningsbehov: components["schemas"]["no.nav.aap.meldekort.kontrakt.Periode"][];

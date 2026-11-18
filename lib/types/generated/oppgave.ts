@@ -624,7 +624,7 @@ export interface paths {
                     /** @description Vis kun på vent-oppgaver. */
                     kunPaaVent?: boolean;
                     /** @description Sorter oppgaveliste */
-                    sortby?: "AVKLARINGSBEHOV_KODE" | "BEHANDLINGSTYPE" | "BEHANDLING_OPPRETTET" | "OPPRETTET_TIDSPUNKT" | "PERSONIDENT" | "RESERVERT_AV" | "SAKSNUMMER" | "TILBAKEKREVINGS_BELOP" | "ÅRSAK_TIL_OPPRETTELSE";
+                    sortby?: "AVKLARINGSBEHOV_KODE" | "BEHANDLINGSTYPE" | "BEHANDLING_OPPRETTET" | "MAKSDATO_SP" | "OPPRETTET_TIDSPUNKT" | "PERSONIDENT" | "RESERVERT_AV" | "SAKSNUMMER" | "TILBAKEKREVINGS_BELOP" | "ÅRSAK_TIL_OPPRETTELSE";
                     /** @description Sorteringsrekkefølge */
                     sortorder?: "ASC" | "DESC";
                 };
@@ -1678,6 +1678,7 @@ export interface components {
             /** @enum {string} */
             behandlingType: "Aktivitetsplikt" | "Aktivitetsplikt11_9" | "Førstegangsbehandling" | "Klage" | "OppfølgingsBehandling" | "Revurdering" | "SvarFraAndreinstans" | "Tilbakekreving";
             "erP\u00E5Vent": boolean;
+            "gjenst\u00E5endeSykedager"?: components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.Gjenst\u00E5endeSykedagerDto"];
             /**
              * Format: date-time
              * @example 2025-04-01T12:30:00
@@ -1735,6 +1736,22 @@ export interface components {
             "\u00E5rsakTilRetur": components["schemas"]["no.nav.aap.behandlingsflyt.kontrakt.hendelse.\u00C5rsakTilRetur"][];
             /** @enum {string|null} */
             "\u00E5rsakTilSattP\u00E5Vent"?: "VENTER_PÅ_FUNKSJONALITET" | "VENTER_PÅ_FUNKSJONALITET_AVSLAG_11_27" | "VENTER_PÅ_KLAGE_IMPLEMENTASJON" | "VENTER_PÅ_MASKINELL_AVKLARING" | "VENTER_PÅ_MEDISINSKE_OPPLYSNINGER" | "VENTER_PÅ_OPPLYSNINGER" | "VENTER_PÅ_OPPLYSNINGER_FRA_UTENLANDSKE_MYNDIGHETER" | "VENTER_PÅ_SVAR_FRA_BRUKER" | "VENTER_PÅ_SVAR_PÅ_FORHÅNDSVARSEL" | "VENTER_PÅ_UTENLANDSK_VIDEREFORING_AVKLARING" | "VENTER_PÅ_VURDERING_AV_ROL" | null;
+        };
+        "no.nav.aap.behandlingsflyt.kontrakt.hendelse.Gjenst\u00E5endeSykedagerDto": {
+            /** Format: int32 */
+            "gjenst\u00E5endeDager"?: number | null;
+            /** @enum {string} */
+            grunnlag: "INGEN_SYKEPENGER_SISTE_26_UKER" | "MAKSDATO_I_INFOTRYGD" | "MANGLER_MAKSDATO_I_INFOTRYGD" | "SISTE_UTBETALING_I_INFOTRYGD" | "VEDTAK_I_NY_LØSNING";
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            maksdato?: string | null;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            vurdertTilOgMed?: string | null;
         };
         /** Format: uuid */
         "no.nav.aap.behandlingsflyt.kontrakt.hendelse.InnsendingId": string;
@@ -1863,6 +1880,22 @@ export interface components {
             forrigeKvalitetssikrerIdent: string;
             forrigeKvalitetssikrerNavn?: string | null;
         };
+        "no.nav.aap.oppgave.Gjenst\u00E5endeSykedagerDto": {
+            /** Format: int32 */
+            "gjenst\u00E5endeDager"?: number | null;
+            /** @enum {string} */
+            grunnlag: "INGEN_SYKEPENGER_SISTE_26_UKER" | "MAKSDATO_I_INFOTRYGD" | "MANGLER_MAKSDATO_I_INFOTRYGD" | "SISTE_UTBETALING_I_INFOTRYGD" | "VEDTAK_I_NY_LØSNING";
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            maksdato?: string | null;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            vurdertTilOgMed?: string | null;
+        };
         "no.nav.aap.oppgave.HarMottattDokument": {
             /** @enum {string} */
             dokumentType: "DIALOGMELDING" | "LEGEERKLÆRING";
@@ -1924,6 +1957,16 @@ export interface components {
         };
         "no.nav.aap.oppgave.drift.FilterDriftRequest": {
             avklaringsbehovKoder: string[];
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            behandlingOpprettetFom?: string | null;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            behandlingOpprettetTom?: string | null;
             behandlingstyper: ("AKTIVITETSPLIKT" | "AKTIVITETSPLIKT_11_9" | "DOKUMENT_HÅNDTERING" | "FORDELING" | "FØRSTEGANGSBEHANDLING" | "JOURNALFØRING" | "KLAGE" | "OPPFØLGINGSBEHANDLING" | "REVURDERING" | "SVAR_FRA_ANDREINSTANS" | "TILBAKEKREVING")[];
             beskrivelse: string;
             enheter: components["schemas"]["no.nav.aap.oppgave.drift.EnhetDriftRequest"][];
@@ -1936,6 +1979,16 @@ export interface components {
         };
         "no.nav.aap.oppgave.drift.FilterDriftResponse": {
             avklaringsbehov: components["schemas"]["no.nav.aap.oppgave.drift.AvklaringsbehovDto"][];
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            behandlingOpprettetFom?: string | null;
+            /**
+             * Format: date
+             * @example 2025-04-01
+             */
+            behandlingOpprettetTom?: string | null;
             behandlingstyper: ("AKTIVITETSPLIKT" | "AKTIVITETSPLIKT_11_9" | "DOKUMENT_HÅNDTERING" | "FORDELING" | "FØRSTEGANGSBEHANDLING" | "JOURNALFØRING" | "KLAGE" | "OPPFØLGINGSBEHANDLING" | "REVURDERING" | "SVAR_FRA_ANDREINSTANS" | "TILBAKEKREVING")[];
             beskrivelse: string;
             ekskluderteEnheter: string[];
@@ -2155,6 +2208,7 @@ export interface components {
              */
             behandlingOpprettet: string;
             behandlingskontekst: components["schemas"]["no.nav.aap.oppgave.BehandlingskontekstResponse"];
+            "gjenst\u00E5endeSykedager"?: components["schemas"]["no.nav.aap.oppgave.Gjenst\u00E5endeSykedagerDto"];
             oppgaveMetadata: components["schemas"]["no.nav.aap.oppgave.liste.OppgaveMetadataResponse"];
             oppgavelisteTags: components["schemas"]["no.nav.aap.oppgave.liste.OppgavelisteTagsResponse"];
             personOgEnhet: components["schemas"]["no.nav.aap.oppgave.liste.PersonOgEnhetResponse"];
@@ -2181,7 +2235,7 @@ export interface components {
         };
         "no.nav.aap.oppgave.liste.OppgaveSortering": {
             /** @enum {string|null} */
-            sortBy?: "AVKLARINGSBEHOV_KODE" | "BEHANDLINGSTYPE" | "BEHANDLING_OPPRETTET" | "OPPRETTET_TIDSPUNKT" | "PERSONIDENT" | "RESERVERT_AV" | "SAKSNUMMER" | "TILBAKEKREVINGS_BELOP" | "ÅRSAK_TIL_OPPRETTELSE" | null;
+            sortBy?: "AVKLARINGSBEHOV_KODE" | "BEHANDLINGSTYPE" | "BEHANDLING_OPPRETTET" | "MAKSDATO_SP" | "OPPRETTET_TIDSPUNKT" | "PERSONIDENT" | "RESERVERT_AV" | "SAKSNUMMER" | "TILBAKEKREVINGS_BELOP" | "ÅRSAK_TIL_OPPRETTELSE" | null;
             /** @enum {string|null} */
             sortOrder?: "ASC" | "DESC" | null;
         };

@@ -1103,6 +1103,11 @@ export interface components {
             message: string;
             /** @enum {string} */
             status: "FEILET" | "OK_UTEN_ENDRING" | "UGYLDIG_REQUEST" | "UTILGJENGELIG";
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "info";
         };
         "no.nav.aap.utbetal.simuleringv2.PosteringDto": {
             /** Format: int32 */
@@ -1122,6 +1127,11 @@ export interface components {
         };
         "no.nav.aap.utbetal.simuleringv2.SimuleringDto": {
             perioder: components["schemas"]["no.nav.aap.utbetal.simuleringv2.SimuleringsperiodeDto"][];
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "simulering";
         };
         "no.nav.aap.utbetal.simuleringv2.SimuleringsperiodeDto": {
             /**
