@@ -1082,6 +1082,44 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/test/saf/tilknyttede-journalposter/{dokumentInfoId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description Dokumentinfo-ID det skal finnes gjenbruk av */
+                    dokumentInfoId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["no.nav.aap.postmottak.gateway.SafTilknyttetJournalpost"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/journalpost/{referanse}/auditlog": {
         parameters: {
             query?: never;
@@ -1899,6 +1937,20 @@ export interface components {
              * @example 2025-04-01
              */
             opprettetDato: string;
+        };
+        "no.nav.aap.postmottak.gateway.SafTilknyttetDokument": {
+            dokumentInfoId: string;
+        };
+        "no.nav.aap.postmottak.gateway.SafTilknyttetJournalpost": {
+            dokumenter: components["schemas"]["no.nav.aap.postmottak.gateway.SafTilknyttetDokument"][];
+            journalpostId: string;
+            sak?: components["schemas"]["no.nav.aap.postmottak.gateway.Sak"];
+        };
+        "no.nav.aap.postmottak.gateway.Sak": {
+            fagsakId?: string | null;
+            fagsaksystem?: string | null;
+            /** @enum {string} */
+            sakstype: "FAGSAK" | "GENERELL_SAK";
         };
         "no.nav.aap.postmottak.joarkavstemmer.UavstemtJournalpost": {
             /** Format: uuid */

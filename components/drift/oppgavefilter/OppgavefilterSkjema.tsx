@@ -1,7 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, Checkbox, CheckboxGroup, HStack, Select, Tag, TextField, VStack } from '@navikt/ds-react';
+import {
+  Button,
+  Checkbox,
+  CheckboxGroup,
+  DatePicker,
+  HStack,
+  Select,
+  Tag,
+  TextField,
+  useDatepicker,
+  VStack,
+} from '@navikt/ds-react';
+import { format, parseISO } from 'date-fns';
 import { Alert } from 'components/felles/alert/Alert.tsx';
 import { PlusIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { FetchJsonBody, hentOppgavefiltre, lagreOppgavefilter } from 'lib/clientApi';
@@ -68,6 +80,25 @@ export const OppgavefilterSkjema = ({ eksisterendeFilter, alleAvklaringsbehov, o
   const [nyEkskludertEnhet, setNyEkskludertEnhet] = useState('');
   const [avklaringsbehovSøk, setAvklaringsbehovSøk] = useState('');
 
+  const {
+    datepickerProps: fomDatepickerProps,
+    inputProps: fomInputProps,
+    selectedDay: behandlingOpprettetFom,
+  } = useDatepicker({
+    defaultSelected: eksisterendeFilter?.behandlingOpprettetFom
+      ? parseISO(eksisterendeFilter.behandlingOpprettetFom)
+      : undefined,
+  });
+  const {
+    datepickerProps: tomDatepickerProps,
+    inputProps: tomInputProps,
+    selectedDay: behandlingOpprettetTom,
+  } = useDatepicker({
+    defaultSelected: eksisterendeFilter?.behandlingOpprettetTom
+      ? parseISO(eksisterendeFilter.behandlingOpprettetTom)
+      : undefined,
+  });
+
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string>();
 
@@ -96,12 +127,18 @@ export const OppgavefilterSkjema = ({ eksisterendeFilter, alleAvklaringsbehov, o
 
   const handleSubmit = async () => {
     setError(undefined);
+    if (behandlingOpprettetFom && behandlingOpprettetTom && behandlingOpprettetFom > behandlingOpprettetTom) {
+      setError('Behandling opprettet fra og med kan ikke være etter til og med.');
+      return;
+    }
     setIsSaving(true);
     const request: FilterDriftRequest = {
       id: eksisterendeFilter?.id,
       navn,
       beskrivelse,
       type,
+      behandlingOpprettetFom: behandlingOpprettetFom ? format(behandlingOpprettetFom, 'yyyy-MM-dd') : null,
+      behandlingOpprettetTom: behandlingOpprettetTom ? format(behandlingOpprettetTom, 'yyyy-MM-dd') : null,
       avklaringsbehovKoder: valgteAvklaringsbehov,
       behandlingstyper: valgteBehandlingstyper,
       enheter: mapTilEnheter(inkluderteEnheter, ekskluderteEnheter),
@@ -166,6 +203,26 @@ export const OppgavefilterSkjema = ({ eksisterendeFilter, alleAvklaringsbehov, o
           </Checkbox>
         ))}
       </CheckboxGroup>
+
+      {/* Behandling opprettet */}
+      <HStack gap="space-16" wrap>
+        <DatePicker {...fomDatepickerProps}>
+          <DatePicker.Input
+            {...fomInputProps}
+            size="small"
+            label="Behandling opprettet fra og med"
+            description="Format: dd.mm.åååå"
+          />
+        </DatePicker>
+        <DatePicker {...tomDatepickerProps}>
+          <DatePicker.Input
+            {...tomInputProps}
+            size="small"
+            label="Behandling opprettet til og med"
+            description="Format: dd.mm.åååå"
+          />
+        </DatePicker>
+      </HStack>
 
       {/* Avklaringsbehov */}
       <VStack gap="space-4">

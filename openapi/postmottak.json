@@ -1988,6 +1988,68 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.postmottak.gateway.SafTilknyttetDokument": {
+        "nullable": false,
+        "properties": {
+          "dokumentInfoId": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "dokumentInfoId"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.gateway.SafTilknyttetJournalpost": {
+        "nullable": false,
+        "properties": {
+          "dokumenter": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.postmottak.gateway.SafTilknyttetDokument"
+            },
+            "nullable": false,
+            "type": "array"
+          },
+          "journalpostId": {
+            "nullable": false,
+            "type": "string"
+          },
+          "sak": {
+            "$ref": "#/components/schemas/no.nav.aap.postmottak.gateway.Sak"
+          }
+        },
+        "required": [
+          "dokumenter",
+          "journalpostId"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.postmottak.gateway.Sak": {
+        "nullable": false,
+        "properties": {
+          "fagsakId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "fagsaksystem": {
+            "nullable": true,
+            "type": "string"
+          },
+          "sakstype": {
+            "enum": [
+              "FAGSAK",
+              "GENERELL_SAK"
+            ],
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "sakstype"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.postmottak.joarkavstemmer.UavstemtJournalpost": {
         "nullable": false,
         "properties": {
@@ -3345,6 +3407,48 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/no.nav.aap.fordeler.EnhetMedOppfølgingsKontor"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ]
+      }
+    },
+    "/test/saf/tilknyttede-journalposter/{dokumentInfoId}": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "Dokumentinfo-ID det skal finnes gjenbruk av",
+            "explode": false,
+            "in": "path",
+            "name": "dokumentInfoId",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/no.nav.aap.postmottak.gateway.SafTilknyttetJournalpost"
+                  },
+                  "nullable": false,
+                  "type": "array"
                 }
               }
             },
