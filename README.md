@@ -36,14 +36,22 @@ I .bashrc eller .zshrc:
 
 Hvor github_pat er din personal access token laget på github (settings -> developer settings). Husk `read:packages`-rettighet og enable SSO når du oppdaterer/lager PAT.
 
+## Kjøre lokalt
+
 ### .env.local-fil
 
-I tillegg må du kopiere `.env-template` til `.env.local` for å kunne kjøre lokalt.
+Kopier `.env-template` til `.env.local`.
 
-### Kjøre lokalt
+### Kjøre appen
 
 ```sh
 yarn dev
+```
+
+Eventuelt med kun mock-data (uten at backendene kjører):
+
+```sh
+yarn dev:mock
 ```
 
 ### Oppdatere openapi.json-filer
