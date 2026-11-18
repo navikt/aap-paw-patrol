@@ -431,6 +431,9 @@
             "nullable": false,
             "type": "boolean"
           },
+          "gjenståendeSykedager": {
+            "$ref": "#/components/schemas/no.nav.aap.behandlingsflyt.kontrakt.hendelse.GjenståendeSykedagerDto"
+          },
           "hendelsesTidspunkt": {
             "example": "2025-04-01T12:30:00",
             "format": "date-time",
@@ -645,6 +648,43 @@
           "status",
           "tidsstempel",
           "årsakTilRetur"
+        ],
+        "type": "object"
+      },
+      "no.nav.aap.behandlingsflyt.kontrakt.hendelse.GjenståendeSykedagerDto": {
+        "nullable": false,
+        "properties": {
+          "gjenståendeDager": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "grunnlag": {
+            "enum": [
+              "INGEN_SYKEPENGER_SISTE_26_UKER",
+              "MAKSDATO_I_INFOTRYGD",
+              "MANGLER_MAKSDATO_I_INFOTRYGD",
+              "SISTE_UTBETALING_I_INFOTRYGD",
+              "VEDTAK_I_NY_LØSNING"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "maksdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "vurdertTilOgMed": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "grunnlag"
         ],
         "type": "object"
       },
@@ -1106,6 +1146,43 @@
         ],
         "type": "object"
       },
+      "no.nav.aap.oppgave.GjenståendeSykedagerDto": {
+        "nullable": false,
+        "properties": {
+          "gjenståendeDager": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "grunnlag": {
+            "enum": [
+              "INGEN_SYKEPENGER_SISTE_26_UKER",
+              "MAKSDATO_I_INFOTRYGD",
+              "MANGLER_MAKSDATO_I_INFOTRYGD",
+              "SISTE_UTBETALING_I_INFOTRYGD",
+              "VEDTAK_I_NY_LØSNING"
+            ],
+            "nullable": false,
+            "type": "string"
+          },
+          "maksdato": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "vurdertTilOgMed": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "grunnlag"
+        ],
+        "type": "object"
+      },
       "no.nav.aap.oppgave.HarMottattDokument": {
         "nullable": false,
         "properties": {
@@ -1360,6 +1437,18 @@
             "type": "array",
             "uniqueItems": true
           },
+          "behandlingOpprettetFom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "behandlingOpprettetTom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
           "behandlingstyper": {
             "items": {
               "enum": [
@@ -1440,6 +1529,18 @@
             "nullable": false,
             "type": "array",
             "uniqueItems": true
+          },
+          "behandlingOpprettetFom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "behandlingOpprettetTom": {
+            "example": "2025-04-01",
+            "format": "date",
+            "nullable": true,
+            "type": "string"
           },
           "behandlingstyper": {
             "items": {
@@ -2201,6 +2302,9 @@
           "behandlingskontekst": {
             "$ref": "#/components/schemas/no.nav.aap.oppgave.BehandlingskontekstResponse"
           },
+          "gjenståendeSykedager": {
+            "$ref": "#/components/schemas/no.nav.aap.oppgave.GjenståendeSykedagerDto"
+          },
           "oppgaveMetadata": {
             "$ref": "#/components/schemas/no.nav.aap.oppgave.liste.OppgaveMetadataResponse"
           },
@@ -2297,6 +2401,7 @@
               "AVKLARINGSBEHOV_KODE",
               "BEHANDLINGSTYPE",
               "BEHANDLING_OPPRETTET",
+              "MAKSDATO_SP",
               "OPPRETTET_TIDSPUNKT",
               "PERSONIDENT",
               "RESERVERT_AV",
@@ -3888,6 +3993,7 @@
                 "AVKLARINGSBEHOV_KODE",
                 "BEHANDLINGSTYPE",
                 "BEHANDLING_OPPRETTET",
+                "MAKSDATO_SP",
                 "OPPRETTET_TIDSPUNKT",
                 "PERSONIDENT",
                 "RESERVERT_AV",

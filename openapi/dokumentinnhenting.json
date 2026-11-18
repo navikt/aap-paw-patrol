@@ -2225,6 +2225,66 @@
         ]
       }
     },
+    "/api/dokumenter/{journalpostId}/{dokumentinfoId}/ORIGINAL": {
+      "get": {
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "Journalpost-ID",
+            "explode": false,
+            "in": "path",
+            "name": "journalpostId",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "deprecated": false,
+            "description": "Dokumentinfo-ID",
+            "explode": false,
+            "in": "path",
+            "name": "dokumentinfoId",
+            "required": true,
+            "schema": {
+              "nullable": false,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": true
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "nullable": false,
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "jwtAuth": [
+              "BEHANDLINGSFLYT"
+            ]
+          }
+        ],
+        "tags": [
+          "Dokumenter"
+        ]
+      }
+    },
     "/api/dokumenter/{journalpostId}/utsendingsinfo": {
       "get": {
         "parameters": [

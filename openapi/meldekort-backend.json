@@ -800,6 +800,13 @@
       "no.nav.aap.meldekort.kontrakt.sak.MeldeperioderV0": {
         "nullable": false,
         "properties": {
+          "fritak": {
+            "items": {
+              "$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.Periode"
+            },
+            "nullable": false,
+            "type": "array"
+          },
           "meldeperioder": {
             "items": {
               "$ref": "#/components/schemas/no.nav.aap.meldekort.kontrakt.Periode"
@@ -846,6 +853,7 @@
           }
         },
         "required": [
+          "fritak",
           "meldeperioder",
           "meldeplikt",
           "opplysningsbehov",
@@ -1176,7 +1184,7 @@
   "info": {
     "description": "For å teste API i dev, besøk\n<a href=\"https://tokenx-token-generator.intern.dev.nav.no/api/obo?aud=dev-gcp:aap:meldekort-backend\">Token Generator</a> for å få token.",
     "title": "AAP - Meldekort",
-    "version": "95718d94cc2ccf46c4f0db2cce8290662fd38c40"
+    "version": "8f4f1c258073bdc2f554ea8d15b502d8f32c540d"
   },
   "openapi": "3.0.0",
   "paths": {

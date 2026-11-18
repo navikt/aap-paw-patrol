@@ -301,13 +301,30 @@
           },
           "kategori": {
             "enum": [
-              "ANNEN_KATEGORI",
+              "AKTIVITETSKORT",
               "ANNET_RELEVANT_DOKUMENT",
+              "DIALOGMELDING",
+              "FAGSYSTEMINFO_BEHOV_HENDELSE",
+              "FORELDREPENGE_VEDTAK_HENDELSE",
+              "INSTITUSJONSOPPHOLD",
+              "KABAL_HENDELSE",
               "KLAGE",
+              "KORRIGER_SØKNADSDATO",
               "LEGEERKLÆRING",
+              "LEGEERKLÆRING_AVVIST",
+              "MANUELL_REVURDERING",
               "MELDEKORT",
+              "MIGRERING_FRA_ARENA",
               "NY_ÅRSAK_TIL_BEHANDLING",
-              "SØKNAD"
+              "OMGJØRING_KLAGE_REVURDERING",
+              "OPPFØLGINGSOPPGAVE",
+              "PDL_HENDELSE_DODSFALL_BARN",
+              "PDL_HENDELSE_DODSFALL_BRUKER",
+              "PDL_HENDELSE_FOLKEREGISTERIDENT",
+              "SYKEPENGE_VEDTAK_HENDELSE",
+              "SØKNAD",
+              "TILBAKEKREVING_HENDELSE",
+              "UFØRE_VEDTAK_HENDELSE"
             ],
             "nullable": false,
             "type": "string"

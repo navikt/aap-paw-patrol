@@ -270,6 +270,15 @@ export function hentTilkjentYtelse(
   );
 }
 
+export function hentVedtakslengde(
+  behandlingsreferanse: string
+): FetchResult<BehandlingsflytPaths['/api/drift/behandling/{referanse}/vedtakslengde']['get']> {
+  return fetchTyped<BehandlingsflytPaths['/api/drift/behandling/{referanse}/vedtakslengde']['get']>(
+    `/api/drift/behandling/${behandlingsreferanse}/vedtakslengde`,
+    { method: 'GET' }
+  );
+}
+
 export function hentYrkesskader(
   behandlingsreferanse: string
 ): FetchResult<BehandlingsflytPaths['/api/drift/behandling/{referanse}/yrkesskade']['get']> {
