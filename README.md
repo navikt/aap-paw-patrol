@@ -115,11 +115,10 @@ Dette:
   uten at den faktiske tjenesten kjører.
 - Krever at porten til `MOCK_API_BASE_URL` er ledig — ikke kjør en annen tjeneste der samtidig.
 
-For å legge til en ny backend, legg først backendens OpenAPI-URL til i
-`scripts/update-openapi-specs.mjs`, og kjør `yarn openapi:update`. Da lastes spesifikasjonen ned til
-`openapi/` og TypeScript-typene regenereres. For å mocke backenden lokalt må du deretter legge til
-én oppføring i `MOCK_SPECS` i `mocks/mock-specs.mjs` med spesifikasjonsfil og riktig
-`*_API_BASE_URL`.
+For å legge til en ny backend, legg til én oppføring i `OPENAPI_SPECS` i `openapi.config.mjs`
+med appnavn, OpenAPI-URL og riktig `*_API_BASE_URL` i `envVar`. Kjør deretter `yarn openapi:update`.
+Da lastes spesifikasjonen ned til `openapi/` og TypeScript-typene regenereres.
+Den samme oppføringen brukes til å mocke backenden lokalt.
 
 #### Justere hvor "ekte"/omfattende de genererte dataene ser ut
 

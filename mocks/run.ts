@@ -4,8 +4,8 @@
  *
  * Run with: node --experimental-strip-types mocks/run.ts (see scripts/dev-with-mocks.mjs).
  *
- * To mock another backend, see mocks/mock-specs.mjs — that's the only place that needs
- * editing; this file starts a server for every entry in MOCK_SPECS automatically.
+ * To mock another backend, see openapi.config.mjs — that's the only place that needs
+ * editing; this file starts a server for every entry in OPENAPI_SPECS automatically.
  */
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
@@ -14,7 +14,7 @@ import { HttpResponse, http } from 'msw';
 import type { RequestHandler } from 'msw';
 import type { components as UtbetalComponents } from '../lib/types/generated/utbetal.ts';
 import { startMockHttpServer } from './standaloneServer.ts';
-import { getMockBasePath, getMockName, MOCK_SPECS } from './mock-specs.mjs';
+import { getMockBasePath, getMockName, OPENAPI_SPECS } from '../openapi.config.mjs';
 
 const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 
@@ -93,7 +93,7 @@ async function startAll() {
   const handlers: RequestHandler[] = [];
   const mockBaseUrl = process.env.MOCK_API_BASE_URL ?? 'http://localhost:8080';
 
-  for (const { spec } of MOCK_SPECS) {
+  for (const { spec } of OPENAPI_SPECS) {
     const mockName = getMockName(spec);
     if (spec === 'utbetal.json') {
       handlers.push(
