@@ -2,13 +2,13 @@
 /**
  * Generates MSW mock handlers from the OpenAPI specs in ./openapi using msw-auto-mock.
  *
- * To mock another backend, see mocks/mock-specs.mjs — that's the only place that needs editing.
+ * To mock another backend, see openapi.config.mjs — that's the only place that needs editing.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getMockBasePath, getMockName, MOCK_SPECS } from '../mocks/mock-specs.mjs';
+import { getMockBasePath, getMockName, OPENAPI_SPECS } from '../openapi.config.mjs';
 
 const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const openApiDir = path.join(rootDir, 'openapi');
@@ -77,7 +77,7 @@ function postProcessHandlers(target) {
 
 let hadError = false;
 
-for (const { spec } of MOCK_SPECS) {
+for (const { spec } of OPENAPI_SPECS) {
   const specPath = path.join(openApiDir, spec);
   if (!existsSync(specPath)) {
     console.warn(`[mock:generate] Skipping ${spec}: not found in ${openApiDir}`);

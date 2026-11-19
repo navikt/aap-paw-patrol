@@ -10,7 +10,7 @@ import { spawn, spawnSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getMockBasePath, MOCK_SPECS } from '../mocks/mock-specs.mjs';
+import { getMockBasePath, OPENAPI_SPECS } from '../openapi.config.mjs';
 
 const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 
@@ -35,7 +35,7 @@ function loadEnvLocal() {
 
 loadEnvLocal();
 const mockBaseUrl = (process.env.MOCK_API_BASE_URL ?? 'http://localhost:8080').replace(/\/+$/, '');
-for (const { envVar, spec } of MOCK_SPECS) {
+for (const { envVar, spec } of OPENAPI_SPECS) {
   process.env[envVar] = `${mockBaseUrl}${getMockBasePath(spec)}`;
 }
 
