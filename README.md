@@ -4,6 +4,14 @@ Frontendapplikasjon for intern drift av saksbehandlingsapper i AAP
 
 ## Bygge og kjøre app lokalt
 
+### Sett opp GitHub token
+
+> ⚠️ **OBS:** Dette steget er nødvendig for å kunne installere avhengigheter fra Navikt Github Package Registry.
+> Hvis noe feiler med `unauthorized` eller `403`, sjekk at du har et gyldig token og oppsett`.
+
+Du finner bruksanvisning for oppsett av GitHub token her:
+[AAP Sysdoc - Frontend](https://aap-sysdoc.ansatt.nav.no/teknisk/frontend)
+
 ### Prettier og linting
 
 Prosjektet bruker prettier og eslint. Skru gjerne på "Automatic configuration" for disse i din IDE.
@@ -24,17 +32,6 @@ Kjører `tsc --noEmit` mot hele prosjektet (alle `.ts`/`.tsx`-filer inkludert `m
 `tsconfig.json`). Kommandoen kjører `yarn mock:generate` først, slik at de genererte mock-handlerne
 i `mocks/generated/` (som `mocks/run.ts` importerer fra, og som ikke er sjekket inn i git) finnes
 før typesjekkingen kjøres — også ved første kjøring på en fersk klone.
-
-### Github package registry
-
-Vi bruker Github sitt package registry for npm-pakker, siden flere av Nav sine pakker kun blir publisert her.
-
-For å kunne kjøre `yarn install` lokalt må du logge inn mot Github package registry. Legg til følgende i .bashrc eller .zshrc lokalt på din maskin:
-I .bashrc eller .zshrc:
-
-`export NODE_AUTH_TOKEN=github_pat`
-
-Hvor github_pat er din personal access token laget på github (settings -> developer settings). Husk `read:packages`-rettighet og enable SSO når du oppdaterer/lager PAT.
 
 ## Kjøre lokalt
 
