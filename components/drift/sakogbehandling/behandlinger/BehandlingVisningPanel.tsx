@@ -9,6 +9,7 @@ import { TilkjentYtelse } from 'components/drift/sakogbehandling/tilkjentytelse/
 import { TidligereVurderinger } from 'components/drift/sakogbehandling/tidligereVurderinger/TidligereVurderinger.tsx';
 import { BrevBestillinger } from 'components/drift/sakogbehandling/brev/BrevBestillinger.tsx';
 import { Yrkesskader } from 'components/drift/sakogbehandling/yrkesskade/Yrkesskader.tsx';
+import { Vedtakslengde } from 'components/drift/sakogbehandling/vedtakslengde/Vedtakslengde.tsx';
 import { ProsesserBehandling } from 'components/drift/sakogbehandling/avklaringsbehov/ProsesserBehandling.tsx';
 import { BehandlingDriftsinfo } from 'components/drift/sakogbehandling/behandlinger/BehandlingOversikt.tsx';
 import { useState } from 'react';
@@ -23,6 +24,7 @@ enum BehandlingFane {
   PROSESSER = 'PROSESSER',
   BREV = 'BREV',
   YRKESSKADE = 'YRKESSKADE',
+  VEDTAKSLENGDE = 'VEDTAKSLENGDE',
 }
 
 export const BehandlingVisningPanel = ({ valgtBehandling }: { valgtBehandling: BehandlingDriftsinfo }) => {
@@ -61,6 +63,7 @@ export const BehandlingVisningPanel = ({ valgtBehandling }: { valgtBehandling: B
           <Tabs.Tab value={BehandlingFane.TIDLIGERE_VURDERINGER} label="Tidligere vurderinger" />
           <Tabs.Tab value={BehandlingFane.BREV} label="Brev" />
           <Tabs.Tab value={BehandlingFane.YRKESSKADE} label="Yrkesskade" />
+          <Tabs.Tab value={BehandlingFane.VEDTAKSLENGDE} label="Vedtakslengde" />
           <Tabs.Tab value={BehandlingFane.PROSESSER} label="Prossesser behandling" />
         </Tabs.List>
 
@@ -96,6 +99,9 @@ export const BehandlingVisningPanel = ({ valgtBehandling }: { valgtBehandling: B
         </Tabs.Panel>
         <Tabs.Panel value={BehandlingFane.YRKESSKADE}>
           <Yrkesskader key={valgtBehandling.referanse} behandlingsreferanse={valgtBehandling.referanse} />
+        </Tabs.Panel>
+        <Tabs.Panel value={BehandlingFane.VEDTAKSLENGDE}>
+          <Vedtakslengde key={valgtBehandling.referanse} behandlingsreferanse={valgtBehandling.referanse} />
         </Tabs.Panel>
         <Tabs.Panel value={BehandlingFane.PROSESSER}>
           <ProsesserBehandling behandling={valgtBehandling} />

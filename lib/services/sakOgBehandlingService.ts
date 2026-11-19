@@ -7,6 +7,8 @@ type TilkjentYtelse2Dto =
   components['schemas']['no.nav.aap.behandlingsflyt.behandling.tilkjentytelse.TilkjentYtelse2Dto'];
 type YrkesskadeGrunnlagDriftsinfoDto =
   components['schemas']['no.nav.aap.behandlingsflyt.drift.YrkesskadeGrunnlagDriftsinfoDto'];
+type VedtakslengdeVurderingDriftsinfoDto =
+  components['schemas']['no.nav.aap.behandlingsflyt.drift.VedtakslengdeVurderingDriftsinfoDto'];
 // Kotlin-genererte anonyme klassenavn gir en litt uvanlig skjema-nøkkel her (kan endre seg ved
 // regenerering via `yarn openapi:types` dersom backenden navngir klassen på nytt).
 type DriftRettighetsinfoDto =
@@ -29,6 +31,11 @@ export const hentYrkesskader = async (behandlingsreferanse: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
   const url = `${baseUrl}/api/drift/behandling/${behandlingsreferanse}/yrkesskade`;
   return await fetchProxy<YrkesskadeGrunnlagDriftsinfoDto>(url, scope, 'GET');
+};
+export const hentVedtakslengde = async (behandlingsreferanse: string) => {
+  const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
+  const url = `${baseUrl}/api/drift/behandling/${behandlingsreferanse}/vedtakslengde`;
+  return await fetchProxy<VedtakslengdeVurderingDriftsinfoDto[]>(url, scope, 'GET');
 };
 export const hentRettighetsinfo = async (behandlingsreferanse: string) => {
   const { baseUrl, scope } = await getBaseUrlAndScopeForApp('behandlingsflyt');
