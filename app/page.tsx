@@ -98,7 +98,7 @@ export default function Home() {
                   <MagnifyingGlassIcon fontSize="2rem" />
                 </LinkCardIcon>
                 <LinkCardTitle>
-                  <LinkCardAnchor href={`/drift/utbetaling`}>Sjekk status på utbetalinger</LinkCardAnchor>
+                  <LinkCardAnchor href={`/drift/utbetaling`}>Sjekk status på utbetalinger (Gammelt API)</LinkCardAnchor>
                 </LinkCardTitle>
               </LinkCard>
 
@@ -107,7 +107,7 @@ export default function Home() {
                   <MagnifyingGlassIcon fontSize="2rem" />
                 </LinkCardIcon>
                 <LinkCardTitle>
-                  <LinkCardAnchor href="/drift/utbetaling/status">Utbetalingsstatuser</LinkCardAnchor>
+                  <LinkCardAnchor href="/drift/utbetaling/status">Vis antall utbetalingsmeldinger per status (Nytt API)</LinkCardAnchor>
                 </LinkCardTitle>
               </LinkCard>
 
@@ -116,7 +116,7 @@ export default function Home() {
                   <MagnifyingGlassIcon fontSize="2rem" />
                 </LinkCardIcon>
                 <LinkCardTitle>
-                  <LinkCardAnchor href={`/drift/utbetaling/migrering`}>Sjekk migreringsstatus</LinkCardAnchor>
+                  <LinkCardAnchor href={`/drift/utbetaling/migrering`}>Migrering til nytt API</LinkCardAnchor>
                 </LinkCardTitle>
               </LinkCard>
 
@@ -125,7 +125,7 @@ export default function Home() {
                   <MagnifyingGlassIcon fontSize="2rem" />
                 </LinkCardIcon>
                 <LinkCardTitle>
-                  <LinkCardAnchor href={`/drift/utbetaling/tidslinje`}>Utbetalinger for sak</LinkCardAnchor>
+                  <LinkCardAnchor href={`/drift/utbetaling/tidslinje`}>Vis utbetalinger for sak (Gammelt API)</LinkCardAnchor>
                 </LinkCardTitle>
               </LinkCard>
 
@@ -134,7 +134,7 @@ export default function Home() {
                   <MagnifyingGlassIcon fontSize="2rem" />
                 </LinkCardIcon>
                 <LinkCardTitle>
-                  <LinkCardAnchor href="/drift/utbetaling/meldinger">Utbetalingsmeldinger</LinkCardAnchor>
+                  <LinkCardAnchor href="/drift/utbetaling/meldinger">Vis utbetalingsmeldinger for sak (Nytt API)</LinkCardAnchor>
                 </LinkCardTitle>
               </LinkCard>
 
